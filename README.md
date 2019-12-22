@@ -18,7 +18,7 @@
 |:-:|:-:|
 |简单类型序列化(`sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `string`, `float`, `double`, `bool`),对于`double`类型目前可能存在较小的精度误差|支持|
 |字符编码设置(`ASCII`, `Unicode`, `UTF-8`)|支持|
-|动态长度数字(`VariableNumber`)，固定长度整数(`FixedNumber`)|支持|
+|动态长度数字(`VariableNumber`)，固定长度数字(`FixedNumber`)|支持|
 |序列化事件回调接口(`ISerializeMessageReceiver`)|支持|
 |序列化数据损坏检查(`StrictMode`)|支持|
 |运行时代理注入(`RuntimeSerializeProxyInjection`)|不完全支持|
@@ -141,7 +141,7 @@ public struct UserInput : ISerializeMessageReceiver
 ```
 
 ## 性能对比
-> 数据不存在JIT的影响，但可能存在允许范围内的部分误差
+> 数据不存在JIT的影响，但可能存在允许范围内的误差
 
 - 测试类型
 
