@@ -70,7 +70,7 @@ public struct UserInput
 
 public sealed class UserInputSerializeProxy : ISerializeProxy<UserInput>
 {
-  unsafe void ISerializeProxy<UserInput>.Serialize(in UserInput* obj, in OutputBuffer* buffer)
+  unsafe void ISerializeProxy<UserInput>.Serialize(in UserInput obj, in OutputBuffer* buffer)
   {
     buffer->WriteValue(0, obj.CarId, false);
     buffer->WriteValue(1, obj.Horizontal, false);
