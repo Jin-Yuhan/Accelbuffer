@@ -1,7 +1,7 @@
 ﻿namespace Accelbuffer
 {
     /// <summary>
-    /// 字符编码（2位）
+    /// 字符编码
     /// </summary>
     public enum CharEncoding : byte
     {

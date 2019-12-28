@@ -45,26 +45,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RuntimeSerializeProxyInjection\Attributes\VariableNumberAttribute.cs" />
+    <Compile Include="Enums\NumberOption.cs" />
+    <Compile Include="Enums\SerializedType.cs" />
+    <Compile Include="IO\UnmanagedReader.cs" />
+    <Compile Include="IO\UnmanagedWriter.cs" />
+    <Compile Include="IO\UnmanagedMemoryAllocator.cs" />
+    <Compile Include="ProxySettings.cs" />
+    <Compile Include="Attributes\NumberAttribute.cs" />
     <Compile Include="Enums\CharEncoding.cs" />
     <Compile Include="Enums\CharType.cs" />
-    <Compile Include="RuntimeSerializeProxyInjection\Attributes\EncodingAttribute.cs" />
-    <Compile Include="RuntimeSerializeProxyInjection\Attributes\SerializeIndexAttribute.cs" />
-    <Compile Include="Buffers\InputBuffer.cs" />
+    <Compile Include="Attributes\EncodingAttribute.cs" />
+    <Compile Include="Attributes\SerializeIncludeAttribute.cs" />
     <Compile Include="Enums\NumberSign.cs" />
-    <Compile Include="ISerializeMessageReceiver.cs" />
     <Compile Include="ISerializeProxy.cs" />
-    <Compile Include="Buffers\OutputBuffer.cs" />
-    <Compile Include="MissingSerializedValueException.cs" />
-    <Compile Include="PrimitiveTypeSerializeProxy.cs" />
+    <Compile Include="Exceptions\MissingSerializedValueException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\SerializeContractAttribute.cs" />
-    <Compile Include="RuntimeSerializeProxyInjection\FieldILEmitUtility.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\FieldData.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\DeserializeILEmitUtility.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\SerializeILEmitUtility.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\ILEmitDataUtility.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\SerializeProxyUtility.cs" />
+    <Compile Include="SerializationSettings.cs" />
     <Compile Include="Serializer.cs" />
-    <Compile Include="SerializeUtility.cs" />
-    <Compile Include="StringSerializeProxy.cs" />
-    <Compile Include="TagDismatchException.cs" />
+    <Compile Include="SerializationUtility.cs" />
+    <Compile Include="Exceptions\TagDismatchException.cs" />
     <Compile Include="Enums\ValueTypeCode.cs" />
     <Compile Include="TagUtility.cs" />
   </ItemGroup>

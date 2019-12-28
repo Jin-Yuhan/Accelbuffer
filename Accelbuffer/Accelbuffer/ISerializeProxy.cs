@@ -10,14 +10,14 @@
         /// 方法用于实现<typeparamref name="T"/>类型对象的序列化
         /// </summary>
         /// <param name="obj">将被序列化的对象（RO）</param>
-        /// <param name="buffer">序列化缓冲区</param>
-        void Serialize(in T obj, in OutputBuffer* buffer);
+        /// <param name="writer">用于写入序列化数据的对象（RO）</param>
+        void Serialize(in T obj, in UnmanagedWriter* writer);
 
         /// <summary>
         /// 方法用于实现<typeparamref name="T"/>类型对象的反序列化
         /// </summary>
-        /// <param name="buffer">反序列化缓冲区</param>
+        /// <param name="reader">用于读取反序列化数据的对象(RO)</param>
         /// <returns>反序列化对象</returns>
-        T Deserialize(in InputBuffer* buffer);
+        T Deserialize(in UnmanagedReader* reader);
     }
 }

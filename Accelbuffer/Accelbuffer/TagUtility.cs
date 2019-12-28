@@ -53,14 +53,14 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableFloatTag(float* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 4);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 4);
             return (byte)(((int)ValueTypeCode.VariableFloat << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableFloatTag(double* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 8);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 8);
             return (byte)(((int)ValueTypeCode.VariableFloat << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 
@@ -81,14 +81,14 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(sbyte* value, out int byteCount)
         {
-            NumberSign sgn = SerializeUtility.GetSign((byte*)value);
+            NumberSign sgn = SerializationUtility.GetSign((byte*)value);
 
             if (sgn == NumberSign.Negative)
             {
-                SerializeUtility.OnesComplement(value);
+                SerializationUtility.OnesComplement(value);
             }
 
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 1);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 1);
 
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)sgn << 4) | byteCount);
         }
@@ -96,21 +96,21 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(byte* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount(value, 1);
+            byteCount = SerializationUtility.GetUsedByteCount(value, 1);
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(short* value, out int byteCount)
         {
-            NumberSign sgn = SerializeUtility.GetSign((byte*)value);
+            NumberSign sgn = SerializationUtility.GetSign((byte*)value);
 
             if (sgn == NumberSign.Negative)
             {
-                SerializeUtility.OnesComplement(value);
+                SerializationUtility.OnesComplement(value);
             }
 
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 2);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 2);
 
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)sgn << 4) | byteCount);
         }
@@ -118,21 +118,21 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(ushort* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 2);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 2);
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(int* value, out int byteCount)
         {
-            NumberSign sgn = SerializeUtility.GetSign((byte*)value);
+            NumberSign sgn = SerializationUtility.GetSign((byte*)value);
 
             if (sgn == NumberSign.Negative)
             {
-                SerializeUtility.OnesComplement(value);
+                SerializationUtility.OnesComplement(value);
             }
 
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 4);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 4);
 
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)sgn << 4) | byteCount);
         }
@@ -140,21 +140,21 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(uint* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 4);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 4);
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(long* value, out int byteCount)
         {
-            NumberSign sgn = SerializeUtility.GetSign((byte*)value);
+            NumberSign sgn = SerializationUtility.GetSign((byte*)value);
 
             if (sgn == NumberSign.Negative)
             {
-                SerializeUtility.OnesComplement(value);
+                SerializationUtility.OnesComplement(value);
             }
 
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 8);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 8);
 
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)sgn << 4) | byteCount);
         }
@@ -162,7 +162,7 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte MakeVariableIntegerTag(ulong* value, out int byteCount)
         {
-            byteCount = SerializeUtility.GetUsedByteCount((byte*)value, 8);
+            byteCount = SerializationUtility.GetUsedByteCount((byte*)value, 8);
             return (byte)(((int)ValueTypeCode.VariableInteger << 5) | ((int)NumberSign.PositiveOrUnsigned << 4) | byteCount);
         }
 

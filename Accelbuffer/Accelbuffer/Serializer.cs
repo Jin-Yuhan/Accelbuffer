@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using Accelbuffer.Experimental.RuntimeSerializeProxyInjection;
 
 namespace Accelbuffer
 {
@@ -13,69 +11,55 @@ namespace Accelbuffer
     public static unsafe class Serializer<T>
     {
         private static readonly ISerializeProxy<T> s_CachedProxy;
-
-        private static OutputBuffer* s_CachedBuffer;
-
         private static readonly object s_Lock;
 
         /// <summary>
-        /// 获取/设置 初始化缓冲区使用的字节大小，对于自定义类型，该值可能为<see cref="SerializeContractAttribute.InitialBufferSize"/>
+        /// 当前类型分配的缓冲区内存管理器
         /// </summary>
-        public static long InitialBufferSize { get; set; }
+        public static UnmanagedMemoryAllocator Allocator { get; }
 
         /// <summary>
-        /// 获取/设置 是否使用严格的序列化模式（开启对序列化索引不匹配的错误警告），对于自定义类型，该值可能为<see cref="SerializeContractAttribute.StrictMode"/>
+        /// 获取/设置 是否使用严格的序列化模式（开启对序列化索引不匹配的错误警告）
         /// </summary>
         public static bool StrictMode { get; set; }
-
-        /// <summary>
-        /// 获取当前缓冲区使用的字节大小
-        /// </summary>
-        public static long CurrentBufferSize
-        {
-            get { return s_CachedBuffer == null ? 0L : s_CachedBuffer->Size; }
-        }
 
         static Serializer()
         {
             Type objectType = typeof(T);
             Type proxyType;
+            long initialBufferSize;
 
-            if (SerializeUtility.IsSerializablePrimitiveType(objectType))
+            if (SerializationSettings.TryGetProxyBinding(objectType, out ProxySettings settings))
             {
-                proxyType = GetPrimitiveProxyType(objectType);
-                InitialBufferSize = SerializeUtility.GetPrimitiveTypeBufferSize(objectType);
-                StrictMode = false;
-            }
-            else if (SerializeUtility.IsSerializablePrimitiveCollection(objectType, out Type elementType))
-            {
-                proxyType = GetPrimitiveProxyType(elementType);
-                InitialBufferSize = SerializeUtility.GetPrimitiveTypeBufferSize(elementType) << 3;
-                StrictMode = false;
+                proxyType = settings.ProxyType;
+                initialBufferSize = settings.InitialBufferSize;
+                StrictMode = settings.StrictMode;
             }
             else
             {
-                SerializeContractAttribute attr = objectType.GetCustomAttribute<SerializeContractAttribute>(true);
+                bool complex = SerializationUtility.IsTrulyComplex(objectType);
 
-                if (attr == null)
+                if (complex && !objectType.IsValueType && objectType.GetConstructor(Type.EmptyTypes) == null)
                 {
-                    throw new SerializationException($"类型{objectType.Name}不能被序列化，因为没有被标记{typeof(SerializeContractAttribute).Name}特性");
+                    throw new SerializationException($"类型{objectType.Name}不能被序列化,因为没有无参构造函数");
                 }
 
-                proxyType = GetProxyType(objectType, attr.ProxyType);
+                SerializeContractAttribute attr = objectType.GetCustomAttribute<SerializeContractAttribute>(true);
 
-                InitialBufferSize = SerializeUtility.GetBufferSize(objectType, attr.InitialBufferSize);
-                StrictMode = attr.StrictMode;
-            }
+                if (complex && attr == null)
+                {
+                    throw new SerializationException($"类型{objectType.Name}不能被序列化，因为没有被标记{typeof(SerializeContractAttribute).Name}特性，且没有手动绑定代理");
+                }
 
-            if (!typeof(ISerializeProxy<T>).IsAssignableFrom(proxyType))
-            {
-                throw new NullReferenceException("获取" + typeof(T).Name + "的序列化代理失败");
+                proxyType = GetProxyType(objectType, attr?.ProxyType);
+                initialBufferSize = SerializationSettings.GetBufferSize(objectType, attr == null ? 0 : attr.InitialBufferSize);
+                StrictMode = attr == null ? true : attr.StrictMode;
             }
 
             s_CachedProxy = (ISerializeProxy<T>)Activator.CreateInstance(proxyType);
-            s_CachedBuffer = null;
             s_Lock = new object();
+
+            Allocator = UnmanagedMemoryAllocator.Alloc(initialBufferSize);
         }
 
         private static Type GetProxyType(Type objectType, Type proxyType)
@@ -90,58 +74,23 @@ namespace Accelbuffer
                 {
                     proxyType = proxyType.MakeGenericType(objectType.GenericTypeArguments);
                 }
+
+                if (!typeof(ISerializeProxy<T>).IsAssignableFrom(proxyType))
+                {
+                    throw new NullReferenceException("获取" + typeof(T).Name + "的序列化代理失败");
+                }
             }
 
             return proxyType;
         }
 
-        private static Type GetPrimitiveProxyType(Type elementType)
-        {
-            if (elementType == typeof(string))
-            {
-                return typeof(StringSerializeProxy);
-            }
-
-            return typeof(PrimitiveTypeSerializeProxy<>).MakeGenericType(elementType);
-        }
-
-        private static void InitializeBuffer()
-        {
-            s_CachedBuffer = (OutputBuffer*)Marshal.AllocHGlobal(sizeof(OutputBuffer)).ToPointer();
-            *s_CachedBuffer = new OutputBuffer(InitialBufferSize);
-            s_CachedBuffer->Reset();
-        }
-
-        private static void SerializePrivate(T obj, OutputBuffer* buffer)
-        {
-            if (obj is ISerializeMessageReceiver receiver)
-            {
-                receiver.OnBeforeSerialize();
-            }
-
-            s_CachedProxy.Serialize(in obj, buffer);
-        }
-
         /// <summary>
-        /// 初始化序列化代理，这个方法什么都不会做，仅为了调用静态构造函数
+        /// 初始化（空方法，TODO：调用静态构造函数）
         /// </summary>
         public static void Initialize() { }
 
         /// <summary>
-        /// 释放当前序列化缓冲区使用的内存
-        /// </summary>
-        public static void FreeBufferMemory()
-        {
-            if (s_CachedBuffer != null)
-            {
-                s_CachedBuffer->Free();
-                Marshal.FreeHGlobal(new IntPtr(s_CachedBuffer));
-                s_CachedBuffer = null;
-            }
-        }
-
-        /// <summary>
-        /// 使用内部维护的缓冲区序列化对象，并返回序列化数据（线程安全）
+        /// 序列化对象，并返回序列化数据（线程安全）
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
         /// <returns>对象的序列化结果</returns>
@@ -149,111 +98,105 @@ namespace Accelbuffer
         {
             lock (s_Lock)
             {
-                if (s_CachedBuffer == null)
-                {
-                    InitializeBuffer();
-                }
+                UnmanagedWriter* writer = Allocator.Writer;
 
-                SerializePrivate(obj, s_CachedBuffer);
+                s_CachedProxy.Serialize(in obj, in writer);
 
-                byte[] result = s_CachedBuffer->ToArray();
-
-                s_CachedBuffer->Reset();
+                byte[] result = writer->ToArray();
 
                 return result;
             }
         }
 
         /// <summary>
-        /// 使用内部维护的缓冲区序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+        /// 序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">用于接受序列化数据的缓冲区</param>
+        /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
         /// <returns>序列化数据的大小</returns>
-        public static int Serialize(T obj, ArraySegment<byte> buffer)
+        /// <exception cref="ArgumentException">字节数组容量不足</exception>
+        public static long Serialize(T obj, byte[] buffer, long index)
         {
             lock (s_Lock)
             {
-                if (s_CachedBuffer == null)
-                {
-                    InitializeBuffer();
-                }
+                UnmanagedWriter* writer = Allocator.Writer;
 
-                SerializePrivate(obj, s_CachedBuffer);
+                s_CachedProxy.Serialize(in obj, in writer);
 
-                int result = (int)s_CachedBuffer->CopyToArray(buffer);
-
-                s_CachedBuffer->Reset();
+                long result = writer->CopyToArray(buffer, index);
 
                 return result;
             }
         }
 
         /// <summary>
-        /// 使用指定的缓冲区序列化对象，并写入序列化数据中
+        /// 序列化对象，并写入序列化数据
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
-        /// <param name="buffer">用于序列化对象的缓冲区</param>
-        /// <exception cref="ArgumentNullException">缓冲区指针为空</exception>
-        public static void Serialize(T obj, OutputBuffer* buffer)
+        /// <param name="writer">用于序列化对象的写入指针</param>
+        /// <exception cref="ArgumentNullException"><paramref name="writer"/>为null</exception>
+        public static void Serialize(T obj, UnmanagedWriter* writer)
         {
-            if (buffer == null)
+            if (writer == null)
             {
-                throw new ArgumentNullException(nameof(buffer), "缓冲区指针不能为空");
+                throw new ArgumentNullException(nameof(writer), "写入指针不能为空");
             }
 
-            SerializePrivate(obj, buffer);
+            s_CachedProxy.Serialize(in obj, in writer);
         }
 
         /// <summary>
-        /// 将指定的字节数组反序列化成<typeparamref name="T"/>类型对象实例
+        /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
         /// <param name="bytes">被反序列化的字节数组</param>
+        /// <param name="index">开始读取的索引位置</param>
+        /// <param name="length">可以读取的字节大小</param>
         /// <returns>反序列化的对象实例</returns>
-        public static T Deserialize(ArraySegment<byte> bytes)
+        /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
+        public static T Deserialize(byte[] bytes, long index, long length)
         {
-            if (bytes.Count == 0)
+            if (length == 0)
             {
                 return default;
+            }
+
+            if (bytes == null)
+            {
+                throw new ArgumentNullException(nameof(bytes), "字节数组不能为空");
+            }
+
+            if (bytes.Length - index < length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index), "字节数组长度不足");
             }
 
             T result;
 
-            fixed (byte* p = bytes.Array)
+            fixed (byte* p = bytes)
             {
-                InputBuffer buffer = new InputBuffer(p + bytes.Offset, bytes.Count, StrictMode);
-
-                result = s_CachedProxy.Deserialize(&buffer);
-
-                if (result is ISerializeMessageReceiver receiver)
-                {
-                    receiver.OnAfterDeserialize();
-                }
+                UnmanagedReader reader = UnmanagedMemoryAllocator.AllocReader(p, index, length, StrictMode);
+                result = s_CachedProxy.Deserialize(&reader);
             }
 
             return result;
         }
 
         /// <summary>
-        /// 将指定的缓冲区中的数据反序列化成<typeparamref name="T"/>类型对象实例
+        /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
-        /// <param name="buffer">反序列化缓冲区</param>
+        /// <param name="reader">反序列化读取指针</param>
         /// <returns>反序列化的对象实例</returns>
-        public static T Deserialize(InputBuffer* buffer)
+        /// <exception cref="ArgumentNullException"><paramref name="reader"/>为null</exception>
+        public static T Deserialize(UnmanagedReader* reader)
         {
-            if (buffer == null)
+            if (reader == null)
             {
-                return default;
+                throw new ArgumentNullException(nameof(reader), "读取指针不能为空");
             }
 
-            T result = s_CachedProxy.Deserialize(buffer);
-
-            if (result is ISerializeMessageReceiver receiver)
-            {
-                receiver.OnAfterDeserialize();
-            }
-
-            return result;
+            return s_CachedProxy.Deserialize(reader);
         }
     }
 }
