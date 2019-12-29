@@ -45,12 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\MemoryAllocatorSettingsAttribute.cs" />
     <Compile Include="Enums\NumberOption.cs" />
     <Compile Include="Enums\SerializedType.cs" />
     <Compile Include="IO\UnmanagedReader.cs" />
     <Compile Include="IO\UnmanagedWriter.cs" />
     <Compile Include="IO\UnmanagedMemoryAllocator.cs" />
-    <Compile Include="ProxySettings.cs" />
     <Compile Include="Attributes\NumberAttribute.cs" />
     <Compile Include="Enums\CharEncoding.cs" />
     <Compile Include="Enums\CharType.cs" />
@@ -65,8 +65,8 @@
     <Compile Include="RuntimeSerializeProxyInjection\DeserializeILEmitUtility.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\SerializeILEmitUtility.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\ILEmitDataUtility.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\SerializeProxyInjector.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\SerializeProxyUtility.cs" />
-    <Compile Include="SerializationSettings.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="SerializationUtility.cs" />
     <Compile Include="Exceptions\TagDismatchException.cs" />

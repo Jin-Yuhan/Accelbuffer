@@ -1,42 +1,86 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Accelbuffer
 {
-    internal static unsafe class SerializationUtility 
+    /// <summary>
+    /// 公开对序列化设置操作的接口
+    /// </summary>
+    public static unsafe class SerializationUtility 
     {
+        /// <summary>
+        /// 获取/设置全局默认初始缓冲区大小
+        /// </summary>
+        public static long GlobalDefaultInitialBufferSize { get; set; }
+
+        /// <summary>
+        /// 获取全局默认数字选项
+        /// </summary>
+        public static NumberOption GlobalDefaultNumberOption { get; }
+
+        /// <summary>
+        /// 获取全局默认字符编码
+        /// </summary>
+        public static CharEncoding GlobalDefaultCharEncoding { get; }
+
+        static SerializationUtility()
+        {
+            GlobalDefaultInitialBufferSize = 20L;
+            GlobalDefaultNumberOption = NumberOption.FixedLength;
+            GlobalDefaultCharEncoding = CharEncoding.Unicode;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NumberSign GetSign(byte* value)
+        internal static long GetBufferSize(Type objectType, long size)
+        {
+            if (size <= 0)
+            {
+                try
+                {
+                    size = Marshal.SizeOf(objectType);
+                }
+                catch
+                {
+                    size = GlobalDefaultInitialBufferSize;
+                }
+            }
+
+            return size;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static NumberSign GetSign(byte* value)
         {
             return (NumberSign)((*value) >> 7 & 0x1);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void OnesComplement(sbyte* value)
+        internal static void OnesComplement(sbyte* value)
         {
             *value = (sbyte)~*value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void OnesComplement(short* value)
+        internal static void OnesComplement(short* value)
         {
             *value = (short)~*value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void OnesComplement(int* value)
+        internal static void OnesComplement(int* value)
         {
             *value = ~*value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void OnesComplement(long* value)
+        internal static void OnesComplement(long* value)
         {
             *value = ~*value;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void OnesComplement(byte* value, int size)
+        internal static void OnesComplement(byte* value, int size)
         {
             switch (size)
             {
@@ -48,7 +92,7 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int GetUsedByteCount(byte* p, int size)
+        internal static int GetUsedByteCount(byte* p, int size)
         {
             p += size - 1;
 
@@ -65,7 +109,7 @@ namespace Accelbuffer
             return size;
         }
 
-        public static SerializedType GetSerializedType(Type type, out string name)
+        internal static SerializedType GetSerializedType(Type type, out string name)
         {
             switch (Type.GetTypeCode(type))
             {
@@ -119,7 +163,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static bool IsTrulyComplex(Type type)
+        internal static bool IsTrulyComplex(Type type)
         {
             if (type.IsArray)
             {

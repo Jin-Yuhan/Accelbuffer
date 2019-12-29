@@ -28,13 +28,13 @@ namespace Accelbuffer
         private static CharEncoding GetCharEncoding(this FieldInfo field)
         {
             EncodingAttribute attribute = field.GetCustomAttribute<EncodingAttribute>(true);
-            return attribute == null ? SerializationSettings.DefaultCharEncoding : attribute.Encoding;
+            return attribute == null ? SerializationUtility.GlobalDefaultCharEncoding : attribute.Encoding;
         }
 
         private static NumberOption GetNumberOption(this FieldInfo field)
         {
             NumberAttribute attr = field.GetCustomAttribute<NumberAttribute>(true);
-            return attr == null ? SerializationSettings.DefaultNumberOption : attr.Option;
+            return attr == null ? SerializationUtility.GlobalDefaultNumberOption : attr.Option;
         }
 
         private static void EmitEncoding(this ILGenerator il, CharEncoding encoding)
@@ -58,7 +58,7 @@ namespace Accelbuffer
             il.Emit(option == NumberOption.FixedLength ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
         }
 
-        private static List<FieldData> GetSerializedFields(this Type objType)
+        public static List<FieldData> GetSerializedFields(this Type objType)
         {
             BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 

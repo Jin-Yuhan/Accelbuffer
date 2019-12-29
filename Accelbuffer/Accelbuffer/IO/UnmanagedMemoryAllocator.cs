@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Accelbuffer
@@ -12,30 +13,42 @@ namespace Accelbuffer
         private static readonly List<UnmanagedMemoryAllocator> s_Allocated = new List<UnmanagedMemoryAllocator>();
 
         private UnmanagedWriter* m_CachedWriter;
-        private long m_InitialSize;
+        private readonly bool m_ReadOnly;
+        private bool m_StrictMode;
+        private long m_InitialBufferSize;
 
-        internal UnmanagedWriter* Writer
+        /// <summary>
+        /// 获取/设置是否使用严格模式（严格模式下创建的<see cref="UnmanagedReader"/>会开启对序列化索引的严格匹配）
+        /// </summary>
+        public bool StrictMode
         {
-            get
+            get => m_StrictMode;
+            set
             {
-                if (m_CachedWriter == null)
+                if (m_ReadOnly)
                 {
-                    m_CachedWriter = (UnmanagedWriter*)Marshal.AllocHGlobal(sizeof(UnmanagedWriter)).ToPointer();
-                    *m_CachedWriter = new UnmanagedWriter(m_InitialSize, false);
+                    throw new UnauthorizedAccessException("无法设置只读属性");
                 }
 
-                m_CachedWriter->Reset();
-                return m_CachedWriter;
+                m_StrictMode = value;
             }
         }
 
         /// <summary>
-        /// 获取/设置 初始化缓冲区时应该分配的字节大小
+        /// 获取/设置初始化缓冲区时应该分配的字节大小
         /// </summary>
         public long InitialBufferSize
         {
-            get => m_InitialSize;
-            set => m_InitialSize = value <= 0 ? m_InitialSize : value;
+            get => m_InitialBufferSize;
+            set
+            {
+                if (m_ReadOnly)
+                {
+                    throw new UnauthorizedAccessException("无法设置只读属性");
+                }
+
+                m_InitialBufferSize = value <= 0 ? m_InitialBufferSize : value;
+            }
         }
 
         /// <summary>
@@ -44,8 +57,26 @@ namespace Accelbuffer
         public long CurrentUsedSize => m_CachedWriter == null ? 0L : m_CachedWriter->m_Size;
 
 
-        private UnmanagedMemoryAllocator() { }
+        private UnmanagedMemoryAllocator(long initialSize, bool strictMode, bool isReadOnly)
+        {
+            m_CachedWriter = null;
+            m_InitialBufferSize = initialSize;
+            m_StrictMode = strictMode;
+            m_ReadOnly = isReadOnly;
+        }
 
+
+        internal UnmanagedWriter* GetCachedWriter()
+        {
+            if (m_CachedWriter == null)
+            {
+                m_CachedWriter = (UnmanagedWriter*)Marshal.AllocHGlobal(sizeof(UnmanagedWriter)).ToPointer();
+                *m_CachedWriter = new UnmanagedWriter(InitialBufferSize, false);
+            }
+
+            m_CachedWriter->Reset();
+            return m_CachedWriter;
+        }
 
         /// <summary>
         /// 释放当前缓冲区使用的内存
@@ -72,19 +103,12 @@ namespace Accelbuffer
         }
 
         /// <summary>
-        /// 分配一个默认大小是<paramref name="size"/>的<see cref="UnmanagedWriter"/>
+        /// 分配一个默认大小是<see cref="InitialBufferSize"/>的<see cref="UnmanagedWriter"/>
         /// </summary>
-        /// <param name="size"><see cref="UnmanagedWriter"/>的默认大小</param>
         /// <returns>创建的对象</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/>是负数</exception>
-        public static UnmanagedWriter AllocWriter(long size)
+        public UnmanagedWriter AllocWriter()
         {
-            if (size < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(size), "缓冲区默认大小必须是非负数");
-            }
-
-            return new UnmanagedWriter(size, true);
+            return new UnmanagedWriter(InitialBufferSize, true);
         }
 
         /// <summary>
@@ -93,11 +117,10 @@ namespace Accelbuffer
         /// <param name="source">源数据指针</param>
         /// <param name="offset">指针的偏移量</param>
         /// <param name="length">允许对象读取的字节长度</param>
-        /// <param name="strictMode">是否使用严格的序列化模式（开启对序列化索引不匹配的错误警告）</param>
         /// <returns>创建的对象</returns>
         /// <exception cref="ArgumentNullException"><paramref name="source"/>为null</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
-        public static UnmanagedReader AllocReader(byte* source, long offset, long length, bool strictMode)
+        public UnmanagedReader AllocReader(byte* source, long offset, long length)
         {
             if (source == null)
             {
@@ -109,12 +132,18 @@ namespace Accelbuffer
                 throw new ArgumentOutOfRangeException(nameof(length), "长度必须是非负数");
             }
 
-            return new UnmanagedReader(source + offset, strictMode, length);
+            return new UnmanagedReader(source + offset, StrictMode, length);
         }
 
-        internal static UnmanagedMemoryAllocator Alloc(long initialSize)
+        internal static UnmanagedMemoryAllocator Alloc(Type objectType)
         {
-            UnmanagedMemoryAllocator allocator = new UnmanagedMemoryAllocator { m_CachedWriter = null, m_InitialSize = initialSize };
+            MemoryAllocatorSettingsAttribute attr = objectType.GetCustomAttribute<MemoryAllocatorSettingsAttribute>(true);
+
+            long initialBufferSize = SerializationUtility.GetBufferSize(objectType, attr == null ? 0L : attr.InitialBufferSize);
+            bool strictMode = attr == null ? false : attr.StrictMode;
+            bool readOnly = attr == null ? false : attr.RuntimeReadOnly;
+
+            UnmanagedMemoryAllocator allocator = new UnmanagedMemoryAllocator(initialBufferSize, strictMode, readOnly);
             s_Allocated.Add(allocator);
             return allocator;
         }

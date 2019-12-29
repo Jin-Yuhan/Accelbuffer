@@ -20,11 +20,11 @@ namespace Accelbuffer
             switch (type)
             {
                 case SerializedType.Number:
-                    il.EmitNumberDeserialize(SerializationSettings.DefaultNumberOption, name);
+                    il.EmitNumberDeserialize(SerializationUtility.GlobalDefaultNumberOption, name);
                     break;
 
                 case SerializedType.Char:
-                    il.EmitCharDeserialize(SerializationSettings.DefaultCharEncoding, name);
+                    il.EmitCharDeserialize(SerializationUtility.GlobalDefaultCharEncoding, name);
                     break;
 
                 case SerializedType.Boolean:
@@ -190,10 +190,10 @@ namespace Accelbuffer
                 switch (type)
                 {
                     case SerializedType.Number:
-                        il.EmitNumberDeserialize(SerializationSettings.DefaultNumberOption, name);
+                        il.EmitNumberDeserialize(SerializationUtility.GlobalDefaultNumberOption, name);
                         break;
                     case SerializedType.Char:
-                        il.EmitCharDeserialize(SerializationSettings.DefaultCharEncoding, name);
+                        il.EmitCharDeserialize(SerializationUtility.GlobalDefaultCharEncoding, name);
                         break;
                     case SerializedType.Boolean:
                         il.EmitBooleanDeserialize(name);

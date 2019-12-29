@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.Serialization;
 
 namespace Accelbuffer
 {
@@ -18,76 +18,35 @@ namespace Accelbuffer
         /// </summary>
         public static UnmanagedMemoryAllocator Allocator { get; }
 
-        /// <summary>
-        /// 获取/设置 是否使用严格的序列化模式（开启对序列化索引不匹配的错误警告）
-        /// </summary>
-        public static bool StrictMode { get; set; }
-
         static Serializer()
         {
-            Type objectType = typeof(T);
-            Type proxyType;
-            long initialBufferSize;
-
-            if (SerializationSettings.TryGetProxyBinding(objectType, out ProxySettings settings))
-            {
-                proxyType = settings.ProxyType;
-                initialBufferSize = settings.InitialBufferSize;
-                StrictMode = settings.StrictMode;
-            }
-            else
-            {
-                bool complex = SerializationUtility.IsTrulyComplex(objectType);
-
-                if (complex && !objectType.IsValueType && objectType.GetConstructor(Type.EmptyTypes) == null)
-                {
-                    throw new SerializationException($"类型{objectType.Name}不能被序列化,因为没有无参构造函数");
-                }
-
-                SerializeContractAttribute attr = objectType.GetCustomAttribute<SerializeContractAttribute>(true);
-
-                if (complex && attr == null)
-                {
-                    throw new SerializationException($"类型{objectType.Name}不能被序列化，因为没有被标记{typeof(SerializeContractAttribute).Name}特性，且没有手动绑定代理");
-                }
-
-                proxyType = GetProxyType(objectType, attr?.ProxyType);
-                initialBufferSize = SerializationSettings.GetBufferSize(objectType, attr == null ? 0 : attr.InitialBufferSize);
-                StrictMode = attr == null ? true : attr.StrictMode;
-            }
-
-            s_CachedProxy = (ISerializeProxy<T>)Activator.CreateInstance(proxyType);
+            s_CachedProxy = SerializeProxyInjector.Inject<T>();
             s_Lock = new object();
-
-            Allocator = UnmanagedMemoryAllocator.Alloc(initialBufferSize);
-        }
-
-        private static Type GetProxyType(Type objectType, Type proxyType)
-        {
-            if (proxyType == null)
-            {
-                proxyType = SerializeProxyUtility.GenerateProxy(objectType);
-            }
-            else
-            {
-                if (proxyType.IsGenericTypeDefinition)
-                {
-                    proxyType = proxyType.MakeGenericType(objectType.GenericTypeArguments);
-                }
-
-                if (!typeof(ISerializeProxy<T>).IsAssignableFrom(proxyType))
-                {
-                    throw new NullReferenceException("获取" + typeof(T).Name + "的序列化代理失败");
-                }
-            }
-
-            return proxyType;
+            Allocator = UnmanagedMemoryAllocator.Alloc(typeof(T));
         }
 
         /// <summary>
-        /// 初始化（空方法，TODO：调用静态构造函数）
+        /// 初始化，包括被当前类型引用的对象
         /// </summary>
-        public static void Initialize() { }
+        public static void Initialize()
+        {
+            List<FieldData> fields = ILEmitUtility.GetSerializedFields(typeof(T));
+
+            for (int i = 0; i < fields.Count; i++)
+            {
+                Type type = fields[i].Field.FieldType;
+
+                if (SerializationUtility.IsTrulyComplex(type))
+                {
+                    if (type.IsArray)
+                    {
+                        type = type.GetElementType();
+                    }
+
+                    typeof(Serializer<>).MakeGenericType(type).GetMethod("Initialize", BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
+                }
+            }
+        }
 
         /// <summary>
         /// 序列化对象，并返回序列化数据（线程安全）
@@ -98,13 +57,9 @@ namespace Accelbuffer
         {
             lock (s_Lock)
             {
-                UnmanagedWriter* writer = Allocator.Writer;
-
+                UnmanagedWriter* writer = Allocator.GetCachedWriter();
                 s_CachedProxy.Serialize(in obj, in writer);
-
-                byte[] result = writer->ToArray();
-
-                return result;
+                return writer->ToArray();
             }
         }
 
@@ -120,13 +75,9 @@ namespace Accelbuffer
         {
             lock (s_Lock)
             {
-                UnmanagedWriter* writer = Allocator.Writer;
-
+                UnmanagedWriter* writer = Allocator.GetCachedWriter();
                 s_CachedProxy.Serialize(in obj, in writer);
-
-                long result = writer->CopyToArray(buffer, index);
-
-                return result;
+                return writer->CopyToArray(buffer, index);
             }
         }
 
@@ -172,15 +123,11 @@ namespace Accelbuffer
                 throw new ArgumentOutOfRangeException(nameof(index), "字节数组长度不足");
             }
 
-            T result;
-
             fixed (byte* p = bytes)
             {
-                UnmanagedReader reader = UnmanagedMemoryAllocator.AllocReader(p, index, length, StrictMode);
-                result = s_CachedProxy.Deserialize(&reader);
+                UnmanagedReader reader = Allocator.AllocReader(p, index, length);
+                return s_CachedProxy.Deserialize(&reader);
             }
-
-            return result;
         }
 
         /// <summary>

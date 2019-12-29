@@ -1,37 +1,31 @@
 ﻿using UnityEngine;
+using static Accelbuffer.SerializeProxyInjector;
 
 namespace Accelbuffer
 {
     public static class UnityExtensionRegistry
     {
-        private static bool s_Registered = false;
-
         [RuntimeInitializeOnLoadMethod]
-        public static void RegisterIfNot()
+        public static void Register()
         {
-            if (!s_Registered)
-            {
-                s_Registered = true;
+            AddBinding<Vector2, VectorSerializeProxy>();
+            AddBinding<Vector3, VectorSerializeProxy>();
+            AddBinding<Vector4, VectorSerializeProxy>();
+            AddBinding<Vector2Int, VectorSerializeProxy>();
+            AddBinding<Vector3Int, VectorSerializeProxy>();
 
-                SerializationSettings.AddSerializeProxyBinding<Vector2, VectorSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Vector3, VectorSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Vector4, VectorSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Vector2Int, VectorSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Vector3Int, VectorSerializeProxy>();
+            AddBinding<Rect, RectSerializeProxy>();
+            AddBinding<RectInt, RectSerializeProxy>();
 
-                SerializationSettings.AddSerializeProxyBinding<Rect, RectSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<RectInt, RectSerializeProxy>();
+            AddBinding<Quaternion, OtherTypesSerializeProxy>();
+            AddBinding<Matrix4x4, OtherTypesSerializeProxy>();
+            AddBinding<LayerMask, OtherTypesSerializeProxy>();
 
-                SerializationSettings.AddSerializeProxyBinding<Quaternion, OtherTypesSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Matrix4x4, OtherTypesSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<LayerMask, OtherTypesSerializeProxy>();
+            AddBinding<Color, ColorSerializeProxy>();
+            AddBinding<Color32, ColorSerializeProxy>();
 
-                SerializationSettings.AddSerializeProxyBinding<Color, ColorSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<Color32, ColorSerializeProxy>();
-
-                SerializationSettings.AddSerializeProxyBinding<Bounds, BoundsSerializeProxy>();
-                SerializationSettings.AddSerializeProxyBinding<BoundsInt, BoundsSerializeProxy>();
-            }
+            AddBinding<Bounds, BoundsSerializeProxy>();
+            AddBinding<BoundsInt, BoundsSerializeProxy>();
         }
     }
 }

@@ -9,16 +9,6 @@ namespace Accelbuffer
     public sealed class SerializeContractAttribute : Attribute
     {
         /// <summary>
-        /// 获取/设置 初始的序列化缓冲区大小，以字节为单位
-        /// </summary>
-        public long InitialBufferSize { get; set; }
-
-        /// <summary>
-        /// 获取/设置 是否使用严格序列化模式（开启对序列化索引不匹配的错误警告）
-        /// </summary>
-        public bool StrictMode { get; set; }
-
-        /// <summary>
         /// 获取 序列化代理类型
         /// </summary>
         public Type ProxyType { get; }

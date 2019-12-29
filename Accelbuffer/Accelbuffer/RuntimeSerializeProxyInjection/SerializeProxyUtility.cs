@@ -59,9 +59,9 @@ namespace Accelbuffer
             s_OverrideMethodAttributes = MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.Final | MethodAttributes.NewSlot | MethodAttributes.Virtual;
         }
 
-        internal static Type GenerateProxy(Type objType)
+        public static Type GenerateProxy(Type objType)
         {
-            string typeName = objType.Name + "SerializeProxy";
+            string typeName = GetProxyTypeName(objType);
 
             Type interfaceType = typeof(ISerializeProxy<>).MakeGenericType(objType);
 
@@ -74,6 +74,11 @@ namespace Accelbuffer
             DefineDeserializeMethod(builder, objType, interfaceType);
 
             return builder.CreateType();
+        }
+
+        private static string GetProxyTypeName(Type objType)
+        {
+            return objType.Name + "SerializeProxy";
         }
 
         private static void DefineSerializeMethod(TypeBuilder builder, Type objType, Type interfaceType)
