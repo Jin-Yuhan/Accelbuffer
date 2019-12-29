@@ -30,10 +30,10 @@
 ## 运行时代理绑定`RuntimeSerializeProxyBinding`
 |方法|功能|
 |:-:|:-:|
-|`SerializationSettings.AddSerializeProxyBinding<TObject, TProxy>(bool strictMode = false, long initialBufferSize = 0)`|代理绑定（`更加高效`）|
-|`SerializationSettings.AddSerializeProxyBinding(Type objectType, Type proxyType, bool strictMode = false, long initialBufferSize = 0)`|代理绑定|
-|`SerializationSettings.RemoveSerializeProxyBinding<TObject>()`|取消代理绑定|
-|`SerializationSettings.RemoveSerializeProxyBinding(Type objectType)`|取消代理绑定|
+|`SerializeProxyInjector.AddSerializeProxyBinding<TObject, TProxy>()`|代理绑定（`更加高效`）|
+|`SerializeProxyInjector.AddSerializeProxyBinding(Type objectType, Type proxyType)`|代理绑定|
+|`SerializeProxyInjector.RemoveSerializeProxyBinding<TObject>()`|取消代理绑定|
+|`SerializeProxyInjector.RemoveSerializeProxyBinding(Type objectType)`|取消代理绑定|
 
 ## 运行时代理注入`RuntimeSerializeProxyInjection`
 * 通过`System.Reflection.Emit`向运行时注入`IL`代码，生成默认的序列化代理，这个过程性能消耗非常大，如果使用该方案，
@@ -70,7 +70,8 @@
 ### 1.使用特性标记类型
 #### 方案一，通过`RuntimeSerializeProxyInjection`
 ```c#
-[SerializeContract(InitialBufferSize = 20L, StrictMode = true)]
+[SerializeContract]
+[MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
   [SerializeInclude(0), Number(NumberOption.VariableLength)] 
@@ -86,7 +87,8 @@ public struct UserInput
 
 #### 方案二，手动实现代理
 ```c#
-[SerializeContract(typeof(UserInputSerializeProxy), InitialBufferSize = 20L, StrictMode = true)]
+[SerializeContract(typeof(UserInputSerializeProxy))]
+[MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
   public int CarId;
