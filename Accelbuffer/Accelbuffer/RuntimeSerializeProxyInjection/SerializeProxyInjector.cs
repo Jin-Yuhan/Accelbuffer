@@ -87,13 +87,7 @@ namespace Accelbuffer
             }
 
             SerializeContractAttribute attr = objectType.GetCustomAttribute<SerializeContractAttribute>(true);
-
-            if (attr == null)
-            {
-                throw new NotSupportedException($"类型{objectType}无法被序列化");
-            }
-
-            proxyType = attr.ProxyType;
+            proxyType = attr?.ProxyType;
 
             if (proxyType == null)
             {

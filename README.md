@@ -30,10 +30,10 @@
 ## 运行时代理绑定`RuntimeSerializeProxyBinding`
 |方法|功能|
 |:-:|:-:|
-|`SerializeProxyInjector.AddSerializeProxyBinding<TObject, TProxy>()`|代理绑定（`更加高效`）|
-|`SerializeProxyInjector.AddSerializeProxyBinding(Type objectType, Type proxyType)`|代理绑定|
-|`SerializeProxyInjector.RemoveSerializeProxyBinding<TObject>()`|取消代理绑定|
-|`SerializeProxyInjector.RemoveSerializeProxyBinding(Type objectType)`|取消代理绑定|
+|`SerializeProxyInjector.AddBinding<TObject, TProxy>()`|代理绑定（`更加高效`）|
+|`SerializeProxyInjector.AddBinding(Type objectType, Type proxyType)`|代理绑定|
+|`SerializeProxyInjector.RemoveBinding<TObject>()`|取消代理绑定|
+|`SerializeProxyInjector.RemoveBinding(Type objectType)`|取消代理绑定|
 
 ## 运行时代理注入`RuntimeSerializeProxyInjection`
 * 通过`System.Reflection.Emit`向运行时注入`IL`代码，生成默认的序列化代理，这个过程性能消耗非常大，如果使用该方案，
@@ -154,7 +154,7 @@ UnmanagedMemoryAllocator.FreeAll();
 > 这个方法不会造成值类型的装箱！
 
 ```c#
-[SerializeContract(InitialBufferSize = 20L, StrictMode = true)]
+[SerializeContract]
 public struct UserInput
 {
   [SerializeInclude(0), Number(NumberOption.VariableLength)] 
@@ -184,7 +184,8 @@ public struct UserInput
 #### 测试类型
 
 ```C#
-[Serializable, ProtoContract, SerializeContract(InitialBufferSize = 50L, StrictMode = true)]
+[Serializable, ProtoContract, SerializeContract]
+[MemoryAllocatorSettings(50L, true, RuntimeReadOnly = true)]
 public struct SerializeTest
 {
   [ProtoMember(1), SerializeInclude(0), Encoding(CharEncoding.ASCII)] 
