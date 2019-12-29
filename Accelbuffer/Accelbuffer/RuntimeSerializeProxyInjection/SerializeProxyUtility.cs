@@ -78,7 +78,7 @@ namespace Accelbuffer
 
         private static string GetProxyTypeName(Type objType)
         {
-            return objType.Name + "SerializeProxy";
+            return objType.FullName + "SerializeProxy";
         }
 
         private static void DefineSerializeMethod(TypeBuilder builder, Type objType, Type interfaceType)
