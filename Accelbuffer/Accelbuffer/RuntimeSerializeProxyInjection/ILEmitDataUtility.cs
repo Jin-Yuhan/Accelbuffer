@@ -74,11 +74,11 @@ namespace Accelbuffer
                     continue;
                 }
 
-                SerializeIncludeAttribute attribute = field.GetCustomAttribute<SerializeIncludeAttribute>(true);
+                FieldIndexAttribute attribute = field.GetCustomAttribute<FieldIndexAttribute>(true);
 
                 if (attribute != null)
                 {
-                    fields.Add(new FieldData(field, attribute.SerializeIndex));
+                    fields.Add(new FieldData(field, attribute.Index));
                 }
             }
 

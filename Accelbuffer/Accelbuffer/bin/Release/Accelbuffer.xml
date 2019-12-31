@@ -571,21 +571,21 @@
             </summary>
             <param name="encoding">字符序列化使用的编码</param>
         </member>
-        <member name="T:Accelbuffer.SerializeIncludeAttribute">
+        <member name="T:Accelbuffer.FieldIndexAttribute">
             <summary>
-            指示字段参与序列化，且拥有指定的索引值
+            指示字段的索引
             </summary>
         </member>
-        <member name="P:Accelbuffer.SerializeIncludeAttribute.SerializeIndex">
+        <member name="P:Accelbuffer.FieldIndexAttribute.Index">
             <summary>
-            获取 序列化索引
+            获取索引
             </summary>
         </member>
-        <member name="M:Accelbuffer.SerializeIncludeAttribute.#ctor(System.Byte)">
+        <member name="M:Accelbuffer.FieldIndexAttribute.#ctor(System.Byte)">
             <summary>
-            初始化 SerializeIndexAttribute 实例
+            初始化 FieldIndexAttribute 实例
             </summary>
-            <param name="serializeIndex">序列化索引</param>
+            <param name="index">索引</param>
         </member>
         <member name="T:Accelbuffer.NumberSign">
             <summary>
@@ -662,24 +662,19 @@
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
         </member>
-        <member name="T:Accelbuffer.SerializeContractAttribute">
+        <member name="T:Accelbuffer.SerializeByAttribute">
             <summary>
-            表示 类型/结构/接口 序列化的协议
+            用于指定 类型/结构/接口 序列化的代理
             </summary>
         </member>
-        <member name="P:Accelbuffer.SerializeContractAttribute.ProxyType">
+        <member name="P:Accelbuffer.SerializeByAttribute.ProxyType">
             <summary>
             获取 序列化代理类型
             </summary>
         </member>
-        <member name="M:Accelbuffer.SerializeContractAttribute.#ctor">
+        <member name="M:Accelbuffer.SerializeByAttribute.#ctor(System.Type)">
             <summary>
-            初始化 SerializeContractAttribute 实例，并指示运行时自动注入序列化代理
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.SerializeContractAttribute.#ctor(System.Type)">
-            <summary>
-            初始化 SerializeContractAttribute 实例，并指示运行时使用<paramref name="proxyType"/>类型作为序列化代理
+            初始化 SerializeByAttribute 实例，并指示运行时使用<paramref name="proxyType"/>类型作为序列化代理
             </summary>
             <param name="proxyType">序列化代理类型</param>
         </member>

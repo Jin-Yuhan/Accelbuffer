@@ -13,22 +13,22 @@
 * 自动的运行时代理注入
 * 可以运行时绑定的序列化代理
 * 没有序列化深度限制
-* 自动的C#代理代码生成 [`accelc`] (正在开发中)
+* 自动的C#代理代码生成(正在开发中)
 
 ## 部分功能
 |功能名称|当前是否支持|
 |:-:|:-:|
-|字符编码设置(`ASCII`, `Unicode`, `UTF-8`)|支持|
-|动态长度数字(`VariableNumber`)，固定长度整数(`FixedNumber`)|支持|
-|自定义可序列化集合(`ISerializableEnumerable<T>`)|支持|
-|序列化事件回调(`SerializeMessage`)|支持|
-|序列化数据损坏检查(`StrictMode`)|支持|
-|运行时代理注入(`RuntimeSerializeProxyInjection`)|支持|
-|运行时代理绑定(`RuntimeSerializeProxyBinding`)|支持|
-|Unity拓展(`AccelbufferUnityExtension`)|支持|
-|C#代理脚本自动生成(`accelc`)|暂时不受支持|
+|字符编码设置|支持|
+|动态长度数字，固定长度整数|支持|
+|自定义可序列化集合|支持|
+|序列化事件回调|支持|
+|序列化数据损坏检查|支持|
+|运行时代理注入|支持|
+|运行时代理绑定|支持|
+|Unity拓展|支持|
+|C#代理脚本自动生成|暂时不受支持|
 
-## 运行时代理绑定`RuntimeSerializeProxyBinding`
+## 运行时代理绑定
 |方法|功能|
 |:-:|:-:|
 |`SerializeProxyInjector.AddBinding<TObject, TProxy>()`|代理绑定（`更加高效`）|
@@ -36,31 +36,17 @@
 |`SerializeProxyInjector.RemoveBinding<TObject>()`|取消代理绑定|
 |`SerializeProxyInjector.RemoveBinding(Type objectType)`|取消代理绑定|
 
-## 运行时代理注入`RuntimeSerializeProxyInjection`
-* 通过`System.Reflection.Emit`向运行时注入`IL`代码，生成默认的序列化代理，这个过程性能消耗非常大，如果使用该方案，
+## 运行时代理注入
+> 这种方法应该尽量在测试时使用，如果条件允许，应该尽可能实现序列化代理，这样可以进一步优化性能
+* 生成代理的过程性能消耗非常大，如果使用该方案，
 应该尽量在加载场景等位置进行代理初始化(调用`Serializer<T>.Initialize()`)
 
-#### `RuntimeSerializeProxyInjection`支持的字段类型
-* `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `string`, `float`, `double`, `bool` 
-
-* `sbyte[]`, `byte[]`, `short[]`, `ushort[]`, `int[]`, `uint[]`, `long[]`, `ulong[]`, `char[]`, `string[]`, `float[]`, `double[]`, `bool[]` 
-
-* 包括 （以上类型字段、标记了 `SerializeContractAttribute` 的任意类型字段 和 运行时绑定了代理的任意类型字段） 的 `class`, `struct`
-
-* `List<T>`, `Dictionary<T>`
-
-* 实现了 `ISerializableEnumerable<T>` 并且拥有默认无参构造函数的类型
-
-## 可以直接使用`Serializer<T>`进行序列化的类型
-* `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `string`, `float`, `double`, `bool` 
-
-* `sbyte[]`, `byte[]`, `short[]`, `ushort[]`, `int[]`, `uint[]`, `long[]`, `ulong[]`, `char[]`, `string[]`, `float[]`, `double[]`, `bool[]` 
-
-* 定义了对应的`ISerializeProxy<T>`并且标记了 `SerializeContractAttribute` 指定代理的任意类型
-
-* 运行时绑定了对应的 `ISerializeProxy<T>` 的任意类型
-
-* 标记了`SerializeContractAttribute`拥有默认无参构造函数并且字段类型被`RuntimeSerializeProxyInjection`支持的任意类型
+## 支持的序列化类型
+* 基元类型（不包括 `decimal`）
+* 一维数组
+* `List<T>`
+* `Dictionary<T>`
+* 自定义 `class`, `struct`
 
 ##### Unity拓展 `AccelbufferUnityExtension`
 > 添加类型支持
@@ -69,26 +55,25 @@
 
 ## 基本用法
 ### 1.使用特性标记类型
-#### 方案一，通过`RuntimeSerializeProxyInjection`
+#### 方案一，通过`运行时代理注入`
 ```c#
-[SerializeContract]
 [MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
-  [SerializeInclude(0), NumberType(Number.Var)] 
+  [FieldIndex(0), NumberType(Number.Var)] 
   public int CarId;
-  [SerializeInclude(1), NumberType(Number.Var)] 
+  [FieldIndex(1), NumberType(Number.Var)] 
   public float Horizontal;
-  [SerializeInclude(2), NumberType(Number.Var)] 
+  [FieldIndex(2), NumberType(Number.Var)] 
   public float Vertical;
-  [SerializeInclude(3), NumberType(Number.Var)] 
+  [FieldIndex(3), NumberType(Number.Var)] 
   public float HandBrake;
 }
 ```
 
 #### 方案二，手动实现代理
 ```c#
-[SerializeContract(typeof(UserInputSerializeProxy))]
+[SerializeBy(typeof(UserInputSerializeProxy))]
 [MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
@@ -121,7 +106,7 @@ internal sealed class UserInputSerializeProxy : ISerializeProxy<UserInput>
 }
 ```
 
-#### 方案三，利用C#代理脚本生成(`accelc`)
+#### 方案三，利用`C#代理脚本生成器`
 > 即将被支持
 
 ### 2.序列化对象
@@ -150,31 +135,30 @@ UnmanagedMemoryAllocator.FreeAll();
 ```
 
 ### 5.序列化事件回调(`SerializeMessage`)
-通过定义 `公开的(public) ` `OnBeforeSerialize` 或 `OnAfterDeserialize` `实例(instance)` 方法实现对序列化事件的关注
+通过定义公开的 `OnBeforeSerialize` 或 `OnAfterDeserialize` 实例方法，实现对序列化事件的关注
 
-> 这个方法不会造成值类型的装箱！
+> 这个方法不会造成值类型的装箱
 
 ```c#
-[SerializeContract]
 public struct UserInput
 {
-  [SerializeInclude(0), Number(NumberOption.VariableLength)] 
+  [FieldIndex(0), NumberType(Number.Var)] 
   public int CarId;
-  [SerializeInclude(1), Number(NumberOption.VariableLength)] 
+  [FieldIndex(1), NumberType(Number.Var)] 
   public float Horizontal;
-  [SerializeInclude(2), Number(NumberOption.VariableLength)] 
+  [FieldIndex(2), NumberType(Number.Var)] 
   public float Vertical;
-  [SerializeInclude(3), Number(NumberOption.VariableLength)] 
+  [FieldIndex(3), NumberType(Number.Var)] 
   public float HandBrake;
   
   public void OnBeforeSerialize()
   {
-    UnityEngine.Debug.Log("OnBeforeSerialize");
+    Console.WriteLine("OnBeforeSerialize");
   }
   
   public void OnAfterDeserialize()
   {
-    UnityEngine.Debug.Log("OnAfterDeserialize");
+    Console.WriteLine("OnAfterDeserialize");
   }
 }
 ```
@@ -185,35 +169,35 @@ public struct UserInput
 #### 测试类型
 
 ```C#
-[Serializable, ProtoContract, SerializeContract]
+[Serializable, ProtoContract]
 [MemoryAllocatorSettings(50L, true, RuntimeReadOnly = true)]
 public struct SerializeTest
 {
-  [ProtoMember(1), SerializeInclude(0), Encoding(CharEncoding.ASCII)] 
+  [ProtoMember(1), FieldIndex(0), Encoding(CharEncoding.ASCII)] 
   public string String;
-  [ProtoMember(2), SerializeInclude(1), Encoding(CharEncoding.ASCII)] 
+  [ProtoMember(2), FieldIndex(1), Encoding(CharEncoding.ASCII)] 
   public char Char;
-  [ProtoMember(3), SerializeInclude(2)]
+  [ProtoMember(3), FieldIndex(2)]
   public byte Integer0;
-  [ProtoMember(4), SerializeInclude(3)]
+  [ProtoMember(4), FieldIndex(3)]
   public sbyte Integer1;
-  [ProtoMember(5), SerializeInclude(4), NumberType(Number.Var)]
+  [ProtoMember(5), FieldIndex(4), NumberType(Number.Var)]
   public ushort Integer2;
-  [ProtoMember(6), SerializeInclude(5), NumberType(Number.Var)]
+  [ProtoMember(6), FieldIndex(5), NumberType(Number.Var)]
   public short Integer3;
-  [ProtoMember(7), SerializeInclude(6), NumberType(Number.Var)]
+  [ProtoMember(7), FieldIndex(6), NumberType(Number.Var)]
   public uint Integer4;
-  [ProtoMember(8), SerializeInclude(7), NumberType(Number.Var)]
+  [ProtoMember(8), FieldIndex(7), NumberType(Number.Var)]
   public int Integer5;
-  [ProtoMember(9), SerializeInclude(8), NumberType(Number.Var)]
+  [ProtoMember(9), FieldIndex(8), NumberType(Number.Var)]
   public ulong Integer6;
-  [ProtoMember(10), SerializeInclude(9), NumberType(Number.Var)]
+  [ProtoMember(10), FieldIndex(9), NumberType(Number.Var)]
   public long Integer7;
-  [ProtoMember(11), SerializeInclude(10), NumberType(Number.Var)]
+  [ProtoMember(11), FieldIndex(10), NumberType(Number.Var)]
   public float Float0;
-  [ProtoMember(12), SerializeInclude(11), NumberType(Number.Var)]
+  [ProtoMember(12), FieldIndex(11), NumberType(Number.Var)]
   public double Float1;
-  [ProtoMember(13), SerializeInclude(12)]
+  [ProtoMember(13), FieldIndex(12)]
   public bool Bool;
 }
 

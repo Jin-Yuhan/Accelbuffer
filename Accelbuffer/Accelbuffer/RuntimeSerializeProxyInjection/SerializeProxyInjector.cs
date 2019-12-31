@@ -100,21 +100,20 @@ namespace Accelbuffer
             Type impType = objectType.GetInterface(enumerableType.Name);
 
             if (impType != null 
-                && GetGenericProxyType(objectType, enumerableType, new Type[] { objectType, impType.GenericTypeArguments[0] }, ref proxyType))
+                && GetGenericProxyType(enumerableType, new Type[] { objectType, impType.GenericTypeArguments[0] }, ref proxyType))
             {
                 return proxyType;
             }
 
             if (objectType.IsGenericType 
-                && GetGenericProxyType(objectType, objectType.GetGenericTypeDefinition(), objectType.GenericTypeArguments, ref proxyType))
+                && GetGenericProxyType(objectType.GetGenericTypeDefinition(), objectType.GenericTypeArguments, ref proxyType))
             {
                 return proxyType;
             }
 
-            SerializeContractAttribute attr = objectType.GetCustomAttribute<SerializeContractAttribute>(true);
-            proxyType = attr?.ProxyType;
+            SerializeByAttribute attr = objectType.GetCustomAttribute<SerializeByAttribute>(true);
 
-            if (proxyType == null)
+            if (attr == null)
             {
                 if (!IsInjectable(objectType))
                 {
@@ -125,6 +124,13 @@ namespace Accelbuffer
             }
             else
             {
+                proxyType = attr.ProxyType;
+
+                if (proxyType == null)
+                {
+                    throw new NotSupportedException("序列化代理类型不能为null");
+                }
+
                 if (proxyType.IsGenericTypeDefinition)
                 {
                     proxyType = proxyType.MakeGenericType(objectType.GenericTypeArguments);
@@ -136,16 +142,14 @@ namespace Accelbuffer
                 }
             }
 
-            s_ProxyMap.Add(objectType, proxyType);
             return proxyType;
         }
 
-        private static bool GetGenericProxyType(Type objectType, Type matchType, Type[] genericTypeArguments, ref Type proxyType)
+        private static bool GetGenericProxyType(Type matchType, Type[] genericTypeArguments, ref Type proxyType)
         {
             if (s_ProxyMap.TryGetValue(matchType, out proxyType))
             {
                 proxyType = proxyType.MakeGenericType(genericTypeArguments);
-                s_ProxyMap.Add(objectType, proxyType);
                 return true;
             }
             return false;

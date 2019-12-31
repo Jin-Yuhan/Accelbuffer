@@ -55,13 +55,13 @@
     <Compile Include="Enums\CharEncoding.cs" />
     <Compile Include="Enums\CharType.cs" />
     <Compile Include="Attributes\EncodingAttribute.cs" />
-    <Compile Include="Attributes\SerializeIncludeAttribute.cs" />
+    <Compile Include="Attributes\FieldIndexAttribute.cs" />
     <Compile Include="Enums\NumberSign.cs" />
     <Compile Include="ISerializableEnumerable.cs" />
     <Compile Include="ISerializeProxy.cs" />
     <Compile Include="Exceptions\MissingSerializedValueException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Attributes\SerializeContractAttribute.cs" />
+    <Compile Include="Attributes\SerializeByAttribute.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\InternalSerializeProxy\DictionarySerializeProxy.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\FieldData.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\DeserializeILEmitUtility.cs" />
