@@ -20,6 +20,7 @@
 |:-:|:-:|
 |字符编码设置(`ASCII`, `Unicode`, `UTF-8`)|支持|
 |动态长度数字(`VariableNumber`)，固定长度整数(`FixedNumber`)|支持|
+|自定义可序列化集合(`ISerializableEnumerable<T>`)|支持|
 |序列化事件回调(`SerializeMessage`)|支持|
 |序列化数据损坏检查(`StrictMode`)|支持|
 |运行时代理注入(`RuntimeSerializeProxyInjection`)|支持|
@@ -46,9 +47,9 @@
 
 * 包括 （以上类型字段、标记了 `SerializeContractAttribute` 的任意类型字段 和 运行时绑定了代理的任意类型字段） 的 `class`, `struct`
 
-* `List<T>`, `Dictionary<T>`（即将支持）
+* `List<T>`, `Dictionary<T>`
 
-* 拥有公共 `Add(T value)` 方法的 `IEnumerable<T>` 类型（即将支持）
+* 实现了 `ISerializableEnumerable<T>` 并且拥有默认无参构造函数的类型
 
 ## 可以直接使用`Serializer<T>`进行序列化的类型
 * `sbyte`, `byte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `string`, `float`, `double`, `bool` 
@@ -74,13 +75,13 @@
 [MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
-  [SerializeInclude(0), Number(NumberOption.VariableLength)] 
+  [SerializeInclude(0), NumberType(Number.Var)] 
   public int CarId;
-  [SerializeInclude(1), Number(NumberOption.VariableLength)] 
+  [SerializeInclude(1), NumberType(Number.Var)] 
   public float Horizontal;
-  [SerializeInclude(2), Number(NumberOption.VariableLength)] 
+  [SerializeInclude(2), NumberType(Number.Var)] 
   public float Vertical;
-  [SerializeInclude(3), Number(NumberOption.VariableLength)] 
+  [SerializeInclude(3), NumberType(Number.Var)] 
   public float HandBrake;
 }
 ```
@@ -101,10 +102,10 @@ internal sealed class UserInputSerializeProxy : ISerializeProxy<UserInput>
 {
   unsafe void ISerializeProxy<UserInput>.Serialize(in UserInput obj, in UnmanagedWriter* writer)
   {
-    writer->WriteValue(0, obj.CarId, NumberOption.VariableLength);
+    writer->WriteValue(0, obj.CarId, Number.Var);
     writer->WriteValue(1, obj.Horizontal, NumberOption.VariableLength);
-    writer->WriteValue(2, obj.Vertical, NumberOption.VariableLength);
-    writer->WriteValue(3, obj.HandBrake, NumberOption.VariableLength);
+    writer->WriteValue(2, obj.Vertical, Number.Var);
+    writer->WriteValue(3, obj.HandBrake, Number.Var);
   }
 
   unsafe UserInput ISerializeProxy<UserInput>.Deserialize(in UnmanagedReader* reader)
@@ -196,21 +197,21 @@ public struct SerializeTest
   public byte Integer0;
   [ProtoMember(4), SerializeInclude(3)]
   public sbyte Integer1;
-  [ProtoMember(5), SerializeInclude(4), Number(NumberOption.VariableLength)]
+  [ProtoMember(5), SerializeInclude(4), NumberType(Number.Var)]
   public ushort Integer2;
-  [ProtoMember(6), SerializeInclude(5), Number(NumberOption.VariableLength)]
+  [ProtoMember(6), SerializeInclude(5), NumberType(Number.Var)]
   public short Integer3;
-  [ProtoMember(7), SerializeInclude(6), Number(NumberOption.VariableLength)]
+  [ProtoMember(7), SerializeInclude(6), NumberType(Number.Var)]
   public uint Integer4;
-  [ProtoMember(8), SerializeInclude(7), Number(NumberOption.VariableLength)]
+  [ProtoMember(8), SerializeInclude(7), NumberType(Number.Var)]
   public int Integer5;
-  [ProtoMember(9), SerializeInclude(8), Number(NumberOption.VariableLength)]
+  [ProtoMember(9), SerializeInclude(8), NumberType(Number.Var)]
   public ulong Integer6;
-  [ProtoMember(10), SerializeInclude(9), Number(NumberOption.VariableLength)]
+  [ProtoMember(10), SerializeInclude(9), NumberType(Number.Var)]
   public long Integer7;
-  [ProtoMember(11), SerializeInclude(10), Number(NumberOption.VariableLength)]
+  [ProtoMember(11), SerializeInclude(10), NumberType(Number.Var)]
   public float Float0;
-  [ProtoMember(12), SerializeInclude(11), Number(NumberOption.VariableLength)]
+  [ProtoMember(12), SerializeInclude(11), NumberType(Number.Var)]
   public double Float1;
   [ProtoMember(13), SerializeInclude(12)]
   public bool Bool;
