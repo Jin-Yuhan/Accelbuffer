@@ -31,17 +31,17 @@
             <param name="initialBufferSize">初始的序列化缓冲区大小，以字节为单位</param>
             <param name="strictMode">是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）</param>
         </member>
-        <member name="T:Accelbuffer.NumberOption">
+        <member name="T:Accelbuffer.NumLen">
             <summary>
-            数字序列化选项
+            数字长度选项
             </summary>
         </member>
-        <member name="F:Accelbuffer.NumberOption.FixedLength">
+        <member name="F:Accelbuffer.NumLen.Fixed">
             <summary>
             指示数字使用固定长度编码
             </summary>
         </member>
-        <member name="F:Accelbuffer.NumberOption.VariableLength">
+        <member name="F:Accelbuffer.NumLen.Var">
             <summary>
             指示数字使用动态长度编码
             </summary>
@@ -350,7 +350,7 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>是null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.SByte,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.SByte,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个8位有符号整数
             </summary>
@@ -358,7 +358,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Byte,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Byte,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个8位无符号整数
             </summary>
@@ -366,7 +366,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int32,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int32,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个32位有符号整数
             </summary>
@@ -374,7 +374,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt32,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt32,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个32位无符号整数
             </summary>
@@ -382,7 +382,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int16,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int16,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个16位有符号整数
             </summary>
@@ -390,7 +390,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt16,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt16,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个16位无符号整数
             </summary>
@@ -398,7 +398,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int64,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int64,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个64位有符号整数
             </summary>
@@ -406,7 +406,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt64,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt64,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个64位无符号整数
             </summary>
@@ -429,7 +429,7 @@
             <param name="value">需要写入的值</param>
             <param name="encoding">编码类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Single,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Single,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个32位浮点数
             </summary>
@@ -437,7 +437,7 @@
             <param name="value">需要写入的值</param>
             <param name="option">数字序列化选项</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Double,Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Double,Accelbuffer.NumLen)">
             <summary>
             使用指定选项写入一个64位浮点数
             </summary>
@@ -509,16 +509,16 @@
             类型和这些类型的集合的字段有效
             </summary>
         </member>
-        <member name="P:Accelbuffer.NumberAttribute.Option">
+        <member name="P:Accelbuffer.NumberAttribute.NumberLength">
             <summary>
             获取数字序列化选项
             </summary>
         </member>
-        <member name="M:Accelbuffer.NumberAttribute.#ctor(Accelbuffer.NumberOption)">
+        <member name="M:Accelbuffer.NumberAttribute.#ctor(Accelbuffer.NumLen)">
             <summary>
-            初始化 OptimizedNumberAttribute 类型
+            初始化 NumberAttribute 类型
             </summary>
-            <param name="option">数字的序列化选项</param>
+            <param name="len">数字的长度选项</param>
         </member>
         <member name="T:Accelbuffer.CharEncoding">
             <summary>
@@ -601,6 +601,23 @@
             <summary>
             表示数字为负数
             </summary>
+        </member>
+        <member name="T:Accelbuffer.ISerializableEnumerable`1">
+            <summary>
+            公开可序列化枚举数，该枚举数支持在指定类型的集合上进行简单迭代并且可以被序列化。
+            </summary>
+            <typeparam name="T">要枚举或序列化的对象的类型</typeparam>
+        </member>
+        <member name="P:Accelbuffer.ISerializableEnumerable`1.Count">
+            <summary>
+            获取元素的数量
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.ISerializableEnumerable`1.Add(`0)">
+            <summary>
+            添加一个元素
+            </summary>
+            <param name="value">添加的元素</param>
         </member>
         <member name="T:Accelbuffer.ISerializeProxy`1">
             <summary>
@@ -770,9 +787,9 @@
             获取/设置全局默认初始缓冲区大小
             </summary>
         </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultNumberOption">
+        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultNumberLengthOption">
             <summary>
-            获取全局默认数字选项
+            获取全局默认数字长度选项
             </summary>
         </member>
         <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultCharEncoding">

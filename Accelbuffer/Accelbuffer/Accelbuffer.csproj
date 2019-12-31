@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\MemoryAllocatorSettingsAttribute.cs" />
-    <Compile Include="Enums\NumberOption.cs" />
+    <Compile Include="Enums\Number.cs" />
     <Compile Include="Enums\SerializedType.cs" />
     <Compile Include="IO\UnmanagedReader.cs" />
     <Compile Include="IO\UnmanagedWriter.cs" />
@@ -57,12 +57,16 @@
     <Compile Include="Attributes\EncodingAttribute.cs" />
     <Compile Include="Attributes\SerializeIncludeAttribute.cs" />
     <Compile Include="Enums\NumberSign.cs" />
+    <Compile Include="ISerializableEnumerable.cs" />
     <Compile Include="ISerializeProxy.cs" />
     <Compile Include="Exceptions\MissingSerializedValueException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\SerializeContractAttribute.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\InternalSerializeProxy\DictionarySerializeProxy.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\FieldData.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\DeserializeILEmitUtility.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\InternalSerializeProxy\ListSerializeProxy.cs" />
+    <Compile Include="RuntimeSerializeProxyInjection\InternalSerializeProxy\SerializableEnumerableSerializeProxy.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\SerializeILEmitUtility.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\ILEmitDataUtility.cs" />
     <Compile Include="RuntimeSerializeProxyInjection\SerializeProxyInjector.cs" />

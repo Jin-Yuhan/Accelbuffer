@@ -31,10 +31,10 @@ namespace Accelbuffer
             return attribute == null ? SerializationUtility.GlobalDefaultCharEncoding : attribute.Encoding;
         }
 
-        private static NumberOption GetNumberOption(this FieldInfo field)
+        private static Number GetNumberOption(this FieldInfo field)
         {
-            NumberAttribute attr = field.GetCustomAttribute<NumberAttribute>(true);
-            return attr == null ? SerializationUtility.GlobalDefaultNumberOption : attr.Option;
+            NumberTypeAttribute attr = field.GetCustomAttribute<NumberTypeAttribute>(true);
+            return attr == null ? SerializationUtility.GlobalDefaultNumberTypeOption : attr.NumberType;
         }
 
         private static void EmitEncoding(this ILGenerator il, CharEncoding encoding)
@@ -53,9 +53,9 @@ namespace Accelbuffer
             }
         }
 
-        private static void EmitIsFixedNumber(this ILGenerator il, NumberOption option)
+        private static void EmitIsFixedNumber(this ILGenerator il, Number option)
         {
-            il.Emit(option == NumberOption.FixedLength ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
+            il.Emit(option == Number.Fixed ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
         }
 
         public static List<FieldData> GetSerializedFields(this Type objType)

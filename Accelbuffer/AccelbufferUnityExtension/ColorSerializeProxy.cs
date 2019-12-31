@@ -16,18 +16,18 @@ namespace Accelbuffer
 
         unsafe void ISerializeProxy<Color>.Serialize(in Color obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.r, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.g, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.b, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.a, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.r, Number.Var);
+            writer->WriteValue(0, obj.g, Number.Var);
+            writer->WriteValue(0, obj.b, Number.Var);
+            writer->WriteValue(0, obj.a, Number.Var);
         }
 
         unsafe void ISerializeProxy<Color32>.Serialize(in Color32 obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.r, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.g, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.b, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.a, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.r, Number.Var);
+            writer->WriteValue(0, obj.g, Number.Var);
+            writer->WriteValue(0, obj.b, Number.Var);
+            writer->WriteValue(0, obj.a, Number.Var);
         }
     }
 }

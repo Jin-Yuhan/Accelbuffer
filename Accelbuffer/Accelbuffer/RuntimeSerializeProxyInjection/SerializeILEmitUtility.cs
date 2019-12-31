@@ -20,11 +20,11 @@ namespace Accelbuffer
             switch (type)
             {
                 case SerializedType.Number:
-                    il.EmitNumberSerialize(SerializationUtility.GlobalDefaultNumberOption, objType);
+                    il.EmitNumberSerialize(GlobalDefaultNumberTypeOption, objType);
                     break;
 
                 case SerializedType.Char:
-                    il.EmitCharSerialize(SerializationUtility.GlobalDefaultCharEncoding, objType);
+                    il.EmitCharSerialize(GlobalDefaultCharEncoding, objType);
                     break;
 
                 case SerializedType.Boolean:
@@ -176,7 +176,7 @@ namespace Accelbuffer
             il.EmitLoadWriterAndIndexAndArg(objType, index);
             il.Emit(OpCodes.Ldlen);
             il.Emit(OpCodes.Conv_I4);
-            EmitNumberSerialize(il, NumberOption.VariableLength, typeof(int));// write len
+            EmitNumberSerialize(il, Number.Var, typeof(int));// write len
 
             il.Emit(OpCodes.Ldc_I4_0);
             il.Emit(OpCodes.Stloc, lb);//i = 0;
@@ -209,10 +209,10 @@ namespace Accelbuffer
                 switch (type)
                 {
                     case SerializedType.Number:
-                        il.EmitNumberSerialize(SerializationUtility.GlobalDefaultNumberOption, objType.GetElementType());
+                        il.EmitNumberSerialize(GlobalDefaultNumberTypeOption, objType.GetElementType());
                         break;
                     case SerializedType.Char:
-                        il.EmitCharSerialize(SerializationUtility.GlobalDefaultCharEncoding, objType.GetElementType());
+                        il.EmitCharSerialize(GlobalDefaultCharEncoding, objType.GetElementType());
                         break;
                     case SerializedType.Boolean:
                         il.EmitBooleanSerialize();
@@ -249,7 +249,7 @@ namespace Accelbuffer
             il.EmitLoadWriterAndIndexAndSerializeField(objType, field, index);
             il.Emit(OpCodes.Ldlen);
             il.Emit(OpCodes.Conv_I4);
-            EmitNumberSerialize(il, NumberOption.VariableLength, typeof(int));// write len
+            EmitNumberSerialize(il, Number.Var, typeof(int));// write len
 
             il.Emit(OpCodes.Ldc_I4_0);
             il.Emit(OpCodes.Stloc, lb);//i = 0
@@ -315,10 +315,10 @@ namespace Accelbuffer
             }
         }
 
-        public static void EmitNumberSerialize(this ILGenerator il, NumberOption option, Type numberType)
+        public static void EmitNumberSerialize(this ILGenerator il, Number option, Type numberType)
         {
             il.EmitIsFixedNumber(option);
-            MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, new Type[] { typeof(byte), numberType, typeof(NumberOption) });
+            MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, new Type[] { typeof(byte), numberType, typeof(Number) });
             il.Emit(OpCodes.Call, method);
         }
 

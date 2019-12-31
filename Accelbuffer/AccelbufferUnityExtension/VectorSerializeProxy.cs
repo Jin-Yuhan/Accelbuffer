@@ -35,36 +35,36 @@ namespace Accelbuffer
 
         unsafe void ISerializeProxy<Vector2>.Serialize(in Vector2 obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
         }
 
         unsafe void ISerializeProxy<Vector3>.Serialize(in Vector3 obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
+            writer->WriteValue(0, obj.z, Number.Var);
         }
 
         unsafe void ISerializeProxy<Vector4>.Serialize(in Vector4 obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.z, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.w, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
+            writer->WriteValue(0, obj.z, Number.Var);
+            writer->WriteValue(0, obj.w, Number.Var);
         }
 
         unsafe void ISerializeProxy<Vector2Int>.Serialize(in Vector2Int obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
         }
 
         unsafe void ISerializeProxy<Vector3Int>.Serialize(in Vector3Int obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
+            writer->WriteValue(0, obj.z, Number.Var);
         }
     }
 }

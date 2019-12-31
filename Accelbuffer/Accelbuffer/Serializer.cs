@@ -21,8 +21,8 @@ namespace Accelbuffer
         static Serializer()
         {
             s_CachedProxy = SerializeProxyInjector.Inject<T>();
+            Allocator = UnmanagedMemoryAllocator.Alloc<T>();
             s_Lock = new object();
-            Allocator = UnmanagedMemoryAllocator.Alloc(typeof(T));
         }
 
         /// <summary>

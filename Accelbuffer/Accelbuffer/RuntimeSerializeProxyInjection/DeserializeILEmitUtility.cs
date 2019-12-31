@@ -20,11 +20,11 @@ namespace Accelbuffer
             switch (type)
             {
                 case SerializedType.Number:
-                    il.EmitNumberDeserialize(SerializationUtility.GlobalDefaultNumberOption, name);
+                    il.EmitNumberDeserialize(GlobalDefaultNumberTypeOption, name);
                     break;
 
                 case SerializedType.Char:
-                    il.EmitCharDeserialize(SerializationUtility.GlobalDefaultCharEncoding, name);
+                    il.EmitCharDeserialize(GlobalDefaultCharEncoding, name);
                     break;
 
                 case SerializedType.Boolean:
@@ -156,7 +156,7 @@ namespace Accelbuffer
             LocalBuilder lb = il.DeclareLocal(typeof(int));//int i;
 
             GetSerializedType(typeof(int), out string name);
-            EmitNumberDeserialize(il, NumberOption.VariableLength, name);
+            EmitNumberDeserialize(il, Number.Var, name);
             il.Emit(OpCodes.Stloc, lenBuilder);//len = read_len();
 
             il.Emit(OpCodes.Ldloc, lenBuilder);
@@ -190,10 +190,10 @@ namespace Accelbuffer
                 switch (type)
                 {
                     case SerializedType.Number:
-                        il.EmitNumberDeserialize(SerializationUtility.GlobalDefaultNumberOption, name);
+                        il.EmitNumberDeserialize(GlobalDefaultNumberTypeOption, name);
                         break;
                     case SerializedType.Char:
-                        il.EmitCharDeserialize(SerializationUtility.GlobalDefaultCharEncoding, name);
+                        il.EmitCharDeserialize(GlobalDefaultCharEncoding, name);
                         break;
                     case SerializedType.Boolean:
                         il.EmitBooleanDeserialize(name);
@@ -232,7 +232,7 @@ namespace Accelbuffer
             LocalBuilder lb = il.DeclareLocal(typeof(int));//int i;
 
             GetSerializedType(typeof(int), out string name);
-            EmitNumberDeserialize(il, NumberOption.VariableLength, name);
+            EmitNumberDeserialize(il, Number.Var, name);
             il.Emit(OpCodes.Stloc, lenBuilder);//len = read_len();
 
             il.Emit(OpCodes.Ldloc, lenBuilder);
@@ -301,9 +301,9 @@ namespace Accelbuffer
             il.Emit(OpCodes.Ldloc, arrayBuilder);
         }
 
-        public static void EmitNumberDeserialize(this ILGenerator il, NumberOption option, string name)
+        public static void EmitNumberDeserialize(this ILGenerator il, Number option, string name)
         {
-            string methodName = $"{s_ReadString}{(option == NumberOption.FixedLength ? s_FixedName : s_VariableName)}{name}";
+            string methodName = $"{s_ReadString}{(option == Number.Fixed ? s_FixedName : s_VariableName)}{name}";
             MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexTypes);
             il.Emit(OpCodes.Call, method);
         }

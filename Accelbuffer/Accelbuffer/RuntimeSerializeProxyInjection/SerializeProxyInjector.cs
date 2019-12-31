@@ -10,7 +10,17 @@ namespace Accelbuffer
     /// </summary>
     public static class SerializeProxyInjector
     {
-        private static readonly Dictionary<Type, Type> s_ProxyMap = new Dictionary<Type, Type>();
+        private static readonly Dictionary<Type, Type> s_ProxyMap;
+
+        static SerializeProxyInjector()
+        {
+            s_ProxyMap = new Dictionary<Type, Type>()
+            {
+                [typeof(List<>)] = typeof(ListSerializeProxy<>),
+                [typeof(ISerializableEnumerable<>)] = typeof(SerializableEnumerableSerializeProxy<,>),
+                [typeof(Dictionary<,>)] = typeof(DictionarySerializeProxy<,>)
+            };
+        }
 
         /// <summary>
         /// 添加一个序列化代理的绑定
@@ -74,14 +84,29 @@ namespace Accelbuffer
 
         internal static ISerializeProxy<T> Inject<T>()
         {
-            Type objectType = typeof(T);
-            Type proxyType = GetProxyType(objectType);
-            return (ISerializeProxy<T>)Activator.CreateInstance(proxyType);
+            return (ISerializeProxy<T>)Activator.CreateInstance(GetProxyType<T>());
         }
 
-        private static Type GetProxyType(Type objectType)
+        private static Type GetProxyType<T>()
         {
+            Type objectType = typeof(T);
+
             if (s_ProxyMap.TryGetValue(objectType, out Type proxyType))
+            {
+                return proxyType;
+            }
+
+            Type enumerableType = typeof(ISerializableEnumerable<>);
+            Type impType = objectType.GetInterface(enumerableType.Name);
+
+            if (impType != null 
+                && GetGenericProxyType(objectType, enumerableType, new Type[] { objectType, impType.GenericTypeArguments[0] }, ref proxyType))
+            {
+                return proxyType;
+            }
+
+            if (objectType.IsGenericType 
+                && GetGenericProxyType(objectType, objectType.GetGenericTypeDefinition(), objectType.GenericTypeArguments, ref proxyType))
             {
                 return proxyType;
             }
@@ -105,7 +130,7 @@ namespace Accelbuffer
                     proxyType = proxyType.MakeGenericType(objectType.GenericTypeArguments);
                 }
 
-                if (!typeof(ISerializeProxy<>).MakeGenericType(objectType).IsAssignableFrom(proxyType))
+                if (!typeof(ISerializeProxy<T>).IsAssignableFrom(proxyType))
                 {
                     throw new NotSupportedException($"{proxyType.Name}类型不是有效的序列化代理类型");
                 }
@@ -113,6 +138,17 @@ namespace Accelbuffer
 
             s_ProxyMap.Add(objectType, proxyType);
             return proxyType;
+        }
+
+        private static bool GetGenericProxyType(Type objectType, Type matchType, Type[] genericTypeArguments, ref Type proxyType)
+        {
+            if (s_ProxyMap.TryGetValue(matchType, out proxyType))
+            {
+                proxyType = proxyType.MakeGenericType(genericTypeArguments);
+                s_ProxyMap.Add(objectType, proxyType);
+                return true;
+            }
+            return false;
         }
 
         private static bool IsInjectable(Type objectType)

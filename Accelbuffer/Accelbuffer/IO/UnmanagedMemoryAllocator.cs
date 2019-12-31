@@ -135,8 +135,9 @@ namespace Accelbuffer
             return new UnmanagedReader(source + offset, StrictMode, length);
         }
 
-        internal static UnmanagedMemoryAllocator Alloc(Type objectType)
+        internal static UnmanagedMemoryAllocator Alloc<T>()
         {
+            Type objectType = typeof(T);
             MemoryAllocatorSettingsAttribute attr = objectType.GetCustomAttribute<MemoryAllocatorSettingsAttribute>(true);
 
             long initialBufferSize = SerializationUtility.GetBufferSize(objectType, attr == null ? 0L : attr.InitialBufferSize);

@@ -15,9 +15,9 @@ namespace Accelbuffer
         public static long GlobalDefaultInitialBufferSize { get; set; }
 
         /// <summary>
-        /// 获取全局默认数字选项
+        /// 获取全局默认数字类型选项
         /// </summary>
-        public static NumberOption GlobalDefaultNumberOption { get; }
+        public static Number GlobalDefaultNumberTypeOption { get; }
 
         /// <summary>
         /// 获取全局默认字符编码
@@ -27,7 +27,7 @@ namespace Accelbuffer
         static SerializationUtility()
         {
             GlobalDefaultInitialBufferSize = 20L;
-            GlobalDefaultNumberOption = NumberOption.FixedLength;
+            GlobalDefaultNumberTypeOption = Number.Fixed;
             GlobalDefaultCharEncoding = CharEncoding.Unicode;
         }
 

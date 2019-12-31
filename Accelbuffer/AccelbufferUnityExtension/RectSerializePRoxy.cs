@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Accelbuffer
 {
@@ -17,18 +16,18 @@ namespace Accelbuffer
 
         unsafe void ISerializeProxy<Rect>.Serialize(in Rect obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.width, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.height, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.x, Number.Var);
+            writer->WriteValue(0, obj.y, Number.Var);
+            writer->WriteValue(0, obj.width, Number.Var);
+            writer->WriteValue(0, obj.height, Number.Var);
         }
 
         unsafe void ISerializeProxy<RectInt>.Serialize(in RectInt obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.xMin, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.yMin, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.width, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.height, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.xMin, Number.Var);
+            writer->WriteValue(0, obj.yMin, Number.Var);
+            writer->WriteValue(0, obj.width, Number.Var);
+            writer->WriteValue(0, obj.height, Number.Var);
         }
     }
 }

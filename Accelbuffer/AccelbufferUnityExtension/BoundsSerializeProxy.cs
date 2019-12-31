@@ -24,24 +24,24 @@ namespace Accelbuffer
 
         unsafe void ISerializeProxy<Bounds>.Serialize(in Bounds obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.center.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.center.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.center.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.center.x, Number.Var);
+            writer->WriteValue(0, obj.center.y, Number.Var);
+            writer->WriteValue(0, obj.center.z, Number.Var);
 
-            writer->WriteValue(0, obj.size.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.size.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.size.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.size.x, Number.Var);
+            writer->WriteValue(0, obj.size.y, Number.Var);
+            writer->WriteValue(0, obj.size.z, Number.Var);
         }
 
         unsafe void ISerializeProxy<BoundsInt>.Serialize(in BoundsInt obj, in UnmanagedWriter* writer)
         {
-            writer->WriteValue(0, obj.position.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.position.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.position.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.position.x, Number.Var);
+            writer->WriteValue(0, obj.position.y, Number.Var);
+            writer->WriteValue(0, obj.position.z, Number.Var);
 
-            writer->WriteValue(0, obj.size.x, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.size.y, NumberOption.VariableLength);
-            writer->WriteValue(0, obj.size.z, NumberOption.VariableLength);
+            writer->WriteValue(0, obj.size.x, Number.Var);
+            writer->WriteValue(0, obj.size.y, Number.Var);
+            writer->WriteValue(0, obj.size.z, Number.Var);
         }
     }
 }

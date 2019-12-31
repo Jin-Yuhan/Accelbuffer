@@ -198,10 +198,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, sbyte value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, sbyte value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) : 
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -213,10 +213,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, byte value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, byte value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) :
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) :
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -228,10 +228,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, int value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, int value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) : 
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -243,10 +243,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, uint value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, uint value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) :
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) :
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -258,10 +258,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, short value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, short value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) : 
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -273,10 +273,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, ushort value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, ushort value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) : 
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -288,10 +288,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, long value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, long value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) : 
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -303,10 +303,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, ulong value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, ulong value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedIntegerTag(value, out int byteCount) :
+            byte tag = type == Number.Fixed ? MakeFixedIntegerTag(value, out int byteCount) :
                 MakeVariableIntegerTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -365,10 +365,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, float value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, float value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedFloatTag(value, out int byteCount) : 
+            byte tag = type == Number.Fixed ? MakeFixedFloatTag(value, out int byteCount) : 
                 MakeVariableFloatTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
@@ -380,10 +380,10 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index">序列化索引</param>
         /// <param name="value">需要写入的值</param>
-        /// <param name="option">数字序列化选项</param>
-        public void WriteValue(byte index, double value, NumberOption option)
+        /// <param name="type">数字序列化类型</param>
+        public void WriteValue(byte index, double value, Number type)
         {
-            byte tag = option == NumberOption.FixedLength ? MakeFixedFloatTag(value, out int byteCount) :
+            byte tag = type == Number.Fixed ? MakeFixedFloatTag(value, out int byteCount) :
                 MakeVariableFloatTag(&value, out byteCount);
             WriteByte(index);
             WriteByte(tag);
