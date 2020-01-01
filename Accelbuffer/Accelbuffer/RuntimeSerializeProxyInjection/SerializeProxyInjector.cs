@@ -48,8 +48,8 @@ namespace Accelbuffer
                 [typeof(IDictionary<,>)] = typeof(DictionarySerializeProxy<,,>)
             };
 
-            DefaultNumberType = Number.Fixed;
-            DefaultCharEncoding = CharEncoding.Unicode;
+            DefaultNumberType = Number.Var;
+            DefaultCharEncoding = CharEncoding.UTF8;
         }
 
         /// <summary>

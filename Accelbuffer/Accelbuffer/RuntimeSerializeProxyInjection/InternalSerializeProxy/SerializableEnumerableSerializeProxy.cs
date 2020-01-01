@@ -12,6 +12,7 @@
             }
 
             T result = new T();
+            result.Initialize(count);
 
             while (count > 0)
             {

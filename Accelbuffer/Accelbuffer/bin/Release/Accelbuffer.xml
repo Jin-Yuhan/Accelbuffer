@@ -629,6 +629,12 @@
             </summary>
             <param name="value">添加的元素</param>
         </member>
+        <member name="M:Accelbuffer.ISerializableEnumerable`1.Initialize(System.Int32)">
+            <summary>
+            使用指定大小初始化集合
+            </summary>
+            <param name="capacity">集合初始大小</param>
+        </member>
         <member name="T:Accelbuffer.ISerializeProxy`1">
             <summary>
             实现接口完成<typeparamref name="T"/>类型对象的序列化代理

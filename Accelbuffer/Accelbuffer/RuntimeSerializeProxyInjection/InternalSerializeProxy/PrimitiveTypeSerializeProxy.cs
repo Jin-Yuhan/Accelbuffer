@@ -17,52 +17,52 @@
     {
         unsafe sbyte ISerializeProxy<sbyte>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedInt8(0);
+            return reader->ReadVariableInt8(0);
         }
 
         unsafe byte ISerializeProxy<byte>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedUInt8(0);
+            return reader->ReadVariableUInt8(0);
         }
 
         unsafe short ISerializeProxy<short>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedInt16(0);
+            return reader->ReadVariableInt16(0);
         }
 
         unsafe ushort ISerializeProxy<ushort>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedUInt16(0);
+            return reader->ReadVariableUInt16(0);
         }
 
         unsafe uint ISerializeProxy<uint>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedUInt32(0);
+            return reader->ReadVariableUInt32(0);
         }
 
         unsafe int ISerializeProxy<int>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedInt32(0);
+            return reader->ReadVariableInt32(0);
         }
 
         unsafe ulong ISerializeProxy<ulong>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedUInt64(0);
+            return reader->ReadVariableUInt64(0);
         }
 
         unsafe double ISerializeProxy<double>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedFloat64(0);
+            return reader->ReadVariableFloat64(0);
         }
 
         unsafe long ISerializeProxy<long>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedInt64(0);
+            return reader->ReadVariableInt64(0);
         }
 
         unsafe float ISerializeProxy<float>.Deserialize(in UnmanagedReader* reader)
         {
-            return reader->ReadFixedFloat32(0);
+            return reader->ReadVariableFloat32(0);
         }
 
         unsafe bool ISerializeProxy<bool>.Deserialize(in UnmanagedReader* reader)

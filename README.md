@@ -43,7 +43,7 @@
 
 ## 支持的序列化类型
 * 基元类型（不包括 `decimal`）
-* 一维数组， 交错数组
+* 一维数组，交错数组
 * `List<T>`, `IList<T>`
 * `Dictionary<T>`, `IDictionary<T>`
 * `ISerializableEnumerable<T>`

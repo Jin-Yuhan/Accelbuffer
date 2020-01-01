@@ -142,7 +142,7 @@ namespace Accelbuffer
                 }
             }
 
-            il.EmitTypeDeserialize(objType, complex, 0);
+            il.EmitTypeDeserialize(objType);
 
             if (complex)
             {

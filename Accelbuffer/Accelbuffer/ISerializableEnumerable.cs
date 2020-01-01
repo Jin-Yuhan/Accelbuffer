@@ -18,5 +18,11 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="value">添加的元素</param>
         void Add(T value);
+
+        /// <summary>
+        /// 使用指定大小初始化集合
+        /// </summary>
+        /// <param name="capacity">集合初始大小</param>
+        void Initialize(int capacity);
     }
 }

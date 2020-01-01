@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using static Accelbuffer.SerializationUtility;
-using static Accelbuffer.SerializeProxyInjector;
 
 namespace Accelbuffer
 {
@@ -11,49 +10,13 @@ namespace Accelbuffer
     {
         public static void EmitTypeSerialize(this ILGenerator il, Type objType, byte index)
         {
-            SerializedType type = GetSerializedType(objType, out _);
+            List<FieldData> fields = objType.GetSerializedFields();
+            il.TryEmitMsgMethodS(objType);
 
-            if (type != SerializedType.Complex)
+            for (int i = 0; i < fields.Count; i++)
             {
-                il.EmitLoadWriterAndIndexAndArg(objType, index);
-            }
-
-            switch (type)
-            {
-                case SerializedType.Number:
-                    il.EmitNumberSerialize(DefaultNumberType, objType);
-                    break;
-
-                case SerializedType.Char:
-                    il.EmitCharSerialize(DefaultCharEncoding, objType);
-                    break;
-
-                case SerializedType.Boolean:
-                    il.EmitBooleanSerialize();
-                    break;
-
-                default:
-                    if (objType.IsArray)
-                    {
-                        if (objType.GetArrayRank() > 1)
-                        {
-                            throw new NotSupportedException("不支持多维数组的序列化");
-                        }
-
-                        il.EmitArraySerialize(objType, index);
-                    }
-                    else
-                    {
-                        List<FieldData> fields = objType.GetSerializedFields();
-                        il.TryEmitMsgMethodS(objType);
-
-                        for (int i = 0; i < fields.Count; i++)
-                        {
-                            FieldData data = fields[i];
-                            il.EmitFieldSerialize(objType, data.Field, data.Index);
-                        }
-                    }
-                    break;
+                FieldData data = fields[i];
+                il.EmitFieldSerialize(objType, data.Field, data.Index);
             }
         }
 
@@ -152,157 +115,9 @@ namespace Accelbuffer
                     break;
 
                 default:
-                    if (field.FieldType.IsArray)
-                    {
-                        if (field.FieldType.GetArrayRank() > 1)
-                        {
-                            throw new NotSupportedException("不支持多维数组的序列化");
-                        }
-
-                        il.EmitArraySerialize(objType, field, index);
-                    }
-                    else
-                    {
-                        il.EmitLoadSerializeFieldAndWriter(objType, field);
-                        il.EmitSerializerDotSerializeCall(field.FieldType);
-                    }
+                    il.EmitLoadSerializeFieldAndWriter(objType, field);
+                    il.EmitSerializerDotSerializeCall(field.FieldType);
                     break;
-            }
-        }
-
-        public static void EmitArraySerialize(this ILGenerator il, Type objType, byte index)
-        {
-            LocalBuilder lb = il.DeclareLocal(typeof(int));//int i;
-
-            il.EmitLoadWriterAndIndexAndArg(objType, index);
-            il.Emit(OpCodes.Ldlen);
-            il.Emit(OpCodes.Conv_I4);
-            EmitNumberSerialize(il, Number.Var, typeof(int));// write len
-
-            il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Stloc, lb);//i = 0;
-
-            Label forLabel1 = il.DefineLabel();
-            Label forLabel2 = il.DefineLabel();
-
-            il.Emit(OpCodes.Br_S, forLabel1);
-            {
-                il.MarkLabel(forLabel2);
-
-                SerializedType type = GetSerializedType(objType.GetElementType(), out _);
-
-                if (type == SerializedType.Complex)
-                {
-                    il.EmitLoadArg(objType);
-
-                    il.Emit(OpCodes.Ldloc, lb);
-                    il.Emit(OpCodes.Ldelem_I4);//array[i]
-
-                    il.EmitLoadWriter();
-                }
-                else
-                {
-                    il.EmitLoadWriterAndIndexAndArg(objType, index);
-                    il.Emit(OpCodes.Ldloc, lb);
-                    il.Emit(OpCodes.Ldelem, objType.GetElementType());//array[i]
-                }
-
-                switch (type)
-                {
-                    case SerializedType.Number:
-                        il.EmitNumberSerialize(DefaultNumberType, objType.GetElementType());
-                        break;
-                    case SerializedType.Char:
-                        il.EmitCharSerialize(DefaultCharEncoding, objType.GetElementType());
-                        break;
-                    case SerializedType.Boolean:
-                        il.EmitBooleanSerialize();
-                        break;
-                    default:
-                        il.EmitSerializerDotSerializeCall(objType.GetElementType());
-                        break;
-                }
-
-                il.Emit(OpCodes.Ldloc, lb);
-                il.Emit(OpCodes.Ldc_I4_1);
-                il.Emit(OpCodes.Add);
-                il.Emit(OpCodes.Stloc, lb);//i++;
-
-                il.MarkLabel(forLabel1);
-
-                il.Emit(OpCodes.Ldloc, lb);
-                il.EmitLoadArg(objType);
-                il.Emit(OpCodes.Ldlen);
-                il.Emit(OpCodes.Conv_I4);
-                il.Emit(OpCodes.Blt_S, forLabel2);
-            }
-        }
-
-        public static void EmitArraySerialize(this ILGenerator il, Type objType, FieldInfo field, byte index)
-        {
-            LocalBuilder lb = il.DeclareLocal(typeof(int));//int i;
-
-            il.EmitLoadWriterAndIndexAndSerializeField(objType, field, index);
-            il.Emit(OpCodes.Ldlen);
-            il.Emit(OpCodes.Conv_I4);
-            EmitNumberSerialize(il, Number.Var, typeof(int));// write len
-
-            il.Emit(OpCodes.Ldc_I4_0);
-            il.Emit(OpCodes.Stloc, lb);//i = 0
-
-            Label forLabel1 = il.DefineLabel();
-            Label forLabel2 = il.DefineLabel();
-
-            il.Emit(OpCodes.Br_S, forLabel1);
-            {
-                il.MarkLabel(forLabel2);
-
-                SerializedType type = GetSerializedType(field.FieldType.GetElementType(), out _);
-
-                if (type == SerializedType.Complex)
-                {
-                    il.EmitLoadSerializeField(objType, field);
-                    
-                    il.Emit(OpCodes.Ldloc, lb);
-                    il.Emit(OpCodes.Ldelem, field.FieldType.GetElementType());//array[i]
-
-                    il.EmitLoadWriter();
-                }
-                else
-                {
-                    il.EmitLoadWriterAndIndexAndSerializeField(objType, field, index);
-                    il.Emit(OpCodes.Ldloc, lb);
-                    il.Emit(OpCodes.Ldelem_I4);//array[i]
-                }
-
-                switch (type)
-                {
-                    case SerializedType.Number:
-                        il.EmitNumberSerialize(field.GetNumberOption(), field.FieldType.GetElementType());
-                        break;
-                    case SerializedType.Char:
-                        il.EmitCharSerialize(field.GetCharEncoding(), field.FieldType.GetElementType());
-                        break;
-                    case SerializedType.Boolean:                    
-                        il.EmitBooleanSerialize();
-                        break;
-                    default:
-                        il.EmitSerializerDotSerializeCall(field.FieldType.GetElementType());
-                        break;
-                }
-
-                il.Emit(OpCodes.Ldloc, lb);
-                il.Emit(OpCodes.Ldc_I4_1);
-                il.Emit(OpCodes.Add);
-                il.Emit(OpCodes.Stloc, lb);//i++;
-
-                il.MarkLabel(forLabel1);
-
-                il.Emit(OpCodes.Ldloc, lb);
-                il.EmitLoadSerializeField(objType, field);
-                il.Emit(OpCodes.Ldlen);
-                il.Emit(OpCodes.Conv_I4);
-                il.Emit(OpCodes.Blt_S, forLabel2);
             }
         }
 
