@@ -43,7 +43,7 @@
 * 基元类型（不包括 `decimal`）
 * 一维数组，交错数组
 * `List<T>`, `IList<T>`
-* `Dictionary<T>`, `IDictionary<T>`
+* `Dictionary<TKey, TValue>`, `IDictionary<TKey, TValue>`
 * `ISerializableEnumerable<T>`
 * `ICollection<T>`
 * 自定义 `class`, `struct`
