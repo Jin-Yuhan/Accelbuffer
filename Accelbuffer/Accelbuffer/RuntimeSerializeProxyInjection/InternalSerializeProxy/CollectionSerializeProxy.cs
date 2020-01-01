@@ -1,6 +1,8 @@
-﻿namespace Accelbuffer
+﻿using System.Collections.Generic;
+
+namespace Accelbuffer
 {
-    internal sealed class SerializableEnumerableSerializeProxy<T, TValue> : ISerializeProxy<T> where T : ISerializableEnumerable<TValue>, new()
+    internal sealed class CollectionSerializeProxy<T, TValue> : ISerializeProxy<T> where T : ICollection<TValue>, new()
     {
         unsafe T ISerializeProxy<T>.Deserialize(in UnmanagedReader* reader)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
 using static Accelbuffer.SerializationUtility;
+using static Accelbuffer.SerializeProxyInjector;
 
 namespace Accelbuffer
 {
@@ -20,11 +21,11 @@ namespace Accelbuffer
             switch (type)
             {
                 case SerializedType.Number:
-                    il.EmitNumberDeserialize(GlobalDefaultNumberTypeOption, name);
+                    il.EmitNumberDeserialize(DefaultNumberType, name);
                     break;
 
                 case SerializedType.Char:
-                    il.EmitCharDeserialize(GlobalDefaultCharEncoding, name);
+                    il.EmitCharDeserialize(DefaultCharEncoding, name);
                     break;
 
                 case SerializedType.Boolean:
@@ -190,10 +191,10 @@ namespace Accelbuffer
                 switch (type)
                 {
                     case SerializedType.Number:
-                        il.EmitNumberDeserialize(GlobalDefaultNumberTypeOption, name);
+                        il.EmitNumberDeserialize(DefaultNumberType, name);
                         break;
                     case SerializedType.Char:
-                        il.EmitCharDeserialize(GlobalDefaultCharEncoding, name);
+                        il.EmitCharDeserialize(DefaultCharEncoding, name);
                         break;
                     case SerializedType.Boolean:
                         il.EmitBooleanDeserialize(name);

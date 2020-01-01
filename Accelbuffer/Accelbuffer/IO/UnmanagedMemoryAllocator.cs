@@ -10,7 +10,26 @@ namespace Accelbuffer
     /// </summary>
     public sealed unsafe class UnmanagedMemoryAllocator
     {
-        private static readonly List<UnmanagedMemoryAllocator> s_Allocated = new List<UnmanagedMemoryAllocator>();
+        private static readonly List<UnmanagedMemoryAllocator> s_Allocated;
+
+        /// <summary>
+        /// 获取/设置默认初始缓冲区大小
+        /// </summary>
+        public static long DefaultInitialBufferSize { get; set; }
+
+        /// <summary>
+        /// 获取/设置默认是否为严格模式
+        /// </summary>
+        public static bool DefaultIsStrictMode { get; set; }
+
+        static UnmanagedMemoryAllocator()
+        {
+            s_Allocated = new List<UnmanagedMemoryAllocator>();
+
+            DefaultInitialBufferSize = 45L;
+            DefaultIsStrictMode = false;
+        }
+
 
         private UnmanagedWriter* m_CachedWriter;
         private readonly bool m_ReadOnly;
@@ -81,24 +100,13 @@ namespace Accelbuffer
         /// <summary>
         /// 释放当前缓冲区使用的内存
         /// </summary>
-        public void FreeUsedMemory()
+        public void FreeMemory()
         {
             if (m_CachedWriter != null)
             {
                 m_CachedWriter->Free();
                 Marshal.FreeHGlobal(new IntPtr(m_CachedWriter));
                 m_CachedWriter = null;
-            }
-        }
-
-        /// <summary>
-        /// 释放所有使用<see cref="UnmanagedMemoryAllocator"/>分配的内存
-        /// </summary>
-        public static void FreeAll()
-        {
-            for (int i = 0; i < s_Allocated.Count; i++)
-            {
-                s_Allocated[i].FreeUsedMemory();
             }
         }
 
@@ -135,13 +143,41 @@ namespace Accelbuffer
             return new UnmanagedReader(source + offset, StrictMode, length);
         }
 
+        /// <summary>
+        /// 释放所有使用<see cref="UnmanagedMemoryAllocator"/>分配的内存
+        /// </summary>
+        public static void FreeAllMemory()
+        {
+            for (int i = 0; i < s_Allocated.Count; i++)
+            {
+                s_Allocated[i].FreeMemory();
+            }
+        }
+
+        private static long GetBufferSize(Type objectType, long size)
+        {
+            if (size <= 0)
+            {
+                try
+                {
+                    size = Marshal.SizeOf(objectType);
+                }
+                catch
+                {
+                    size = DefaultInitialBufferSize;
+                }
+            }
+
+            return size;
+        }
+
         internal static UnmanagedMemoryAllocator Alloc<T>()
         {
             Type objectType = typeof(T);
-            MemoryAllocatorSettingsAttribute attr = objectType.GetCustomAttribute<MemoryAllocatorSettingsAttribute>(true);
+            MemoryAllocatorAttribute attr = objectType.GetCustomAttribute<MemoryAllocatorAttribute>(true);
 
-            long initialBufferSize = SerializationUtility.GetBufferSize(objectType, attr == null ? 0L : attr.InitialBufferSize);
-            bool strictMode = attr == null ? false : attr.StrictMode;
+            long initialBufferSize = GetBufferSize(objectType, attr == null ? 0L : attr.InitialBufferSize);
+            bool strictMode = attr == null ? DefaultIsStrictMode : attr.StrictMode;
             bool readOnly = attr == null ? false : attr.RuntimeReadOnly;
 
             UnmanagedMemoryAllocator allocator = new UnmanagedMemoryAllocator(initialBufferSize, strictMode, readOnly);

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 
 namespace Accelbuffer
 {
@@ -28,13 +26,13 @@ namespace Accelbuffer
         private static CharEncoding GetCharEncoding(this FieldInfo field)
         {
             EncodingAttribute attribute = field.GetCustomAttribute<EncodingAttribute>(true);
-            return attribute == null ? SerializationUtility.GlobalDefaultCharEncoding : attribute.Encoding;
+            return attribute == null ? SerializeProxyInjector.DefaultCharEncoding : attribute.Encoding;
         }
 
         private static Number GetNumberOption(this FieldInfo field)
         {
             NumberTypeAttribute attr = field.GetCustomAttribute<NumberTypeAttribute>(true);
-            return attr == null ? SerializationUtility.GlobalDefaultNumberTypeOption : attr.NumberType;
+            return attr == null ? SerializeProxyInjector.DefaultNumberType : attr.NumberType;
         }
 
         private static void EmitEncoding(this ILGenerator il, CharEncoding encoding)
@@ -56,34 +54,6 @@ namespace Accelbuffer
         private static void EmitIsFixedNumber(this ILGenerator il, Number option)
         {
             il.Emit(option == Number.Fixed ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
-        }
-
-        public static List<FieldData> GetSerializedFields(this Type objType)
-        {
-            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-
-            FieldInfo[] allFields = objType.GetFields(flags);
-            List<FieldData> fields = new List<FieldData>(allFields.Length);
-
-            for (int i = 0; i < allFields.Length; i++)
-            {
-                FieldInfo field = allFields[i];
-
-                if (field.GetCustomAttribute<CompilerGeneratedAttribute>() != null || field.IsInitOnly)
-                {
-                    continue;
-                }
-
-                FieldIndexAttribute attribute = field.GetCustomAttribute<FieldIndexAttribute>(true);
-
-                if (attribute != null)
-                {
-                    fields.Add(new FieldData(field, attribute.Index));
-                }
-            }
-
-            fields.Sort((f1, f2) => f1.Index - f2.Index);
-            return fields;
         }
     }
 }

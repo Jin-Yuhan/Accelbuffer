@@ -4,29 +4,29 @@
         <name>Accelbuffer</name>
     </assembly>
     <members>
-        <member name="T:Accelbuffer.MemoryAllocatorSettingsAttribute">
+        <member name="T:Accelbuffer.MemoryAllocatorAttribute">
             <summary>
             指定内存分配器的设置
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.InitialBufferSize">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.InitialBufferSize">
             <summary>
             获取初始的序列化缓冲区大小，以字节为单位
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.StrictMode">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.StrictMode">
             <summary>
             获取是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.RuntimeReadOnly">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.RuntimeReadOnly">
             <summary>
             获取/设置内存分配器的设置是否在运行时为只读
             </summary>
         </member>
-        <member name="M:Accelbuffer.MemoryAllocatorSettingsAttribute.#ctor(System.Int64,System.Boolean)">
+        <member name="M:Accelbuffer.MemoryAllocatorAttribute.#ctor(System.Int64,System.Boolean)">
             <summary>
-            创建 MemoryAllocatorSettingsAttribute 实例
+            创建 MemoryAllocatorAttribute 实例
             </summary>
             <param name="initialBufferSize">初始的序列化缓冲区大小，以字节为单位</param>
             <param name="strictMode">是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）</param>
@@ -458,6 +458,16 @@
             公开对非托管缓冲区内存的操作权限
             </summary>
         </member>
+        <member name="P:Accelbuffer.UnmanagedMemoryAllocator.DefaultInitialBufferSize">
+            <summary>
+            获取/设置默认初始缓冲区大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.UnmanagedMemoryAllocator.DefaultIsStrictMode">
+            <summary>
+            获取/设置默认是否为严格模式
+            </summary>
+        </member>
         <member name="P:Accelbuffer.UnmanagedMemoryAllocator.StrictMode">
             <summary>
             获取/设置是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）
@@ -473,14 +483,9 @@
             获取 当前使用的内存大小
             </summary>
         </member>
-        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeUsedMemory">
+        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeMemory">
             <summary>
             释放当前缓冲区使用的内存
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeAll">
-            <summary>
-            释放所有使用<see cref="T:Accelbuffer.UnmanagedMemoryAllocator"/>分配的内存
             </summary>
         </member>
         <member name="M:Accelbuffer.UnmanagedMemoryAllocator.AllocWriter">
@@ -499,6 +504,11 @@
             <returns>创建的对象</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="source"/>为null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeAllMemory">
+            <summary>
+            释放所有使用<see cref="T:Accelbuffer.UnmanagedMemoryAllocator"/>分配的内存
+            </summary>
         </member>
         <member name="T:Accelbuffer.NumberTypeAttribute">
             <summary>
@@ -683,34 +693,44 @@
             公开对序列化代理的操作权限
             </summary>
         </member>
+        <member name="P:Accelbuffer.SerializeProxyInjector.DefaultNumberType">
+            <summary>
+            获取默认数字类型选项
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.SerializeProxyInjector.DefaultCharEncoding">
+            <summary>
+            获取默认字符编码
+            </summary>
+        </member>
         <member name="M:Accelbuffer.SerializeProxyInjector.AddBinding``2">
             <summary>
-            添加一个序列化代理的绑定
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
             </summary>
             <typeparam name="TObject">序列化对象类型</typeparam>
             <typeparam name="TProxy">被绑定的代理类型</typeparam>
-            <exception cref="T:System.InvalidOperationException">已经存在一个绑定</exception>
         </member>
         <member name="M:Accelbuffer.SerializeProxyInjector.AddBinding(System.Type,System.Type)">
             <summary>
-            添加一个序列化代理的绑定
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
             </summary>
             <param name="objectType">序列化对象类型</param>
             <param name="proxyType">被绑定的代理类型</param>
             <exception cref="T:System.InvalidCastException"><paramref name="proxyType"/>类型错误</exception>
-            <exception cref="T:System.InvalidOperationException">已经存在一个绑定</exception>
         </member>
-        <member name="M:Accelbuffer.SerializeProxyInjector.RemoveBinding``1">
+        <member name="M:Accelbuffer.SerializeProxyInjector.HasBinding``1">
             <summary>
-            移除一个序列化代理的绑定
+            获取是否已经存在绑定
             </summary>
             <typeparam name="TObject">序列化对象类型</typeparam>
+            <returns>如果已经存在，返回true，否则，false</returns>
         </member>
-        <member name="M:Accelbuffer.SerializeProxyInjector.RemoveBinding(System.Type)">
+        <member name="M:Accelbuffer.SerializeProxyInjector.HasBinding(System.Type)">
             <summary>
-            移除一个序列化代理的绑定
+            获取是否已经存在绑定
             </summary>
             <param name="objectType">序列化对象类型</param>
+            <returns>如果已经存在，返回true，否则，false</returns>
         </member>
         <member name="T:Accelbuffer.Serializer`1">
             <summary>
@@ -771,26 +791,6 @@
             <param name="reader">反序列化读取指针</param>
             <returns>反序列化的对象实例</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="reader"/>为null</exception>
-        </member>
-        <member name="T:Accelbuffer.SerializationUtility">
-            <summary>
-            公开对序列化设置操作的接口
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultInitialBufferSize">
-            <summary>
-            获取/设置全局默认初始缓冲区大小
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultNumberTypeOption">
-            <summary>
-            获取全局默认数字类型选项
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultCharEncoding">
-            <summary>
-            获取全局默认字符编码
-            </summary>
         </member>
         <member name="M:Accelbuffer.SerializationUtility.IsTrulyComplex(System.Type)">
             <summary>

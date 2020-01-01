@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accelbuffer", "Accelbuffer\Accelbuffer.csproj", "{8C53DD8B-ACA0-466C-852C-4B2197540C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "accelc", "accelc\accelc.csproj", "{1B5A249C-3C78-44CF-B106-E4A4B52CE99D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccelbufferUnityExtension", "AccelbufferUnityExtension\AccelbufferUnityExtension.csproj", "{1E59558A-BFEC-4D35-8337-93C94B31E21A}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{8C53DD8B-ACA0-466C-852C-4B2197540C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C53DD8B-ACA0-466C-852C-4B2197540C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C53DD8B-ACA0-466C-852C-4B2197540C3C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B5A249C-3C78-44CF-B106-E4A4B52CE99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B5A249C-3C78-44CF-B106-E4A4B52CE99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B5A249C-3C78-44CF-B106-E4A4B52CE99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B5A249C-3C78-44CF-B106-E4A4B52CE99D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1E59558A-BFEC-4D35-8337-93C94B31E21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1E59558A-BFEC-4D35-8337-93C94B31E21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E59558A-BFEC-4D35-8337-93C94B31E21A}.Release|Any CPU.ActiveCfg = Release|Any CPU

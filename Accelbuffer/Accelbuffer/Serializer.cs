@@ -30,7 +30,7 @@ namespace Accelbuffer
         /// </summary>
         public static void Initialize()
         {
-            List<FieldData> fields = ILEmitUtility.GetSerializedFields(typeof(T));
+            List<FieldData> fields = SerializeProxyInjector.GetSerializedFields(typeof(T));
 
             for (int i = 0; i < fields.Count; i++)
             {
