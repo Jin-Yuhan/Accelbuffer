@@ -219,11 +219,6 @@ namespace Accelbuffer
                         il.EmitBooleanSerialize();
                         break;
                     default:
-                        if (objType.GetElementType().IsArray)
-                        {
-                            throw new NotSupportedException("不支持交错数组的序列化");
-                        }
-
                         il.EmitSerializerDotSerializeCall(objType.GetElementType());
                         break;
                 }
@@ -292,11 +287,6 @@ namespace Accelbuffer
                         il.EmitBooleanSerialize();
                         break;
                     default:
-                        if (field.FieldType.GetElementType().IsArray)
-                        {
-                            throw new NotSupportedException("不支持交错数组的序列化");
-                        }
-
                         il.EmitSerializerDotSerializeCall(field.FieldType.GetElementType());
                         break;
                 }

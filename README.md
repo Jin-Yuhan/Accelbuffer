@@ -1,4 +1,4 @@
-# Accelbuffer - v1.1 - preview
+# Accelbuffer - v1.2
 `Accelbuffer` 是一个快速，高效的序列化系统，可以用于数据持久化、网络数据传输等。
 
 ## 运行时支持
@@ -33,8 +33,8 @@
 |:-:|:-:|
 |`SerializeProxyInjector.AddBinding<TObject, TProxy>()`|代理绑定（`更加高效`）|
 |`SerializeProxyInjector.AddBinding(Type objectType, Type proxyType)`|代理绑定|
-|`SerializeProxyInjector.RemoveBinding<TObject>()`|取消代理绑定|
-|`SerializeProxyInjector.RemoveBinding(Type objectType)`|取消代理绑定|
+|`SerializeProxyInjector.HasBinding<TObject>()`|获取是否存在绑定|
+|`SerializeProxyInjector.HasBinding(Type objectType)`|获取是否存在绑定|
 
 ## 运行时代理注入
 > 这种方法应该尽量在测试时使用，如果条件允许，应该尽可能实现序列化代理，这样可以进一步优化性能
@@ -43,9 +43,11 @@
 
 ## 支持的序列化类型
 * 基元类型（不包括 `decimal`）
-* 一维数组
-* `List<T>`
-* `Dictionary<T>`
+* 一维数组， 交错数组
+* `List<T>`, `IList<T>`
+* `Dictionary<T>`, `IDictionary<T>`
+* `ISerializableEnumerable<T>`
+* `ICollection<T>`
 * 自定义 `class`, `struct`
 
 ##### Unity拓展 `AccelbufferUnityExtension`
@@ -56,25 +58,25 @@
 ## 基本用法
 ### 1.使用特性标记类型
 #### 方案一，通过`运行时代理注入`
-```c#
-[MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
+```csharp
+[MemoryAllocator(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
-  [FieldIndex(0), NumberType(Number.Var)] 
+  [FieldIndex(0), NumberType(Number.Var)]
   public int CarId;
-  [FieldIndex(1), NumberType(Number.Var)] 
+  [FieldIndex(1), NumberType(Number.Var)]
   public float Horizontal;
-  [FieldIndex(2), NumberType(Number.Var)] 
+  [FieldIndex(2), NumberType(Number.Var)]
   public float Vertical;
-  [FieldIndex(3), NumberType(Number.Var)] 
+  [FieldIndex(3), NumberType(Number.Var)]
   public float HandBrake;
 }
 ```
 
 #### 方案二，手动实现代理
-```c#
+```csharp
 [SerializeBy(typeof(UserInputSerializeProxy))]
-[MemoryAllocatorSettings(20L, true, RuntimeReadOnly = true)]
+[MemoryAllocator(20L, true, RuntimeReadOnly = true)]
 public struct UserInput
 {
   public int CarId;
@@ -110,13 +112,13 @@ internal sealed class UserInputSerializeProxy : ISerializeProxy<UserInput>
 > 即将被支持
 
 ### 2.序列化对象
-```c#
+```csharp
 UserInput input = new UserInput { CarId = 1, Horizontal = 0, Vertical = 0, HandBrake = 0 };
 byte[] data = Serializer<UserInput>.Serialize(input);
 ```
 
 ### 3.反序列化对象
-```c#
+```csharp
 byte[] data = File.ReadAllBytes(someFile);
 UserInput input = Serializer<UserInput>.Deserialize(data, 0, data.LongLength);
 ```
@@ -125,13 +127,13 @@ UserInput input = Serializer<UserInput>.Deserialize(data, 0, data.LongLength);
 > 如果一个类型经常被序列化，可以选择不释放内存，以减少内存的频繁分配
 
 ##### 方法一、 释放指定一个类型的缓冲区内存
-```c#
-Serializer<UserInput>.Allocator.FreeUsedMemory();
+```csharp
+Serializer<UserInput>.Allocator.FreeMemory();
 ```
 
 ##### 方法二、 释放所有序列化器分配的缓冲区内存
-```c#
-UnmanagedMemoryAllocator.FreeAll();
+```csharp
+UnmanagedMemoryAllocator.FreeAllMemory();
 ```
 
 ### 5.序列化事件回调(`SerializeMessage`)
@@ -170,7 +172,7 @@ public struct UserInput
 
 ```C#
 [Serializable, ProtoContract]
-[MemoryAllocatorSettings(50L, true, RuntimeReadOnly = true)]
+[MemoryAllocator(50L, true, RuntimeReadOnly = true)]
 public struct SerializeTest
 {
   [ProtoMember(1), FieldIndex(0), Encoding(CharEncoding.ASCII)] 

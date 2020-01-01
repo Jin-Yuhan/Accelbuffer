@@ -4,44 +4,44 @@
         <name>Accelbuffer</name>
     </assembly>
     <members>
-        <member name="T:Accelbuffer.MemoryAllocatorSettingsAttribute">
+        <member name="T:Accelbuffer.MemoryAllocatorAttribute">
             <summary>
             指定内存分配器的设置
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.InitialBufferSize">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.InitialBufferSize">
             <summary>
             获取初始的序列化缓冲区大小，以字节为单位
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.StrictMode">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.StrictMode">
             <summary>
             获取是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）
             </summary>
         </member>
-        <member name="P:Accelbuffer.MemoryAllocatorSettingsAttribute.RuntimeReadOnly">
+        <member name="P:Accelbuffer.MemoryAllocatorAttribute.RuntimeReadOnly">
             <summary>
             获取/设置内存分配器的设置是否在运行时为只读
             </summary>
         </member>
-        <member name="M:Accelbuffer.MemoryAllocatorSettingsAttribute.#ctor(System.Int64,System.Boolean)">
+        <member name="M:Accelbuffer.MemoryAllocatorAttribute.#ctor(System.Int64,System.Boolean)">
             <summary>
-            创建 MemoryAllocatorSettingsAttribute 实例
+            创建 MemoryAllocatorAttribute 实例
             </summary>
             <param name="initialBufferSize">初始的序列化缓冲区大小，以字节为单位</param>
             <param name="strictMode">是否使用严格模式（严格模式下创建的<see cref="T:Accelbuffer.UnmanagedReader"/>会开启对序列化索引的严格匹配）</param>
         </member>
-        <member name="T:Accelbuffer.NumLen">
+        <member name="T:Accelbuffer.Number">
             <summary>
-            数字长度选项
+            数字类型选项
             </summary>
         </member>
-        <member name="F:Accelbuffer.NumLen.Fixed">
+        <member name="F:Accelbuffer.Number.Fixed">
             <summary>
             指示数字使用固定长度编码
             </summary>
         </member>
-        <member name="F:Accelbuffer.NumLen.Var">
+        <member name="F:Accelbuffer.Number.Var">
             <summary>
             指示数字使用动态长度编码
             </summary>
@@ -350,69 +350,69 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>是null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.SByte,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.SByte,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个8位有符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Byte,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Byte,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个8位无符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int32,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int32,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个32位有符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt32,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt32,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个32位无符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int16,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int16,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个16位有符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt16,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt16,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个16位无符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int64,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Int64,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个64位有符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt64,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.UInt64,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个64位无符号整数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
         <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Boolean)">
             <summary>
@@ -429,21 +429,21 @@
             <param name="value">需要写入的值</param>
             <param name="encoding">编码类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Single,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Single,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个32位浮点数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
-        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Double,Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Double,Accelbuffer.Number)">
             <summary>
             使用指定选项写入一个64位浮点数
             </summary>
             <param name="index">序列化索引</param>
             <param name="value">需要写入的值</param>
-            <param name="option">数字序列化选项</param>
+            <param name="type">数字序列化类型</param>
         </member>
         <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.String,Accelbuffer.CharEncoding)">
             <summary>
@@ -456,6 +456,16 @@
         <member name="T:Accelbuffer.UnmanagedMemoryAllocator">
             <summary>
             公开对非托管缓冲区内存的操作权限
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.UnmanagedMemoryAllocator.DefaultInitialBufferSize">
+            <summary>
+            获取/设置默认初始缓冲区大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.UnmanagedMemoryAllocator.DefaultIsStrictMode">
+            <summary>
+            获取/设置默认是否为严格模式
             </summary>
         </member>
         <member name="P:Accelbuffer.UnmanagedMemoryAllocator.StrictMode">
@@ -473,14 +483,9 @@
             获取 当前使用的内存大小
             </summary>
         </member>
-        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeUsedMemory">
+        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeMemory">
             <summary>
             释放当前缓冲区使用的内存
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeAll">
-            <summary>
-            释放所有使用<see cref="T:Accelbuffer.UnmanagedMemoryAllocator"/>分配的内存
             </summary>
         </member>
         <member name="M:Accelbuffer.UnmanagedMemoryAllocator.AllocWriter">
@@ -500,25 +505,30 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="source"/>为null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
         </member>
-        <member name="T:Accelbuffer.NumberAttribute">
+        <member name="M:Accelbuffer.UnmanagedMemoryAllocator.FreeAllMemory">
             <summary>
-            指示字段作为数字被序列化的选项，
+            释放所有使用<see cref="T:Accelbuffer.UnmanagedMemoryAllocator"/>分配的内存
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.NumberTypeAttribute">
+            <summary>
+            指示字段作为数字被序列化的类型，
             该特性只对 
             <see cref="T:System.Byte"/>, <see cref="T:System.SByte"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.Int16"/>, <see cref="T:System.UInt32"/>,
             <see cref="T:System.Int32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.Int64"/>, <see cref="T:System.Single"/>, <see cref="T:System.Double"/> 
             类型和这些类型的集合的字段有效
             </summary>
         </member>
-        <member name="P:Accelbuffer.NumberAttribute.NumberLength">
+        <member name="P:Accelbuffer.NumberTypeAttribute.NumberType">
             <summary>
-            获取数字序列化选项
+            获取数字序列化类型
             </summary>
         </member>
-        <member name="M:Accelbuffer.NumberAttribute.#ctor(Accelbuffer.NumLen)">
+        <member name="M:Accelbuffer.NumberTypeAttribute.#ctor(Accelbuffer.Number)">
             <summary>
-            初始化 NumberAttribute 类型
+            初始化 NumberTypeAttribute 类型
             </summary>
-            <param name="len">数字的长度选项</param>
+            <param name="type">数字的类型选项</param>
         </member>
         <member name="T:Accelbuffer.CharEncoding">
             <summary>
@@ -571,21 +581,21 @@
             </summary>
             <param name="encoding">字符序列化使用的编码</param>
         </member>
-        <member name="T:Accelbuffer.SerializeIncludeAttribute">
+        <member name="T:Accelbuffer.FieldIndexAttribute">
             <summary>
-            指示字段参与序列化，且拥有指定的索引值
+            指示字段的索引
             </summary>
         </member>
-        <member name="P:Accelbuffer.SerializeIncludeAttribute.SerializeIndex">
+        <member name="P:Accelbuffer.FieldIndexAttribute.Index">
             <summary>
-            获取 序列化索引
+            获取索引
             </summary>
         </member>
-        <member name="M:Accelbuffer.SerializeIncludeAttribute.#ctor(System.Byte)">
+        <member name="M:Accelbuffer.FieldIndexAttribute.#ctor(System.Byte)">
             <summary>
-            初始化 SerializeIndexAttribute 实例
+            初始化 FieldIndexAttribute 实例
             </summary>
-            <param name="serializeIndex">序列化索引</param>
+            <param name="index">索引</param>
         </member>
         <member name="T:Accelbuffer.NumberSign">
             <summary>
@@ -662,24 +672,19 @@
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
         </member>
-        <member name="T:Accelbuffer.SerializeContractAttribute">
+        <member name="T:Accelbuffer.SerializeByAttribute">
             <summary>
-            表示 类型/结构/接口 序列化的协议
+            用于指定 类型/结构/接口 序列化的代理
             </summary>
         </member>
-        <member name="P:Accelbuffer.SerializeContractAttribute.ProxyType">
+        <member name="P:Accelbuffer.SerializeByAttribute.ProxyType">
             <summary>
             获取 序列化代理类型
             </summary>
         </member>
-        <member name="M:Accelbuffer.SerializeContractAttribute.#ctor">
+        <member name="M:Accelbuffer.SerializeByAttribute.#ctor(System.Type)">
             <summary>
-            初始化 SerializeContractAttribute 实例，并指示运行时自动注入序列化代理
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.SerializeContractAttribute.#ctor(System.Type)">
-            <summary>
-            初始化 SerializeContractAttribute 实例，并指示运行时使用<paramref name="proxyType"/>类型作为序列化代理
+            初始化 SerializeByAttribute 实例，并指示运行时使用<paramref name="proxyType"/>类型作为序列化代理
             </summary>
             <param name="proxyType">序列化代理类型</param>
         </member>
@@ -688,34 +693,44 @@
             公开对序列化代理的操作权限
             </summary>
         </member>
+        <member name="P:Accelbuffer.SerializeProxyInjector.DefaultNumberType">
+            <summary>
+            获取默认数字类型选项
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.SerializeProxyInjector.DefaultCharEncoding">
+            <summary>
+            获取默认字符编码
+            </summary>
+        </member>
         <member name="M:Accelbuffer.SerializeProxyInjector.AddBinding``2">
             <summary>
-            添加一个序列化代理的绑定
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
             </summary>
             <typeparam name="TObject">序列化对象类型</typeparam>
             <typeparam name="TProxy">被绑定的代理类型</typeparam>
-            <exception cref="T:System.InvalidOperationException">已经存在一个绑定</exception>
         </member>
         <member name="M:Accelbuffer.SerializeProxyInjector.AddBinding(System.Type,System.Type)">
             <summary>
-            添加一个序列化代理的绑定
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
             </summary>
             <param name="objectType">序列化对象类型</param>
             <param name="proxyType">被绑定的代理类型</param>
             <exception cref="T:System.InvalidCastException"><paramref name="proxyType"/>类型错误</exception>
-            <exception cref="T:System.InvalidOperationException">已经存在一个绑定</exception>
         </member>
-        <member name="M:Accelbuffer.SerializeProxyInjector.RemoveBinding``1">
+        <member name="M:Accelbuffer.SerializeProxyInjector.HasBinding``1">
             <summary>
-            移除一个序列化代理的绑定
+            获取是否已经存在绑定
             </summary>
             <typeparam name="TObject">序列化对象类型</typeparam>
+            <returns>如果已经存在，返回true，否则，false</returns>
         </member>
-        <member name="M:Accelbuffer.SerializeProxyInjector.RemoveBinding(System.Type)">
+        <member name="M:Accelbuffer.SerializeProxyInjector.HasBinding(System.Type)">
             <summary>
-            移除一个序列化代理的绑定
+            获取是否已经存在绑定
             </summary>
             <param name="objectType">序列化对象类型</param>
+            <returns>如果已经存在，返回true，否则，false</returns>
         </member>
         <member name="T:Accelbuffer.Serializer`1">
             <summary>
@@ -776,26 +791,6 @@
             <param name="reader">反序列化读取指针</param>
             <returns>反序列化的对象实例</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="reader"/>为null</exception>
-        </member>
-        <member name="T:Accelbuffer.SerializationUtility">
-            <summary>
-            公开对序列化设置操作的接口
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultInitialBufferSize">
-            <summary>
-            获取/设置全局默认初始缓冲区大小
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultNumberLengthOption">
-            <summary>
-            获取全局默认数字长度选项
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.SerializationUtility.GlobalDefaultCharEncoding">
-            <summary>
-            获取全局默认字符编码
-            </summary>
         </member>
         <member name="M:Accelbuffer.SerializationUtility.IsTrulyComplex(System.Type)">
             <summary>
