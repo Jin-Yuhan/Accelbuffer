@@ -88,7 +88,7 @@ internal sealed class UserInputSerializeProxy : ISerializeProxy<UserInput>
   unsafe void ISerializeProxy<UserInput>.Serialize(in UserInput obj, in UnmanagedWriter* writer)
   {
     writer->WriteValue(0, obj.CarId, Number.Var);
-    writer->WriteValue(1, obj.Horizontal, NumberOption.VariableLength);
+    writer->WriteValue(1, obj.Horizontal, Number.Var);
     writer->WriteValue(2, obj.Vertical, Number.Var);
     writer->WriteValue(3, obj.HandBrake, Number.Var);
   }
