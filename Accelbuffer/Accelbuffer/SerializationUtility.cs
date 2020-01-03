@@ -1,10 +1,21 @@
 ﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 namespace Accelbuffer
 {
     internal static unsafe class SerializationUtility 
     {
+        public static Number DefaultNumberType { get; }
+
+        public static CharEncoding DefaultCharEncoding { get; }
+
+        static SerializationUtility()
+        {
+            DefaultNumberType = Number.Var;
+            DefaultCharEncoding = CharEncoding.UTF8;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberSign GetSign(byte* value)
         {
@@ -114,19 +125,9 @@ namespace Accelbuffer
             }
         }
 
-        /// <summary>
-        /// 获取是否真正是复杂类型（不包括简单类型组成的一维数组）
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        public static bool IsTrulyComplex(Type type)
+        public static bool GetIsStrictMode<T>()
         {
-            if (type.IsArray)
-            {
-                return type.GetArrayRank() > 1 || GetSerializedType(type.GetElementType(), out _) == SerializedType.Complex;
-            }
-
-            return GetSerializedType(type, out _) == SerializedType.Complex;
+            return typeof(T).GetCustomAttribute<StrictSerializationAttribute>(true) != null;
         }
     }
 }

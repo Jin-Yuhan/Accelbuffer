@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using Accelbuffer.Runtime.Injection;
+using System;
 
 namespace Accelbuffer
 {
@@ -10,42 +9,26 @@ namespace Accelbuffer
     /// <typeparam name="T">序列化类型</typeparam>
     public static unsafe class Serializer<T>
     {
-        private static readonly ISerializeProxy<T> s_CachedProxy;
-        private static readonly object s_Lock;
+        /// <summary>
+        /// 获取/设置是否使用严格模式（严格模式会开启对序列化索引的严格匹配）
+        /// </summary>
+        public static bool StrictMode { get; set; }
 
         /// <summary>
         /// 当前类型分配的缓冲区内存管理器
         /// </summary>
         public static UnmanagedMemoryAllocator Allocator { get; }
 
+        private static readonly ISerializeProxy<T> s_CachedProxy;
+        private static readonly object s_Lock;
+
         static Serializer()
         {
-            s_CachedProxy = SerializeProxyInjector.Inject<T>();
+            StrictMode = SerializationUtility.GetIsStrictMode<T>();
             Allocator = UnmanagedMemoryAllocator.Alloc<T>();
+
+            s_CachedProxy = SerializeProxyInjector.Inject<T>();
             s_Lock = new object();
-        }
-
-        /// <summary>
-        /// 初始化，包括被当前类型引用的对象
-        /// </summary>
-        public static void Initialize()
-        {
-            List<FieldData> fields = SerializeProxyInjector.GetSerializedFields(typeof(T));
-
-            for (int i = 0; i < fields.Count; i++)
-            {
-                Type type = fields[i].Field.FieldType;
-
-                if (SerializationUtility.IsTrulyComplex(type))
-                {
-                    if (type.IsArray)
-                    {
-                        type = type.GetElementType();
-                    }
-
-                    typeof(Serializer<>).MakeGenericType(type).GetMethod("Initialize", BindingFlags.Public | BindingFlags.Static).Invoke(null, null);
-                }
-            }
         }
 
         /// <summary>
@@ -57,9 +40,12 @@ namespace Accelbuffer
         {
             lock (s_Lock)
             {
-                UnmanagedWriter* writer = Allocator.GetCachedWriter();
-                s_CachedProxy.Serialize(in obj, in writer);
-                return writer->ToArray();
+                using (Allocator.MemoryWritingBlock())
+                {
+                    UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+                    s_CachedProxy.Serialize(obj, ref writer);
+                    return writer.ToArray();
+                }
             }
         }
 
@@ -75,9 +61,12 @@ namespace Accelbuffer
         {
             lock (s_Lock)
             {
-                UnmanagedWriter* writer = Allocator.GetCachedWriter();
-                s_CachedProxy.Serialize(in obj, in writer);
-                return writer->CopyToArray(buffer, index);
+                using (Allocator.MemoryWritingBlock())
+                {
+                    UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+                    s_CachedProxy.Serialize(obj, ref writer);
+                    return writer.CopyToArray(buffer, index);
+                }
             }
         }
 
@@ -85,16 +74,16 @@ namespace Accelbuffer
         /// 序列化对象，并写入序列化数据
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
-        /// <param name="writer">用于序列化对象的写入指针</param>
-        /// <exception cref="ArgumentNullException"><paramref name="writer"/>为null</exception>
-        public static void Serialize(T obj, UnmanagedWriter* writer)
+        /// <param name="writer">数据输出流</param>
+        /// <exception cref="ArgumentNullException"><paramref name="writer"/>是不合法的</exception>
+        public static void Serialize(T obj, ref UnmanagedWriter writer)
         {
-            if (writer == null)
+            if (writer.IsDefault())
             {
-                throw new ArgumentNullException(nameof(writer), "写入指针不能为空");
+                throw new ArgumentNullException(nameof(writer), "UnmanagedWriter 不合法");
             }
 
-            s_CachedProxy.Serialize(in obj, in writer);
+            s_CachedProxy.Serialize(obj, ref writer);
         }
 
         /// <summary>
@@ -125,25 +114,25 @@ namespace Accelbuffer
 
             fixed (byte* p = bytes)
             {
-                UnmanagedReader reader = Allocator.AllocReader(p, index, length);
-                return s_CachedProxy.Deserialize(&reader);
+                UnmanagedReader reader = new UnmanagedReader(p + index, StrictMode, length);
+                return s_CachedProxy.Deserialize(ref reader);
             }
         }
 
         /// <summary>
         /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
-        /// <param name="reader">反序列化读取指针</param>
+        /// <param name="reader">数据输入流</param>
         /// <returns>反序列化的对象实例</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="reader"/>为null</exception>
-        public static T Deserialize(UnmanagedReader* reader)
+        /// <exception cref="ArgumentNullException"><paramref name="reader"/>是不合法的</exception>
+        public static T Deserialize(ref UnmanagedReader reader)
         {
-            if (reader == null)
+            if (reader.IsDefault())
             {
-                throw new ArgumentNullException(nameof(reader), "读取指针不能为空");
+                throw new ArgumentNullException(nameof(reader), "UnmanagedReader 不合法");
             }
 
-            return s_CachedProxy.Deserialize(reader);
+            return s_CachedProxy.Deserialize(ref reader);
         }
     }
 }

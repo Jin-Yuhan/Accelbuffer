@@ -8,63 +8,63 @@ namespace Accelbuffer
                                                  ISerializeProxy<Vector2Int>, 
                                                  ISerializeProxy<Vector3Int>
     {
-        unsafe Vector2 ISerializeProxy<Vector2>.Deserialize(in UnmanagedReader* reader)
+        Vector2 ISerializeProxy<Vector2>.Deserialize(ref UnmanagedReader reader)
         {
-            return new Vector2(reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0));
+            return new Vector2(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0));
         }
 
-        unsafe Vector3 ISerializeProxy<Vector3>.Deserialize(in UnmanagedReader* reader)
+        Vector3 ISerializeProxy<Vector3>.Deserialize(ref UnmanagedReader reader)
         {
-            return new Vector3(reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0));
+            return new Vector3(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0));
         }
 
-        unsafe Vector4 ISerializeProxy<Vector4>.Deserialize(in UnmanagedReader* reader)
+        Vector4 ISerializeProxy<Vector4>.Deserialize(ref UnmanagedReader reader)
         {
-            return new Vector4(reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0), reader->ReadVariableFloat32(0));
+            return new Vector4(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0));
         }
 
-        unsafe Vector2Int ISerializeProxy<Vector2Int>.Deserialize(in UnmanagedReader* reader)
+        Vector2Int ISerializeProxy<Vector2Int>.Deserialize(ref UnmanagedReader reader)
         {
-            return new Vector2Int(reader->ReadVariableInt32(0), reader->ReadVariableInt32(0));
+            return new Vector2Int(reader.ReadVariableInt32(0), reader.ReadVariableInt32(0));
         }
 
-        unsafe Vector3Int ISerializeProxy<Vector3Int>.Deserialize(in UnmanagedReader* reader)
+        Vector3Int ISerializeProxy<Vector3Int>.Deserialize(ref UnmanagedReader reader)
         {
-            return new Vector3Int(reader->ReadVariableInt32(0), reader->ReadVariableInt32(0), reader->ReadVariableInt32(0));
+            return new Vector3Int(reader.ReadVariableInt32(0), reader.ReadVariableInt32(0), reader.ReadVariableInt32(0));
         }
 
-        unsafe void ISerializeProxy<Vector2>.Serialize(in Vector2 obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<Vector2>.Serialize(Vector2 obj, ref UnmanagedWriter writer)
         {
-            writer->WriteValue(0, obj.x, Number.Var);
-            writer->WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.x, Number.Var);
+            writer.WriteValue(0, obj.y, Number.Var);
         }
 
-        unsafe void ISerializeProxy<Vector3>.Serialize(in Vector3 obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<Vector3>.Serialize(Vector3 obj, ref UnmanagedWriter writer)
         {
-            writer->WriteValue(0, obj.x, Number.Var);
-            writer->WriteValue(0, obj.y, Number.Var);
-            writer->WriteValue(0, obj.z, Number.Var);
+            writer.WriteValue(0, obj.x, Number.Var);
+            writer.WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.z, Number.Var);
         }
 
-        unsafe void ISerializeProxy<Vector4>.Serialize(in Vector4 obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<Vector4>.Serialize(Vector4 obj, ref UnmanagedWriter writer)
         {
-            writer->WriteValue(0, obj.x, Number.Var);
-            writer->WriteValue(0, obj.y, Number.Var);
-            writer->WriteValue(0, obj.z, Number.Var);
-            writer->WriteValue(0, obj.w, Number.Var);
+            writer.WriteValue(0, obj.x, Number.Var);
+            writer.WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.z, Number.Var);
+            writer.WriteValue(0, obj.w, Number.Var);
         }
 
-        unsafe void ISerializeProxy<Vector2Int>.Serialize(in Vector2Int obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<Vector2Int>.Serialize(Vector2Int obj, ref UnmanagedWriter writer)
         {
-            writer->WriteValue(0, obj.x, Number.Var);
-            writer->WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.x, Number.Var);
+            writer.WriteValue(0, obj.y, Number.Var);
         }
 
-        unsafe void ISerializeProxy<Vector3Int>.Serialize(in Vector3Int obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<Vector3Int>.Serialize(Vector3Int obj, ref UnmanagedWriter writer)
         {
-            writer->WriteValue(0, obj.x, Number.Var);
-            writer->WriteValue(0, obj.y, Number.Var);
-            writer->WriteValue(0, obj.z, Number.Var);
+            writer.WriteValue(0, obj.x, Number.Var);
+            writer.WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.z, Number.Var);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace Accelbuffer
+﻿namespace Accelbuffer.Runtime.Injection
 {
     internal sealed class SerializableEnumerableSerializeProxy<T, TValue> : ISerializeProxy<T> where T : ISerializableEnumerable<TValue>, new()
     {
-        unsafe T ISerializeProxy<T>.Deserialize(in UnmanagedReader* reader)
+        T ISerializeProxy<T>.Deserialize(ref UnmanagedReader reader)
         {
-            int count = reader->ReadVariableInt32(0);
+            int count = reader.ReadVariableInt32(0);
 
             if (count == -1)
             {
@@ -16,17 +16,17 @@
 
             while (count > 0)
             {
-                result.Add(Serializer<TValue>.Deserialize(reader));
+                result.Add(Serializer<TValue>.Deserialize(ref reader));
                 count--;
             }
 
             return result;
         }
 
-        unsafe void ISerializeProxy<T>.Serialize(in T obj, in UnmanagedWriter* writer)
+        void ISerializeProxy<T>.Serialize(T obj, ref UnmanagedWriter writer)
         {
             int count = obj == null ? -1 : obj.Count;
-            writer->WriteValue(0, count, Number.Var);
+            writer.WriteValue(0, count, Number.Var);
 
             if (count == -1)
             {
@@ -35,7 +35,7 @@
 
             foreach (TValue o in obj)
             {
-                Serializer<TValue>.Serialize(o, writer);
+                Serializer<TValue>.Serialize(o, ref writer);
             }
         }
     }

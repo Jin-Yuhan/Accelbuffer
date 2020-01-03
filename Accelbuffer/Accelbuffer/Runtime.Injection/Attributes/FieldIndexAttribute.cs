@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accelbuffer
+namespace Accelbuffer.Runtime.Injection
 {
     /// <summary>
     /// 指示字段的索引

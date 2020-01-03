@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accelbuffer
+namespace Accelbuffer.Runtime.Injection
 {
     /// <summary>
     /// 指示字段使用指定的编码被序列化，该特性只对 <see cref="char"/>, <see cref="string"/> 类型和这两个类型构成的集合的字段有效

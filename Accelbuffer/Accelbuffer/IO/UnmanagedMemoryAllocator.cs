@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Runtime.InteropServices;
 
 namespace Accelbuffer
@@ -8,181 +6,77 @@ namespace Accelbuffer
     /// <summary>
     /// 公开对非托管缓冲区内存的操作权限
     /// </summary>
-    public sealed unsafe class UnmanagedMemoryAllocator
+    public sealed partial class UnmanagedMemoryAllocator
     {
-        private static readonly List<UnmanagedMemoryAllocator> s_Allocated;
+        private IntPtr m_MemoryPtr;
+        private long m_InitialSize;
+        private readonly WritingBlock m_WritingBlock;
 
         /// <summary>
-        /// 获取/设置默认初始缓冲区大小
+        /// 获取/设置初始化内存时应该分配的字节大小
         /// </summary>
-        public static long DefaultInitialBufferSize { get; set; }
-
-        /// <summary>
-        /// 获取/设置默认是否为严格模式
-        /// </summary>
-        public static bool DefaultIsStrictMode { get; set; }
-
-        static UnmanagedMemoryAllocator()
+        public long InitialSize
         {
-            s_Allocated = new List<UnmanagedMemoryAllocator>();
-
-            DefaultInitialBufferSize = 45L;
-            DefaultIsStrictMode = false;
+            get => m_InitialSize;
+            set => m_InitialSize = value <= 0L ? m_InitialSize : value;
         }
 
-
-        private UnmanagedWriter* m_CachedWriter;
-        private readonly bool m_ReadOnly;
-        private bool m_StrictMode;
-        private long m_InitialBufferSize;
-
         /// <summary>
-        /// 获取/设置是否使用严格模式（严格模式下创建的<see cref="UnmanagedReader"/>会开启对序列化索引的严格匹配）
+        /// 获取 当前分配的内存大小，以字节为单位
         /// </summary>
-        public bool StrictMode
+        public long AllocatedSize { get; private set; }
+
+        private UnmanagedMemoryAllocator(long initialSize)
         {
-            get => m_StrictMode;
-            set
+            m_MemoryPtr = IntPtr.Zero;
+            m_InitialSize = initialSize;
+            m_WritingBlock = new WritingBlock();
+            AllocatedSize = 0L;
+        }
+
+        internal unsafe byte* GetMemoryPtr(long minSize, long offset)
+        {
+            if (AllocatedSize < minSize)
             {
-                if (m_ReadOnly)
+                if (AllocatedSize == 0L)
                 {
-                    throw new UnauthorizedAccessException("无法设置只读属性");
+                    AllocatedSize = minSize > InitialSize ? minSize : InitialSize;
+                    m_MemoryPtr = Marshal.AllocHGlobal(new IntPtr(AllocatedSize));
                 }
-
-                m_StrictMode = value;
-            }
-        }
-
-        /// <summary>
-        /// 获取/设置初始化缓冲区时应该分配的字节大小
-        /// </summary>
-        public long InitialBufferSize
-        {
-            get => m_InitialBufferSize;
-            set
-            {
-                if (m_ReadOnly)
+                else
                 {
-                    throw new UnauthorizedAccessException("无法设置只读属性");
+                    long sizeTwice = AllocatedSize << 1;
+                    AllocatedSize = minSize > sizeTwice ? minSize : sizeTwice;
+                    m_MemoryPtr = Marshal.ReAllocHGlobal(m_MemoryPtr, new IntPtr(AllocatedSize));
                 }
-
-                m_InitialBufferSize = value <= 0 ? m_InitialBufferSize : value;
             }
+
+            return (byte*)m_MemoryPtr.ToPointer() + offset;
+        }
+
+        internal IDisposable MemoryWritingBlock()
+        {
+            m_WritingBlock.StartWriting();
+            return m_WritingBlock;
         }
 
         /// <summary>
-        /// 获取 当前使用的内存大小
+        /// 释放当前分配的内存
         /// </summary>
-        public long CurrentUsedSize => m_CachedWriter == null ? 0L : m_CachedWriter->m_Size;
-
-
-        private UnmanagedMemoryAllocator(long initialSize, bool strictMode, bool isReadOnly)
-        {
-            m_CachedWriter = null;
-            m_InitialBufferSize = initialSize;
-            m_StrictMode = strictMode;
-            m_ReadOnly = isReadOnly;
-        }
-
-
-        internal UnmanagedWriter* GetCachedWriter()
-        {
-            if (m_CachedWriter == null)
-            {
-                m_CachedWriter = (UnmanagedWriter*)Marshal.AllocHGlobal(sizeof(UnmanagedWriter)).ToPointer();
-                *m_CachedWriter = new UnmanagedWriter(InitialBufferSize, false);
-            }
-
-            m_CachedWriter->Reset();
-            return m_CachedWriter;
-        }
-
-        /// <summary>
-        /// 释放当前缓冲区使用的内存
-        /// </summary>
+        /// <exception cref="InvalidOperationException">分配的内存当前正在被使用</exception>
         public void FreeMemory()
         {
-            if (m_CachedWriter != null)
+            if (m_WritingBlock.IsWriting)
             {
-                m_CachedWriter->Free();
-                Marshal.FreeHGlobal(new IntPtr(m_CachedWriter));
-                m_CachedWriter = null;
-            }
-        }
-
-        /// <summary>
-        /// 分配一个默认大小是<see cref="InitialBufferSize"/>的<see cref="UnmanagedWriter"/>
-        /// </summary>
-        /// <returns>创建的对象</returns>
-        public UnmanagedWriter AllocWriter()
-        {
-            return new UnmanagedWriter(InitialBufferSize, true);
-        }
-
-        /// <summary>
-        /// 分配一个<see cref="UnmanagedReader"/>
-        /// </summary>
-        /// <param name="source">源数据指针</param>
-        /// <param name="offset">指针的偏移量</param>
-        /// <param name="length">允许对象读取的字节长度</param>
-        /// <returns>创建的对象</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/>为null</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
-        public UnmanagedReader AllocReader(byte* source, long offset, long length)
-        {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
+                throw new InvalidOperationException("无法释放内存，因为这块内存正在被使用");
             }
 
-            if (length < 0)
+            if (AllocatedSize > 0L)
             {
-                throw new ArgumentOutOfRangeException(nameof(length), "长度必须是非负数");
+                Marshal.FreeHGlobal(m_MemoryPtr);
+                m_MemoryPtr = IntPtr.Zero;
+                AllocatedSize = 0L;
             }
-
-            return new UnmanagedReader(source + offset, StrictMode, length);
-        }
-
-        /// <summary>
-        /// 释放所有使用<see cref="UnmanagedMemoryAllocator"/>分配的内存
-        /// </summary>
-        public static void FreeAllMemory()
-        {
-            for (int i = 0; i < s_Allocated.Count; i++)
-            {
-                s_Allocated[i].FreeMemory();
-            }
-        }
-
-        private static long GetBufferSize(Type objectType, long size)
-        {
-            if (size <= 0)
-            {
-                try
-                {
-                    size = Marshal.SizeOf(objectType);
-                }
-                catch
-                {
-                    size = DefaultInitialBufferSize;
-                }
-            }
-
-            return size;
-        }
-
-        internal static UnmanagedMemoryAllocator Alloc<T>()
-        {
-            Type objectType = typeof(T);
-            MemoryAllocatorAttribute attr = objectType.GetCustomAttribute<MemoryAllocatorAttribute>(true);
-
-            long initialBufferSize = GetBufferSize(objectType, attr == null ? 0L : attr.InitialBufferSize);
-            bool strictMode = attr == null ? DefaultIsStrictMode : attr.StrictMode;
-            bool readOnly = attr == null ? false : attr.RuntimeReadOnly;
-
-            UnmanagedMemoryAllocator allocator = new UnmanagedMemoryAllocator(initialBufferSize, strictMode, readOnly);
-            s_Allocated.Add(allocator);
-            return allocator;
         }
     }
 }

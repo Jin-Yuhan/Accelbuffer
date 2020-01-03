@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accelbuffer
+namespace Accelbuffer.Runtime.Injection
 {
     /// <summary>
     /// 指示字段作为数字被序列化的类型，

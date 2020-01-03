@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Accelbuffer
+namespace Accelbuffer.Runtime.Injection
 {
     internal readonly struct FieldData
     {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using static Accelbuffer.SerializeProxyUtility;
 
-namespace Accelbuffer
+namespace Accelbuffer.Runtime.Injection
 {
     /// <summary>
     /// 公开对序列化代理的操作权限
@@ -12,16 +10,6 @@ namespace Accelbuffer
     public static class SerializeProxyInjector
     {
         private static readonly Dictionary<Type, Type> s_ProxyMap;
-
-        /// <summary>
-        /// 获取默认数字类型选项
-        /// </summary>
-        public static Number DefaultNumberType { get; }
-
-        /// <summary>
-        /// 获取默认字符编码
-        /// </summary>
-        public static CharEncoding DefaultCharEncoding { get; }
 
         static SerializeProxyInjector()
         {
@@ -47,9 +35,6 @@ namespace Accelbuffer
                 [typeof(Dictionary<,>)] = typeof(DictionarySerializeProxy<,>),
                 [typeof(IDictionary<,>)] = typeof(DictionarySerializeProxy<,,>)
             };
-
-            DefaultNumberType = Number.Var;
-            DefaultCharEncoding = CharEncoding.UTF8;
         }
 
         /// <summary>
@@ -116,34 +101,6 @@ namespace Accelbuffer
             return s_ProxyMap.ContainsKey(objectType);
         }
 
-        internal static List<FieldData> GetSerializedFields(this Type objType)
-        {
-            BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-
-            FieldInfo[] allFields = objType.GetFields(flags);
-            List<FieldData> fields = new List<FieldData>(allFields.Length);
-
-            for (int i = 0; i < allFields.Length; i++)
-            {
-                FieldInfo field = allFields[i];
-
-                if (field.GetCustomAttribute<CompilerGeneratedAttribute>() != null || field.IsInitOnly)
-                {
-                    continue;
-                }
-
-                FieldIndexAttribute attribute = field.GetCustomAttribute<FieldIndexAttribute>(true);
-
-                if (attribute != null)
-                {
-                    fields.Add(new FieldData(field, attribute.Index));
-                }
-            }
-
-            fields.Sort((f1, f2) => f1.Index - f2.Index);
-            return fields;
-        }
-
         internal static ISerializeProxy<T> Inject<T>()
         {
             return (ISerializeProxy<T>)Activator.CreateInstance(GetProxyType<T>());
@@ -187,7 +144,7 @@ namespace Accelbuffer
                     throw new NotSupportedException($"无法为类型{objectType}注入代理");
                 }
 
-                return GenerateProxy(objectType);
+                return SerializeProxyPipeline.InjectType<T>();
             }
             else
             {
@@ -252,7 +209,7 @@ namespace Accelbuffer
 
         private static bool IsInjectable(Type objectType)
         {
-            return !SerializationUtility.IsTrulyComplex(objectType) || objectType.IsValueType || HasDefaultCtor(objectType);
+            return objectType.IsValueType || HasDefaultCtor(objectType);
         }
 
         private static bool HasDefaultCtor(Type type)

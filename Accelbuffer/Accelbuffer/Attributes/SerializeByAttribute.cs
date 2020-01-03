@@ -9,7 +9,7 @@ namespace Accelbuffer
     public sealed class SerializeByAttribute : Attribute
     {
         /// <summary>
-        /// 获取 序列化代理类型
+        /// 获取序列化代理类型
         /// </summary>
         public Type ProxyType { get; }
 

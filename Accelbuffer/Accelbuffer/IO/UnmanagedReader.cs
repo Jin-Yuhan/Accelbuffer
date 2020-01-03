@@ -9,7 +9,7 @@ namespace Accelbuffer
     /// <summary>
     /// 使用特定编码将二进制值读取为基元类型
     /// </summary>
-    public unsafe struct UnmanagedReader
+    public unsafe ref struct UnmanagedReader
     {
         private readonly byte* m_Buffer;
         private readonly long m_Size;
@@ -22,6 +22,11 @@ namespace Accelbuffer
             m_Size = size;
             m_StrictMode = strictMode;
             m_ReadCount = 0;
+        }
+
+        internal bool IsDefault()
+        {
+            return m_Buffer == null;
         }
 
         /// <summary>
@@ -44,15 +49,16 @@ namespace Accelbuffer
         /// 从内部缓冲区读取<paramref name="length"/>个字节并写入<paramref name="buffer"/>中
         /// </summary>
         /// <param name="buffer">写入数据的缓冲区</param>
+        /// <param name="bufferIndex">开始写入数据的索引</param>
         /// <param name="length">读取的字节长度</param>
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/>为null</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/>是负数</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        public void ReadBytes(byte* buffer, long length)
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/>是负数或buffer长度不足</exception>
+        /// <exception cref="IndexOutOfRangeException">内部缓冲区长度不足</exception>
+        public void ReadBytes(byte[] buffer, int bufferIndex, int length)
         {
             if (buffer == null)
             {
-                throw new ArgumentNullException(nameof(buffer), "写入数据的缓冲区为null");
+                throw new ArgumentNullException(nameof(buffer), "buffer为null");
             }
 
             if (length < 0)
@@ -60,15 +66,23 @@ namespace Accelbuffer
                 throw new ArgumentOutOfRangeException(nameof(length), "读取字节的长度必须是非负数");
             }
 
-            ReadBytesPrivate(buffer, length);
+            if (buffer.Length - bufferIndex < length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(buffer), "buffer长度不足");
+            }
+
+            fixed (byte* p = buffer)
+            {
+                ReadBytesPrivate(p + bufferIndex, length);
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void ReadBytesPrivate(byte* buffer, long length)
+        private void ReadBytesPrivate(byte* buffer, int length)
         {
             if (m_ReadCount + length > m_Size)
             {
-                throw new IndexOutOfRangeException("缓冲区长度不足");
+                throw new IndexOutOfRangeException("内部缓冲区长度不足");
             }
 
             while (length > 0)

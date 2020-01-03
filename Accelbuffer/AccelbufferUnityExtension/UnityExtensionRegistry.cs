@@ -1,12 +1,10 @@
-﻿using System.Diagnostics;
-using UnityEngine;
-using static Accelbuffer.SerializeProxyInjector;
+﻿using UnityEngine;
+using static Accelbuffer.Runtime.Injection.SerializeProxyInjector;
 
 namespace Accelbuffer
 {
     public static class UnityExtensionRegistry
     {
-        [Conditional("UNITY_ACCELBUFFER")]
         [RuntimeInitializeOnLoadMethod]
         public static void Register()
         {
