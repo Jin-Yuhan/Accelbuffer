@@ -147,7 +147,7 @@ namespace Accelbuffer.Runtime.Injection
         {
             string methodName = s_ReadString + name;
 
-            EmitNumberType(il, field);
+            EmitNumberType(il, field, OpCodes.Ldarg_2);
             MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexAndNumberTypes);
             il.Emit(OpCodes.Call, method);
         }
@@ -156,7 +156,7 @@ namespace Accelbuffer.Runtime.Injection
         {
             string methodName = s_ReadString + name;
 
-            EmitEncoding(il, field);
+            EmitEncoding(il, field, OpCodes.Ldarg_2);
             MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexAndCharEncodingTypes);
             il.Emit(OpCodes.Call, method);
         }

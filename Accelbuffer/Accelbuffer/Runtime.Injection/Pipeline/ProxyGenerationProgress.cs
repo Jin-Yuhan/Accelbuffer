@@ -106,13 +106,13 @@ namespace Accelbuffer.Runtime.Injection
             }
         }
 
-        protected static void EmitNumberType(ILGenerator il, FieldInfo field)
+        protected static void EmitNumberType(ILGenerator il, FieldInfo field, OpCode context)
         {
             Number numberType = GetNumberType(field, out bool useContext);
 
             if (useContext)
             {
-                il.Emit(OpCodes.Ldarg_3);
+                il.Emit(context);
                 il.Emit(OpCodes.Ldfld, s_ContextDefaultNumberType);
             }
             else
@@ -121,13 +121,13 @@ namespace Accelbuffer.Runtime.Injection
             }
         }
 
-        protected static void EmitEncoding(ILGenerator il, FieldInfo field)
+        protected static void EmitEncoding(ILGenerator il, FieldInfo field, OpCode context)
         {
             CharEncoding encoding = GetCharEncoding(field, out bool useContext);
 
             if (useContext)
             {
-                il.Emit(OpCodes.Ldarg_3);
+                il.Emit(context);
                 il.Emit(OpCodes.Ldfld, s_ContextDefaultEncoding);
             }
             else

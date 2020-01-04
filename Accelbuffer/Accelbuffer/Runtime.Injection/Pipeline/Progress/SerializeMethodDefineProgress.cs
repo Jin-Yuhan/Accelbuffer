@@ -121,7 +121,7 @@ namespace Accelbuffer.Runtime.Injection
         {
             s_IndexAndNumberTypes3[1] = type;
 
-            EmitNumberType(il, field);
+            EmitNumberType(il, field, OpCodes.Ldarg_3);
             MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndNumberTypes3);
             il.Emit(OpCodes.Call, method);
         }
@@ -130,7 +130,7 @@ namespace Accelbuffer.Runtime.Injection
         {
             s_IndexAndCharEncodingTypes3[1] = charType;
 
-            EmitEncoding(il, field);
+            EmitEncoding(il, field, OpCodes.Ldarg_3);
             MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndCharEncodingTypes3);
             il.Emit(OpCodes.Call, method);
         }
