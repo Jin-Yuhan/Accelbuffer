@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Accelbuffer
 {
     /// <summary>
-    /// 公开对非托管缓冲区内存的操作权限
+    /// 公开对非托管内存的部分操作权限
     /// </summary>
     public sealed partial class UnmanagedMemoryAllocator
     {
         private IntPtr m_MemoryPtr;
         private long m_InitialSize;
-        private readonly WritingBlock m_WritingBlock;
+        private readonly object m_Lock;
 
         /// <summary>
         /// 获取/设置初始化内存时应该分配的字节大小
@@ -22,18 +23,34 @@ namespace Accelbuffer
         }
 
         /// <summary>
-        /// 获取 当前分配的内存大小，以字节为单位
+        /// 获取当前分配的内存大小，以字节为单位
         /// </summary>
         public long AllocatedSize { get; private set; }
+
+        /// <summary>
+        /// 获取是否正在写入内存
+        /// </summary>
+        public bool IsWritingMemory { get; private set; }
+
+        /// <summary>
+        /// 获取当前线程是否正在写入内存
+        /// </summary>
+        public bool IsCurrentThreadWritingMemory => IsWritingMemory && Monitor.IsEntered(m_Lock);
 
         private UnmanagedMemoryAllocator(long initialSize)
         {
             m_MemoryPtr = IntPtr.Zero;
             m_InitialSize = initialSize;
-            m_WritingBlock = new WritingBlock();
+            m_Lock = new object();
+
             AllocatedSize = 0L;
+            IsWritingMemory = false;
         }
 
+        /// <summary>
+        /// 这个方法不是线程安全的，如果需要使方法线程安全，
+        /// 请在前后插入<see cref="BeginThreadSafeMemoryWriting"/>和<see cref="EndThreadSafeMemoryWriting"/>
+        /// </summary>
         internal unsafe byte* GetMemoryPtr(long minSize, long offset)
         {
             if (AllocatedSize < minSize)
@@ -54,29 +71,35 @@ namespace Accelbuffer
             return (byte*)m_MemoryPtr.ToPointer() + offset;
         }
 
-        internal IDisposable MemoryWritingBlock()
+        internal void BeginThreadSafeMemoryWriting()
         {
-            m_WritingBlock.StartWriting();
-            return m_WritingBlock;
+            Monitor.Enter(m_Lock);
+            IsWritingMemory = true;
+        }
+
+        internal void EndThreadSafeMemoryWriting()
+        {
+            IsWritingMemory = false;
+            Monitor.Exit(m_Lock);
         }
 
         /// <summary>
-        /// 释放当前分配的内存
+        /// 尝试释放当前分配的内存
         /// </summary>
-        /// <exception cref="InvalidOperationException">分配的内存当前正在被使用</exception>
-        public void FreeMemory()
+        /// <returns>如果释放成功，返回true，否则，false</returns>
+        public bool TryFreeMemory()
         {
-            if (m_WritingBlock.IsWriting)
+            if (IsWritingMemory || AllocatedSize <= 0L || !Monitor.TryEnter(m_Lock))
             {
-                throw new InvalidOperationException("无法释放内存，因为这块内存正在被使用");
+                return false;
             }
 
-            if (AllocatedSize > 0L)
-            {
-                Marshal.FreeHGlobal(m_MemoryPtr);
-                m_MemoryPtr = IntPtr.Zero;
-                AllocatedSize = 0L;
-            }
+            Marshal.FreeHGlobal(m_MemoryPtr);
+            m_MemoryPtr = IntPtr.Zero;
+            AllocatedSize = 0L;
+
+            Monitor.Exit(m_Lock);
+            return true;
         }
     }
 }

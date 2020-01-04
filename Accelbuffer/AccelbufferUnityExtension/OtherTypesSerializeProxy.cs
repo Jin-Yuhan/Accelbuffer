@@ -4,28 +4,28 @@ namespace Accelbuffer
 {
     internal sealed class OtherTypesSerializeProxy : ISerializeProxy<Quaternion>, ISerializeProxy<Matrix4x4>, ISerializeProxy<LayerMask>
     {
-        Quaternion ISerializeProxy<Quaternion>.Deserialize(ref UnmanagedReader reader)
+        Quaternion ISerializeProxy<Quaternion>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
         {
-            return new Quaternion(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0));
+            return new Quaternion(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var));
         }
 
-        Matrix4x4 ISerializeProxy<Matrix4x4>.Deserialize(ref UnmanagedReader reader)
+        Matrix4x4 ISerializeProxy<Matrix4x4>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
         {
             return new Matrix4x4
             (
-                new Vector4(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0)),
-                new Vector4(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0)),
-                new Vector4(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0)),
-                new Vector4(reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0), reader.ReadVariableFloat32(0))
+                new Vector4(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var)),
+                new Vector4(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var)),
+                new Vector4(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var)),
+                new Vector4(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var))
             );
         }
 
-        LayerMask ISerializeProxy<LayerMask>.Deserialize(ref UnmanagedReader reader)
+        LayerMask ISerializeProxy<LayerMask>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
         {
-            return reader.ReadVariableInt32(0);
+            return reader.ReadInt32(0, Number.Var);
         }
 
-        void ISerializeProxy<Quaternion>.Serialize(Quaternion obj, ref UnmanagedWriter writer)
+        void ISerializeProxy<Quaternion>.Serialize(Quaternion obj, ref UnmanagedWriter writer, SerializationContext context)
         {
             writer.WriteValue(0, obj.x, Number.Var);
             writer.WriteValue(0, obj.y, Number.Var);
@@ -33,7 +33,7 @@ namespace Accelbuffer
             writer.WriteValue(0, obj.w, Number.Var);
         }
 
-        void ISerializeProxy<Matrix4x4>.Serialize(Matrix4x4 obj, ref UnmanagedWriter writer)
+        void ISerializeProxy<Matrix4x4>.Serialize(Matrix4x4 obj, ref UnmanagedWriter writer, SerializationContext context)
         {
             writer.WriteValue(0, obj.m00, Number.Var);
             writer.WriteValue(0, obj.m10, Number.Var);
@@ -56,7 +56,7 @@ namespace Accelbuffer
             writer.WriteValue(0, obj.m33, Number.Var);
         }
 
-        void ISerializeProxy<LayerMask>.Serialize(LayerMask obj, ref UnmanagedWriter writer)
+        void ISerializeProxy<LayerMask>.Serialize(LayerMask obj, ref UnmanagedWriter writer, SerializationContext context)
         {
             writer.WriteValue(0, obj, Number.Var);
         }

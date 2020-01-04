@@ -6,16 +6,6 @@ namespace Accelbuffer
 {
     internal static unsafe class SerializationUtility 
     {
-        public static Number DefaultNumberType { get; }
-
-        public static CharEncoding DefaultCharEncoding { get; }
-
-        static SerializationUtility()
-        {
-            DefaultNumberType = Number.Var;
-            DefaultCharEncoding = CharEncoding.UTF8;
-        }
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static NumberSign GetSign(byte* value)
         {

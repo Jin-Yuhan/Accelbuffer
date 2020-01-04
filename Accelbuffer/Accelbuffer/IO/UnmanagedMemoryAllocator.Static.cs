@@ -11,6 +11,29 @@ namespace Accelbuffer
         /// </summary>
         public static long DefaultInitialSize { get; set; }
 
+        /// <summary>
+        /// 获取总共分配的非托管内存大小，以字节为单位
+        /// </summary>
+        public static long TotalAllocatedSize
+        {
+            get
+            {
+                long result = 0L;
+
+                for (int i = 0; i < s_Allocated.Count; i++)
+                {
+                    result += s_Allocated[i].AllocatedSize;
+                }
+
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 获取所有的内存分配器的数量
+        /// </summary>
+        public static int AllocatorCount => s_Allocated.Count;
+
         private static readonly List<UnmanagedMemoryAllocator> s_Allocated;
 
         static UnmanagedMemoryAllocator()
@@ -20,13 +43,13 @@ namespace Accelbuffer
         }
 
         /// <summary>
-        /// 释放所有使用<see cref="UnmanagedMemoryAllocator"/>分配的内存
+        /// 尝试释放所有使用<see cref="UnmanagedMemoryAllocator"/>分配的内存
         /// </summary>
-        public static void FreeAllMemory()
+        public static void FreeAllAvailableMemory()
         {
             for (int i = 0; i < s_Allocated.Count; i++)
             {
-                s_Allocated[i].FreeMemory();
+                s_Allocated[i].TryFreeMemory();
             }
         }
 

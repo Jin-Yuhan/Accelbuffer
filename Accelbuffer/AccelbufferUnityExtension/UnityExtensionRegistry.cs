@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using static Accelbuffer.Runtime.Injection.SerializeProxyInjector;
 
-namespace Accelbuffer
+namespace Accelbuffer.Unity
 {
     public static class UnityExtensionRegistry
     {

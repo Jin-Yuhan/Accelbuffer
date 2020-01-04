@@ -40,7 +40,7 @@ namespace Accelbuffer.Runtime.Injection
             for (int i = 0; i < fields.Count; i++)
             {
                 FieldData data = fields[i];
-                EmitFieldSerialize(il, objType, data.Field, data.Index);
+                EmitFieldSerialize(il, data.Field, data.Index);
             }
         }
 
@@ -53,13 +53,20 @@ namespace Accelbuffer.Runtime.Injection
                 il.Emit(OpCodes.Ldind_Ref);
             }
 
-            il.Emit(OpCodes.Callvirt, method);
+            if (method.IsAbstract || method.IsVirtual)
+            {
+                il.Emit(OpCodes.Callvirt, method);
+            }
+            else
+            {
+                il.Emit(OpCodes.Call, method);
+            }
         }
 
         private static void EmitSerializerDotSerializeCall(ILGenerator il, Type type)
         {
-            s_SerializeCallTypes[0] = type;
-            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_SerializeName, s_SerializeCallTypes));
+            s_SerializeTypes[0] = type;
+            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_SerializeName, s_SerializeTypes));
         }
 
         private static void EmitLoadWriterAndIndexAndSerializeField(ILGenerator il, FieldInfo field, byte index)
@@ -70,14 +77,16 @@ namespace Accelbuffer.Runtime.Injection
             il.Emit(OpCodes.Ldfld, field);//field
         }
 
-        private static void EmitLoadSerializeFieldAndWriter(ILGenerator il, FieldInfo field)
+        private static void EmitLoadSerializeFieldAndWriterAndContext(ILGenerator il, FieldInfo field)
         {
             il.Emit(OpCodes.Ldarg_1);//arg
             il.Emit(OpCodes.Ldfld, field);//field
             il.Emit(OpCodes.Ldarg_2);//writer
+
+            EmitContext(il, field, OpCodes.Ldarg_3);
         }
 
-        private static void EmitFieldSerialize(ILGenerator il, Type objType, FieldInfo field, byte index)
+        private static void EmitFieldSerialize(ILGenerator il, FieldInfo field, byte index)
         {
             Type fieldType = field.FieldType;
             SerializedType type = GetSerializedType(field.FieldType, out _);
@@ -90,11 +99,11 @@ namespace Accelbuffer.Runtime.Injection
             switch (type)
             {
                 case SerializedType.Number:
-                    EmitNumberSerialize(il, GetNumberType(field), fieldType);
+                    EmitNumberSerialize(il, field, fieldType);
                     break;
 
                 case SerializedType.Char:
-                    EmitCharSerialize(il, GetCharEncoding(field), fieldType);
+                    EmitCharSerialize(il, field, fieldType);
                     break;
 
                 case SerializedType.Boolean:
@@ -102,31 +111,31 @@ namespace Accelbuffer.Runtime.Injection
                     break;
 
                 default:
-                    EmitLoadSerializeFieldAndWriter(il, field);
+                    EmitLoadSerializeFieldAndWriterAndContext(il, field);
                     EmitSerializerDotSerializeCall(il, fieldType);
                     break;
             }
         }
 
-        public static void EmitNumberSerialize(ILGenerator il, Number option, Type numberType)
+        private static void EmitNumberSerialize(ILGenerator il, FieldInfo field, Type type)
         {
-            s_IndexAndNumberTypes[1] = numberType;
+            s_IndexAndNumberTypes3[1] = type;
 
-            EmitIsFixedNumber(il, option);
-            MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndNumberTypes);
+            EmitNumberType(il, field);
+            MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndNumberTypes3);
             il.Emit(OpCodes.Call, method);
         }
 
-        public static void EmitCharSerialize(ILGenerator il, CharEncoding encoding, Type charType)
+        private static void EmitCharSerialize(ILGenerator il, FieldInfo field, Type charType)
         {
             s_IndexAndCharEncodingTypes3[1] = charType;
 
-            EmitEncoding(il, encoding);
+            EmitEncoding(il, field);
             MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndCharEncodingTypes3);
             il.Emit(OpCodes.Call, method);
         }
 
-        public static void EmitBooleanSerialize(ILGenerator il)
+        private static void EmitBooleanSerialize(ILGenerator il)
         {
             MethodInfo method = s_WriterType.GetMethod(s_WriteValueString, s_IndexAndBoolTypes);
             il.Emit(OpCodes.Call, method);

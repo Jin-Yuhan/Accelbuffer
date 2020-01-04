@@ -47,7 +47,6 @@
   <ItemGroup>
     <Compile Include="Attributes\InitialMemorySizeAttribute.cs" />
     <Compile Include="Enums\SerializedType.cs" />
-    <Compile Include="IO\UnmanagedMemoryAllocator.WritingBlock.cs" />
     <Compile Include="Runtime.Injection\Attributes\SerializationCallbackAttribute.cs" />
     <Compile Include="Attributes\StrictSerializationAttribute.cs" />
     <Compile Include="Enums\Number.cs" />
@@ -81,6 +80,7 @@
     <Compile Include="Runtime.Injection\Pipeline\Progress\SerializeMethodDefineProgress.cs" />
     <Compile Include="Runtime.Injection\Pipeline\SerializeProxyPipeline.cs" />
     <Compile Include="Runtime.Injection\SerializeProxyInjector.cs" />
+    <Compile Include="SerializationContext.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="SerializationUtility.cs" />
     <Compile Include="Exceptions\TagDismatchException.cs" />

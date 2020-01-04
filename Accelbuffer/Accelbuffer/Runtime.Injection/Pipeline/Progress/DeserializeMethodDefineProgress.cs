@@ -14,7 +14,7 @@ namespace Accelbuffer.Runtime.Injection
                                                         s_MethodAttributes,
                                                         s_CallingConventions,
                                                         objType,
-                                                        s_ReaderTypeRef);
+                                                        s_DeserializeTypes);
 
             ILGenerator il = method.GetILGenerator();
 
@@ -73,22 +73,30 @@ namespace Accelbuffer.Runtime.Injection
                 il.Emit(OpCodes.Ldloc_0);
             }
 
-            il.Emit(OpCodes.Callvirt, method);
+            if (method.IsAbstract || method.IsVirtual)
+            {
+                il.Emit(OpCodes.Callvirt, method);
+            }
+            else
+            {
+                il.Emit(OpCodes.Call, method);
+            }
         }
 
         private static void EmitSerializerDotDeserializeCall(ILGenerator il, Type type)
         {
-            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_DeserializeName, s_ReaderTypeRef));
+            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_DeserializeName, s_DeserializeTypes));
         }
 
-        private static void EmitLoadReader(ILGenerator il)
+        private static void EmitLoadReaderAndContext(ILGenerator il, FieldInfo field)
         {
             il.Emit(OpCodes.Ldarg_1);
+            EmitContext(il, field, OpCodes.Ldarg_2);
         }
 
         private static void EmitLoadReaderAndIndex(ILGenerator il, byte index)
         {
-            EmitLoadReader(il);
+            il.Emit(OpCodes.Ldarg_1);
             il.Emit(OpCodes.Ldc_I4, (int)index);
         }
 
@@ -113,11 +121,13 @@ namespace Accelbuffer.Runtime.Injection
             switch (type)
             {
                 case SerializedType.Number:
-                    EmitNumberDeserialize(il, GetNumberType(field), name);
+                    
+                    EmitNumberDeserialize(il, field, name);
                     break;
 
                 case SerializedType.Char:
-                    EmitCharDeserialize(il, GetCharEncoding(field), name);
+                    
+                    EmitCharDeserialize(il, field, name);
                     break;
 
                 case SerializedType.Boolean:
@@ -125,7 +135,7 @@ namespace Accelbuffer.Runtime.Injection
                     break;
 
                 default:
-                    EmitLoadReader(il);
+                    EmitLoadReaderAndContext(il, field);
                     EmitSerializerDotDeserializeCall(il, field.FieldType);
                     break;
             }
@@ -133,22 +143,25 @@ namespace Accelbuffer.Runtime.Injection
             il.Emit(OpCodes.Stfld, field);
         }
 
-        public static void EmitNumberDeserialize(ILGenerator il, Number option, string name)
+        private static void EmitNumberDeserialize(ILGenerator il, FieldInfo field, string name)
         {
-            string methodName = $"{s_ReadString}{(option == Number.Fixed ? s_FixedName : s_VariableName)}{name}";
-            MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexTypes);
+            string methodName = s_ReadString + name;
+
+            EmitNumberType(il, field);
+            MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexAndNumberTypes);
             il.Emit(OpCodes.Call, method);
         }
 
-        public static void EmitCharDeserialize(ILGenerator il, CharEncoding encoding, string name)
+        private static void EmitCharDeserialize(ILGenerator il, FieldInfo field, string name)
         {
-            string methodName = $"{s_ReadString}{name}";
-            EmitEncoding(il, encoding);
+            string methodName = s_ReadString + name;
+
+            EmitEncoding(il, field);
             MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexAndCharEncodingTypes);
             il.Emit(OpCodes.Call, method);
         }
 
-        public static void EmitBooleanDeserialize(ILGenerator il, string name)
+        private static void EmitBooleanDeserialize(ILGenerator il, string name)
         {
             string methodName = $"{s_ReadString}{name}";
             MethodInfo method = s_ReaderType.GetMethod(methodName, s_IndexTypes);

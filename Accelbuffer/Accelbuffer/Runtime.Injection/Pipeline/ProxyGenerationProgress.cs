@@ -14,37 +14,40 @@ namespace Accelbuffer.Runtime.Injection
         protected static readonly CallingConventions s_CallingConventions = CallingConventions.Standard;
 
         protected static readonly Type s_ReaderType = typeof(UnmanagedReader);
-        protected static readonly Type[] s_ReaderTypeRef = new Type[] { typeof(UnmanagedReader).MakeByRefType() };
-
         protected static readonly Type s_WriterType = typeof(UnmanagedWriter);
-        protected static readonly Type[] s_WriterTypeRef = new Type[] { typeof(UnmanagedWriter).MakeByRefType() };
 
-        protected static readonly Type[] s_SerializeTypes = new Type[] { null, s_WriterTypeRef[0] };
-        protected static readonly Type[] s_SerializeCallTypes = new Type[] { null, s_WriterTypeRef[0] };
+        protected static readonly Type[] s_SerializeTypes = new Type[] { null, typeof(UnmanagedWriter).MakeByRefType(), typeof(SerializationContext) };
+        protected static readonly Type[] s_DeserializeTypes = new Type[] { typeof(UnmanagedReader).MakeByRefType(), typeof(SerializationContext) };
 
         protected static readonly Type[] s_IndexAndCharEncodingTypes = new Type[] { typeof(byte), typeof(CharEncoding) };
         protected static readonly Type[] s_IndexAndCharEncodingTypes3 = new Type[] { typeof(byte), null, typeof(CharEncoding) };
         protected static readonly Type[] s_IndexAndBoolTypes = new Type[] { typeof(byte), typeof(bool) };
-        protected static readonly Type[] s_IndexAndNumberTypes = new Type[] { typeof(byte), null, typeof(Number) };
+        protected static readonly Type[] s_IndexAndNumberTypes = new Type[] { typeof(byte), typeof(Number) };
+        protected static readonly Type[] s_IndexAndNumberTypes3 = new Type[] { typeof(byte), null, typeof(Number) };
         protected static readonly Type[] s_IndexTypes = new Type[] { typeof(byte) };
+
+        protected static readonly FieldInfo s_ContextDefaultEncoding = typeof(SerializationContext).GetField("DefaultEncoding");
+        protected static readonly FieldInfo s_ContextDefaultNumberType = typeof(SerializationContext).GetField("DefaultNumberType");
+
+        protected static readonly ConstructorInfo s_ContextCtor = typeof(SerializationContext).GetConstructor(new Type[] { typeof(CharEncoding), typeof(Number) });
 
         protected static readonly string s_WriteValueString = "WriteValue";
         protected static readonly string s_ReadString = "Read";
-        protected static readonly string s_FixedName = "Fixed";
-        protected static readonly string s_VariableName = "Variable";
 
         public abstract void Execute(Type objType, Type interfaceType, TypeBuilder builder, List<FieldData> fields, List<MethodData> methods);
 
-        protected static CharEncoding GetCharEncoding(FieldInfo field)
+        protected static CharEncoding GetCharEncoding(FieldInfo field, out bool useContext)
         {
             EncodingAttribute attribute = field.GetCustomAttribute<EncodingAttribute>(true);
-            return attribute == null ? SerializationUtility.DefaultCharEncoding : attribute.Encoding;
+            useContext = attribute == null;
+            return useContext ? default : attribute.Encoding;
         }
 
-        protected static Number GetNumberType(FieldInfo field)
+        protected static Number GetNumberType(FieldInfo field, out bool useContext)
         {
             NumberTypeAttribute attr = field.GetCustomAttribute<NumberTypeAttribute>(true);
-            return attr == null ? SerializationUtility.DefaultNumberType : attr.NumberType;
+            useContext = attr == null;
+            return useContext ? default : attr.NumberType;
         }
 
         protected static void EmitEncoding(ILGenerator il, CharEncoding encoding)
@@ -63,9 +66,74 @@ namespace Accelbuffer.Runtime.Injection
             }
         }
 
-        protected static void EmitIsFixedNumber(ILGenerator il, Number option)
+        protected static void EmitIsFixedNumber(ILGenerator il, Number type)
         {
-            il.Emit(option == Number.Fixed ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
+            il.Emit(type == Number.Fixed ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
+        }
+
+        protected static void EmitContext(ILGenerator il, FieldInfo field, OpCode context)
+        {
+            Number numberType = GetNumberType(field, out bool f1);
+            CharEncoding encoding = GetCharEncoding(field, out bool f2);
+
+            if (f1 && f2)
+            {
+                il.Emit(context);//context
+            }
+            else
+            {
+                if (f2)
+                {
+                    il.Emit(context);
+                    il.Emit(OpCodes.Ldfld, s_ContextDefaultEncoding);
+                }
+                else
+                {
+                    EmitEncoding(il, encoding);
+                }
+
+                if (f1)
+                {
+                    il.Emit(context);
+                    il.Emit(OpCodes.Ldfld, s_ContextDefaultNumberType);
+                }
+                else
+                {
+                    EmitIsFixedNumber(il, numberType);
+                }
+
+                il.Emit(OpCodes.Newobj, s_ContextCtor);
+            }
+        }
+
+        protected static void EmitNumberType(ILGenerator il, FieldInfo field)
+        {
+            Number numberType = GetNumberType(field, out bool useContext);
+
+            if (useContext)
+            {
+                il.Emit(OpCodes.Ldarg_3);
+                il.Emit(OpCodes.Ldfld, s_ContextDefaultNumberType);
+            }
+            else
+            {
+                EmitIsFixedNumber(il, numberType);
+            }
+        }
+
+        protected static void EmitEncoding(ILGenerator il, FieldInfo field)
+        {
+            CharEncoding encoding = GetCharEncoding(field, out bool useContext);
+
+            if (useContext)
+            {
+                il.Emit(OpCodes.Ldarg_3);
+                il.Emit(OpCodes.Ldfld, s_ContextDefaultEncoding);
+            }
+            else
+            {
+                EmitEncoding(il, encoding);
+            }
         }
     }
 }

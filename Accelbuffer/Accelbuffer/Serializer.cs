@@ -20,7 +20,6 @@ namespace Accelbuffer
         public static UnmanagedMemoryAllocator Allocator { get; }
 
         private static readonly ISerializeProxy<T> s_CachedProxy;
-        private static readonly object s_Lock;
 
         static Serializer()
         {
@@ -28,7 +27,6 @@ namespace Accelbuffer
             Allocator = UnmanagedMemoryAllocator.Alloc<T>();
 
             s_CachedProxy = SerializeProxyInjector.Inject<T>();
-            s_Lock = new object();
         }
 
         /// <summary>
@@ -38,14 +36,28 @@ namespace Accelbuffer
         /// <returns>对象的序列化结果</returns>
         public static byte[] Serialize(T obj)
         {
-            lock (s_Lock)
+            return Serialize(obj, SerializationContext.Default);
+        }
+
+        /// <summary>
+        /// 序列化对象，并返回序列化数据（线程安全）
+        /// </summary>
+        /// <param name="obj">被序列化的对象</param>
+        /// <param name="context">序列化上下文</param>
+        /// <returns>对象的序列化结果</returns>
+        public static byte[] Serialize(T obj, SerializationContext context)
+        {
+            Allocator.BeginThreadSafeMemoryWriting();
+            UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+
+            try
             {
-                using (Allocator.MemoryWritingBlock())
-                {
-                    UnmanagedWriter writer = new UnmanagedWriter(Allocator);
-                    s_CachedProxy.Serialize(obj, ref writer);
-                    return writer.ToArray();
-                }
+                s_CachedProxy.Serialize(obj, ref writer, context);
+                return writer.ToArray();
+            }
+            finally
+            {
+                Allocator.EndThreadSafeMemoryWriting();
             }
         }
 
@@ -59,14 +71,31 @@ namespace Accelbuffer
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
         public static long Serialize(T obj, byte[] buffer, long index)
         {
-            lock (s_Lock)
+            return Serialize(obj, buffer, index, SerializationContext.Default);
+        }
+
+        /// <summary>
+        /// 序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+        /// </summary>
+        /// <param name="obj">被序列化的对象</param>
+        /// <param name="buffer">用于接受序列化数据的缓冲区</param>
+        /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
+        /// <param name="context">序列化上下文</param>
+        /// <returns>序列化数据的大小</returns>
+        /// <exception cref="ArgumentException">字节数组容量不足</exception>
+        public static long Serialize(T obj, byte[] buffer, long index, SerializationContext context)
+        {
+            Allocator.BeginThreadSafeMemoryWriting();
+            UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+
+            try
             {
-                using (Allocator.MemoryWritingBlock())
-                {
-                    UnmanagedWriter writer = new UnmanagedWriter(Allocator);
-                    s_CachedProxy.Serialize(obj, ref writer);
-                    return writer.CopyToArray(buffer, index);
-                }
+                s_CachedProxy.Serialize(obj, ref writer, context);
+                return writer.CopyToArray(buffer, index);
+            }
+            finally
+            {
+                Allocator.EndThreadSafeMemoryWriting();
             }
         }
 
@@ -75,15 +104,16 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
         /// <param name="writer">数据输出流</param>
+        /// <param name="context">序列化上下文</param>
         /// <exception cref="ArgumentNullException"><paramref name="writer"/>是不合法的</exception>
-        public static void Serialize(T obj, ref UnmanagedWriter writer)
+        public static void Serialize(T obj, ref UnmanagedWriter writer, SerializationContext context)
         {
             if (writer.IsDefault())
             {
                 throw new ArgumentNullException(nameof(writer), "UnmanagedWriter 不合法");
             }
 
-            s_CachedProxy.Serialize(obj, ref writer);
+            s_CachedProxy.Serialize(obj, ref writer, context);
         }
 
         /// <summary>
@@ -96,6 +126,21 @@ namespace Accelbuffer
         /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
         public static T Deserialize(byte[] bytes, long index, long length)
+        {
+            return Deserialize(bytes, index, length, SerializationContext.Default);
+        }
+
+        /// <summary>
+        /// 反序列化<typeparamref name="T"/>类型对象实例
+        /// </summary>
+        /// <param name="bytes">被反序列化的字节数组</param>
+        /// <param name="index">开始读取的索引位置</param>
+        /// <param name="length">可以读取的字节大小</param>
+        /// <param name="context">序列化上下文</param>
+        /// <returns>反序列化的对象实例</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
+        public static T Deserialize(byte[] bytes, long index, long length, SerializationContext context)
         {
             if (length == 0)
             {
@@ -115,7 +160,7 @@ namespace Accelbuffer
             fixed (byte* p = bytes)
             {
                 UnmanagedReader reader = new UnmanagedReader(p + index, StrictMode, length);
-                return s_CachedProxy.Deserialize(ref reader);
+                return s_CachedProxy.Deserialize(ref reader, context);
             }
         }
 
@@ -123,16 +168,17 @@ namespace Accelbuffer
         /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
         /// <param name="reader">数据输入流</param>
+        /// <param name="context">序列化上下文</param>
         /// <returns>反序列化的对象实例</returns>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/>是不合法的</exception>
-        public static T Deserialize(ref UnmanagedReader reader)
+        public static T Deserialize(ref UnmanagedReader reader, SerializationContext context)
         {
             if (reader.IsDefault())
             {
                 throw new ArgumentNullException(nameof(reader), "UnmanagedReader 不合法");
             }
 
-            return s_CachedProxy.Deserialize(ref reader);
+            return s_CachedProxy.Deserialize(ref reader, context);
         }
     }
 }

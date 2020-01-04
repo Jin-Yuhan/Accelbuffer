@@ -113,7 +113,7 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T ReadUVarNumber<T>(byte index, ValueTypeCode expected) where T : unmanaged
+        private T ReadNumber<T>(byte index, ValueTypeCode expected, bool unsigned) where T : unmanaged
         {
             if (ReadByte() != index)
             {
@@ -121,53 +121,40 @@ namespace Accelbuffer
                 return default;
             }
 
-            ToVariableNumberTag(ReadByte(), out ValueTypeCode typeCode, out NumberSign sign, out int byteCount);
+            ValueTypeCode typeCode;
+            NumberSign sign = NumberSign.PositiveOrUnsigned;
+            int byteCount;
+
+            if (expected == ValueTypeCode.FixedInteger || expected == ValueTypeCode.FixedFloat)
+            {
+                ToFixedNumberTag(ReadByte(), out typeCode, out byteCount);
+
+                if (byteCount != sizeof(T) && byteCount != 0)
+                {
+                    throw new TagDismatchException(sizeof(T), byteCount);
+                }
+            }
+            else
+            {
+                ToVariableNumberTag(ReadByte(), out typeCode, out sign, out byteCount);
+
+                if (byteCount > sizeof(T))
+                {
+                    throw new TagDismatchException(sizeof(T), byteCount);
+                }
+
+                if (unsigned && sign == NumberSign.Negative)
+                {
+                    throw new TagDismatchException(NumberSign.PositiveOrUnsigned, sign);
+                }
+            }
 
             if (typeCode != expected)
             {
                 throw new TagDismatchException(expected, typeCode);
             }
 
-            if (sign != NumberSign.PositiveOrUnsigned)
-            {
-                throw new TagDismatchException(NumberSign.PositiveOrUnsigned, sign);
-            }
-
-            if (byteCount > sizeof(T))
-            {
-                throw new TagDismatchException(sizeof(T), byteCount);
-            }
-
             T value = default;
-
-            ReadBytesPrivate((byte*)&value, byteCount);
-
-            return value;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T ReadSVarNumber<T>(byte index, ValueTypeCode expected) where T : unmanaged
-        {
-            if (ReadByte() != index)
-            {
-                OnIndexNotMatch(index);
-                return default;
-            }
-
-            ToVariableNumberTag(ReadByte(), out ValueTypeCode typeCode, out NumberSign sign, out int byteCount);
-
-            if (typeCode != expected)
-            {
-                throw new TagDismatchException(expected, typeCode);
-            }
-
-            if (byteCount > sizeof(T))
-            {
-                throw new TagDismatchException(sizeof(T), byteCount);
-            }
-
-            T value = default;
-
             ReadBytesPrivate((byte*)&value, byteCount);
 
             if (sign == NumberSign.Negative)
@@ -178,240 +165,116 @@ namespace Accelbuffer
             return value;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private T ReadFixedNumber<T>(byte index, ValueTypeCode expected) where T : unmanaged
-        {
-            if (ReadByte() != index)
-            {
-                OnIndexNotMatch(index);
-                return default;
-            }
-
-            ToFixedNumberTag(ReadByte(), out ValueTypeCode typeCode, out int byteCount);
-
-            if (typeCode != expected)
-            {
-                throw new TagDismatchException(expected, typeCode);
-            }
-
-            if (byteCount != sizeof(T) && byteCount != 0)
-            {
-                throw new TagDismatchException(sizeof(T), byteCount);
-            }
-
-            T value = default;
-
-            ReadBytesPrivate((byte*)&value, byteCount);
-
-            return value;
-        }
-
         /// <summary>
         /// 读取一个动态长度的8位有符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public sbyte ReadVariableInt8(byte index)
+        public sbyte ReadInt8(byte index, Number numberType)
         {
-            return ReadSVarNumber<sbyte>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<sbyte>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, false);
         }
 
         /// <summary>
         /// 读取一个动态长度的8位无符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public byte ReadVariableUInt8(byte index)
+        public byte ReadUInt8(byte index, Number numberType)
         {
-            return ReadUVarNumber<byte>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<byte>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, true);
         }
 
         /// <summary>
         /// 读取一个动态长度的16位有符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public short ReadVariableInt16(byte index)
+        public short ReadInt16(byte index, Number numberType)
         {
-            return ReadSVarNumber<short>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<short>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, false);
         }
 
         /// <summary>
         /// 读取一个动态长度的16位无符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public ushort ReadVariableUInt16(byte index)
+        public ushort ReadUInt16(byte index, Number numberType)
         {
-            return ReadUVarNumber<ushort>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<ushort>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, true);
         }
 
         /// <summary>
         /// 读取一个动态长度的32位有符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public int ReadVariableInt32(byte index)
+        public int ReadInt32(byte index, Number numberType)
         {
-            return ReadSVarNumber<int>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<int>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, false);
         }
 
         /// <summary>
         /// 读取一个动态长度的32位无符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public uint ReadVariableUInt32(byte index)
+        public uint ReadUInt32(byte index, Number numberType)
         {
-            return ReadUVarNumber<uint>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<uint>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, true);
         }
 
         /// <summary>
         /// 读取一个动态长度的64位有符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public long ReadVariableInt64(byte index)
+        public long ReadInt64(byte index, Number numberType)
         {
-            return ReadSVarNumber<long>(index, ValueTypeCode.VariableInteger);
+            return ReadNumber<long>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, false);
         }
 
         /// <summary>
         /// 读取一个动态长度的64位无符号整数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public ulong ReadVariableUInt64(byte index)
+        public ulong ReadUInt64(byte index, Number numberType)
         {
-            return ReadUVarNumber<ulong>(index, ValueTypeCode.VariableInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的8位有符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public sbyte ReadFixedInt8(byte index)
-        {
-            return ReadFixedNumber<sbyte>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的8位无符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public byte ReadFixedUInt8(byte index)
-        {
-            return ReadFixedNumber<byte>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的16位有符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public short ReadFixedInt16(byte index)
-        {
-            return ReadFixedNumber<short>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的16位无符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public ushort ReadFixedUInt16(byte index)
-        {
-            return ReadFixedNumber<ushort>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的32位有符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public int ReadFixedInt32(byte index)
-        {
-            return ReadFixedNumber<int>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的32位无符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public uint ReadFixedUInt32(byte index)
-        {
-            return ReadFixedNumber<uint>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的64位有符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public long ReadFixedInt64(byte index)
-        {
-            return ReadFixedNumber<long>(index, ValueTypeCode.FixedInteger);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的64位无符号整数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public ulong ReadFixedUInt64(byte index)
-        {
-            return ReadFixedNumber<ulong>(index, ValueTypeCode.FixedInteger);
+            return ReadNumber<ulong>(index, numberType == Number.Var ? ValueTypeCode.VariableInteger : ValueTypeCode.FixedInteger, true);
         }
 
         /// <summary>
@@ -526,52 +389,28 @@ namespace Accelbuffer
         /// 读取一个动态长度的32位浮点数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public float ReadVariableFloat32(byte index)
+        public float ReadFloat32(byte index, Number numberType)
         {
-            return ReadUVarNumber<float>(index, ValueTypeCode.VariableFloat);
+            return ReadNumber<float>(index, numberType == Number.Var ? ValueTypeCode.VariableFloat : ValueTypeCode.FixedFloat, true);
         }
 
         /// <summary>
         /// 读取一个动态长度的64位浮点数
         /// </summary>
         /// <param name="index">序列化索引</param>
+        /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public double ReadVariableFloat64(byte index)
+        public double ReadFloat64(byte index, Number numberType)
         {
-            return ReadUVarNumber<double>(index, ValueTypeCode.VariableFloat);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的32位浮点数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public float ReadFixedFloat32(byte index)
-        {
-            return ReadFixedNumber<float>(index, ValueTypeCode.FixedFloat);
-        }
-
-        /// <summary>
-        /// 读取一个固定长度的64位浮点数
-        /// </summary>
-        /// <param name="index">序列化索引</param>
-        /// <returns>读取数字</returns>
-        /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
-        /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
-        /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
-        public double ReadFixedFloat64(byte index)
-        {
-            return ReadFixedNumber<double>(index, ValueTypeCode.FixedFloat);
+            return ReadNumber<double>(index, numberType == Number.Var ? ValueTypeCode.VariableFloat : ValueTypeCode.FixedFloat, true);
         }
 
         /// <summary>
