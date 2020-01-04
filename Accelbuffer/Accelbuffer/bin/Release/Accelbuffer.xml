@@ -688,6 +688,11 @@
             当前类型分配的缓冲区内存管理器
             </summary>
         </member>
+        <member name="M:Accelbuffer.Serializer`1.PrepareSerializeProxy">
+            <summary>
+            准备序列化代理
+            </summary>
+        </member>
         <member name="M:Accelbuffer.Serializer`1.Serialize(`0)">
             <summary>
             序列化对象，并返回序列化数据（线程安全）

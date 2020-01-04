@@ -30,6 +30,11 @@ namespace Accelbuffer
         }
 
         /// <summary>
+        /// 准备序列化代理
+        /// </summary>
+        public static void PrepareSerializeProxy() { }
+
+        /// <summary>
         /// 序列化对象，并返回序列化数据（线程安全）
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
