@@ -78,6 +78,12 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal bool DismatchIndex(byte expectedIndex)
+        {
+            return expectedIndex != 0 && ReadByte() != expectedIndex;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void ReadBytesPrivate(byte* buffer, int length)
         {
             if (m_ReadCount + length > m_Size)
@@ -93,7 +99,7 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private void OnIndexNotMatch(byte index)
+        internal void OnIndexNotMatch(byte index)
         {
             if (m_StrictMode)
             {
@@ -115,7 +121,7 @@ namespace Accelbuffer
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private T ReadNumber<T>(byte index, ValueTypeCode expected, bool unsigned) where T : unmanaged
         {
-            if (ReadByte() != index)
+            if (DismatchIndex(index))
             {
                 OnIndexNotMatch(index);
                 return default;
@@ -168,7 +174,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的8位有符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -182,7 +188,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的8位无符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -196,7 +202,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的16位有符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -210,7 +216,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的16位无符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -224,7 +230,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的32位有符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -238,7 +244,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的32位无符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -252,7 +258,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的64位有符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -266,7 +272,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的64位无符号整数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -280,14 +286,14 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个布尔值
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <returns>读取的布尔值</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
         /// <exception cref="IndexOutOfRangeException">缓冲区长度不足</exception>
         /// <exception cref="TagDismatchException">序列化标签不匹配</exception>
         public bool ReadBoolean(byte index)
         {
-            if (ReadByte() != index)
+            if (DismatchIndex(index))
             {
                 OnIndexNotMatch(index);
                 return default;
@@ -306,7 +312,7 @@ namespace Accelbuffer
         /// <summary>
         /// 使用指定编码读取一个字符
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="encoding">字符编码类型</param>
         /// <returns>读取的字符</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -315,7 +321,7 @@ namespace Accelbuffer
         /// <exception cref="DecoderFallbackException">字符解码发生回退</exception>
         public char ReadChar(byte index, CharEncoding encoding)
         {
-            if (ReadByte() != index)
+            if (DismatchIndex(index))
             {
                 OnIndexNotMatch(index);
                 return default;
@@ -388,7 +394,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的32位浮点数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -402,7 +408,7 @@ namespace Accelbuffer
         /// <summary>
         /// 读取一个动态长度的64位浮点数
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="numberType">数字类型</param>
         /// <returns>读取数字</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -416,7 +422,7 @@ namespace Accelbuffer
         /// <summary>
         /// 使用一个编码读取一个字符串
         /// </summary>
-        /// <param name="index">序列化索引</param>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="encoding">字符编码类型</param>
         /// <returns>读取的字符串</returns>
         /// <exception cref="MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -425,7 +431,7 @@ namespace Accelbuffer
         /// <exception cref="DecoderFallbackException">字符串解码发生回退</exception>
         public string ReadString(byte index, CharEncoding encoding)
         {
-            if (ReadByte() != index)
+            if (DismatchIndex(index))
             {
                 OnIndexNotMatch(index);
                 return default;

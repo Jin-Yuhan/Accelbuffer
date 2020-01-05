@@ -17,8 +17,8 @@ namespace Accelbuffer.Runtime.Injection
 
             while (count > 0)
             {
-                TKey key = Serializer<TKey>.Deserialize(ref reader, context);
-                TValue value = Serializer<TValue>.Deserialize(ref reader, context);
+                TKey key = Serializer<TKey>.Deserialize(0, ref reader, context);
+                TValue value = Serializer<TValue>.Deserialize(0, ref reader, context);
                 result.Add(key, value);
                 count--;
             }
@@ -38,8 +38,8 @@ namespace Accelbuffer.Runtime.Injection
 
             foreach (KeyValuePair<TKey, TValue> pair in obj)
             {
-                Serializer<TKey>.Serialize(pair.Key, ref writer, context);
-                Serializer<TValue>.Serialize(pair.Value, ref writer, context);
+                Serializer<TKey>.Serialize(0, pair.Key, ref writer, context);
+                Serializer<TValue>.Serialize(0, pair.Value, ref writer, context);
             }
         }
     }
@@ -59,8 +59,8 @@ namespace Accelbuffer.Runtime.Injection
 
             while (count > 0)
             {
-                TKey key = Serializer<TKey>.Deserialize(ref reader, context);
-                TValue value = Serializer<TValue>.Deserialize(ref reader, context);
+                TKey key = Serializer<TKey>.Deserialize(0, ref reader, context);
+                TValue value = Serializer<TValue>.Deserialize(0, ref reader, context);
                 result.Add(key, value);
                 count--;
             }
@@ -80,8 +80,8 @@ namespace Accelbuffer.Runtime.Injection
 
             foreach (KeyValuePair<TKey, TValue> pair in obj)
             {
-                Serializer<TKey>.Serialize(pair.Key, ref writer, context);
-                Serializer<TValue>.Serialize(pair.Value, ref writer, context);
+                Serializer<TKey>.Serialize(0, pair.Key, ref writer, context);
+                Serializer<TValue>.Serialize(0, pair.Value, ref writer, context);
             }
         }
     }

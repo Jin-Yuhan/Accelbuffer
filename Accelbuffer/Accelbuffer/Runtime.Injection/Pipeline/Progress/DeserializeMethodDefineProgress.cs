@@ -85,11 +85,12 @@ namespace Accelbuffer.Runtime.Injection
 
         private static void EmitSerializerDotDeserializeCall(ILGenerator il, Type type)
         {
-            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_DeserializeName, s_DeserializeTypes));
+            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_DeserializeName, s_DeserializeTypes4));
         }
 
-        private static void EmitLoadReaderAndContext(ILGenerator il, FieldInfo field)
+        private static void EmitLoadIndexAndReaderAndContext(ILGenerator il, FieldInfo field, byte index)
         {
+            il.Emit(OpCodes.Ldc_I4, (int)index);
             il.Emit(OpCodes.Ldarg_1);
             EmitContext(il, field, OpCodes.Ldarg_2);
         }
@@ -135,7 +136,7 @@ namespace Accelbuffer.Runtime.Injection
                     break;
 
                 default:
-                    EmitLoadReaderAndContext(il, field);
+                    EmitLoadIndexAndReaderAndContext(il, field, index);
                     EmitSerializerDotDeserializeCall(il, field.FieldType);
                     break;
             }

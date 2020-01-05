@@ -79,19 +79,19 @@
         </member>
         <member name="T:Accelbuffer.Runtime.Injection.FieldIndexAttribute">
             <summary>
-            指示字段的索引
+            指示字段的序列化索引，只有标记了这个特性的字段才会参与序列化
             </summary>
         </member>
         <member name="P:Accelbuffer.Runtime.Injection.FieldIndexAttribute.Index">
             <summary>
-            获取索引
+            获取字段的序列化索引，0表示既不写入索引，也不读取索引
             </summary>
         </member>
         <member name="M:Accelbuffer.Runtime.Injection.FieldIndexAttribute.#ctor(System.Byte)">
             <summary>
             初始化 FieldIndexAttribute 实例
             </summary>
-            <param name="index">索引</param>
+            <param name="index">字段的序列化索引，0表示既不写入索引，也不读取索引</param>
         </member>
         <member name="T:Accelbuffer.Runtime.Injection.SerializeProxyInjector">
             <summary>
@@ -246,7 +246,7 @@
             <summary>
             读取一个动态长度的8位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -257,7 +257,7 @@
             <summary>
             读取一个动态长度的8位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -268,7 +268,7 @@
             <summary>
             读取一个动态长度的16位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -279,7 +279,7 @@
             <summary>
             读取一个动态长度的16位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -290,7 +290,7 @@
             <summary>
             读取一个动态长度的32位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -301,7 +301,7 @@
             <summary>
             读取一个动态长度的32位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -312,7 +312,7 @@
             <summary>
             读取一个动态长度的64位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -323,7 +323,7 @@
             <summary>
             读取一个动态长度的64位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -334,7 +334,7 @@
             <summary>
             读取一个布尔值
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <returns>读取的布尔值</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
             <exception cref="T:System.IndexOutOfRangeException">缓冲区长度不足</exception>
@@ -344,7 +344,7 @@
             <summary>
             使用指定编码读取一个字符
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="encoding">字符编码类型</param>
             <returns>读取的字符</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -356,7 +356,7 @@
             <summary>
             读取一个动态长度的32位浮点数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -367,7 +367,7 @@
             <summary>
             读取一个动态长度的64位浮点数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="numberType">数字类型</param>
             <returns>读取数字</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -378,7 +378,7 @@
             <summary>
             使用一个编码读取一个字符串
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="encoding">字符编码类型</param>
             <returns>读取的字符串</returns>
             <exception cref="T:Accelbuffer.MissingSerializedValueException">（StrictMode下）序列化数据丢失</exception>
@@ -411,7 +411,7 @@
             <summary>
             使用指定类型写入一个8位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -419,7 +419,7 @@
             <summary>
             使用指定类型写入一个8位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -427,7 +427,7 @@
             <summary>
             使用指定类型写入一个32位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -435,7 +435,7 @@
             <summary>
             使用指定类型写入一个32位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -443,7 +443,7 @@
             <summary>
             使用指定类型写入一个16位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -451,7 +451,7 @@
             <summary>
             使用指定类型写入一个16位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -459,7 +459,7 @@
             <summary>
             使用指定类型写入一个64位有符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -467,7 +467,7 @@
             <summary>
             使用指定类型写入一个64位无符号整数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -475,14 +475,14 @@
             <summary>
             写入一个布尔值
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
         </member>
         <member name="M:Accelbuffer.UnmanagedWriter.WriteValue(System.Byte,System.Char,Accelbuffer.CharEncoding)">
             <summary>
             使用指定编码写入一个字符
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="encoding">编码类型</param>
         </member>
@@ -490,7 +490,7 @@
             <summary>
             使用指定类型写入一个32位浮点数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -498,7 +498,7 @@
             <summary>
             使用指定类型写入一个64位浮点数
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="type">数字序列化类型</param>
         </member>
@@ -506,7 +506,7 @@
             <summary>
             使用指定编码写入一个字符串
             </summary>
-            <param name="index">序列化索引</param>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="value">需要写入的值</param>
             <param name="encoding">编码类型</param>
         </member>
@@ -729,10 +729,11 @@
             <returns>序列化数据的大小</returns>
             <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
         </member>
-        <member name="M:Accelbuffer.Serializer`1.Serialize(`0,Accelbuffer.UnmanagedWriter@,Accelbuffer.SerializationContext)">
+        <member name="M:Accelbuffer.Serializer`1.Serialize(System.Byte,`0,Accelbuffer.UnmanagedWriter@,Accelbuffer.SerializationContext)">
             <summary>
             序列化对象，并写入序列化数据
             </summary>
+            <param name="index">序列化索引，0表示不写入索引</param>
             <param name="obj">被序列化的对象</param>
             <param name="writer">数据输出流</param>
             <param name="context">序列化上下文</param>
@@ -761,10 +762,11 @@
             <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
         </member>
-        <member name="M:Accelbuffer.Serializer`1.Deserialize(Accelbuffer.UnmanagedReader@,Accelbuffer.SerializationContext)">
+        <member name="M:Accelbuffer.Serializer`1.Deserialize(System.Byte,Accelbuffer.UnmanagedReader@,Accelbuffer.SerializationContext)">
             <summary>
             反序列化<typeparamref name="T"/>类型对象实例
             </summary>
+            <param name="index">序列化索引，0表示不读取索引</param>
             <param name="reader">数据输入流</param>
             <param name="context">序列化上下文</param>
             <returns>反序列化的对象实例</returns>

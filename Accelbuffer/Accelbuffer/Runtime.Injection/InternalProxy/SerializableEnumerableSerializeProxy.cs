@@ -16,7 +16,7 @@
 
             while (count > 0)
             {
-                result.Add(Serializer<TValue>.Deserialize(ref reader, context));
+                result.Add(Serializer<TValue>.Deserialize(0, ref reader, context));
                 count--;
             }
 
@@ -35,7 +35,7 @@
 
             foreach (TValue o in obj)
             {
-                Serializer<TValue>.Serialize(o, ref writer, context);
+                Serializer<TValue>.Serialize(0, o, ref writer, context);
             }
         }
     }

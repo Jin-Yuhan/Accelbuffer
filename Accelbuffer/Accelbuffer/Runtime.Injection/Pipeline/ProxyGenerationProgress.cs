@@ -19,6 +19,9 @@ namespace Accelbuffer.Runtime.Injection
         protected static readonly Type[] s_SerializeTypes = new Type[] { null, typeof(UnmanagedWriter).MakeByRefType(), typeof(SerializationContext) };
         protected static readonly Type[] s_DeserializeTypes = new Type[] { typeof(UnmanagedReader).MakeByRefType(), typeof(SerializationContext) };
 
+        protected static readonly Type[] s_SerializeTypes4 = new Type[] { typeof(byte), null, typeof(UnmanagedWriter).MakeByRefType(), typeof(SerializationContext) };
+        protected static readonly Type[] s_DeserializeTypes4 = new Type[] { typeof(byte), typeof(UnmanagedReader).MakeByRefType(), typeof(SerializationContext) };
+
         protected static readonly Type[] s_IndexAndCharEncodingTypes = new Type[] { typeof(byte), typeof(CharEncoding) };
         protected static readonly Type[] s_IndexAndCharEncodingTypes3 = new Type[] { typeof(byte), null, typeof(CharEncoding) };
         protected static readonly Type[] s_IndexAndBoolTypes = new Type[] { typeof(byte), typeof(bool) };

@@ -17,7 +17,7 @@ namespace Accelbuffer.Runtime.Injection
 
             while (count > 0)
             {
-                result.Add(Serializer<T>.Deserialize(ref reader, context));
+                result.Add(Serializer<T>.Deserialize(0, ref reader, context));
                 count--;
             }
 
@@ -31,7 +31,7 @@ namespace Accelbuffer.Runtime.Injection
 
             for (int i = 0; i < count; i++)
             {
-                Serializer<T>.Serialize(obj[i], ref writer, context);
+                Serializer<T>.Serialize(0, obj[i], ref writer, context);
             }
         }
     }
@@ -51,7 +51,7 @@ namespace Accelbuffer.Runtime.Injection
 
             while (count > 0)
             {
-                result.Add(Serializer<TValue>.Deserialize(ref reader, context));
+                result.Add(Serializer<TValue>.Deserialize(0, ref reader, context));
                 count--;
             }
 
@@ -70,7 +70,7 @@ namespace Accelbuffer.Runtime.Injection
 
             for (int i = 0; i < obj.Count; i++)
             {
-                Serializer<TValue>.Serialize(obj[i], ref writer, context);
+                Serializer<TValue>.Serialize(0, obj[i], ref writer, context);
             }
         }
     }

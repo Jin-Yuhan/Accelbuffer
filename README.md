@@ -52,13 +52,13 @@
 ```csharp
 public struct TestStruct
 {
-  [FieldIndex(0), NumberType(Number.Var)]
+  [FieldIndex(1), NumberType(Number.Var)]
   public List<int> IntList;
 
-  [FieldIndex(1), Encoding(CharEncoding.UTF8)]
+  [FieldIndex(2), Encoding(CharEncoding.UTF8)]
   public Dictionary<string, string> StringMap;
 
-  [FieldIndex(2), NumberType(Number.Var)]
+  [FieldIndex(3), NumberType(Number.Var)]
   public float Float;
 }
 ```
@@ -79,17 +79,17 @@ public sealed class TestStructSerializeProxy : ISerializeProxy<TestStruct>
   {
     return new TestStruct
     {
-      IntList = Serializer<List<int>>.Deserialize(ref reader, context),
-      StringMap = Serializer<Dictionary<string, string>>.Deserialize(ref reader, context),
-      Float = reader.ReadFloat32(2, context.DefaultNumberType)
+      IntList = Serializer<List<int>>.Deserialize(1, ref reader, context),
+      StringMap = Serializer<Dictionary<string, string>>.Deserialize(2, ref reader, context),
+      Float = reader.ReadFloat32(3, context.DefaultNumberType)
     };
   }
 
   void ISerializeProxy<TestStruct>.Serialize(TestStruct obj, ref UnmanagedWriter writer, SerializationContext context)
   {
-    Serializer<List<int>>.Serialize(obj.IntList, ref writer, context);
-    Serializer<Dictionary<string, string>>.Serialize(obj.StringMap, ref writer, context);
-    writer.WriteValue(2, obj.Float, context.DefaultNumberType);
+    Serializer<List<int>>.Serialize(1, obj.IntList, ref writer, context);
+    Serializer<Dictionary<string, string>>.Serialize(2, obj.StringMap, ref writer, context);
+    writer.WriteValue(3, obj.Float, context.DefaultNumberType);
   }
 }
 ```
@@ -126,13 +126,13 @@ UnmanagedMemoryAllocator.FreeAllAvailableMemory();
 ```csharp
 public struct TestStruct
 {
-  [FieldIndex(0), NumberType(Number.Var)]
+  [FieldIndex(1), NumberType(Number.Var)]
   public List<int> IntList;
 
-  [FieldIndex(1), Encoding(CharEncoding.UTF8)]
+  [FieldIndex(2), Encoding(CharEncoding.UTF8)]
   public Dictionary<string, string> StringMap;
 
-  [FieldIndex(2), NumberType(Number.Var)]
+  [FieldIndex(3), NumberType(Number.Var)]
   public float Float;
 
   [SerializationCallback(SerializationCallbackMethod.OnBeforeSerialize)]

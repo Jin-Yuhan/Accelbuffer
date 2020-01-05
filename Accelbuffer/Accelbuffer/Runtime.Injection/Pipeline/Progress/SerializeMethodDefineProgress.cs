@@ -65,8 +65,8 @@ namespace Accelbuffer.Runtime.Injection
 
         private static void EmitSerializerDotSerializeCall(ILGenerator il, Type type)
         {
-            s_SerializeTypes[0] = type;
-            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_SerializeName, s_SerializeTypes));
+            s_SerializeTypes4[1] = type;
+            il.Emit(OpCodes.Call, typeof(Serializer<>).MakeGenericType(type).GetMethod(s_SerializeName, s_SerializeTypes4));
         }
 
         private static void EmitLoadWriterAndIndexAndSerializeField(ILGenerator il, FieldInfo field, byte index)
@@ -77,8 +77,9 @@ namespace Accelbuffer.Runtime.Injection
             il.Emit(OpCodes.Ldfld, field);//field
         }
 
-        private static void EmitLoadSerializeFieldAndWriterAndContext(ILGenerator il, FieldInfo field)
+        private static void EmitLoadIndexAndSerializeFieldAndWriterAndContext(ILGenerator il, FieldInfo field, byte index)
         {
+            il.Emit(OpCodes.Ldc_I4, (int)index);//index
             il.Emit(OpCodes.Ldarg_1);//arg
             il.Emit(OpCodes.Ldfld, field);//field
             il.Emit(OpCodes.Ldarg_2);//writer
@@ -111,7 +112,7 @@ namespace Accelbuffer.Runtime.Injection
                     break;
 
                 default:
-                    EmitLoadSerializeFieldAndWriterAndContext(il, field);
+                    EmitLoadIndexAndSerializeFieldAndWriterAndContext(il, field, index);
                     EmitSerializerDotSerializeCall(il, fieldType);
                     break;
             }

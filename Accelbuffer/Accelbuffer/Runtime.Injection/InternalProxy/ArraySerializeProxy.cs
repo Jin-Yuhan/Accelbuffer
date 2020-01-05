@@ -15,7 +15,7 @@
 
             for (int i = 0; i < len; i++)
             {
-                result[i] = Serializer<T>.Deserialize(ref reader, context);
+                result[i] = Serializer<T>.Deserialize(0, ref reader, context);
             }
 
             return result;
@@ -28,7 +28,7 @@
 
             for (int i = 0; i < count; i++)
             {
-                Serializer<T>.Serialize(obj[i], ref writer, context);
+                Serializer<T>.Serialize(0, obj[i], ref writer, context);
             }
         }
     }

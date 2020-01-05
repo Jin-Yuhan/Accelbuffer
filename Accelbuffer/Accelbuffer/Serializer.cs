@@ -107,17 +107,19 @@ namespace Accelbuffer
         /// <summary>
         /// 序列化对象，并写入序列化数据
         /// </summary>
+        /// <param name="index">序列化索引，0表示不写入索引</param>
         /// <param name="obj">被序列化的对象</param>
         /// <param name="writer">数据输出流</param>
         /// <param name="context">序列化上下文</param>
         /// <exception cref="ArgumentNullException"><paramref name="writer"/>是不合法的</exception>
-        public static void Serialize(T obj, ref UnmanagedWriter writer, SerializationContext context)
+        public static void Serialize(byte index, T obj, ref UnmanagedWriter writer, SerializationContext context)
         {
             if (writer.IsDefault())
             {
                 throw new ArgumentNullException(nameof(writer), "UnmanagedWriter 不合法");
             }
 
+            writer.WriteIndex(index);
             s_CachedProxy.Serialize(obj, ref writer, context);
         }
 
@@ -172,15 +174,22 @@ namespace Accelbuffer
         /// <summary>
         /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
+        /// <param name="index">序列化索引，0表示不读取索引</param>
         /// <param name="reader">数据输入流</param>
         /// <param name="context">序列化上下文</param>
         /// <returns>反序列化的对象实例</returns>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/>是不合法的</exception>
-        public static T Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        public static T Deserialize(byte index, ref UnmanagedReader reader, SerializationContext context)
         {
             if (reader.IsDefault())
             {
                 throw new ArgumentNullException(nameof(reader), "UnmanagedReader 不合法");
+            }
+
+            if (reader.DismatchIndex(index))
+            {
+                reader.OnIndexNotMatch(index);
+                return default;
             }
 
             return s_CachedProxy.Deserialize(ref reader, context);
