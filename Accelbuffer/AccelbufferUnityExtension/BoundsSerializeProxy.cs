@@ -2,46 +2,46 @@
 
 namespace Accelbuffer
 {
-    internal sealed class BoundsSerializeProxy : ISerializeProxy<Bounds>, ISerializeProxy<BoundsInt>
+    internal sealed class BoundsSerializeProxy : ITypeSerializer<Bounds>, ITypeSerializer<BoundsInt>
     {
-        Bounds ISerializeProxy<Bounds>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Bounds ITypeSerializer<Bounds>.Deserialize(ref StreamingIterator iterator)
         {
             return new Bounds
             (
-                new Vector3(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var)),
-                new Vector3(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var))
+                new Vector3(iterator.NextAsFloat32WithoutTag(), iterator.NextAsFloat32WithoutTag(), iterator.NextAsFloat32WithoutTag()),
+                new Vector3(iterator.NextAsFloat32WithoutTag(), iterator.NextAsFloat32WithoutTag(), iterator.NextAsFloat32WithoutTag())
             );
         }
 
-        BoundsInt ISerializeProxy<BoundsInt>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        BoundsInt ITypeSerializer<BoundsInt>.Deserialize(ref StreamingIterator iterator)
         {
             return new BoundsInt
             (
-                new Vector3Int(reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var)),
-                new Vector3Int(reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var))
+                new Vector3Int(iterator.NextAsInt32WithoutTag(NumberFormat.Variant), iterator.NextAsInt32WithoutTag(NumberFormat.Variant), iterator.NextAsInt32WithoutTag(NumberFormat.Variant)),
+                new Vector3Int(iterator.NextAsInt32WithoutTag(NumberFormat.Variant), iterator.NextAsInt32WithoutTag(NumberFormat.Variant), iterator.NextAsInt32WithoutTag(NumberFormat.Variant))
             );
         }
 
-        void ISerializeProxy<Bounds>.Serialize(Bounds obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Bounds>.Serialize(Bounds obj, ref StreamingWriter writer)
         {
-            writer.WriteValue(0, obj.center.x, Number.Var);
-            writer.WriteValue(0, obj.center.y, Number.Var);
-            writer.WriteValue(0, obj.center.z, Number.Var);
+            writer.WriteValue(0, obj.center.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.center.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.center.z, NumberFormat.Variant);
 
-            writer.WriteValue(0, obj.size.x, Number.Var);
-            writer.WriteValue(0, obj.size.y, Number.Var);
-            writer.WriteValue(0, obj.size.z, Number.Var);
+            writer.WriteValue(0, obj.size.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.size.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.size.z, NumberFormat.Variant);
         }
 
-        void ISerializeProxy<BoundsInt>.Serialize(BoundsInt obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<BoundsInt>.Serialize(BoundsInt obj, ref StreamingWriter writer)
         {
-            writer.WriteValue(0, obj.position.x, Number.Var);
-            writer.WriteValue(0, obj.position.y, Number.Var);
-            writer.WriteValue(0, obj.position.z, Number.Var);
+            writer.WriteValue(0, obj.position.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.position.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.position.z, NumberFormat.Variant);
 
-            writer.WriteValue(0, obj.size.x, Number.Var);
-            writer.WriteValue(0, obj.size.y, Number.Var);
-            writer.WriteValue(0, obj.size.z, Number.Var);
+            writer.WriteValue(0, obj.size.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.size.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.size.z, NumberFormat.Variant);
         }
     }
 }

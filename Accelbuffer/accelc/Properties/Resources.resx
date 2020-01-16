@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccelbufferFileExtension" xml:space="preserve">
+    <value>accel</value>
+  </data>
+  <data name="AccelbufferInjectionNamespace" xml:space="preserve">
+    <value>Accelbuffer.Injection</value>
+  </data>
+  <data name="AccelbufferMemoryNamespace" xml:space="preserve">
+    <value>Accelbuffer.Memory</value>
+  </data>
+  <data name="AccelbufferNamespace" xml:space="preserve">
+    <value>Accelbuffer</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="AccelbufferTemplate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AccelbufferTemplate.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;gb2312</value>
+  </data>
+  <data name="AccelbufferTextNamespace" xml:space="preserve">
+    <value>Accelbuffer.Text</value>
+  </data>
+  <data name="DocumentNotEnd" xml:space="preserve">
+    <value>文档需要'--'来结束</value>
+  </data>
+  <data name="ExpectAccessKeyword" xml:space="preserve">
+    <value>缺少'public'或'internal'修饰符</value>
+  </data>
+  <data name="ExpectCloseBrace" xml:space="preserve">
+    <value>缺少'}'</value>
+  </data>
+  <data name="ExpectCShapCodeDotAfter" xml:space="preserve">
+    <value>.after方法缺少方法体</value>
+  </data>
+  <data name="ExpectCShapCodeDotBefore" xml:space="preserve">
+    <value>.before方法缺少方法体</value>
+  </data>
+  <data name="ExpectEquals" xml:space="preserve">
+    <value>缺少'='</value>
+  </data>
+  <data name="ExpectFieldType" xml:space="preserve">
+    <value>字段定义缺少类型</value>
+  </data>
+  <data name="ExpectIdentifier" xml:space="preserve">
+    <value>缺少标识符</value>
+  </data>
+  <data name="ExpectInt32Literal" xml:space="preserve">
+    <value>缺少int32类型的值</value>
+  </data>
+  <data name="ExpectOpenBrace" xml:space="preserve">
+    <value>缺少'{'</value>
+  </data>
+  <data name="ExpectSemicolon" xml:space="preserve">
+    <value>缺少';'来结束</value>
+  </data>
+  <data name="ExpectTypeKeyword" xml:space="preserve">
+    <value>缺少'type'关键字</value>
+  </data>
+  <data name="FileNotFound" xml:space="preserve">
+    <value>无法找到文件：{0}</value>
+  </data>
+  <data name="FilePath" xml:space="preserve">
+    <value>文件路径：</value>
+  </data>
+  <data name="GenerateSuccessfully" xml:space="preserve">
+    <value>文件生成成功</value>
+  </data>
+  <data name="InvalidChar" xml:space="preserve">
+    <value>无效的字符：'{0}'</value>
+  </data>
+  <data name="InvalidCheckRef" xml:space="preserve">
+    <value>关键字'checkref'不能在标记了'compact'的类型中使用</value>
+  </data>
+  <data name="InvalidCheckrefKeyword" xml:space="preserve">
+    <value>关键字'checkref'不能标记不可空类型的字段</value>
+  </data>
+  <data name="InvalidCtor" xml:space="preserve">
+    <value>'.ctor'必须在标记了'ref'关键字的类型中使用</value>
+  </data>
+  <data name="InvalidEncodingKeyword" xml:space="preserve">
+    <value>关键字'utf8', 'unicode', 'ascii'只能修饰'char'和'string'类型的字段</value>
+  </data>
+  <data name="InvalidFinal" xml:space="preserve">
+    <value>只有标记了'ref'关键字的类型才可以被标记为'final'</value>
+  </data>
+  <data name="InvalidFixedKeyword" xml:space="preserve">
+    <value>关键字'fixed'不能修饰非整数类型</value>
+  </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>标记：'{0}'无效</value>
+  </data>
+  <data name="LineNumber" xml:space="preserve">
+    <value>行号：</value>
+  </data>
+  <data name="MultiNamespace" xml:space="preserve">
+    <value>不能同时定义多个命名空间</value>
+  </data>
+  <data name="MultipleAccessKeyword" xml:space="preserve">
+    <value>可访问修饰符重复</value>
+  </data>
+  <data name="MultipleKeyword" xml:space="preserve">
+    <value>关键字：'{0}'重复</value>
+  </data>
+  <data name="ReplaceString" xml:space="preserve">
+    <value>#NAME#</value>
+  </data>
+  <data name="SyntaxError" xml:space="preserve">
+    <value>SyntaxError：</value>
+  </data>
+  <data name="TemplateName" xml:space="preserve">
+    <value>AccelbufferTemplate</value>
+  </data>
+  <data name="UnexpectedNamespace" xml:space="preserve">
+    <value>命名空间的声明必须在类型之前</value>
+  </data>
+  <data name="UnexpectedUsing" xml:space="preserve">
+    <value>命名空间的引用必须在类型之前</value>
+  </data>
+  <data name="UnknownChar" xml:space="preserve">
+    <value>无法识别的字符：'{0}'</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>v0.1.0.5</value>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>public void After()</value>
+  </data>
+  <data name="AfterAttr" xml:space="preserve">
+    <value>[OnAfterDeserialization(Priority = 0)]</value>
+  </data>
+  <data name="ArraySuffix" xml:space="preserve">
+    <value>[]</value>
+  </data>
+  <data name="Before" xml:space="preserve">
+    <value>public void Before()</value>
+  </data>
+  <data name="BeforeAttr" xml:space="preserve">
+    <value>[OnBeforeSerialization(Priority = 0)]</value>
+  </data>
+  <data name="Break" xml:space="preserve">
+    <value>break;</value>
+  </data>
+  <data name="Case" xml:space="preserve">
+    <value>case {0}:</value>
+  </data>
+  <data name="CheckRef" xml:space="preserve">
+    <value>[CheckRef]</value>
+  </data>
+  <data name="Class" xml:space="preserve">
+    <value>class </value>
+  </data>
+  <data name="CompactLayout" xml:space="preserve">
+    <value>[CompactLayout]</value>
+  </data>
+  <data name="DefaultCtor" xml:space="preserve">
+    <value>{0}() {{ }}</value>
+  </data>
+  <data name="Defeault" xml:space="preserve">
+    <value>default:</value>
+  </data>
+  <data name="DefIndex" xml:space="preserve">
+    <value>int index = 0;</value>
+  </data>
+  <data name="DeserializeMethod" xml:space="preserve">
+    <value>public {0} Deserialize(ref StreamingIterator iterator)</value>
+  </data>
+  <data name="EncodingASCII" xml:space="preserve">
+    <value>[Encoding(Encoding.ASCII)]</value>
+  </data>
+  <data name="EncodingUnicode" xml:space="preserve">
+    <value>[Encoding(Encoding.Unicode)]</value>
+  </data>
+  <data name="EncodingUTF8" xml:space="preserve">
+    <value>[Encoding(Encoding.UTF8)]</value>
+  </data>
+  <data name="Field" xml:space="preserve">
+    <value>public {0} {1};</value>
+  </data>
+  <data name="FieldIndex" xml:space="preserve">
+    <value>[FieldIndex({0})]</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>[Fixed]</value>
+  </data>
+  <data name="IncreaseIndex" xml:space="preserve">
+    <value>index++;</value>
+  </data>
+  <data name="InitialMemorySize" xml:space="preserve">
+    <value>[InitialMemorySize({0})]</value>
+  </data>
+  <data name="Internal" xml:space="preserve">
+    <value>internal </value>
+  </data>
+  <data name="InvalidIdentifier" xml:space="preserve">
+    <value>非法的标识符：'{0}'</value>
+  </data>
+  <data name="Namespace" xml:space="preserve">
+    <value>namespace </value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>{0} result = new {1}();</value>
+  </data>
+  <data name="NextAs" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}();</value>
+  </data>
+  <data name="NextAsCharStringASCIICompact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}WithoutTag(Encoding.ASCII);</value>
+  </data>
+  <data name="NextAsCharStringUnicodeCompact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}WithoutTag(Encoding.Unicode);</value>
+  </data>
+  <data name="NextAsCharStringUTF8Compact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}WithoutTag(Encoding.UTF8);</value>
+  </data>
+  <data name="NextAsCompact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}WithoutTag();</value>
+  </data>
+  <data name="NextAsComplex" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs&lt;{1}&gt;();</value>
+  </data>
+  <data name="NextAsComplexCompact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAsWithoutTag&lt;{1}&gt;();</value>
+  </data>
+  <data name="NextAsIntCompact" xml:space="preserve">
+    <value>result.{0} = iterator.NextAs{1}WithoutTag({2});</value>
+  </data>
+  <data name="NumberFormat.Fixed" xml:space="preserve">
+    <value>NumberFormat.Fixed</value>
+  </data>
+  <data name="NumberFormat.Variant" xml:space="preserve">
+    <value>NumberFormat.Variant</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>public </value>
+  </data>
+  <data name="ReturnResult" xml:space="preserve">
+    <value>return result;</value>
+  </data>
+  <data name="Sealed" xml:space="preserve">
+    <value>sealed </value>
+  </data>
+  <data name="Semicolon" xml:space="preserve">
+    <value>;</value>
+  </data>
+  <data name="Serializable" xml:space="preserve">
+    <value>[System.Serializable]</value>
+  </data>
+  <data name="SerializeBy" xml:space="preserve">
+    <value>[SerializeBy(typeof({0}Serializer))]</value>
+  </data>
+  <data name="SerializeMethod" xml:space="preserve">
+    <value>public void Serialize({0} obj, ref StreamingWriter writer)</value>
+  </data>
+  <data name="SerializerName" xml:space="preserve">
+    <value>{0}Serializer</value>
+  </data>
+  <data name="SerializerType" xml:space="preserve">
+    <value>internal sealed class {0}Serializer : ITypeSerializer&lt;{1}&gt;</value>
+  </data>
+  <data name="SkipNext" xml:space="preserve">
+    <value>iterator.SkipNext();</value>
+  </data>
+  <data name="Struct" xml:space="preserve">
+    <value>struct </value>
+  </data>
+  <data name="Switch" xml:space="preserve">
+    <value>switch(index)</value>
+  </data>
+  <data name="Using" xml:space="preserve">
+    <value>using </value>
+  </data>
+  <data name="While" xml:space="preserve">
+    <value>while(iterator.HasNext(out index))</value>
+  </data>
+  <data name="WhileCompact" xml:space="preserve">
+    <value>while(iterator.HasNext())</value>
+  </data>
+  <data name="WriteValueCheckRef" xml:space="preserve">
+    <value>if (obj.{0} != null)</value>
+  </data>
+  <data name="WriteValueComplex" xml:space="preserve">
+    <value>writer.WriteValue&lt;{0}&gt;({1}, obj.{2});</value>
+  </data>
+  <data name="WriteValueComplexCompact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{1});</value>
+  </data>
+  <data name="WriteValueFloatBool" xml:space="preserve">
+    <value>writer.WriteValue({0}, obj.{1});</value>
+  </data>
+  <data name="WriteValueFloatBoolCompact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{0});</value>
+  </data>
+  <data name="WriteValueInt" xml:space="preserve">
+    <value>writer.WriteValue({0}, obj.{1}, {2});</value>
+  </data>
+  <data name="WriteValueIntCompact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{0}, {1});</value>
+  </data>
+  <data name="WriteValueStringASCII" xml:space="preserve">
+    <value>writer.WriteValue({0}, obj.{1}, Encoding.ASCII);</value>
+  </data>
+  <data name="WriteValueStringASCIICompact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{0}, Encoding.ASCII);</value>
+  </data>
+  <data name="WriteValueStringUnicode" xml:space="preserve">
+    <value>writer.WriteValue({0}, obj.{1}, Encoding.Unicode);</value>
+  </data>
+  <data name="WriteValueStringUnicodeCompact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{0}, Encoding.Unicode);</value>
+  </data>
+  <data name="WriteValueStringUTF8" xml:space="preserve">
+    <value>writer.WriteValue({0}, obj.{1}, Encoding.UTF8);</value>
+  </data>
+  <data name="WriteValueStringUTF8Compact" xml:space="preserve">
+    <value>writer.WriteValue(obj.{0}, Encoding.UTF8);</value>
+  </data>
+</root>

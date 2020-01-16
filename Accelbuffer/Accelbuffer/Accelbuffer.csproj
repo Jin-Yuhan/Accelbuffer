@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Accelbuffer</RootNamespace>
     <AssemblyName>Accelbuffer</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -23,6 +23,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,59 +35,72 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\Accelbuffer.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>default</LangVersion>
+    <CodeAnalysisRuleSet />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\InitialMemorySizeAttribute.cs" />
-    <Compile Include="Enums\SerializedType.cs" />
-    <Compile Include="Runtime.Injection\Attributes\SerializationCallbackAttribute.cs" />
-    <Compile Include="Attributes\StrictSerializationAttribute.cs" />
-    <Compile Include="Enums\Number.cs" />
-    <Compile Include="Enums\SerializationCallbackMethod.cs" />
-    <Compile Include="IO\UnmanagedMemoryAllocator.Static.cs" />
-    <Compile Include="IO\UnmanagedReader.cs" />
-    <Compile Include="IO\UnmanagedWriter.cs" />
-    <Compile Include="IO\UnmanagedMemoryAllocator.cs" />
-    <Compile Include="Runtime.Injection\Attributes\NumberTypeAttribute.cs" />
-    <Compile Include="Enums\CharEncoding.cs" />
-    <Compile Include="Enums\CharType.cs" />
-    <Compile Include="Runtime.Injection\Attributes\EncodingAttribute.cs" />
-    <Compile Include="Runtime.Injection\Attributes\FieldIndexAttribute.cs" />
-    <Compile Include="Enums\NumberSign.cs" />
+    <Compile Include="Enums\FieldType.cs" />
+    <Compile Include="Exceptions\InvalidFieldIndexException.cs" />
+    <Compile Include="Exceptions\InvalidUTF8CharException.cs" />
+    <Compile Include="Exceptions\SerializerTypeException.cs" />
+    <Compile Include="Memory\InitialMemorySizeAttribute.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Injection\Attributes\CheckRefAttribute.cs" />
+    <Compile Include="Injection\Attributes\CompactLayoutAttribute.cs" />
+    <Compile Include="Injection\Attributes\OnAfterDeserializationAttribute.cs" />
+    <Compile Include="Injection\Enums\AccelbufferCallback.cs" />
+    <Compile Include="Injection\Enums\SerializerOption.cs" />
+    <Compile Include="Text\ASCIIEncoding.cs" />
+    <Compile Include="Text\Encodings.cs" />
+    <Compile Include="Text\ITextEncoding.cs" />
+    <Compile Include="Text\UnicodeEncoding.cs" />
+    <Compile Include="Enums\NumberFormat.cs" />
+    <Compile Include="Injection\Enums\WireType.cs" />
+    <Compile Include="Exceptions\StreamTooShortException.cs" />
+    <Compile Include="IO\StreamingIterator.cs" />
+    <Compile Include="Injection\Attributes\OnBeforeSerializationAttribute.cs" />
+    <Compile Include="Memory\MemoryAllocator.Static.cs" />
+    <Compile Include="Memory\MemoryAllocator.cs" />
+    <Compile Include="Injection\Attributes\FixedAttribute.cs" />
+    <Compile Include="Text\Encoding.cs" />
+    <Compile Include="Injection\Attributes\EncodingAttribute.cs" />
+    <Compile Include="Injection\Attributes\FieldIndexAttribute.cs" />
     <Compile Include="ISerializableEnumerable.cs" />
-    <Compile Include="ISerializeProxy.cs" />
-    <Compile Include="Exceptions\MissingSerializedValueException.cs" />
+    <Compile Include="ITypeSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Attributes\SerializeByAttribute.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\ArraySerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\CollectionSerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\DictionarySerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\FieldData.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\PrimitiveTypeSerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\ListSerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\InternalProxy\SerializableEnumerableSerializeProxy.cs" />
-    <Compile Include="Runtime.Injection\MethodData.cs" />
-    <Compile Include="Runtime.Injection\Pipeline\Progress\CtorDefineProgress.cs" />
-    <Compile Include="Runtime.Injection\Pipeline\Progress\DeserializeMethodDefineProgress.cs" />
-    <Compile Include="Runtime.Injection\Pipeline\ProxyGenerationProgress.cs" />
-    <Compile Include="Runtime.Injection\Pipeline\Progress\SerializeMethodDefineProgress.cs" />
-    <Compile Include="Runtime.Injection\Pipeline\SerializeProxyPipeline.cs" />
-    <Compile Include="Runtime.Injection\SerializeProxyInjector.cs" />
-    <Compile Include="SerializationContext.cs" />
+    <Compile Include="SerializeByAttribute.cs" />
+    <Compile Include="Injection\InternalSerializers\ArraySerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\CollectionSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\DictionarySerializer.cs" />
+    <Compile Include="Injection\FieldData.cs" />
+    <Compile Include="Injection\InternalSerializers\PrimitiveTypeSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\ListSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\SerializableEnumerableSerializer.cs" />
+    <Compile Include="Injection\MethodData.cs" />
+    <Compile Include="Injection\Pipeline\Progress\CtorDefineProgress.cs" />
+    <Compile Include="Injection\Pipeline\Progress\DeserializeMethodDefineProgress.cs" />
+    <Compile Include="Injection\Pipeline\SerializerGenerationProgress.cs" />
+    <Compile Include="Injection\Pipeline\Progress\SerializeMethodDefineProgress.cs" />
+    <Compile Include="Injection\Pipeline\SerializerPipeline.cs" />
+    <Compile Include="Injection\SerializerInjector.cs" />
     <Compile Include="Serializer.cs" />
-    <Compile Include="SerializationUtility.cs" />
-    <Compile Include="Exceptions\TagDismatchException.cs" />
-    <Compile Include="Enums\ValueTypeCode.cs" />
-    <Compile Include="TagUtility.cs" />
+    <Compile Include="Enums\ObjectType.cs" />
+    <Compile Include="IO\StreamingWriter.cs" />
+    <Compile Include="Text\UTF8Encoding.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

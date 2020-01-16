@@ -1,0 +1,208 @@
+%YAML 1.2
+---
+
+name: Accelbuffer
+file_extensions: accel
+scope: source.accel
+
+variables:
+
+  # digit separators
+  digit_separators: '(?:(?:_+[0-9]+)*)'
+
+  # integers
+  hex_numeral: '(0[xX])_*\h+(?:_+\h+)*'
+  binary_numeral: '(0[bB])_*[01]+(?:_+[01]+)*'
+  decimal_numeral: '(0|[1-9][0-9]*{{digit_separators}})((?i:ul|lu|u|l)?)'
+
+  # floating point numbers
+  exponent: '[eE][+\-]?[0-9]+{{digit_separators}}'
+  floating_point: '([0-9]+{{digit_separators}}(?={{floating_point_suffix}}|[.Ee])(?:\.[0-9]+{{digit_separators}})?(?:{{exponent}})?)({{floating_point_suffix}}?)'
+  floating_point_suffix: '[fFdDmM]'
+
+  # characters
+  unicode_char: '(?:\\u\h{4}|\\U\h{8})'
+  escaped_char: '(?:\\[abfnrtv"''\\]|{{unicode_char}}|\\x[0-9a-fA-F]{1,4}|\\[0-9]{1,3})'
+
+  visibility: \b(?:public|internal)\b
+
+  base_type: (?:(?:bool|byte|sbyte|short|ushort|int|uint|long|ulong|float|double|decimal|char|string)\b)
+  cs_base_type: (?:(?:bool|byte|sbyte|char|decimal|double|float|int|uint|long|ulong|short|ushort|object|string|void)\b)
+  base_type_modifier: (?:(?:fixed|unicode|utf8|ascii)\b)
+  generic_declaration: \s*(<[^(={};<]*>)?\s*
+
+  message: (?:(?:\.before|\.after)\b)
+
+  reserved: '(?:{{visibility}}|compact|runtime|ref|final)'
+  cs_reserved: '(?:abstract|as|base|break|case|catch|checked|class|const|continue|default|delegate|do|else|enum|event|explicit|extern|finally|fixed|for|foreach|goto|if|implicit|in|interface|internal|is|lock|nameof|namespace|new|null|operator|out|override|params|private|protected|public|readonly|ref|return|sealed|sizeof|stackalloc|static|string|struct|switch|this|throw|try|typeof|unchecked|unsafe|using|virtual|volatile|while)'
+  name: '(?:@{{cs_reserved}}|@{{cs_base_type}}|@var|@?{{name_normal}})'
+  namespaced_name: (?:(?:{{name}}{{generic_declaration}}\s*\.\s*)*{{name}}{{generic_declaration}})
+
+  start_char: '(?:{{unicode_char}}|[_\p{L}])'
+  other_char: '(?:{{unicode_char}}|[_0-9\p{L}])'
+  name_normal: '{{start_char}}{{other_char}}*\b'
+
+contexts:
+  main:
+    - match: '\b(namespace)\b'
+      scope: keyword.namespace.accel
+
+    - match: '\b(using)\b'
+      scope: keyword.using.accel
+
+    - include: document
+    - include: single_line_comment
+    - include: type_declaration
+
+  #类型声明
+  type_declaration:
+    - match: '\b({{reserved}})\b'
+      scope: keyword.type.modifier.accel
+
+    - match: '\b({{visibility}})\b'
+      scope: keyword.type.visibility.accel
+
+    - match: '\b(type)\s+({{name}})'
+      captures:
+        1: keyword.type.definition.accel
+        2: storage.type.name.accel
+      push: type_signature
+
+  #类型签名
+  type_signature:
+    - meta_scope: meta.type.accel
+    - match: '(?=\{)'
+      set: type_body
+
+    - include: document
+    - include: single_line_comment
+
+  #类型体
+  type_body:
+    - match: '\{'
+      scope: type.block.begin.accel
+      push:
+        - meta_scope: typeblock.accel
+        - match: '\}'
+          scope: type.block.end.accel
+          pop: true
+
+        - include: type_declaration
+        - include: fields_declaration
+        - include: messages_declaration
+        - include: init_memory
+        - include: ctor
+        - include: document
+        - include: single_line_comment
+    - match: '\S*'
+      pop: true 
+        
+  #字段声明
+  fields_declaration:
+    - match: (\b(checkref)\b)
+      scope: keyword.field.modifier.accel
+
+    - match: '({{base_type_modifier}}?)\s+({{base_type}})\s*((\[\])*)\s+({{name}})'
+      captures:
+        1: keyword.type.base_type.modifier.accel
+        2: keyword.type.base_type.accel
+
+    - match: ({{namespaced_name}})\s*((\[\])*)\s+({{name}})
+      captures:
+        1: storage.type.name.accel
+
+  #序列化消息
+  messages_declaration:
+    - match: '({{message}})'
+      scope: keyword.message.accel
+    - match: '\{'
+      scope: message.block.begin.accel
+      push: Packages/C#/C#.sublime-syntax
+      with_prototype:
+        - match: '\}'
+          scope: message.block.end.accel
+          pop: true
+        
+  init_memory:
+    - match: '(.init_memory)\s*='
+      scope: keyword.init_memory.accel
+      push: 
+        - match: ';'
+          pop: true
+        - include: literals
+
+  ctor:
+    - match: '(.ctor)\s*=\s*({{visibility}})'
+      scope: keyword.ctor.accel
+      push: 
+        - match: ';'
+          pop: true
+
+  # bools, numbers, chars, simple strings
+  literals:
+    # language constants
+    - match: \b(true|false|null)\b
+      scope: constant.language.cs
+    # characters
+    - match: '''\'''
+      scope: invalid.illegal.lone-escape.cs
+    - match: (')({{escaped_char}})(')
+      scope: constant.character.cs
+      captures:
+        2: constant.character.escape.cs
+    - match: (').(')
+      scope: constant.character.cs
+    - match: (')[^']+(')
+      scope: invalid.illegal.not_a_char.cs
+    # numbers
+    - match: '{{hex_numeral}}'
+      scope: constant.numeric.integer.hexadecimal.cs
+      captures:
+        1: punctuation.definition.numeric.hexadecimal.cs
+    - match: '{{binary_numeral}}'
+      scope: constant.numeric.integer.binary.cs
+      captures:
+        1: punctuation.definition.numeric.binary.cs
+    - match: '{{floating_point}}'
+      captures:
+        1: constant.numeric.float.decimal.cs
+        2: storage.type.numeric.cs
+    - match: '{{decimal_numeral}}'
+      captures:
+        1: constant.numeric.integer.decimal.cs
+        2: storage.type.numeric.cs
+    # strings
+    - match: '"'
+      scope: punctuation.definition.string.begin.cs
+      push: string
+
+  string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.cs
+    - match: '"'
+      scope: punctuation.definition.string.end.cs
+      pop: true
+    - match: '(\{)(\d+)'
+      captures:
+        1: punctuation.definition.placeholder.begin.cs
+        2: constant.numeric.cs
+    - match: $\n?
+      scope: invalid.illegal.unclosed-string.cs
+      pop: true
+
+  document:
+    - match: '--'
+      scope: constant.numeric.doc.begin.accel
+      push: 
+        - meta_scope: constant.numeric.doc.accel
+        - match: '--'
+          scope: constant.numeric.doc.end.accel
+          pop: true
+
+  single_line_comment:
+    - match: '//'
+      scope: comment.begin.accel
+      push: 
+        - meta_scope: comment.line.accel
+        - match: $
+          pop: true

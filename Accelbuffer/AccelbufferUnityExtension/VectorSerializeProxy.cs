@@ -2,69 +2,69 @@
 
 namespace Accelbuffer
 {
-    internal sealed class VectorSerializeProxy : ISerializeProxy<Vector2>, 
-                                                 ISerializeProxy<Vector3>, 
-                                                 ISerializeProxy<Vector4>, 
-                                                 ISerializeProxy<Vector2Int>, 
-                                                 ISerializeProxy<Vector3Int>
+    internal sealed class VectorSerializeProxy : ITypeSerializer<Vector2>, 
+                                                 ITypeSerializer<Vector3>, 
+                                                 ITypeSerializer<Vector4>, 
+                                                 ITypeSerializer<Vector2Int>, 
+                                                 ITypeSerializer<Vector3Int>
     {
-        Vector2 ISerializeProxy<Vector2>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Vector2 ITypeSerializer<Vector2>.Deserialize(ref StreamingIterator iterator)
         {
-            return new Vector2(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var));
+            return new Vector2(reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant));
         }
 
-        Vector3 ISerializeProxy<Vector3>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Vector3 ITypeSerializer<Vector3>.Deserialize(ref StreamingIterator iterator)
         {
-            return new Vector3(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var));
+            return new Vector3(reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant));
         }
 
-        Vector4 ISerializeProxy<Vector4>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Vector4 ITypeSerializer<Vector4>.Deserialize(ref StreamingIterator iterator)
         {
-            return new Vector4(reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var), reader.ReadFloat32(0, Number.Var));
+            return new Vector4(reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant), reader.ReadFloat32(0, NumberFormat.Variant));
         }
 
-        Vector2Int ISerializeProxy<Vector2Int>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Vector2Int ITypeSerializer<Vector2Int>.Deserialize(ref StreamingIterator iterator)
         {
-            return new Vector2Int(reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var));
+            return new Vector2Int(reader.ReadInt32(0, NumberFormat.Variant), reader.ReadInt32(0, NumberFormat.Variant));
         }
 
-        Vector3Int ISerializeProxy<Vector3Int>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+        Vector3Int ITypeSerializer<Vector3Int>.Deserialize(ref StreamingIterator iterator)
         {
-            return new Vector3Int(reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var), reader.ReadInt32(0, Number.Var));
+            return new Vector3Int(reader.ReadInt32(0, NumberFormat.Variant), reader.ReadInt32(0, NumberFormat.Variant), reader.ReadInt32(0, NumberFormat.Variant));
         }
 
-        void ISerializeProxy<Vector2>.Serialize(Vector2 obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Vector2>.Serialize(Vector2 obj, ref StreamingWriter writer, StreamingContext context)
         {
-            writer.WriteValue(0, obj.x, Number.Var);
-            writer.WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.y, NumberFormat.Variant);
         }
 
-        void ISerializeProxy<Vector3>.Serialize(Vector3 obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Vector3>.Serialize(Vector3 obj, ref StreamingWriter writer, StreamingContext context)
         {
-            writer.WriteValue(0, obj.x, Number.Var);
-            writer.WriteValue(0, obj.y, Number.Var);
-            writer.WriteValue(0, obj.z, Number.Var);
+            writer.WriteValue(0, obj.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.z, NumberFormat.Variant);
         }
 
-        void ISerializeProxy<Vector4>.Serialize(Vector4 obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Vector4>.Serialize(Vector4 obj, ref StreamingWriter writer, StreamingContext context)
         {
-            writer.WriteValue(0, obj.x, Number.Var);
-            writer.WriteValue(0, obj.y, Number.Var);
-            writer.WriteValue(0, obj.z, Number.Var);
-            writer.WriteValue(0, obj.w, Number.Var);
+            writer.WriteValue(0, obj.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.z, NumberFormat.Variant);
+            writer.WriteValue(0, obj.w, NumberFormat.Variant);
         }
 
-        void ISerializeProxy<Vector2Int>.Serialize(Vector2Int obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Vector2Int>.Serialize(Vector2Int obj, ref StreamingWriter writer, StreamingContext context)
         {
-            writer.WriteValue(0, obj.x, Number.Var);
-            writer.WriteValue(0, obj.y, Number.Var);
+            writer.WriteValue(0, obj.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.y, NumberFormat.Variant);
         }
 
-        void ISerializeProxy<Vector3Int>.Serialize(Vector3Int obj, ref UnmanagedWriter writer, SerializationContext context)
+        void ITypeSerializer<Vector3Int>.Serialize(Vector3Int obj, ref StreamingWriter writer, StreamingContext context)
         {
-            writer.WriteValue(0, obj.x, Number.Var);
-            writer.WriteValue(0, obj.y, Number.Var);
-            writer.WriteValue(0, obj.z, Number.Var);
+            writer.WriteValue(0, obj.x, NumberFormat.Variant);
+            writer.WriteValue(0, obj.y, NumberFormat.Variant);
+            writer.WriteValue(0, obj.z, NumberFormat.Variant);
         }
     }
 }

@@ -1,109 +1,129 @@
-# Accelbuffer - v1.3
-`Accelbuffer` 是一个快速，高效的序列化系统，可以用于数据持久化、网络数据传输等。
+# Accelbuffer - v1.4
+`Accelbuffer` 是一个快速，高效的序列化系统。
 
 ## 运行时支持
-`.NET Framework 4.6+`
+`.NET Framework 4.5+`
 
 ## 特点
 * 时间消耗低
 * 托管堆内存分配接近于对象的真实大小
 * 无装箱、拆箱
-* 自定义序列化流程
-* 运行时代理注入
-* 运行时代理绑定
+* 可以自定义序列化流程
 * 没有序列化深度限制
 
-## 部分功能
-|功能名称|当前是否支持|
-|:-:|:-:|
-|字符编码设置|支持|
-|动态长度数字，固定长度整数|支持|
-|自定义可序列化集合|支持|
-|序列化事件回调|支持|
-|序列化数据损坏检查|支持|
-|运行时代理注入|支持|
-|运行时代理绑定|支持|
-|Unity拓展|支持|
-
-## 运行时代理绑定
-> 对于在其他程序集中实现的类型，既无法自动生成代理，又无法使用特性指定代理，通过 `Accelbuffer.Runtime.Injection.SerializeProxyInjector` 可以为这些类型指定代理，并且性能与使用特性指定几乎相同
-
-## 运行时代理注入
-> 生成代理的过程性能消耗非常大，这种方法应该尽量在测试时使用，如果条件允许，应该尽可能实现序列化代理，这样可以进一步优化性能
-
 ## 支持的序列化类型
-* 基元类型（不包括 `decimal`）
+* 基元类型
 * 一维数组，交错数组
 * `List<T>`, `IList<T>`
 * `Dictionary<TKey, TValue>`, `IDictionary<TKey, TValue>`
 * `ISerializableEnumerable<T>`
 * `ICollection<T>`
-* 自定义 `class`, `struct`
-
-##### Unity拓展 `AccelbufferUnityExtension`
-`Vector2`, `Vector3`, `Vector4`, `Vector2Int`, `Vector3Int`, `Rect`, `RectInt`, `Quaternion`, `Matrix4x4`, `Color`, `Color32`,
-`LayerMask`, `Bounds`, `BoundsInt`
-
-> 新增以上类型的序列化支持
+* `class`, `struct`
 
 ## 基本用法
 ### 1.使用特性标记类型
 #### 方案一，自动注入代理
 ```csharp
-public struct TestStruct
+public class Student
 {
-  [FieldIndex(1), NumberType(Number.Var)]
-  public List<int> IntList;
+  [FieldIndex(1)]
+  public int Id;
 
-  [FieldIndex(2), Encoding(CharEncoding.UTF8)]
-  public Dictionary<string, string> StringMap;
+  [FieldIndex(2)]
+  [Encoding(Encoding.Unicode)]
+  public string Name;
 
-  [FieldIndex(3), NumberType(Number.Var)]
-  public float Float;
+  [CheckRef]
+  [FieldIndex(3)]
+  public List<string> FriendNames;
+
+  public Student() { }
 }
 ```
 
 #### 方案二，手动实现代理
 ```csharp
-[SerializeBy(typeof(TestStructSerializeProxy))]
-public struct TestStruct
+[SerializeBy(typeof(StudentSerializer))]
+public class Student
 {
-  public List<int> IntList;
-  public Dictionary<string, string> StringMap;
-  public float Float;
+  public int Id;
+  public string Name;
+  public List<string> FriendNames;
+
+  public Student() { }
 }
 
-public sealed class TestStructSerializeProxy : ISerializeProxy<TestStruct>
+internal sealed class StudentSerializer : ITypeSerializer<Student>
 {
-  TestStruct ISerializeProxy<TestStruct>.Deserialize(ref UnmanagedReader reader, SerializationContext context)
+  public void Serialize(Student obj, ref StreamingWriter writer)
   {
-    return new TestStruct
+    writer.WriteValue(1, obj.Id, NumberFormat.Variant);
+    writer.WriteValue(2, obj.Name, Encoding.Unicode);
+  
+    if (obj.FriendNames != null)
     {
-      IntList = Serializer<List<int>>.Deserialize(1, ref reader, context),
-      StringMap = Serializer<Dictionary<string, string>>.Deserialize(2, ref reader, context),
-      Float = reader.ReadFloat32(3, context.DefaultNumberType)
-    };
+      writer.WriteValue<List<string>>(3, obj.FriendNames);
+    }
   }
-
-  void ISerializeProxy<TestStruct>.Serialize(TestStruct obj, ref UnmanagedWriter writer, SerializationContext context)
+  public Student Deserialize(ref StreamingIterator iterator)
   {
-    Serializer<List<int>>.Serialize(1, obj.IntList, ref writer, context);
-    Serializer<Dictionary<string, string>>.Serialize(2, obj.StringMap, ref writer, context);
-    writer.WriteValue(3, obj.Float, context.DefaultNumberType);
+    Student result = new Student();
+    int index = 0;
+
+    while(iterator.HasNext(out index))
+    {
+      switch(index)
+      {
+        case 1:
+          result.Id = iterator.NextAsInt32();
+          break;
+        case 2:
+          result.Name = iterator.NextAsString();
+          break;
+        case 3:
+          result.FriendNames = iterator.NextAs<List<string>>();
+          break;
+        default:
+          iterator.SkipNext();
+          break;
+      }
+    }
+    return result;
   }
 }
 ```
 
+#### 方案三，使用`Accelbuffer`语言
+> 项目提供了`sublime`的语法高亮文件
+
+```csharp
+using System.Collections.Generic;
+
+ref type Student
+{
+  int Id;
+  unicode string Name;
+  checkref List<string> FriendNames;
+}
+```
+
+* 命令行中输入
+> accelc -c C:\Users\Administrator\Desktop\test.accel
+
+* 如果输出以下内容，则编译成功
+> 文件生成成功
+> 文件路径：C:\Users\Administrator\Desktop\test.accel.cs
+
 ### 2.序列化对象
 ```csharp
-TestStruct test = new TestStruct { ... };
-byte[] data = Serializer<TestStruct>.Serialize(test);
+Student student = new Student { ... };
+byte[] data = Serializer.Serialize<Student>(student);
 ```
 
 ### 3.反序列化对象
 ```csharp
 byte[] data = File.ReadAllBytes(someFile);
-TestStruct test = Serializer<TestStruct>.Deserialize(data, 0, data.LongLength);
+Student student = Serializer.Deserialize<Student>(data, 0, data.Length);
 ```
 
 ### 4.释放序列化缓冲区内存
@@ -112,61 +132,67 @@ TestStruct test = Serializer<TestStruct>.Deserialize(data, 0, data.LongLength);
 
 ##### 方法一、 释放指定一个类型的缓冲区内存
 ```csharp
-Serializer<TestStruct>.Allocator.TryFreeMemory();
+Serializer.GetAllocator<Student>().TryFreeMemory();
 ```
 
 ##### 方法二、 释放所有序列化器分配的缓冲区内存
 ```csharp
-UnmanagedMemoryAllocator.FreeAllAvailableMemory();
+MemoryAllocator.FreeAllAvailableMemory();
 ```
 
-### 5.序列化事件回调(`SerializeMessage`)
-> 这个方法不会造成值类型的装箱，且可以存在多个回调方法，这些方法可以通过`SerializationCallbackAttribute.Priority`指定调用顺序
+### 5.序列化事件回调
+> 这个方法不会造成值类型的装箱，且可以存在多个回调方法，这些方法必须是公共的实例方法且可以通过`Priority`指定调用顺序
 
 ```csharp
-public struct TestStruct
+public class Student
 {
-  [FieldIndex(1), NumberType(Number.Var)]
-  public List<int> IntList;
+  [FieldIndex(1)]
+  public int Id;
+  [FieldIndex(2)]
+  [Encoding(Encoding.Unicode)]
+  public string Name;
+  [CheckRef]
+  [FieldIndex(3)]
+  public List<string> FriendNames;
 
-  [FieldIndex(2), Encoding(CharEncoding.UTF8)]
-  public Dictionary<string, string> StringMap;
-
-  [FieldIndex(3), NumberType(Number.Var)]
-  public float Float;
-
-  [SerializationCallback(SerializationCallbackMethod.OnBeforeSerialize)]
+  [OnBeforeSerialization(Priority = 0)]
   public void Before()
   {
     Console.WriteLine("Before Serialization");
   }
 
-  [SerializationCallback(SerializationCallbackMethod.OnAfterDeserialize)]
+  [OnAfterDeserialization(Priority = 0)]
   public void After()
+  {
+    Console.WriteLine("After Deserialization");
+  }
+
+  public Student() { }
+}
+```
+
+> 建议使用`Accelbuffer`语言，以下是等价的写法
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+ref runtime type Student
+{
+  int Id;
+  unicode string Name;
+  checkref List<string> FriendNames;
+
+  .before
+  {
+    Console.WriteLine("Before Serialization");
+  }
+
+  .after
   {
     Console.WriteLine("After Deserialization");
   }
 }
 ```
-
-## 更多优化选项
-```csharp
-/// <summary>
-/// 设置初始的序列化缓冲区内存大小，合理设置这个值，可以大幅提升性能
-/// </summary>
-public sealed class InitialMemorySizeAttribute : Attribute
-```
-
-```csharp
-/// <summary>
-/// 指示对类型使用严格的序列化模式，这个特性会开启
-/// 对序列化字段索引的严格匹配，不允许存在数据丢失的情况
-/// </summary>
-public sealed class StrictSerializationAttribute : Attribute
-```
-
-
-## 支持
-* 作者正在努力更新部分新的功能，这个序列化系统原本只是作者开发的Unity开源框架(在~~很久~~不久后也会开源)的一部分，由于没有对Unity的依赖而被单独分离，在这个序列化系统的大部分功能完善后，会继续着手开发Unity框架，同时不定期维护这个项目，更多细节可以参考源码。
 
 * 作者联系方式 QQ：1024751595

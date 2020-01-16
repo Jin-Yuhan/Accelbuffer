@@ -1,0 +1,20 @@
+﻿using System.Collections.Generic;
+
+namespace Accelbuffer.Test;
+
+runtime compact type Test
+{
+	.init_memory = 200;
+
+	utf8 string StringValue;
+	int Int32Value;
+	List<Test1> ListValue;
+}
+
+runtime compact type Test1
+{
+	.init_memory = 200;
+
+	float FloatValue;
+	Dictionary<string, int> DictValue;
+}

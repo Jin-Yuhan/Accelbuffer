@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using static Accelbuffer.Runtime.Injection.SerializeProxyInjector;
+using static Accelbuffer.Runtime.Injection.SerializerInjector;
 
 namespace Accelbuffer.Unity
 {

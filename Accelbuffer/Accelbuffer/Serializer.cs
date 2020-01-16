@@ -1,68 +1,53 @@
-﻿using Accelbuffer.Runtime.Injection;
+﻿using Accelbuffer.Injection;
+using Accelbuffer.Memory;
+using Accelbuffer.Properties;
 using System;
 
 namespace Accelbuffer
 {
     /// <summary>
-    /// 公开序列化<typeparamref name="T"/>类型对象的接口
+    /// 公开序列化对象的接口
     /// </summary>
-    /// <typeparam name="T">序列化类型</typeparam>
-    public static unsafe class Serializer<T>
+    public static unsafe class Serializer
     {
-        /// <summary>
-        /// 获取/设置是否使用严格模式（严格模式会开启对序列化索引的严格匹配）
-        /// </summary>
-        public static bool StrictMode { get; set; }
-
-        /// <summary>
-        /// 当前类型分配的缓冲区内存管理器
-        /// </summary>
-        public static UnmanagedMemoryAllocator Allocator { get; }
-
-        private static readonly ISerializeProxy<T> s_CachedProxy;
-
-        static Serializer()
-        {
-            StrictMode = SerializationUtility.GetIsStrictMode<T>();
-            Allocator = UnmanagedMemoryAllocator.Alloc<T>();
-
-            s_CachedProxy = SerializeProxyInjector.Inject<T>();
-        }
-
         /// <summary>
         /// 准备序列化代理
         /// </summary>
-        public static void PrepareSerializeProxy() { }
+        /// <typeparam name="T">需要准备序列化代理的类型</typeparam>
+        public static void PrepareSerializer<T>()
+        {
+            SerializerInjector.InternalCache<T>.Initialize();
+        }
 
         /// <summary>
-        /// 序列化对象，并返回序列化数据（线程安全）
+        /// 获取内存分配器
         /// </summary>
-        /// <param name="obj">被序列化的对象</param>
-        /// <returns>对象的序列化结果</returns>
-        public static byte[] Serialize(T obj)
+        /// <typeparam name="T">需要获取的内存分配器所属的对象类型</typeparam>
+        /// <returns>类型的内存分配器</returns>
+        public static MemoryAllocator GetAllocator<T>()
         {
-            return Serialize(obj, SerializationContext.Default);
+            return SerializerInjector.InternalCache<T>.Allocator;
         }
 
         /// <summary>
         /// 序列化对象，并返回序列化数据（线程安全）
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
-        /// <param name="context">序列化上下文</param>
+        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <returns>对象的序列化结果</returns>
-        public static byte[] Serialize(T obj, SerializationContext context)
+        public static byte[] Serialize<T>(T obj)
         {
-            Allocator.BeginThreadSafeMemoryWriting();
-            UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+            StreamingWriter writer = new StreamingWriter(GetAllocator<T>());
+            writer.BeginWrite();
 
             try
             {
-                s_CachedProxy.Serialize(obj, ref writer, context);
+                SerializerInjector.InternalCache<T>.Serializer.Serialize(obj, ref writer);
                 return writer.ToArray();
             }
             finally
             {
-                Allocator.EndThreadSafeMemoryWriting();
+                writer.EndWrite();
             }
         }
 
@@ -72,55 +57,23 @@ namespace Accelbuffer
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">用于接受序列化数据的缓冲区</param>
         /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
+        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <returns>序列化数据的大小</returns>
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
-        public static long Serialize(T obj, byte[] buffer, long index)
+        public static int Serialize<T>(T obj, byte[] buffer, int index)
         {
-            return Serialize(obj, buffer, index, SerializationContext.Default);
-        }
-
-        /// <summary>
-        /// 序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
-        /// </summary>
-        /// <param name="obj">被序列化的对象</param>
-        /// <param name="buffer">用于接受序列化数据的缓冲区</param>
-        /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
-        /// <param name="context">序列化上下文</param>
-        /// <returns>序列化数据的大小</returns>
-        /// <exception cref="ArgumentException">字节数组容量不足</exception>
-        public static long Serialize(T obj, byte[] buffer, long index, SerializationContext context)
-        {
-            Allocator.BeginThreadSafeMemoryWriting();
-            UnmanagedWriter writer = new UnmanagedWriter(Allocator);
+            StreamingWriter writer = new StreamingWriter(GetAllocator<T>());
+            writer.BeginWrite();
 
             try
             {
-                s_CachedProxy.Serialize(obj, ref writer, context);
+                SerializerInjector.InternalCache<T>.Serializer.Serialize(obj, ref writer);
                 return writer.CopyToArray(buffer, index);
             }
             finally
             {
-                Allocator.EndThreadSafeMemoryWriting();
+                writer.EndWrite();
             }
-        }
-
-        /// <summary>
-        /// 序列化对象，并写入序列化数据
-        /// </summary>
-        /// <param name="index">序列化索引，0表示不写入索引</param>
-        /// <param name="obj">被序列化的对象</param>
-        /// <param name="writer">数据输出流</param>
-        /// <param name="context">序列化上下文</param>
-        /// <exception cref="ArgumentNullException"><paramref name="writer"/>是不合法的</exception>
-        public static void Serialize(byte index, T obj, ref UnmanagedWriter writer, SerializationContext context)
-        {
-            if (writer.IsDefault())
-            {
-                throw new ArgumentNullException(nameof(writer), "UnmanagedWriter 不合法");
-            }
-
-            writer.WriteIndex(index);
-            s_CachedProxy.Serialize(obj, ref writer, context);
         }
 
         /// <summary>
@@ -129,25 +82,11 @@ namespace Accelbuffer
         /// <param name="bytes">被反序列化的字节数组</param>
         /// <param name="index">开始读取的索引位置</param>
         /// <param name="length">可以读取的字节大小</param>
+        /// <typeparam name="T">反序列化的对象类型</typeparam>
         /// <returns>反序列化的对象实例</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
-        public static T Deserialize(byte[] bytes, long index, long length)
-        {
-            return Deserialize(bytes, index, length, SerializationContext.Default);
-        }
-
-        /// <summary>
-        /// 反序列化<typeparamref name="T"/>类型对象实例
-        /// </summary>
-        /// <param name="bytes">被反序列化的字节数组</param>
-        /// <param name="index">开始读取的索引位置</param>
-        /// <param name="length">可以读取的字节大小</param>
-        /// <param name="context">序列化上下文</param>
-        /// <returns>反序列化的对象实例</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
-        public static T Deserialize(byte[] bytes, long index, long length, SerializationContext context)
+        public static T Deserialize<T>(byte[] bytes, int index, int length)
         {
             if (length == 0)
             {
@@ -156,43 +95,19 @@ namespace Accelbuffer
 
             if (bytes == null)
             {
-                throw new ArgumentNullException(nameof(bytes), "字节数组不能为空");
+                throw new ArgumentNullException(nameof(bytes), Resources.ByteArrayIsNull);
             }
 
             if (bytes.Length - index < length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), "字节数组长度不足");
+                throw new ArgumentOutOfRangeException(nameof(bytes), Resources.ByteArrayTooShort);
             }
 
             fixed (byte* p = bytes)
             {
-                UnmanagedReader reader = new UnmanagedReader(p + index, StrictMode, length);
-                return s_CachedProxy.Deserialize(ref reader, context);
+                StreamingIterator iterator = new StreamingIterator(p + index, length);
+                return SerializerInjector.InternalCache<T>.Serializer.Deserialize(ref iterator);
             }
-        }
-
-        /// <summary>
-        /// 反序列化<typeparamref name="T"/>类型对象实例
-        /// </summary>
-        /// <param name="index">序列化索引，0表示不读取索引</param>
-        /// <param name="reader">数据输入流</param>
-        /// <param name="context">序列化上下文</param>
-        /// <returns>反序列化的对象实例</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="reader"/>是不合法的</exception>
-        public static T Deserialize(byte index, ref UnmanagedReader reader, SerializationContext context)
-        {
-            if (reader.IsDefault())
-            {
-                throw new ArgumentNullException(nameof(reader), "UnmanagedReader 不合法");
-            }
-
-            if (reader.DismatchIndex(index))
-            {
-                reader.OnIndexNotMatch(index);
-                return default;
-            }
-
-            return s_CachedProxy.Deserialize(ref reader, context);
         }
     }
 }
