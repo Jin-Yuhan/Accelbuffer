@@ -216,71 +216,22 @@ namespace accelc.Compiler
         private Token GetInt32DecimalLiteral()
         {
             StringBuilder sb = new StringBuilder();
-            bool isBin = false;
-            bool isHex = false;
-
             do
             {
                 char c = Current();
 
-                switch (c)
+                if (char.IsDigit(c))
                 {
-                    case 'x' when isBin:
-                    case 'X' when isBin:
-                    case 'x' when isHex:
-                    case 'X' when isHex:
-                    case 'b' when isBin:
-                    case 'B' when isBin:
-                        MoveBack();
-                        goto End;
-
-                    case 'a' when isHex:
-                    case 'A' when isHex:
-                    case 'b' when isHex:
-                    case 'B' when isHex:
-                    case 'c' when isHex:
-                    case 'C' when isHex:
-                    case 'd' when isHex:
-                    case 'D' when isHex:
-                    case 'e' when isHex:
-                    case 'E' when isHex:
-                    case 'f' when isHex:
-                    case 'F' when isHex:
-                        sb.Append(c);
-                        break;
-
-                    case 'x':
-                    case 'X':
-                        sb.Append(c);
-                        isHex = true;
-                        break;
-
-                    case 'b':
-                    case 'B':
-                        sb.Append(c);
-                        isBin = true;
-                        break;
-
-                    default:
-                        if (char.IsDigit(c))
-                        {
-                            if (isBin && c != '0' && c != '1')
-                            {
-                                MoveBack();
-                                goto End;
-                            }
-                            sb.Append(c);
-                        }
-                        else
-                        {
-                            MoveBack();
-                            goto End;
-                        }
-                        break;
+                    sb.Append(c);
                 }
+                else
+                {
+                    MoveBack();
+                    break;
+                }
+
             } while (MoveNext());
 
-        End:
             return CreateToken(sb.ToString(), TokenType.Int32Literal);
         }
 
