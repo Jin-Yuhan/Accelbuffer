@@ -411,7 +411,16 @@ namespace accelc.Compiler
                 {
                     MoveNext();
                     int value = int.Parse(Current().Raw);
-                    return new InitMemoryDeclaration { Value = value };
+
+                    if (ExpectNextTokenType(1, TokenType.Semicolon))
+                    {
+                        MoveNext();
+                        return new InitMemoryDeclaration { Value = value };
+                    }
+                    else
+                    {
+                        LogError(Resources.Error_A1010_ExpectSemicolon, Current());
+                    }
                 }
                 else
                 {
@@ -436,7 +445,16 @@ namespace accelc.Compiler
                 {
                     MoveNext();
                     bool isInternal = Current().Type == TokenType.InternalKeyword;
-                    return new CtorDeclaration { IsInternal = isInternal };
+
+                    if (ExpectNextTokenType(1, TokenType.Semicolon))
+                    {
+                        MoveNext();
+                        return new CtorDeclaration { IsInternal = isInternal };
+                    }
+                    else
+                    {
+                        LogError(Resources.Error_A1010_ExpectSemicolon, Current());
+                    }
                 }
                 else
                 {
