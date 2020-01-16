@@ -713,8 +713,8 @@ namespace accelc.Compiler
             if (!IsError)
             {
                 m_ErrorWriter.WriteLine(message);
-                m_ErrorWriter.WriteLine(Resources.LineNumber + token.LineNumber.ToString());
                 m_ErrorWriter.WriteLine(Resources.FilePath + token.FilePath);
+                m_ErrorWriter.WriteLine(Resources.LineNumber + token.LineNumber.ToString());
                 IsError = true;
             }
         }

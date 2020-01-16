@@ -426,8 +426,8 @@ namespace accelc.Compiler
             if (!IsError)
             {
                 m_ErrorWriter.WriteLine(message);
-                m_ErrorWriter.WriteLine(Resources.LineNumber + m_LineNumber.ToString());
                 m_ErrorWriter.WriteLine(Resources.FilePath + m_FilePath);
+                m_ErrorWriter.WriteLine(Resources.LineNumber + m_LineNumber.ToString());
                 IsError = true;
             }
         }
