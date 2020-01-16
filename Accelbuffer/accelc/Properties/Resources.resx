@@ -136,44 +136,35 @@
   <data name="AccelbufferTextNamespace" xml:space="preserve">
     <value>Accelbuffer.Text</value>
   </data>
-  <data name="DocumentNotEnd" xml:space="preserve">
-    <value>文档需要'--'来结束</value>
+  <data name="Error_A1012_ExpectAccessKeyword" xml:space="preserve">
+    <value>error: A1012: 缺少 'public' 或 'internal' 关键字</value>
   </data>
-  <data name="ExpectAccessKeyword" xml:space="preserve">
-    <value>缺少'public'或'internal'修饰符</value>
+  <data name="Error_A1004_ExpectCShapCode" xml:space="preserve">
+    <value>error: A1004: 缺少方法体</value>
   </data>
-  <data name="ExpectCloseBrace" xml:space="preserve">
-    <value>缺少'}'</value>
+  <data name="Error_A1005_ExpectEquals" xml:space="preserve">
+    <value>error: A1005: 缺少'='</value>
   </data>
-  <data name="ExpectCShapCodeDotAfter" xml:space="preserve">
-    <value>.after方法缺少方法体</value>
+  <data name="Error_A1006_ExpectFieldType" xml:space="preserve">
+    <value>error: A1006: 缺少类型标识符</value>
   </data>
-  <data name="ExpectCShapCodeDotBefore" xml:space="preserve">
-    <value>.before方法缺少方法体</value>
+  <data name="Error_A1007_ExpectIdentifier" xml:space="preserve">
+    <value>error: A1007: 缺少标识符</value>
   </data>
-  <data name="ExpectEquals" xml:space="preserve">
-    <value>缺少'='</value>
+  <data name="Error_A1008_ExpectInt32Literal" xml:space="preserve">
+    <value>error: A1008: 缺少整数常量</value>
   </data>
-  <data name="ExpectFieldType" xml:space="preserve">
-    <value>字段定义缺少类型</value>
+  <data name="Error_A1009_ExpectOpenBrace" xml:space="preserve">
+    <value>error: A1009: 缺少'{'</value>
   </data>
-  <data name="ExpectIdentifier" xml:space="preserve">
-    <value>缺少标识符</value>
+  <data name="Error_A1010_ExpectSemicolon" xml:space="preserve">
+    <value>error: A1010: 缺少';'</value>
   </data>
-  <data name="ExpectInt32Literal" xml:space="preserve">
-    <value>缺少int32类型的值</value>
+  <data name="Error_A1011_ExpectTypeKeyword" xml:space="preserve">
+    <value>error: A1011: 缺少'type'关键字</value>
   </data>
-  <data name="ExpectOpenBrace" xml:space="preserve">
-    <value>缺少'{'</value>
-  </data>
-  <data name="ExpectSemicolon" xml:space="preserve">
-    <value>缺少';'来结束</value>
-  </data>
-  <data name="ExpectTypeKeyword" xml:space="preserve">
-    <value>缺少'type'关键字</value>
-  </data>
-  <data name="FileNotFound" xml:space="preserve">
-    <value>无法找到文件：{0}</value>
+  <data name="Error_A1002_FileNotFound" xml:space="preserve">
+    <value>error: A1002: 无法找到文件：{0}</value>
   </data>
   <data name="FilePath" xml:space="preserve">
     <value>文件路径：</value>
@@ -181,59 +172,53 @@
   <data name="GenerateSuccessfully" xml:space="preserve">
     <value>文件生成成功</value>
   </data>
-  <data name="InvalidChar" xml:space="preserve">
-    <value>无效的字符：'{0}'</value>
+  <data name="Error_A1014_InvalidChar" xml:space="preserve">
+    <value>error: A1014: 无效的字符'{0}'</value>
   </data>
-  <data name="InvalidCheckRef" xml:space="preserve">
-    <value>关键字'checkref'不能在标记了'compact'的类型中使用</value>
+  <data name="Error_A1024_InvalidCheckRefWhenCompact" xml:space="preserve">
+    <value>error: A1024: 无效的关键字'checkref'，因为声明字段的类型被标记为'compact'</value>
   </data>
-  <data name="InvalidCheckrefKeyword" xml:space="preserve">
-    <value>关键字'checkref'不能标记不可空类型的字段</value>
+  <data name="Error_A1025_InvalidCheckrefKeyword" xml:space="preserve">
+    <value>error: A1025: 无效的关键字'checkref'，因为字段的类型不是引用类型</value>
   </data>
-  <data name="InvalidCtor" xml:space="preserve">
-    <value>'.ctor'必须在标记了'ref'关键字的类型中使用</value>
+  <data name="Error_A1014_InvalidCtor" xml:space="preserve">
+    <value>error: A1014: '.ctor'必须在标记了'ref'关键字的类型中使用</value>
   </data>
-  <data name="InvalidEncodingKeyword" xml:space="preserve">
-    <value>关键字'utf8', 'unicode', 'ascii'只能修饰'char'和'string'类型的字段</value>
+  <data name="Error_A1026_InvalidEncodingUnicodeKeyword" xml:space="preserve">
+    <value>error: A1026: 无效关键字'unicode'，因为字段的类型不是'char'或'string'类型</value>
   </data>
-  <data name="InvalidFinal" xml:space="preserve">
-    <value>只有标记了'ref'关键字的类型才可以被标记为'final'</value>
+  <data name="Error_A1016_InvalidFinal" xml:space="preserve">
+    <value>error: A1016: 无效的关键字'final'，因为类型没有标记'ref'关键字</value>
   </data>
-  <data name="InvalidFixedKeyword" xml:space="preserve">
-    <value>关键字'fixed'不能修饰非整数类型</value>
+  <data name="Error_A1015_InvalidFixedKeyword" xml:space="preserve">
+    <value>error: A1015: 无效的关键字'fixed'，因为字段类型不是整数类型</value>
   </data>
-  <data name="InvalidToken" xml:space="preserve">
-    <value>标记：'{0}'无效</value>
+  <data name="Error_A1018_InvalidToken" xml:space="preserve">
+    <value>error: A1018: 无效的标记'{0}'</value>
   </data>
   <data name="LineNumber" xml:space="preserve">
     <value>行号：</value>
   </data>
-  <data name="MultiNamespace" xml:space="preserve">
-    <value>不能同时定义多个命名空间</value>
+  <data name="Error_A1019_MultiNamespace" xml:space="preserve">
+    <value>error: A1019: 不能同时定义多个命名空间</value>
   </data>
-  <data name="MultipleAccessKeyword" xml:space="preserve">
-    <value>可访问修饰符重复</value>
+  <data name="Error_A1020_MultipleAccessKeyword" xml:space="preserve">
+    <value>error: A1020: 可访问修饰符重复</value>
   </data>
-  <data name="MultipleKeyword" xml:space="preserve">
-    <value>关键字：'{0}'重复</value>
+  <data name="Error_A1021_MultipleKeyword" xml:space="preserve">
+    <value>error: A1021: 重复的关键字'{0}'</value>
   </data>
   <data name="ReplaceString" xml:space="preserve">
     <value>#NAME#</value>
   </data>
-  <data name="SyntaxError" xml:space="preserve">
-    <value>SyntaxError：</value>
+  <data name="Error_A1022_UnexpectedNamespace" xml:space="preserve">
+    <value>error: A1022: 命名空间的声明必须在类型之前</value>
   </data>
-  <data name="TemplateName" xml:space="preserve">
-    <value>AccelbufferTemplate</value>
+  <data name="Error_A1023_UnexpectedUsing" xml:space="preserve">
+    <value>error: A1023: 命名空间的引用必须在类型之前</value>
   </data>
-  <data name="UnexpectedNamespace" xml:space="preserve">
-    <value>命名空间的声明必须在类型之前</value>
-  </data>
-  <data name="UnexpectedUsing" xml:space="preserve">
-    <value>命名空间的引用必须在类型之前</value>
-  </data>
-  <data name="UnknownChar" xml:space="preserve">
-    <value>无法识别的字符：'{0}'</value>
+  <data name="Error_A1001_UnknownChar" xml:space="preserve">
+    <value>error: A1001: 无法识别的字符 '{0}'</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>v0.1.0.5</value>
@@ -307,8 +292,8 @@
   <data name="Internal" xml:space="preserve">
     <value>internal </value>
   </data>
-  <data name="InvalidIdentifier" xml:space="preserve">
-    <value>非法的标识符：'{0}'</value>
+  <data name="Error_A1017_InvalidIdentifier" xml:space="preserve">
+    <value>error: A1017: 无效的标识符'{0}'</value>
   </data>
   <data name="Namespace" xml:space="preserve">
     <value>namespace </value>
@@ -429,5 +414,17 @@
   </data>
   <data name="WriteValueStringUTF8Compact" xml:space="preserve">
     <value>writer.WriteValue(obj.{0}, Encoding.UTF8);</value>
+  </data>
+  <data name="Error_A1003_ExpectCloseBrace" xml:space="preserve">
+    <value>error: A1003: 缺少'}'</value>
+  </data>
+  <data name="Error_A1013_ExpectSubSub" xml:space="preserve">
+    <value>error: A1013: 缺少'--'</value>
+  </data>
+  <data name="Error_A1027_InvalidEncodingASCIIKeyword" xml:space="preserve">
+    <value>error: A1027: 无效关键字'ascii'，因为字段的类型不是'char'或'string'类型</value>
+  </data>
+  <data name="Error_A1028_InvalidEncodingUTF8Keyword" xml:space="preserve">
+    <value>error: A1028: 无效关键字'utf8'，因为字段的类型不是'char'或'string'类型</value>
   </data>
 </root>

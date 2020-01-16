@@ -139,7 +139,7 @@ namespace accelc.Compiler
                         }
                         else
                         {
-                            LogError(string.Format(Resources.UnknownChar, c));
+                            LogError(string.Format(Resources.Error_A1001_UnknownChar, c));
                         }
                         break;
                 }
@@ -313,7 +313,7 @@ namespace accelc.Compiler
         End:
             if (!end)
             {
-                LogError(Resources.DocumentNotEnd);
+                LogError(Resources.Error_A1013_ExpectSubSub);
             }
             return CreateToken(sb.ToString().Trim(), TokenType.Document);
         }
@@ -374,7 +374,7 @@ namespace accelc.Compiler
 
             if (depth != 0)
             {
-                LogError(Resources.ExpectCloseBrace);
+                LogError(Resources.Error_A1003_ExpectCloseBrace);
             }
 
             return CreateToken(sb.ToString().Trim(), TokenType.CSharpCode);
@@ -425,10 +425,9 @@ namespace accelc.Compiler
         {
             if (!IsError)
             {
-                m_ErrorWriter.WriteLine(Resources.SyntaxError);
-                m_ErrorWriter.WriteLine("\t" + message);
-                m_ErrorWriter.WriteLine("\t" + Resources.LineNumber + m_LineNumber.ToString());
-                m_ErrorWriter.WriteLine("\t" + Resources.FilePath + m_FilePath);
+                m_ErrorWriter.WriteLine(message);
+                m_ErrorWriter.WriteLine(Resources.LineNumber + m_LineNumber.ToString());
+                m_ErrorWriter.WriteLine(Resources.FilePath + m_FilePath);
                 IsError = true;
             }
         }

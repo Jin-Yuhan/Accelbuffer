@@ -26,7 +26,7 @@ namespace accelc
                 case "-n":
                     {
                         string path = args[1];
-                        string text = Resources.ResourceManager.GetObject(Resources.TemplateName) as string;
+                        string text = Resources.AccelbufferTemplate;
 
                         path = Path.ChangeExtension(path, Resources.AccelbufferFileExtension);
 
@@ -44,7 +44,7 @@ namespace accelc
 
                         if (!File.Exists(filePath))
                         {
-                            Console.WriteLine(string.Format(Resources.FileNotFound, filePath));
+                            Console.WriteLine(string.Format(Resources.Error_A1002_FileNotFound, filePath));
                             return;
                         }
 
@@ -67,7 +67,7 @@ namespace accelc
 
                         if (!File.Exists(filePath))
                         {
-                            Console.WriteLine(string.Format(Resources.FileNotFound, filePath));
+                            Console.WriteLine(string.Format(Resources.Error_A1002_FileNotFound, filePath));
                             return;
                         }
 
@@ -89,7 +89,7 @@ namespace accelc
 
                             if (!File.Exists(filePath))
                             {
-                                Console.WriteLine(string.Format(Resources.FileNotFound, filePath));
+                                Console.WriteLine(string.Format(Resources.Error_A1002_FileNotFound, filePath));
                                 continue;
                             }
 

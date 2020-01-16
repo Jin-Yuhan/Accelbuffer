@@ -82,10 +82,10 @@ namespace accelc.Compiler
                 switch (token.Type)
                 {
                     case TokenType.NamespaceKeyword:
-                        LogError(Resources.UnexpectedNamespace, token);
+                        LogError(Resources.Error_A1022_UnexpectedNamespace, token);
                         break;
                     case TokenType.UsingKeyword:
-                        LogError(Resources.UnexpectedUsing, token);
+                        LogError(Resources.Error_A1023_UnexpectedUsing, token);
                         break;
 
                     case TokenType.Semicolon:
@@ -107,7 +107,7 @@ namespace accelc.Compiler
                         goto End;
 
                     default:
-                        LogError(string.Format(Resources.InvalidToken, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1018_InvalidToken, token.Raw), token);
                         break;
                 }
 
@@ -122,7 +122,7 @@ namespace accelc.Compiler
         {
             if (m_HasNamespace)
             {
-                LogError(Resources.MultiNamespace, Current());
+                LogError(Resources.Error_A1019_MultiNamespace, Current());
             }
             else if (ExpectNextTokenType(1, TokenType.Identifier))
             {
@@ -137,11 +137,11 @@ namespace accelc.Compiler
                     return new NamespaceDeclaration { Name = name };
                 }
 
-                LogError(Resources.ExpectSemicolon, Current());
+                LogError(Resources.Error_A1010_ExpectSemicolon, Current());
             }
             else
             {
-                LogError(Resources.ExpectIdentifier, Current());
+                LogError(Resources.Error_A1007_ExpectIdentifier, Current());
             }
 
             return null;
@@ -161,11 +161,11 @@ namespace accelc.Compiler
                     return new UsingDeclaration { Name = name };
                 }
 
-                LogError(Resources.ExpectSemicolon, Current());
+                LogError(Resources.Error_A1010_ExpectSemicolon, Current());
             }
             else
             {
-                LogError(Resources.ExpectIdentifier, Current());
+                LogError(Resources.Error_A1007_ExpectIdentifier, Current());
             }
 
             return null;
@@ -196,48 +196,48 @@ namespace accelc.Compiler
                 switch (token.Type)
                 {
                     case TokenType.PublicKeyword when isPublic:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.PublicKeyword when isInternal:
-                        LogError(string.Format(Resources.MultipleAccessKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1020_MultipleAccessKeyword, token.Raw), token);
                         break;
                     case TokenType.PublicKeyword:
                         isPublic = true;
                         break;
 
                     case TokenType.InternalKeyword when isInternal:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.InternalKeyword when isPublic:
-                        LogError(string.Format(Resources.MultipleAccessKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1020_MultipleAccessKeyword, token.Raw), token);
                         break;
                     case TokenType.InternalKeyword:
                         isInternal = true;
                         break;
 
                     case TokenType.RefKeyword when isRef:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.RefKeyword:
                         isRef = true;
                         break;
 
                     case TokenType.FinalKeyword when isFinal:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.FinalKeyword:
                         isFinal = true;
                         break;
 
                     case TokenType.RuntimeKeyword when isRuntime:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.RuntimeKeyword:
                         isRuntime = true;
                         break;
 
                     case TokenType.CompactKeyword when isCompact:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.CompactKeyword:
                         isCompact = true;
@@ -248,14 +248,14 @@ namespace accelc.Compiler
                 }
             }
 
-            LogError(Resources.ExpectTypeKeyword, Current());
+            LogError(Resources.Error_A1011_ExpectTypeKeyword, Current());
             return null;
 
         NameDef:
 
             if (isFinal && !isRef)
             {
-                LogError(Resources.InvalidFinal, Current());
+                LogError(Resources.Error_A1016_InvalidFinal, Current());
             }
 
             if (ExpectNextTokenType(1, TokenType.Identifier))
@@ -301,17 +301,17 @@ namespace accelc.Compiler
                     }
                     else
                     {
-                        LogError(Resources.ExpectCloseBrace, Current());
+                        LogError(Resources.Error_A1003_ExpectCloseBrace, Current());
                     }
                 }
                 else
                 {
-                    LogError(Resources.ExpectOpenBrace, Current());
+                    LogError(Resources.Error_A1009_ExpectOpenBrace, Current());
                 }
             }
             else
             {
-                LogError(Resources.ExpectIdentifier, Current());
+                LogError(Resources.Error_A1007_ExpectIdentifier, Current());
             }
 
             return null;
@@ -337,7 +337,7 @@ namespace accelc.Compiler
                         break;
 
                     case TokenType.DotCtorKeyword when !isTypeRef:
-                        LogError(Resources.InvalidCtor, token);
+                        LogError(Resources.Error_A1014_InvalidCtor, token);
                         break;
                     case TokenType.DotCtorKeyword:
                         declaration = GetCtor();
@@ -352,7 +352,7 @@ namespace accelc.Compiler
                         break;
 
                     case TokenType.CheckrefKeyword when isCompact:
-                        LogError(Resources.InvalidCheckRef, token);
+                        LogError(Resources.Error_A1024_InvalidCheckRefWhenCompact, token);
                         break;
 
                     case TokenType.CheckrefKeyword:
@@ -415,12 +415,12 @@ namespace accelc.Compiler
                 }
                 else
                 {
-                    LogError(Resources.ExpectInt32Literal, Current());
+                    LogError(Resources.Error_A1008_ExpectInt32Literal, Current());
                 }
             }
             else
             {
-                LogError(Resources.ExpectEquals, Current());
+                LogError(Resources.Error_A1005_ExpectEquals, Current());
             }
 
             return null;
@@ -440,12 +440,12 @@ namespace accelc.Compiler
                 }
                 else
                 {
-                    LogError(Resources.ExpectAccessKeyword, Current());
+                    LogError(Resources.Error_A1012_ExpectAccessKeyword, Current());
                 }
             }
             else
             {
-                LogError(Resources.ExpectEquals, Current());
+                LogError(Resources.Error_A1005_ExpectEquals, Current());
             }
 
             return null;
@@ -461,7 +461,7 @@ namespace accelc.Compiler
             }
             else
             {
-                LogError(Resources.ExpectCShapCodeDotBefore, Current());
+                LogError(Resources.Error_A1004_ExpectCShapCode, Current());
             }
 
             return null;
@@ -477,7 +477,7 @@ namespace accelc.Compiler
             }
             else
             {
-                LogError(Resources.ExpectCShapCodeDotAfter, Current());
+                LogError(Resources.Error_A1004_ExpectCShapCode, Current());
             }
 
             return null;
@@ -508,35 +508,35 @@ namespace accelc.Compiler
                 switch (token.Type)
                 {
                     case TokenType.FixedKeyword when isFixed:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.FixedKeyword:
                         isFixed = true;
                         break;
 
                     case TokenType.UnicodeKeyword when isUnicode:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.UnicodeKeyword:
                         isUnicode = true;
                         break;
 
                     case TokenType.ASCIIKeyword when isASCII:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.ASCIIKeyword:
                         isASCII = true;
                         break;
 
                     case TokenType.UTF8Keyword when isUTF8:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.UTF8Keyword:
                         isUTF8 = true;
                         break;
 
                     case TokenType.CheckrefKeyword when isCheckref:
-                        LogError(string.Format(Resources.MultipleKeyword, token.Raw), token);
+                        LogError(string.Format(Resources.Error_A1021_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.CheckrefKeyword:
                         isCheckref = true;
@@ -550,14 +550,22 @@ namespace accelc.Compiler
                     case TokenType.UIntKeyword:
                     case TokenType.LongKeyword:
                     case TokenType.ULongKeyword:
-                        if (isUnicode || isASCII || isUTF8)
+                        if (isUnicode)
                         {
-                            LogError(Resources.InvalidEncodingKeyword, token);
+                            LogError(Resources.Error_A1026_InvalidEncodingUnicodeKeyword, token);
+                        }
+                        else if (isASCII)
+                        {
+                            LogError(Resources.Error_A1027_InvalidEncodingASCIIKeyword, token);
+                        }
+                        else if (isUTF8)
+                        {
+                            LogError(Resources.Error_A1028_InvalidEncodingUTF8Keyword, token);
                         }
 
                         if (isCheckref)
                         {
-                            LogError(Resources.InvalidCheckrefKeyword, token);
+                            LogError(Resources.Error_A1025_InvalidCheckrefKeyword, token);
                         }
                         type = token.Raw;
                         goto NameDef;
@@ -566,19 +574,27 @@ namespace accelc.Compiler
                     case TokenType.FloatKeyoword:
                     case TokenType.DoubleKeyword:
                     case TokenType.DecimalKeyword:
-                        if (isUnicode || isASCII || isUTF8)
+                        if (isUnicode)
                         {
-                            LogError(Resources.InvalidEncodingKeyword, token);
+                            LogError(Resources.Error_A1026_InvalidEncodingUnicodeKeyword, token);
+                        }
+                        else if (isASCII)
+                        {
+                            LogError(Resources.Error_A1027_InvalidEncodingASCIIKeyword, token);
+                        }
+                        else if (isUTF8)
+                        {
+                            LogError(Resources.Error_A1028_InvalidEncodingUTF8Keyword, token);
                         }
 
                         if (isCheckref)
                         {
-                            LogError(Resources.InvalidCheckrefKeyword, token);
+                            LogError(Resources.Error_A1025_InvalidCheckrefKeyword, token);
                         }
 
                         if (isFixed)
                         {
-                            LogError(Resources.InvalidFixedKeyword, token);
+                            LogError(Resources.Error_A1015_InvalidFixedKeyword, token);
                         }
                         type = token.Raw;
                         goto NameDef;
@@ -587,7 +603,7 @@ namespace accelc.Compiler
                     case TokenType.StringKeyword:
                         if (isFixed)
                         {
-                            LogError(Resources.InvalidFixedKeyword, token);
+                            LogError(Resources.Error_A1015_InvalidFixedKeyword, token);
                         }
                         type = token.Raw;
                         goto NameDef;
@@ -598,19 +614,27 @@ namespace accelc.Compiler
 
                         if (t != null)
                         {
-                            if (isUnicode || isASCII || isUTF8)
+                            if (isUnicode)
                             {
-                                LogError(Resources.InvalidEncodingKeyword, token);
+                                LogError(Resources.Error_A1026_InvalidEncodingUnicodeKeyword, token);
+                            }
+                            else if (isASCII)
+                            {
+                                LogError(Resources.Error_A1027_InvalidEncodingASCIIKeyword, token);
+                            }
+                            else if (isUTF8)
+                            {
+                                LogError(Resources.Error_A1028_InvalidEncodingUTF8Keyword, token);
                             }
 
                             if (t.IsValueType && isCheckref)
                             {
-                                LogError(Resources.InvalidCheckrefKeyword, token);
+                                LogError(Resources.Error_A1025_InvalidCheckrefKeyword, token);
                             }
 
                             if (isFixed)
                             {
-                                LogError(Resources.InvalidFixedKeyword, token);
+                                LogError(Resources.Error_A1015_InvalidFixedKeyword, token);
                             }
                         }
 
@@ -618,7 +642,7 @@ namespace accelc.Compiler
                 }
             }
 
-            LogError(Resources.ExpectFieldType, Current());
+            LogError(Resources.Error_A1006_ExpectFieldType, Current());
             return null;
         NameDef:
 
@@ -652,12 +676,12 @@ namespace accelc.Compiler
                 }
                 else
                 {
-                    LogError(Resources.ExpectSemicolon, Current());
+                    LogError(Resources.Error_A1010_ExpectSemicolon, Current());
                 }
             }
             else
             {
-                LogError(Resources.ExpectIdentifier, Current());
+                LogError(Resources.Error_A1007_ExpectIdentifier, Current());
             }
 
             return null;
@@ -688,10 +712,9 @@ namespace accelc.Compiler
         {
             if (!IsError)
             {
-                m_ErrorWriter.WriteLine(Resources.SyntaxError);
-                m_ErrorWriter.WriteLine("\t" + message);
-                m_ErrorWriter.WriteLine("\t" + Resources.LineNumber + token.LineNumber.ToString());
-                m_ErrorWriter.WriteLine("\t" + Resources.FilePath + token.FilePath);
+                m_ErrorWriter.WriteLine(message);
+                m_ErrorWriter.WriteLine(Resources.LineNumber + token.LineNumber.ToString());
+                m_ErrorWriter.WriteLine(Resources.FilePath + token.FilePath);
                 IsError = true;
             }
         }
@@ -724,7 +747,7 @@ namespace accelc.Compiler
             }
 
         Log:
-            LogError(string.Format(Resources.InvalidIdentifier, identifier), Current());
+            LogError(string.Format(Resources.Error_A1017_InvalidIdentifier, identifier), Current());
         }
 
         private Token Current()

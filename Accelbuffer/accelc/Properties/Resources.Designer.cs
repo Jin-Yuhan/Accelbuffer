@@ -255,15 +255,6 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 文档需要&apos;--&apos;来结束 的本地化字符串。
-        /// </summary>
-        internal static string DocumentNotEnd {
-            get {
-                return ResourceManager.GetString("DocumentNotEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 [Encoding(Encoding.ASCII)] 的本地化字符串。
         /// </summary>
         internal static string EncodingASCII {
@@ -291,101 +282,263 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;public&apos;或&apos;internal&apos;修饰符 的本地化字符串。
+        ///   查找类似 error: A1001: 无法识别的字符 &apos;{0}&apos; 的本地化字符串。
         /// </summary>
-        internal static string ExpectAccessKeyword {
+        internal static string Error_A1001_UnknownChar {
             get {
-                return ResourceManager.GetString("ExpectAccessKeyword", resourceCulture);
+                return ResourceManager.GetString("Error_A1001_UnknownChar", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;}&apos; 的本地化字符串。
+        ///   查找类似 error: A1002: 无法找到文件：{0} 的本地化字符串。
         /// </summary>
-        internal static string ExpectCloseBrace {
+        internal static string Error_A1002_FileNotFound {
             get {
-                return ResourceManager.GetString("ExpectCloseBrace", resourceCulture);
+                return ResourceManager.GetString("Error_A1002_FileNotFound", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 .after方法缺少方法体 的本地化字符串。
+        ///   查找类似 error: A1003: 缺少&apos;}&apos; 的本地化字符串。
         /// </summary>
-        internal static string ExpectCShapCodeDotAfter {
+        internal static string Error_A1003_ExpectCloseBrace {
             get {
-                return ResourceManager.GetString("ExpectCShapCodeDotAfter", resourceCulture);
+                return ResourceManager.GetString("Error_A1003_ExpectCloseBrace", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 .before方法缺少方法体 的本地化字符串。
+        ///   查找类似 error: A1004: 缺少方法体 的本地化字符串。
         /// </summary>
-        internal static string ExpectCShapCodeDotBefore {
+        internal static string Error_A1004_ExpectCShapCode {
             get {
-                return ResourceManager.GetString("ExpectCShapCodeDotBefore", resourceCulture);
+                return ResourceManager.GetString("Error_A1004_ExpectCShapCode", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;=&apos; 的本地化字符串。
+        ///   查找类似 error: A1005: 缺少&apos;=&apos; 的本地化字符串。
         /// </summary>
-        internal static string ExpectEquals {
+        internal static string Error_A1005_ExpectEquals {
             get {
-                return ResourceManager.GetString("ExpectEquals", resourceCulture);
+                return ResourceManager.GetString("Error_A1005_ExpectEquals", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 字段定义缺少类型 的本地化字符串。
+        ///   查找类似 error: A1006: 缺少类型标识符 的本地化字符串。
         /// </summary>
-        internal static string ExpectFieldType {
+        internal static string Error_A1006_ExpectFieldType {
             get {
-                return ResourceManager.GetString("ExpectFieldType", resourceCulture);
+                return ResourceManager.GetString("Error_A1006_ExpectFieldType", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少标识符 的本地化字符串。
+        ///   查找类似 error: A1007: 缺少标识符 的本地化字符串。
         /// </summary>
-        internal static string ExpectIdentifier {
+        internal static string Error_A1007_ExpectIdentifier {
             get {
-                return ResourceManager.GetString("ExpectIdentifier", resourceCulture);
+                return ResourceManager.GetString("Error_A1007_ExpectIdentifier", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少int32类型的值 的本地化字符串。
+        ///   查找类似 error: A1008: 缺少整数常量 的本地化字符串。
         /// </summary>
-        internal static string ExpectInt32Literal {
+        internal static string Error_A1008_ExpectInt32Literal {
             get {
-                return ResourceManager.GetString("ExpectInt32Literal", resourceCulture);
+                return ResourceManager.GetString("Error_A1008_ExpectInt32Literal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;{&apos; 的本地化字符串。
+        ///   查找类似 error: A1009: 缺少&apos;{&apos; 的本地化字符串。
         /// </summary>
-        internal static string ExpectOpenBrace {
+        internal static string Error_A1009_ExpectOpenBrace {
             get {
-                return ResourceManager.GetString("ExpectOpenBrace", resourceCulture);
+                return ResourceManager.GetString("Error_A1009_ExpectOpenBrace", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;;&apos;来结束 的本地化字符串。
+        ///   查找类似 error: A1010: 缺少&apos;;&apos; 的本地化字符串。
         /// </summary>
-        internal static string ExpectSemicolon {
+        internal static string Error_A1010_ExpectSemicolon {
             get {
-                return ResourceManager.GetString("ExpectSemicolon", resourceCulture);
+                return ResourceManager.GetString("Error_A1010_ExpectSemicolon", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 缺少&apos;type&apos;关键字 的本地化字符串。
+        ///   查找类似 error: A1011: 缺少&apos;type&apos;关键字 的本地化字符串。
         /// </summary>
-        internal static string ExpectTypeKeyword {
+        internal static string Error_A1011_ExpectTypeKeyword {
             get {
-                return ResourceManager.GetString("ExpectTypeKeyword", resourceCulture);
+                return ResourceManager.GetString("Error_A1011_ExpectTypeKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1012: 缺少 &apos;public&apos; 或 &apos;internal&apos; 关键字 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1012_ExpectAccessKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1012_ExpectAccessKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1013: 缺少&apos;--&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1013_ExpectSubSub {
+            get {
+                return ResourceManager.GetString("Error_A1013_ExpectSubSub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1014: 无效的字符&apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1014_InvalidChar {
+            get {
+                return ResourceManager.GetString("Error_A1014_InvalidChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1014: &apos;.ctor&apos;必须在标记了&apos;ref&apos;关键字的类型中使用 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1014_InvalidCtor {
+            get {
+                return ResourceManager.GetString("Error_A1014_InvalidCtor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1015: 无效的关键字&apos;fixed&apos;，因为字段类型不是整数类型 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1015_InvalidFixedKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1015_InvalidFixedKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1016: 无效的关键字&apos;final&apos;，因为类型没有标记&apos;ref&apos;关键字 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1016_InvalidFinal {
+            get {
+                return ResourceManager.GetString("Error_A1016_InvalidFinal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1017: 无效的标识符&apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1017_InvalidIdentifier {
+            get {
+                return ResourceManager.GetString("Error_A1017_InvalidIdentifier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1018: 无效的标记&apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1018_InvalidToken {
+            get {
+                return ResourceManager.GetString("Error_A1018_InvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1019: 不能同时定义多个命名空间 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1019_MultiNamespace {
+            get {
+                return ResourceManager.GetString("Error_A1019_MultiNamespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1020: 可访问修饰符重复 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1020_MultipleAccessKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1020_MultipleAccessKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1021: 重复的关键字&apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1021_MultipleKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1021_MultipleKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1022: 命名空间的声明必须在类型之前 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1022_UnexpectedNamespace {
+            get {
+                return ResourceManager.GetString("Error_A1022_UnexpectedNamespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1023: 命名空间的引用必须在类型之前 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1023_UnexpectedUsing {
+            get {
+                return ResourceManager.GetString("Error_A1023_UnexpectedUsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1024: 无效的关键字&apos;checkref&apos;，因为声明字段的类型被标记为&apos;compact&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1024_InvalidCheckRefWhenCompact {
+            get {
+                return ResourceManager.GetString("Error_A1024_InvalidCheckRefWhenCompact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1025: 无效的关键字&apos;checkref&apos;，因为字段的类型不是引用类型 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1025_InvalidCheckrefKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1025_InvalidCheckrefKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1026: 无效关键字&apos;unicode&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1026_InvalidEncodingUnicodeKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1026_InvalidEncodingUnicodeKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1027: 无效关键字&apos;ascii&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1027_InvalidEncodingASCIIKeyword {
+            get {
+                return ResourceManager.GetString("Error_A1027_InvalidEncodingASCIIKeyword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1028: 无效关键字&apos;utf8&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1028_InvalidEncodingUTF8Keyword {
+            get {
+                return ResourceManager.GetString("Error_A1028_InvalidEncodingUTF8Keyword", resourceCulture);
             }
         }
         
@@ -404,15 +557,6 @@ namespace accelc.Properties {
         internal static string FieldIndex {
             get {
                 return ResourceManager.GetString("FieldIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 无法找到文件：{0} 的本地化字符串。
-        /// </summary>
-        internal static string FileNotFound {
-            get {
-                return ResourceManager.GetString("FileNotFound", resourceCulture);
             }
         }
         
@@ -471,119 +615,11 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 无效的字符：&apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string InvalidChar {
-            get {
-                return ResourceManager.GetString("InvalidChar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 关键字&apos;checkref&apos;不能在标记了&apos;compact&apos;的类型中使用 的本地化字符串。
-        /// </summary>
-        internal static string InvalidCheckRef {
-            get {
-                return ResourceManager.GetString("InvalidCheckRef", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 关键字&apos;checkref&apos;不能标记不可空类型的字段 的本地化字符串。
-        /// </summary>
-        internal static string InvalidCheckrefKeyword {
-            get {
-                return ResourceManager.GetString("InvalidCheckrefKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 &apos;.ctor&apos;必须在标记了&apos;ref&apos;关键字的类型中使用 的本地化字符串。
-        /// </summary>
-        internal static string InvalidCtor {
-            get {
-                return ResourceManager.GetString("InvalidCtor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 关键字&apos;utf8&apos;, &apos;unicode&apos;, &apos;ascii&apos;只能修饰&apos;char&apos;和&apos;string&apos;类型的字段 的本地化字符串。
-        /// </summary>
-        internal static string InvalidEncodingKeyword {
-            get {
-                return ResourceManager.GetString("InvalidEncodingKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 只有标记了&apos;ref&apos;关键字的类型才可以被标记为&apos;final&apos; 的本地化字符串。
-        /// </summary>
-        internal static string InvalidFinal {
-            get {
-                return ResourceManager.GetString("InvalidFinal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 关键字&apos;fixed&apos;不能修饰非整数类型 的本地化字符串。
-        /// </summary>
-        internal static string InvalidFixedKeyword {
-            get {
-                return ResourceManager.GetString("InvalidFixedKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 非法的标识符：&apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string InvalidIdentifier {
-            get {
-                return ResourceManager.GetString("InvalidIdentifier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 标记：&apos;{0}&apos;无效 的本地化字符串。
-        /// </summary>
-        internal static string InvalidToken {
-            get {
-                return ResourceManager.GetString("InvalidToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 行号： 的本地化字符串。
         /// </summary>
         internal static string LineNumber {
             get {
                 return ResourceManager.GetString("LineNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 不能同时定义多个命名空间 的本地化字符串。
-        /// </summary>
-        internal static string MultiNamespace {
-            get {
-                return ResourceManager.GetString("MultiNamespace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 可访问修饰符重复 的本地化字符串。
-        /// </summary>
-        internal static string MultipleAccessKeyword {
-            get {
-                return ResourceManager.GetString("MultipleAccessKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 关键字：&apos;{0}&apos;重复 的本地化字符串。
-        /// </summary>
-        internal static string MultipleKeyword {
-            get {
-                return ResourceManager.GetString("MultipleKeyword", resourceCulture);
             }
         }
         
@@ -809,51 +845,6 @@ namespace accelc.Properties {
         internal static string Switch {
             get {
                 return ResourceManager.GetString("Switch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 SyntaxError： 的本地化字符串。
-        /// </summary>
-        internal static string SyntaxError {
-            get {
-                return ResourceManager.GetString("SyntaxError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 AccelbufferTemplate 的本地化字符串。
-        /// </summary>
-        internal static string TemplateName {
-            get {
-                return ResourceManager.GetString("TemplateName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 命名空间的声明必须在类型之前 的本地化字符串。
-        /// </summary>
-        internal static string UnexpectedNamespace {
-            get {
-                return ResourceManager.GetString("UnexpectedNamespace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 命名空间的引用必须在类型之前 的本地化字符串。
-        /// </summary>
-        internal static string UnexpectedUsing {
-            get {
-                return ResourceManager.GetString("UnexpectedUsing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 无法识别的字符：&apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string UnknownChar {
-            get {
-                return ResourceManager.GetString("UnknownChar", resourceCulture);
             }
         }
         
