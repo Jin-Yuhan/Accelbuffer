@@ -154,14 +154,7 @@ namespace accelc.Compiler
                 {
                     WriteLine();
 
-                    if (declaration.Declarations.FirstOrDefault(de => de is CtorDeclaration) is CtorDeclaration ctor)
-                    {
-                        Write(ctor.IsInternal ? Resources.Internal : Resources.Public);
-                    }
-                    else
-                    {
-                        Write(Resources.Public);
-                    }
+                    Write(Resources.Public);
 
                     WriteLine(string.Format(Resources.DefaultCtor, declaration.Name), false);
                 }
@@ -185,6 +178,8 @@ namespace accelc.Compiler
                 using (new Block(this))
                 {
                     int index = 1;
+
+                    WriteLine(Resources.BeforeMethod);
 
                     foreach (Declaration d in declaration.Declarations)
                     {
@@ -390,6 +385,7 @@ namespace accelc.Compiler
 
                             if (declaration.IsCompact)
                             {
+                                WriteLine(Resources.AfterMethod);
                                 WriteLine(Resources.ReturnResult);
                             }
                             else
@@ -407,6 +403,7 @@ namespace accelc.Compiler
                         }
                     }
 
+                    WriteLine(Resources.AfterMethod);
                     WriteLine(Resources.ReturnResult);
                 }
             }
@@ -520,7 +517,7 @@ namespace accelc.Compiler
         {
             for (int i = 0; i < m_Depth && writeIndent; i++)
             {
-                m_Writer.Write('\t');
+                m_Writer.Write("    ");
             }
 
             m_Writer.Write(text);
@@ -530,7 +527,7 @@ namespace accelc.Compiler
         {
             for (int i = 0; i < m_Depth && writeIndent; i++)
             {
-                m_Writer.Write('\t');
+                m_Writer.Write("    ");
             }
 
             m_Writer.WriteLine(text);

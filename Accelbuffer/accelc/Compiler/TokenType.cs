@@ -118,11 +118,6 @@
         DotInitMemoryKeyword,
 
         /// <summary>
-        /// .ctor
-        /// </summary>
-        DotCtorKeyword,
-
-        /// <summary>
         /// .before
         /// </summary>
         DotBeforeKeyword,

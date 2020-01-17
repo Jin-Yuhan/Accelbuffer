@@ -258,6 +258,11 @@ namespace accelc.Compiler
                 LogError(Resources.Error_A1016_InvalidFinal, Current());
             }
 
+            if (isRuntime && isInternal)
+            {
+                LogError(Resources.Error_A1030_InvalidRuntime, Current());
+            }
+
             if (ExpectNextTokenType(1, TokenType.Identifier))
             {
                 MoveNext();
@@ -334,13 +339,6 @@ namespace accelc.Compiler
 
                     case TokenType.DotInitMemoryKeyword:
                         declaration = GetInitMemory();
-                        break;
-
-                    case TokenType.DotCtorKeyword when !isTypeRef:
-                        LogError(Resources.Error_A1014_InvalidCtor, token);
-                        break;
-                    case TokenType.DotCtorKeyword:
-                        declaration = GetCtor();
                         break;
 
                     case TokenType.DotBeforeKeyword:
@@ -429,51 +427,6 @@ namespace accelc.Compiler
                 else
                 {
                     LogError(Resources.Error_A1008_ExpectInt32Literal, Current());
-                }
-            }
-            else
-            {
-                LogError(Resources.Error_A1005_ExpectEquals, Current());
-            }
-
-            return null;
-        }
-
-        private Declaration GetCtor()
-        {
-            if (ExpectNextTokenType(1, TokenType.Equals))
-            {
-                MoveNext();
-
-                if (ExpectNextTokenType(1, TokenType.DefaultValue))
-                {
-                    MoveNext();
-
-                    bool isInternal = false;
-                    string value = Current().Raw.Trim();
-
-                    if (Scanner.Keywords.TryGetValue(value, out TokenType type) && (type == TokenType.PublicKeyword || type == TokenType.InternalKeyword))
-                    {
-                        isInternal = type == TokenType.InternalKeyword;
-                    }
-                    else
-                    {
-                        LogError(Resources.Error_A1012_ExpectAccessKeyword, Current());
-                    }
-
-                    if (ExpectNextTokenType(1, TokenType.Semicolon))
-                    {
-                        MoveNext();
-                        return new CtorDeclaration { IsInternal = isInternal };
-                    }
-                    else
-                    {
-                        LogError(Resources.Error_A1010_ExpectSemicolon, Current());
-                    }
-                }
-                else
-                {
-                    LogError(Resources.Error_A1012_ExpectAccessKeyword, Current());
                 }
             }
             else

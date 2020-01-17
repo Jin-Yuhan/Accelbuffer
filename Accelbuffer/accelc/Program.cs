@@ -30,7 +30,7 @@ namespace accelc
 
                         path = Path.ChangeExtension(path, Resources.AccelbufferFileExtension);
 
-                        text = text.Replace(Resources.ReplaceString, Path.GetFileNameWithoutExtension(path));
+                        text = text.Replace(Resources.ReplaceString, Path.GetFileNameWithoutExtension(path).Replace(" ", string.Empty));
                         File.WriteAllText(path, text);
 
                         Console.WriteLine(Resources.GenerateSuccessfully);

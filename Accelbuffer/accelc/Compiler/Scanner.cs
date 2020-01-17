@@ -23,7 +23,6 @@ namespace accelc.Compiler
                 ["ref"]= TokenType.RefKeyword,
                 ["type"]= TokenType.TypeKeyword,
                 [".init_memory"]= TokenType.DotInitMemoryKeyword,
-                [".ctor"]= TokenType.DotCtorKeyword,
                 [".before"]= TokenType.DotBeforeKeyword,
                 [".after"]= TokenType.DotAfterKeyword,
                 ["checkref"]= TokenType.CheckrefKeyword,

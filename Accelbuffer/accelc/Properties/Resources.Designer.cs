@@ -147,6 +147,15 @@ namespace accelc.Properties {
         }
         
         /// <summary>
+        ///   查找类似 result.After(); 的本地化字符串。
+        /// </summary>
+        internal static string AfterMethod {
+            get {
+                return ResourceManager.GetString("AfterMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 [] 的本地化字符串。
         /// </summary>
         internal static string ArraySuffix {
@@ -170,6 +179,15 @@ namespace accelc.Properties {
         internal static string BeforeAttr {
             get {
                 return ResourceManager.GetString("BeforeAttr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 obj.Before(); 的本地化字符串。
+        /// </summary>
+        internal static string BeforeMethod {
+            get {
+                return ResourceManager.GetString("BeforeMethod", resourceCulture);
             }
         }
         
@@ -548,6 +566,15 @@ namespace accelc.Properties {
         internal static string Error_A1029_UnknownChar {
             get {
                 return ResourceManager.GetString("Error_A1029_UnknownChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1030: invalid keyword &apos;runtime&apos; because type is marked &apos;internal&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1030_InvalidRuntime {
+            get {
+                return ResourceManager.GetString("Error_A1030_InvalidRuntime", resourceCulture);
             }
         }
         

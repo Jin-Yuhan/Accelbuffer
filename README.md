@@ -3,9 +3,10 @@
 
 ## 支持
 * 需要.NET Framework 4.5+
-* 提供unity插件
-* 提供unity生成配置
+* 提供unity插件（自动编译，模板代码，编辑器拓展）
+* 提供unity生成配置（类型支持）
 * 提供sublime的语法高亮文件
+* 提供95%的API注释文档
 
 ## 特点
 * 时间消耗低
@@ -13,6 +14,7 @@
 * 无装箱、拆箱
 * 可以自定义序列化流程
 * 没有序列化深度限制
+* 性能略高于`Protobuf.NET`
 
 ## 支持的序列化类型
 * 基元类型
@@ -29,7 +31,7 @@
 
 ## 基本用法
 ### 1.使用特性标记类型
-#### 方案一，自动注入代理
+#### 方案一，自动注入代理，需要标记SerializableAttribute
 ```csharp
 [Serializable]
 public class Student

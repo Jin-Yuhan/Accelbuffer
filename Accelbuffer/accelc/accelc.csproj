@@ -44,7 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Compiler\Declarations\CtorDeclaration.cs" />
     <Compile Include="Compiler\Declarations\Declaration.cs" />
     <Compile Include="Compiler\Declarations\FieldDeclaration.cs" />
     <Compile Include="Compiler\Declarations\InitMemoryDeclaration.cs" />

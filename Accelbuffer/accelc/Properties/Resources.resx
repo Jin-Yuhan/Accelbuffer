@@ -433,4 +433,13 @@
   <data name="Error_A1029_UnknownChar" xml:space="preserve">
     <value>error: A1029: unknown character'{0}'</value>
   </data>
+  <data name="AfterMethod" xml:space="preserve">
+    <value>result.After();</value>
+  </data>
+  <data name="BeforeMethod" xml:space="preserve">
+    <value>obj.Before();</value>
+  </data>
+  <data name="Error_A1030_InvalidRuntime" xml:space="preserve">
+    <value>error: A1030: invalid keyword 'runtime' because type is marked 'internal'</value>
+  </data>
 </root>

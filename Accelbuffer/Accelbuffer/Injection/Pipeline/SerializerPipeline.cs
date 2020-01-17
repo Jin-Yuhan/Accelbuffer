@@ -44,7 +44,7 @@ namespace Accelbuffer.Injection
             s_FieldBindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
             s_MessageCallbackBindingFlags = BindingFlags.Public | BindingFlags.Instance;
             s_InterfaceTypeArray = new Type[1];
-            s_FieldData = new List<FieldData>();
+            s_FieldData = new List<FieldData>(10);
             s_MethodData = new List<MethodData>(2);
 
             s_Progress = new SerializerGenerationProgress[]
@@ -94,6 +94,11 @@ namespace Accelbuffer.Injection
             FieldInfo[] allFields = objType.GetFields(s_FieldBindingFlags);
             s_FieldData.Clear();
 
+            if (allFields == null)
+            {
+                return;
+            }
+
             for (int i = 0; i < allFields.Length; i++)
             {
                 FieldInfo field = allFields[i];
@@ -120,11 +125,17 @@ namespace Accelbuffer.Injection
             MethodInfo[] methods = objType.GetMethods(s_MessageCallbackBindingFlags);
             s_MethodData.Clear();
 
+            if (methods == null)
+            {
+                return;
+            }            
+
             for (int i = 0; i < methods.Length; i++)
             {
                 MethodInfo method = methods[i];
+                ParameterInfo[] parameters = method.GetParameters();
 
-                if (method.GetParameters().Length != 0)
+                if (parameters != null && parameters.Length != 0)
                 {
                     continue;
                 }
@@ -139,7 +150,7 @@ namespace Accelbuffer.Injection
 
                 if (attr2 != null)
                 {
-                    s_MethodData.Add(new MethodData(method, AccelbufferCallback.OnAfterDeserialization, attr1.Priority));
+                    s_MethodData.Add(new MethodData(method, AccelbufferCallback.OnAfterDeserialization, attr2.Priority));
                 }
             }
 

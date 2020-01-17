@@ -91,7 +91,6 @@ contexts:
         - include: fields_declaration
         - include: messages_declaration
         - include: init_memory
-        - include: ctor
         - include: document
         - include: single_line_comment
     - match: '\S*'
@@ -101,6 +100,24 @@ contexts:
   fields_declaration:
     - match: (\b(checkref)\b)
       scope: keyword.field.modifier.accel
+
+    - match: (=)
+      scope: keyword.field.assign.accel
+      push: 
+        - match: ';'
+          pop: true
+
+        - match: '\b(new)\b'
+          scope: keyword.new.accel
+
+        - match: '({{base_type}})\s*((\[\])*)'
+          captures:
+            1: keyword.type.field.accel
+
+        - match: ({{namespaced_name}})\s*((\[\])*)
+          scope: storage.type.field.accel
+
+        - include: literals
 
     - match: '({{base_type_modifier}}?)\s+({{base_type}})\s*((\[\])*)\s+({{name}})'
       captures:
@@ -130,13 +147,6 @@ contexts:
         - match: ';'
           pop: true
         - include: literals
-
-  ctor:
-    - match: '(.ctor)\s*=\s*({{visibility}})'
-      scope: keyword.ctor.accel
-      push: 
-        - match: ';'
-          pop: true
 
   # bools, numbers, chars, simple strings
   literals:
