@@ -10,5 +10,6 @@
         public string Type;
         public string Name;
         public string Doc;
+        public string Assignment;
     }
 }

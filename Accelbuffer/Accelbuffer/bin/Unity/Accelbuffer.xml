@@ -1,0 +1,1438 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Accelbuffer</name>
+    </assembly>
+    <members>
+        <member name="T:Accelbuffer.FieldType">
+            <summary>
+            表示一个字段的类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.VariantInt">
+            <summary>
+            <see cref="T:System.Byte"/>, <see cref="T:System.SByte"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.Int16"/>, <see cref="T:System.UInt32"/>,
+            <see cref="T:System.Int32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Int8">
+            <summary>
+            <see cref="T:System.SByte"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UInt8">
+            <summary>
+            <see cref="T:System.Byte"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Int16">
+            <summary>
+            <see cref="T:System.Int16"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UInt16">
+            <summary>
+            <see cref="T:System.UInt16"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Int32">
+            <summary>
+            <see cref="T:System.Int32"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UInt32">
+            <summary>
+            <see cref="T:System.UInt32"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Int64">
+            <summary>
+            <see cref="T:System.Int64"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UInt64">
+            <summary>
+            <see cref="T:System.UInt64"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Float32">
+            <summary>
+            <see cref="T:System.Single"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Float64">
+            <summary>
+            <see cref="T:System.Double"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Float128">
+            <summary>
+            <see cref="T:System.Decimal"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Boolean">
+            <summary>
+            <see cref="T:System.Boolean"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.ASCIIChar">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.ASCII"/> <see cref="T:System.Char"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UnicodeChar">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.Unicode"/> <see cref="T:System.Char"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UTF8Char">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.UTF8"/> <see cref="T:System.Char"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.ASCIIString">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.ASCII"/> <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UnicodeString">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.Unicode"/> <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.UTF8String">
+            <summary>
+            <see cref="F:Accelbuffer.Text.Encoding.UTF8"/> <see cref="T:System.String"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.FieldType.Complex">
+            <summary>
+            自定义类型，集合，结构...
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.InvalidFieldIndexException">
+            <summary>
+            无效的字段索引错误
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.InvalidFieldIndexException.#ctor">
+            <summary>
+            初始化 InvalidFieldIndexException
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.InvalidFieldIndexException.#ctor(System.String)">
+            <summary>
+            初始化 InvalidFieldIndexException
+            </summary>
+            <param name="message">描述错误的消息</param>
+        </member>
+        <member name="M:Accelbuffer.InvalidFieldIndexException.#ctor(System.String,System.Exception)">
+            <summary>
+            初始化 InvalidFieldIndexException
+            </summary>
+            <param name="message">描述错误的消息</param>
+            <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
+        </member>
+        <member name="T:Accelbuffer.InvalidUTF8CharException">
+            <summary>
+            无效的UTF8字符错误
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.InvalidUTF8CharException.#ctor">
+            <summary>
+            初始化 InvalidUTF8CharException
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.InvalidUTF8CharException.#ctor(System.String)">
+            <summary>
+            初始化 InvalidUTF8CharException
+            </summary>
+            <param name="message">描述错误的消息</param>
+        </member>
+        <member name="M:Accelbuffer.InvalidUTF8CharException.#ctor(System.String,System.Exception)">
+            <summary>
+            初始化 InvalidUTF8CharException
+            </summary>
+            <param name="message">描述错误的消息</param>
+            <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
+        </member>
+        <member name="T:Accelbuffer.SerializerTypeException">
+            <summary>
+            序列化代理类型错误
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.SerializerTypeException.#ctor">
+            <summary>
+            初始化 SerializerTypeException
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.SerializerTypeException.#ctor(System.String)">
+            <summary>
+            初始化 SerializerTypeException
+            </summary>
+            <param name="message">描述错误的消息</param>
+        </member>
+        <member name="M:Accelbuffer.SerializerTypeException.#ctor(System.String,System.Exception)">
+            <summary>
+            初始化 SerializerTypeException
+            </summary>
+            <param name="message">描述错误的消息</param>
+            <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
+        </member>
+        <member name="T:Accelbuffer.Injection.CheckRefAttribute">
+            <summary>
+            指示序列化时检查字段引用是否为null，如果是null，则不写入字段，这个特性只对引用类型有效；
+            在<see cref="T:Accelbuffer.Injection.CompactLayoutAttribute"/>下，这个特性无效
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.CompactLayoutAttribute">
+            <summary>
+            指示类型应该被序列化成紧凑的布局，紧凑的布局可能导致 '不安全的反序列化'，但可以减少少量序列化后的字节大小并提高速度。
+            !!!使用这个模式，请保证所有的字段的引用都不为null，且字节数据一定没有损坏!!!
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.OnAfterDeserializationAttribute">
+            <summary>
+            指定一个方法为反序列化后的回调方法
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Injection.OnAfterDeserializationAttribute.Priority">
+            <summary>
+            获取/设置调用优先级
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.OnBeforeSerializationAttribute">
+            <summary>
+            指定一个方法为序列化前的回调方法
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Injection.OnBeforeSerializationAttribute.Priority">
+            <summary>
+            获取/设置调用优先级
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.FixedAttribute">
+            <summary>
+            指示字段使用固定长度格式，
+            该特性只对 
+            <see cref="T:System.Byte"/>, <see cref="T:System.SByte"/>, <see cref="T:System.UInt16"/>, <see cref="T:System.Int16"/>, <see cref="T:System.UInt32"/>,
+            <see cref="T:System.Int32"/>, <see cref="T:System.UInt64"/>, <see cref="T:System.Int64"/> 类型的字段有效
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.EncodingAttribute">
+            <summary>
+            指示字段使用指定的编码被序列化，该特性只对 <see cref="T:System.Char"/>, <see cref="T:System.String"/> 类型字段有效
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Injection.EncodingAttribute.Encoding">
+            <summary>
+            获取字符的编码
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Injection.EncodingAttribute.#ctor(Accelbuffer.Text.Encoding)">
+            <summary>
+            初始化 EncodingAttribute 实例
+            </summary>
+            <param name="encoding">字符序列化使用的编码</param>
+        </member>
+        <member name="T:Accelbuffer.Injection.FieldIndexAttribute">
+            <summary>
+            指示字段的序列化索引，只有标记了这个特性的字段才会参与序列化
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Injection.FieldIndexAttribute.Index">
+            <summary>
+            获取字段的序列化索引
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Injection.FieldIndexAttribute.#ctor(System.Int32)">
+            <summary>
+            初始化 FieldIndexAttribute 实例
+            </summary>
+            <param name="index">字段的序列化索引，必须是 (0, 268435456] 范围内的整数；如果可能，索引应该尽可能全部连续（以1递增或递减）</param>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_SerializeTypes">
+            <summary>
+            用于定义接口的序列化方法的类型 <see cref="M:Accelbuffer.ITypeSerializer`1.Serialize(`0,Accelbuffer.StreamingWriter@)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_DeserializeTypes">
+            <summary>
+            用于定义接口的反序列化方法的类型 <see cref="M:Accelbuffer.ITypeSerializer`1.Deserialize(Accelbuffer.StreamingIterator@)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueIntWithIndexTypes">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Int32,Accelbuffer.NumberFormat)"/> etc...
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueIntTypes">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,Accelbuffer.NumberFormat)"/> etc...
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueFloatWithIndexTypes">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Single)"/> etc...
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueFloatTypes">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Single)"/> etc...
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueCharWithIndexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Char,Accelbuffer.Text.Encoding)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueCharMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Char,Accelbuffer.Text.Encoding)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueStringWithIndexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.String,Accelbuffer.Text.Encoding)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueStringMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.String,Accelbuffer.Text.Encoding)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueBoolWithIndexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Boolean)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueBoolMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue(System.Boolean)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueComplexWithIndexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue``1(System.Int32,``0)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_WriteValueComplexTypesMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingWriter.WriteValue``1(``0)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_NumberFormatTypes">
+            <summary>
+            <see cref="T:Accelbuffer.NumberFormat"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_CharEncodingTypes">
+            <summary>
+            <see cref="T:Accelbuffer.Text.Encoding"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_HasNextOutIndexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingIterator.HasNext(System.Int32@)"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_HasNextMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingIterator.HasNext"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_SkipNextMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingIterator.SkipNext"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_IteratorNextAsComplexMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingIterator.NextAs``1"/>
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Injection.SerializerGenerationProgress.s_IteratorNextAsComplexWithoutTagMethod">
+            <summary>
+            <see cref="M:Accelbuffer.StreamingIterator.NextAsWithoutTag``1"/>
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Injection.SerializerInjector">
+            <summary>
+            公开对序列化代理绑定的接口
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Injection.SerializerInjector.AddBinding``2">
+            <summary>
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
+            </summary>
+            <typeparam name="TObject">序列化对象类型</typeparam>
+            <typeparam name="TSerializer">被绑定的代理类型</typeparam>
+        </member>
+        <member name="M:Accelbuffer.Injection.SerializerInjector.AddBinding(System.Type,System.Type)">
+            <summary>
+            添加一个序列化代理的绑定，如果已经存在，则覆盖
+            </summary>
+            <param name="objectType">序列化对象类型</param>
+            <param name="serializerType">被绑定的代理类型</param>
+            <exception cref="T:Accelbuffer.SerializerTypeException"><paramref name="serializerType"/>类型错误</exception>
+        </member>
+        <member name="M:Accelbuffer.Injection.SerializerInjector.HasBinding``1(System.Boolean)">
+            <summary>
+            获取是否已经存在绑定
+            </summary>
+            <typeparam name="TObject">序列化对象类型</typeparam>
+            <param name="checkAttribute">指示是否检查类型的<see cref="T:Accelbuffer.SerializeByAttribute"/></param>
+            <returns>如果已经存在，返回true，否则，false</returns>
+        </member>
+        <member name="M:Accelbuffer.Injection.SerializerInjector.HasBinding(System.Type,System.Boolean)">
+            <summary>
+            获取是否已经存在绑定
+            </summary>
+            <param name="objectType">序列化对象类型</param>
+            <param name="checkAttribute">指示是否检查类型的<see cref="T:Accelbuffer.SerializeByAttribute"/></param>
+            <returns>如果已经存在，返回true，否则，false</returns>
+        </member>
+        <member name="T:Accelbuffer.Memory.InitialMemorySizeAttribute">
+            <summary>
+            指定<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>初始内存分配大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.InitialMemorySizeAttribute.InitialSize">
+            <summary>
+            获取初始的内存分配大小，以字节为单位
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.InitialMemorySizeAttribute.#ctor(System.Int32)">
+            <summary>
+            创建 InitialMemorySizeAttribute 实例
+            </summary>
+            <param name="initialSize">获取初始的内存分配大小，以字节为单位</param>
+        </member>
+        <member name="T:Accelbuffer.Memory.MemoryAllocator">
+            <summary>
+            公开对序列化内存分配的管理与查询接口
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.DefaultInitialSize">
+            <summary>
+            获取/设置默认初始内存分配大小
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.FreeAllAvailableMemory">
+            <summary>
+            尝试释放所有使用<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>分配的内存
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.InitialSize">
+            <summary>
+            获取/设置初始化内存时应该分配的字节大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.AllocatedSize">
+            <summary>
+            获取当前分配的内存大小，以字节为单位
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsWritingMemory">
+            <summary>
+            获取是否正在写入内存
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsCurrentThreadWritingMemory">
+            <summary>
+            获取当前线程是否正在写入内存
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.GetMemoryPtr(System.Int32,System.Int32)">
+            <summary>
+            这个方法不是线程安全的，如果需要使方法线程安全，
+            请在前后插入<see cref="M:Accelbuffer.Memory.MemoryAllocator.BeginThreadSafeMemoryWriting"/>和<see cref="M:Accelbuffer.Memory.MemoryAllocator.EndThreadSafeMemoryWriting"/>
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.TryFreeMemory">
+            <summary>
+            尝试释放当前分配的内存
+            </summary>
+            <returns>如果释放成功，返回true，否则，false</returns>
+        </member>
+        <member name="T:Accelbuffer.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ASCIIStringByteCountError">
+            <summary>
+              查找类似 ASCII字符串的字节数量必须是非负数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.BoolName">
+            <summary>
+              查找类似 Boolean 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteArrayIsNull">
+            <summary>
+              查找类似 字节数组不能为空 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteArrayTooShort">
+            <summary>
+              查找类似 字节数组长度过小 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteName">
+            <summary>
+              查找类似 UInt8 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.CharName">
+            <summary>
+              查找类似 Char 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ComplexName">
+            <summary>
+              查找类似  的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DecimalName">
+            <summary>
+              查找类似 Float128 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DeserializeMethodName">
+            <summary>
+              查找类似 Deserialize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DoubleName">
+            <summary>
+              查找类似 Float64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.FloatName">
+            <summary>
+              查找类似 Float32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.HasNextName">
+            <summary>
+              查找类似 HasNext 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.IntName">
+            <summary>
+              查找类似 Int32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidCastFormat">
+            <summary>
+              查找类似 不存在从{0}到{1}的隐式转换 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidFieldIndex">
+            <summary>
+              查找类似 字段的索引必须是 (0, 268435456] 范围内的整数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidSerializerType">
+            <summary>
+              查找类似 所有的序列化代理必须要实现ITypeSerializer&lt;T&gt;接口 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidUTF8Char">
+            <summary>
+              查找类似 UTF8字符的第一个字节的格式必须满足&apos;0vvvvvvv&apos;或&apos;110vvvvv&apos;或&apos;1110vvvv&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.LongName">
+            <summary>
+              查找类似 Int64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NextAsName">
+            <summary>
+              查找类似 NextAs 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NextAsWithoutTagName">
+            <summary>
+              查找类似 NextAs{0}WithoutTag 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSerializable">
+            <summary>
+              查找类似 无法为{0}类型注入代理，因为类型没有被标记为[Serializable] 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSupportHighRankArray">
+            <summary>
+              查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSupportTypeInjection">
+            <summary>
+              查找类似 无法为{0}类型注入代理，因为类型没有无参构造方法 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SByteName">
+            <summary>
+              查找类似 Int8 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializeMethodName">
+            <summary>
+              查找类似 Serialize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerAssemblyName">
+            <summary>
+              查找类似 DynamicSerializerAssembly.dll 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerModuleName">
+            <summary>
+              查找类似 DynamicSerializerModule 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeIsNull">
+            <summary>
+              查找类似 序列化代理类型不能为null 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeSuffix">
+            <summary>
+              查找类似 &lt;Serializer&gt; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ShortName">
+            <summary>
+              查找类似 Int16 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SkipNextName">
+            <summary>
+              查找类似 SkipNext 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.StreamTooShort">
+            <summary>
+              查找类似 数据流的长度过小 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.StringName">
+            <summary>
+              查找类似 String 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UIntName">
+            <summary>
+              查找类似 UInt32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ULongName">
+            <summary>
+              查找类似 UInt64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UnicodeStringByteCountError">
+            <summary>
+              查找类似 Unicode字符串的字节数量必须是非负偶数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UShortName">
+            <summary>
+              查找类似 UInt16 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UTF8StringByteCountError">
+            <summary>
+              查找类似 UTF8字符串的字节数量必须是非负数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.WriteValueMethodName">
+            <summary>
+              查找类似 WriteValue 的本地化字符串。
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Text.Encodings">
+            <summary>
+            公开对字符串编码的接口
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Text.Encodings.ASCII">
+            <summary>
+            ASCII编码
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Text.Encodings.Unicode">
+            <summary>
+            Unicode编码
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Text.Encodings.UTF8">
+            <summary>
+            UTF8编码
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Text.Encodings.GetEncoding(Accelbuffer.Text.Encoding)">
+            <summary>
+            获取指定的文本编码对象
+            </summary>
+            <param name="encoding">编码类型</param>
+            <returns>文本编码</returns>
+        </member>
+        <member name="T:Accelbuffer.Text.ITextEncoding">
+            <summary>
+            表示一种文本编码
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Text.ITextEncoding.GetBytes(System.String,System.Byte*)">
+            <summary>
+            将指定字符串中的一组字符编码为指定的字节数组
+            </summary>
+            <param name="str">字符串</param>
+            <param name="bytes">字节数组指针</param>
+            <returns>字节数量</returns>
+        </member>
+        <member name="M:Accelbuffer.Text.ITextEncoding.GetString(System.Byte*,System.Int32)">
+            <summary>
+            将指定字节数组中的所有字节解码为一个字符串
+            </summary>
+            <param name="bytes">字节数组指针</param>
+            <param name="byteCount">字节数量</param>
+            <returns>解码的字符串</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="byteCount"/>的值错误</exception>
+        </member>
+        <member name="M:Accelbuffer.Text.ITextEncoding.GetBytes(System.Char,System.Byte*)">
+            <summary>
+            将指定字符编码为指定的字节数组
+            </summary>
+            <param name="c">字符</param>
+            <param name="bytes">字节数组指针</param>
+            <returns>字节数量</returns>
+        </member>
+        <member name="M:Accelbuffer.Text.ITextEncoding.GetChar(System.Byte*,System.Int32@)">
+            <summary>
+            将指定字节数组中的所有字节解码为一个字符
+            </summary>
+            <param name="bytes">字节数组指针</param>
+            <param name="readByteCount">读取的字节数量</param>
+            <returns>解码的字符</returns>
+        </member>
+        <member name="T:Accelbuffer.Text.Encoding">
+            <summary>
+            表示字符编码
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Text.Encoding.Unicode">
+            <summary>
+            指示字符使用 <see cref="P:Accelbuffer.Text.Encodings.Unicode"/> 进行编码
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Text.Encoding.ASCII">
+            <summary>
+            指示字符使用 <see cref="P:Accelbuffer.Text.Encodings.ASCII"/> 进行编码
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Text.Encoding.UTF8">
+            <summary>
+            指示字符使用 <see cref="P:Accelbuffer.Text.Encodings.UTF8"/> 进行编码
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.NumberFormat">
+            <summary>
+            表示数字的格式
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.NumberFormat.Variant">
+            <summary>
+            指示使用可变格式
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.NumberFormat.Fixed">
+            <summary>
+            指示使用固定格式
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.StreamTooShortException">
+            <summary>
+            数据流的长度过短错误
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.StreamTooShortException.#ctor">
+            <summary>
+            初始化 StreamTooShortException
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.StreamTooShortException.#ctor(System.String)">
+            <summary>
+            初始化 StreamTooShortException
+            </summary>
+            <param name="message">描述错误的消息</param>
+        </member>
+        <member name="M:Accelbuffer.StreamTooShortException.#ctor(System.String,System.Exception)">
+            <summary>
+            初始化 StreamTooShortException
+            </summary>
+            <param name="message">描述错误的消息</param>
+            <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
+        </member>
+        <member name="T:Accelbuffer.StreamingIterator">
+            <summary>
+            提供对流数据的迭代支持
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.Move(System.Int32)">
+            <summary>
+            将迭代器的指针移动指定字节
+            </summary>
+            <param name="byteCount">移动字节数量，这个值是一维矢量</param>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.HasNext">
+            <summary>
+            获取是否还有下一个值
+            </summary>
+            <returns>如果还有值，返回true，否则，false</returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.HasNext(System.Int32@)">
+            <summary>
+            获取是否还有下一个值
+            </summary>
+            <param name="index">下一个值的索引</param>
+            <returns>如果还有值，返回true，否则，false</returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.SkipNext">
+            <summary>
+            跳过下一个值
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt8">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt8">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt16">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt16">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt32">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt32">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt64">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt64">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat32">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat64">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat128">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsBoolean">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsChar">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAs``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt8WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt8WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt16WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt16WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt32WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt32WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsInt64WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsUInt64WithoutTag(Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat32WithoutTag">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat64WithoutTag">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsFloat128WithoutTag">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsBooleanWithoutTag">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsCharWithoutTag(Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsStringWithoutTag(Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.StreamingIterator.NextAsWithoutTag``1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:Accelbuffer.ISerializableEnumerable`1">
+            <summary>
+            公开可序列化枚举数，该枚举数支持在指定类型的集合上进行简单迭代并且可以被序列化。
+            如果集合类型是引用类型，则必须有无参构造函数
+            </summary>
+            <typeparam name="T">要枚举或序列化的对象的类型</typeparam>
+        </member>
+        <member name="P:Accelbuffer.ISerializableEnumerable`1.Count">
+            <summary>
+            获取元素的数量
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.ISerializableEnumerable`1.Add(`0)">
+            <summary>
+            添加一个元素
+            </summary>
+            <param name="value">添加的元素</param>
+        </member>
+        <member name="M:Accelbuffer.ISerializableEnumerable`1.Initialize(System.Int32)">
+            <summary>
+            使用指定大小初始化集合
+            </summary>
+            <param name="capacity">集合初始大小</param>
+        </member>
+        <member name="T:Accelbuffer.ITypeSerializer`1">
+            <summary>
+            实现接口完成指定类型对象的序列化和反序列化
+            </summary>
+            <typeparam name="T">序列化的对象的类型</typeparam>
+        </member>
+        <member name="M:Accelbuffer.ITypeSerializer`1.Serialize(`0,Accelbuffer.StreamingWriter@)">
+            <summary>
+            方法用于实现对象的序列化
+            </summary>
+            <param name="obj">将被序列化的对象</param>
+            <param name="writer">数据输出流</param>
+        </member>
+        <member name="M:Accelbuffer.ITypeSerializer`1.Deserialize(Accelbuffer.StreamingIterator@)">
+            <summary>
+            方法用于实现对象的反序列化
+            </summary>
+            <param name="iterator">流数据迭代器</param>
+            <returns>反序列化对象</returns>
+        </member>
+        <member name="T:Accelbuffer.SerializeByAttribute">
+            <summary>
+            用于指定类型的序列化和反序列化代理的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.SerializeByAttribute.SerializerType">
+            <summary>
+            获取序列化代理类型
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.SerializeByAttribute.#ctor(System.Type)">
+            <summary>
+            初始化 SerializeByAttribute 实例，并指示运行时使用<paramref name="serializerType"/>类型实现序列化与反序列化
+            </summary>
+            <param name="serializerType">序列化代理类型</param>
+        </member>
+        <member name="T:Accelbuffer.Serializer">
+            <summary>
+            公开序列化对象的接口
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Serializer.PrepareSerializer``1">
+            <summary>
+            准备序列化代理
+            </summary>
+            <typeparam name="T">需要准备序列化代理的类型</typeparam>
+        </member>
+        <member name="M:Accelbuffer.Serializer.GetAllocator``1">
+            <summary>
+            获取内存分配器
+            </summary>
+            <typeparam name="T">需要获取的内存分配器所属的对象类型</typeparam>
+            <returns>类型的内存分配器</returns>
+        </member>
+        <member name="M:Accelbuffer.Serializer.Serialize``1(``0)">
+            <summary>
+            序列化对象，并返回序列化数据（线程安全）
+            </summary>
+            <param name="obj">被序列化的对象</param>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <returns>对象的序列化结果</returns>
+        </member>
+        <member name="M:Accelbuffer.Serializer.Serialize``1(``0,System.Byte[],System.Int32)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+            </summary>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">用于接受序列化数据的缓冲区</param>
+            <param name="index"><paramref name="buffer"/>开始写入的索引</param>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <returns>序列化数据的大小</returns>
+            <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
+        </member>
+        <member name="M:Accelbuffer.Serializer.Deserialize``1(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            反序列化<typeparamref name="T"/>类型对象实例
+            </summary>
+            <param name="bytes">被反序列化的字节数组</param>
+            <param name="index">开始读取的索引位置</param>
+            <param name="length">可以读取的字节大小</param>
+            <typeparam name="T">反序列化的对象类型</typeparam>
+            <returns>反序列化的对象实例</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
+        </member>
+        <member name="T:Accelbuffer.ObjectType">
+            <summary>
+            表示一个对象的数据类型（4位）
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Fixed8">
+            <summary>
+            8位固定长度类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Fixed16">
+            <summary>
+            16位固定长度类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Fixed32">
+            <summary>
+            32位固定长度类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Fixed64">
+            <summary>
+            64位固定长度类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Fixed128">
+            <summary>
+            128位固定长度类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Variant">
+            <summary>
+            动态长度类型 (1字节长度 + [0, 8]字节数据)
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.LengthPrefixed">
+            <summary>
+            前缀长度类型（Variant字节长度 + N字节数据）
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.ASCIIChar">
+            <summary>
+            使用ASCII编码的字符类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.UnicodeChar">
+            <summary>
+            使用Unicode编码的字符类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.UTF8Char">
+            <summary>
+            使用UTF8编码字符类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.ASCIIString">
+            <summary>
+            使用ASCII编码的字符串类型（Variant字节长度 + N字节数据）
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.UnicodeString">
+            <summary>
+            使用Unicode编码的字符串类型（Variant字节长度 + N字节数据）
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.UTF8String">
+            <summary>
+            使用UTF8编码的字符串类型（Variant字节长度 + N字节数据）
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Reserved0">
+            <summary>
+            保留类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Reserved1">
+            <summary>
+            保留类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.ObjectType.Reserved2">
+            <summary>
+            保留类型
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.StreamingWriter">
+            <summary>
+            提供将数据写入流的接口
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.SByte,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.SByte,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Byte,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Byte,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Int16,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int16,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.UInt16,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.UInt16,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Int32,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.UInt32,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.UInt32,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Int64,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int64,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.UInt64,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.UInt64,Accelbuffer.NumberFormat)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="format"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Single)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Decimal)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Decimal)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.Char,Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Char,Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.Int32,System.String,Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="index"></param>
+            <param name="value"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue(System.String,Accelbuffer.Text.Encoding)">
+            <summary>
+            
+            </summary>
+            <param name="value"></param>
+            <param name="encoding"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue``1(System.Int32,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="index"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteValue``1(``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.StreamingWriter.WriteTag(System.Int32,Accelbuffer.FieldType)">
+            <summary>
+            写入一个标签
+            </summary>
+            <param name="index">字段的索引，必须是 (0, 268435456] 范围内的整数</param>
+            <param name="fieldType">字段的类型</param>
+            <exception cref="T:Accelbuffer.InvalidFieldIndexException">index超出范围</exception>
+        </member>
+    </members>
+</doc>

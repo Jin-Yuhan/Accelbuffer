@@ -18,12 +18,17 @@
 * `Dictionary<TKey, TValue>`, `IDictionary<TKey, TValue>`
 * `ISerializableEnumerable<T>`
 * `ICollection<T>`
+* `Type`
 * `class`, `struct`
+
+> Unity配置下，新增类型
+* `Vector2`, `Vector3`, `Vector4`, `Vector2Int`, `Vector3Int`, `Quaternion`
 
 ## 基本用法
 ### 1.使用特性标记类型
 #### 方案一，自动注入代理
 ```csharp
+[Serializable]
 public class Student
 {
   [FieldIndex(1)]
@@ -144,6 +149,7 @@ MemoryAllocator.FreeAllAvailableMemory();
 > 这个方法不会造成值类型的装箱，且可以存在多个回调方法，这些方法必须是公共的实例方法且可以通过`Priority`指定调用顺序
 
 ```csharp
+[Serializable]
 public class Student
 {
   [FieldIndex(1)]

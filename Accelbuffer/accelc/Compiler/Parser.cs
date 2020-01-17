@@ -376,7 +376,7 @@ namespace accelc.Compiler
                     case TokenType.StringKeyword:
                     case TokenType.Identifier:
                         MoveBack();
-                        declaration = GetField();
+                        declaration = GetField(isTypeRef);
                         break;
 
                     case TokenType.PublicKeyword:
@@ -407,10 +407,14 @@ namespace accelc.Compiler
             {
                 MoveNext();
 
-                if (ExpectNextTokenType(1, TokenType.Int32Literal))
+                if (ExpectNextTokenType(1, TokenType.DefaultValue))
                 {
                     MoveNext();
-                    int value = int.Parse(Current().Raw);
+
+                    if (!int.TryParse(Current().Raw.Trim(), out int value))
+                    {
+                        LogError(Resources.Error_A1008_ExpectInt32Literal, Current());
+                    }
 
                     if (ExpectNextTokenType(1, TokenType.Semicolon))
                     {
@@ -441,10 +445,21 @@ namespace accelc.Compiler
             {
                 MoveNext();
 
-                if (ExpectNextTokenType(1, TokenType.PublicKeyword) || ExpectNextTokenType(1, TokenType.InternalKeyword))
+                if (ExpectNextTokenType(1, TokenType.DefaultValue))
                 {
                     MoveNext();
-                    bool isInternal = Current().Type == TokenType.InternalKeyword;
+
+                    bool isInternal = false;
+                    string value = Current().Raw.Trim();
+
+                    if (Scanner.Keywords.TryGetValue(value, out TokenType type) && (type == TokenType.PublicKeyword || type == TokenType.InternalKeyword))
+                    {
+                        isInternal = type == TokenType.InternalKeyword;
+                    }
+                    else
+                    {
+                        LogError(Resources.Error_A1012_ExpectAccessKeyword, Current());
+                    }
 
                     if (ExpectNextTokenType(1, TokenType.Semicolon))
                     {
@@ -501,7 +516,7 @@ namespace accelc.Compiler
             return null;
         }
 
-        private Declaration GetField()
+        private Declaration GetField(bool isRefType)
         {
             bool isFixed = false;
             bool isUnicode = false;
@@ -511,6 +526,7 @@ namespace accelc.Compiler
             string type;
             string name;
             string doc = null;
+            string assign = null;
 
             Token docToken = Current();
 
@@ -677,6 +693,24 @@ namespace accelc.Compiler
                 name = Current().Raw;
                 CheckIdentifier(name);
 
+                if (ExpectNextTokenType(1, TokenType.Equals))
+                {
+                    MoveNext();
+
+                    if (isRefType)
+                    {
+                        if (ExpectNextTokenType(1, TokenType.DefaultValue))
+                        {
+                            MoveNext();
+                            assign = Current().Raw.Trim();
+                        }
+                    }
+                    else
+                    {
+                        LogError(Resources.Error_A1001_InvalidAssignment, Current());
+                    }
+                }
+
                 if (ExpectNextTokenType(1, TokenType.Semicolon))
                 {
                     MoveNext();
@@ -689,7 +723,8 @@ namespace accelc.Compiler
                         IsCheckref = isCheckref,
                         Name = name,
                         Doc = doc,
-                        Type = type
+                        Type = type,
+                        Assignment = assign
                     };
                 }
                 else

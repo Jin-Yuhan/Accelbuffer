@@ -282,11 +282,11 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1001: 无法识别的字符 &apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1001: 无法为字段设置默认值，因为声明字段的类型没有被标记&apos;ref&apos;关键字 的本地化字符串。
         /// </summary>
-        internal static string Error_A1001_UnknownChar {
+        internal static string Error_A1001_InvalidAssignment {
             get {
-                return ResourceManager.GetString("Error_A1001_UnknownChar", resourceCulture);
+                return ResourceManager.GetString("Error_A1001_InvalidAssignment", resourceCulture);
             }
         }
         
@@ -543,6 +543,15 @@ namespace accelc.Properties {
         }
         
         /// <summary>
+        ///   查找类似 error: A1029: 无法识别的字符&apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1029_UnknownChar {
+            get {
+                return ResourceManager.GetString("Error_A1029_UnknownChar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 public {0} {1}; 的本地化字符串。
         /// </summary>
         internal static string Field {
@@ -557,6 +566,15 @@ namespace accelc.Properties {
         internal static string FieldIndex {
             get {
                 return ResourceManager.GetString("FieldIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 public {0} {1} = {2}; 的本地化字符串。
+        /// </summary>
+        internal static string FieldWithAssignment {
+            get {
+                return ResourceManager.GetString("FieldWithAssignment", resourceCulture);
             }
         }
         

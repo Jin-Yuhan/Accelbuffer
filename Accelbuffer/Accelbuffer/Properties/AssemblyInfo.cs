@@ -9,6 +9,8 @@ using System.Runtime.InteropServices;
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
+#elif UNITY
+[assembly: AssemblyConfiguration("Unity-Release")]
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
@@ -24,7 +26,7 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("8c53dd8b-aca0-466c-852c-4b2197540c3c")]
 
-[assembly: AssemblyVersion("1.4.10.6")]
-[assembly: AssemblyFileVersion("1.4.14.9")]
+[assembly: AssemblyVersion("1.4.10.7")]
+[assembly: AssemblyFileVersion("1.4.15.1")]
 [assembly: NeutralResourcesLanguage("zh")]
 

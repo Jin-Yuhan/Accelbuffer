@@ -7,11 +7,11 @@ namespace accelc.Compiler
 {
     public sealed class Scanner
     {
-        private static readonly Dictionary<string, TokenType> s_Keywords;
+        public static readonly Dictionary<string, TokenType> Keywords;
 
         static Scanner()
         {
-            s_Keywords = new Dictionary<string, TokenType>()
+            Keywords = new Dictionary<string, TokenType>()
             {
                 ["namespace"]= TokenType.NamespaceKeyword,
                 ["using"]= TokenType.UsingKeyword,
@@ -69,79 +69,85 @@ namespace accelc.Compiler
         public Token[] ToTokens()
         {
             List<Token> tokens = new List<Token>(25);
+            bool lastIsEquals = false;
 
             while (MoveNext())
             {
                 Token token = default;
                 char c = Current();
 
-                switch (c)
+                if (lastIsEquals)
                 {
-                    case ' ':
-                    case '\t':
-                    case '\0':
-                    case '\r':
-                        continue;
-                    case '\n':
-                        m_LineNumber++;
-                        continue;
+                    token = GetDefaultValue();
+                    lastIsEquals = false;
+                }
+                else
+                {
+                    switch (c)
+                    {
+                        case ' ':
+                        case '\t':
+                        case '\0':
+                        case '\r':
+                            continue;
+                        case '\n':
+                            m_LineNumber++;
+                            continue;
 
-                    case '{':
-                        if (tokens.Count > 0)
-                        {
-                            TokenType type = tokens[tokens.Count - 1].Type;
-                            if (type == TokenType.DotBeforeKeyword || type == TokenType.DotAfterKeyword)
+                        case '{':
+                            if (tokens.Count > 0)
                             {
-                                token = GetCSharpCode();
-                                break;
+                                TokenType type = tokens[tokens.Count - 1].Type;
+                                if (type == TokenType.DotBeforeKeyword || type == TokenType.DotAfterKeyword)
+                                {
+                                    token = GetCSharpCode();
+                                    break;
+                                }
                             }
-                        }
 
-                        token = CreateToken("{", TokenType.OpenBrace);
-                        break;
-                    case '}':
-                        token = CreateToken("}", TokenType.CloseBrace);
-                        break;
-                    case '[':
-                        token = CreateToken("[", TokenType.OpenBracket);
-                        break;
-                    case ']':
-                        token = CreateToken("]", TokenType.CloseBracket);
-                        break;
-                    case ';':
-                        token = CreateToken(";", TokenType.Semicolon);
-                        break;
-                    case ',':
-                        token = CreateToken(",", TokenType.Comma);
-                        break;
-                    case '=':
-                        token = CreateToken("=", TokenType.Equals);
-                        break;
+                            token = CreateToken("{", TokenType.OpenBrace);
+                            break;
+                        case '}':
+                            token = CreateToken("}", TokenType.CloseBrace);
+                            break;
+                        case '[':
+                            token = CreateToken("[", TokenType.OpenBracket);
+                            break;
+                        case ']':
+                            token = CreateToken("]", TokenType.CloseBracket);
+                            break;
+                        case ';':
+                            token = CreateToken(";", TokenType.Semicolon);
+                            break;
+                        case ',':
+                            token = CreateToken(",", TokenType.Comma);
+                            break;
+                        case '=':
+                            token = CreateToken("=", TokenType.Equals);
+                            lastIsEquals = true;
+                            break;
 
-                    case '-' when ExpectNextChar(1, '-')://文档
-                        MoveNext();
-                        token = GetDocument();
-                        break; ;
+                        case '-' when ExpectNextChar(1, '-')://文档
+                            MoveNext();
+                            token = GetDocument();
+                            break; ;
 
-                    case '/' when ExpectNextChar(1, '/')://单行注释
-                        MoveNext();
-                        IgnoreSingleLineComment();
-                        continue;
+                        case '/' when ExpectNextChar(1, '/')://单行注释
+                            MoveNext();
+                            IgnoreSingleLineComment();
+                            continue;
 
-                    default:
-                        if (char.IsDigit(c))
-                        {
-                            token = GetInt32DecimalLiteral();
-                        }
-                        else if (char.IsLetter(c) || c == '_' || c == '@' || c == '.')
-                        {
-                            token = GetIdentifierOrKeyword();
-                        }
-                        else
-                        {
-                            LogError(string.Format(Resources.Error_A1001_UnknownChar, c));
-                        }
-                        break;
+                        default:
+                            if (char.IsLetter(c) || c == '_' || c == '@' || c == '.')
+                            {
+                                token = GetIdentifierOrKeyword();
+                            }
+                            else
+                            {
+                                LogError(string.Format(Resources.Error_A1029_UnknownChar, c));
+                            }
+                            break;
+                    }
                 }
 
                 tokens.Add(token);
@@ -149,6 +155,36 @@ namespace accelc.Compiler
 
             tokens.Add(CreateToken(string.Empty, TokenType.EOF));//结束
             return tokens.ToArray();
+        }
+
+        /// <summary>
+        /// 获取默认值
+        /// </summary>
+        /// <returns></returns>
+        private Token GetDefaultValue()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            do
+            {
+                char c = Current();
+
+                if (c == ';')
+                {
+                    MoveBack();
+                    break;
+                }
+
+                if (c == '\n')
+                {
+                    m_LineNumber++;
+                }
+
+                sb.Append(c);
+
+            } while (MoveNext());
+
+            return CreateToken(sb.ToString(), TokenType.DefaultValue);
         }
 
         /// <summary>
@@ -203,36 +239,10 @@ namespace accelc.Compiler
 
             string str = sb.ToString();
 
-            if (s_Keywords.ContainsKey(str))
-                return CreateToken(str, s_Keywords[str]);
+            if (Keywords.ContainsKey(str))
+                return CreateToken(str, Keywords[str]);
             else
                 return CreateToken(str, TokenType.Identifier);
-        }
-
-        /// <summary>
-        /// 获取十进制的32位整数
-        /// </summary>
-        /// <returns></returns>
-        private Token GetInt32DecimalLiteral()
-        {
-            StringBuilder sb = new StringBuilder();
-            do
-            {
-                char c = Current();
-
-                if (char.IsDigit(c))
-                {
-                    sb.Append(c);
-                }
-                else
-                {
-                    MoveBack();
-                    break;
-                }
-
-            } while (MoveNext());
-
-            return CreateToken(sb.ToString(), TokenType.Int32Literal);
         }
 
         /// <summary>

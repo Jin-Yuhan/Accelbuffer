@@ -39,14 +39,31 @@
     <LangVersion>default</LangVersion>
     <CodeAnalysisRuleSet />
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Unity|AnyCPU'">
+    <OutputPath>bin\Unity\</OutputPath>
+    <DefineConstants>TRACE;UNITY</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Unity\Accelbuffer.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>default</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="UnityEngine">
+      <HintPath>D:\Unity\2019.2.5f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\FieldType.cs" />
     <Compile Include="Exceptions\InvalidFieldIndexException.cs" />
     <Compile Include="Exceptions\InvalidUTF8CharException.cs" />
     <Compile Include="Exceptions\SerializerTypeException.cs" />
+    <Compile Include="Injection\InternalSerializers\TypeSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\UnitySerializer.cs" />
     <Compile Include="Memory\InitialMemorySizeAttribute.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -138,7 +138,7 @@ namespace accelc.Compiler
                     switch (d)
                     {
                         case FieldDeclaration field:
-                            WriteField(field, declaration.IsRuntime, ref index);
+                            WriteField(field, ref index);
                             break;
 
                         case MessageDeclaration message:
@@ -448,7 +448,7 @@ namespace accelc.Compiler
             WriteLine("/// </summary>");
         }
 
-        private void WriteField(FieldDeclaration field, bool isRuntime, ref int index)
+        private void WriteField(FieldDeclaration field, ref int index)
         {
             if (field.Doc != null)
             {
@@ -480,7 +480,14 @@ namespace accelc.Compiler
                 WriteLine(Resources.EncodingUTF8);
             }
 
-            WriteLine(string.Format(Resources.Field, field.Type, field.Name));
+            if (string.IsNullOrEmpty(field.Assignment))
+            {
+                WriteLine(string.Format(Resources.Field, field.Type, field.Name));
+            }
+            else
+            {
+                WriteLine(string.Format(Resources.FieldWithAssignment, field.Type, field.Name, field.Assignment));
+            }
         }
 
         private void WriteMessage(MessageDeclaration message)

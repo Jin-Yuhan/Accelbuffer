@@ -217,8 +217,8 @@
   <data name="Error_A1023_UnexpectedUsing" xml:space="preserve">
     <value>error: A1023: 命名空间的引用必须在类型之前</value>
   </data>
-  <data name="Error_A1001_UnknownChar" xml:space="preserve">
-    <value>error: A1001: 无法识别的字符 '{0}'</value>
+  <data name="Error_A1001_InvalidAssignment" xml:space="preserve">
+    <value>error: A1001: 无法为字段设置默认值，因为声明字段的类型没有被标记'ref'关键字</value>
   </data>
   <data name="Version" xml:space="preserve">
     <value>v0.1.0.5</value>
@@ -426,5 +426,11 @@
   </data>
   <data name="Error_A1028_InvalidEncodingUTF8Keyword" xml:space="preserve">
     <value>error: A1028: 无效关键字'utf8'，因为字段的类型不是'char'或'string'类型</value>
+  </data>
+  <data name="FieldWithAssignment" xml:space="preserve">
+    <value>public {0} {1} = {2};</value>
+  </data>
+  <data name="Error_A1029_UnknownChar" xml:space="preserve">
+    <value>error: A1029: 无法识别的字符'{0}'</value>
   </data>
 </root>

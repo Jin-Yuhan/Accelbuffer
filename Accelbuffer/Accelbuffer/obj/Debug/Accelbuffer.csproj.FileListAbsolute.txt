@@ -12,3 +12,6 @@ C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\obj\De
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\obj\Debug\Accelbuffer.Properties.Resources.resources
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\obj\Debug\Accelbuffer.csproj.GenerateResource.cache
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\obj\Debug\Accelbuffer.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\bin\Debug\UnityEngine.dll
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\bin\Debug\UnityEngine.xml
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer\obj\Debug\Accelbuffer.csproj.CopyComplete

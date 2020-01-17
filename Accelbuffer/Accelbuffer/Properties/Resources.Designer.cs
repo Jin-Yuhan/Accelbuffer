@@ -241,6 +241,15 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 无法为{0}类型注入代理，因为类型没有被标记为[Serializable] 的本地化字符串。
+        /// </summary>
+        internal static string NotSerializable {
+            get {
+                return ResourceManager.GetString("NotSerializable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
         /// </summary>
         internal static string NotSupportHighRankArray {
@@ -250,7 +259,7 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 无法为{0}类型注入代理 的本地化字符串。
+        ///   查找类似 无法为{0}类型注入代理，因为类型没有无参构造方法 的本地化字符串。
         /// </summary>
         internal static string NotSupportTypeInjection {
             get {

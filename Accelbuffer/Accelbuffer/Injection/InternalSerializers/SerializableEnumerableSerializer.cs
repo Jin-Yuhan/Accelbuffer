@@ -6,11 +6,6 @@
         {
             int count = iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : 0;
 
-            if (count == -1)
-            {
-                return default;
-            }
-
             T result = new T();
             result.Initialize(count);
 
@@ -24,13 +19,8 @@
 
         void ITypeSerializer<T>.Serialize(T obj, ref StreamingWriter writer)
         {
-            int count = obj == null ? -1 : obj.Count;
+            int count = obj.Count;
             writer.WriteValue(count, NumberFormat.Variant);
-
-            if (count == -1)
-            {
-                return;
-            }
 
             foreach (TValue o in obj)
             {

@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Accelbuffer.Test.TestClass-20200116-125200</title>
+<title>Accelbuffer.Test.TestClass-20200117-131612</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -15,7 +15,7 @@
 <pre><code>
 BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
 Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
-Frequency=2836162 Hz, Resolution=352.5892 ns, Timer=TSC
+Frequency=2836123 Hz, Resolution=352.5940 ns, Timer=TSC
   [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
   DefaultJob : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
 </code></pre>
@@ -24,8 +24,8 @@ Frequency=2836162 Hz, Resolution=352.5892 ns, Timer=TSC
 <table>
 <thead><tr><th>                      Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>StdErr</th><th>Min</th><th>Q1</th><th>Median</th><th>Q3</th><th>Max</th><th>Op/s</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>AccelbufferSerializeAndDeserialize</td><td>10.66 us</td><td>0.093 us</td><td>0.082 us</td><td>0.022 us</td><td>10.57 us</td><td>10.60 us</td><td>10.63 us</td><td>10.72 us</td><td>10.85 us</td><td>93,790.7</td><td>1.1902</td><td>-</td><td>-</td><td>1.84 KB</td>
-</tr><tr><td>ProtobufDeserializeAndDeserialize</td><td>11.90 us</td><td>0.114 us</td><td>0.106 us</td><td>0.027 us</td><td>11.78 us</td><td>11.82 us</td><td>11.88 us</td><td>12.03 us</td><td>12.07 us</td><td>84,001.9</td><td>1.9836</td><td>-</td><td>-</td><td>3.06 KB</td>
+</thead><tbody><tr><td>AccelbufferSerializeAndDeserialize</td><td>10.85 us</td><td>0.265 us</td><td>0.505 us</td><td>0.075 us</td><td>10.64 us</td><td>10.68 us</td><td>10.72 us</td><td>10.80 us</td><td>13.35 us</td><td>92,206.5</td><td>1.1902</td><td>-</td><td>-</td><td>1.84 KB</td>
+</tr><tr><td>ProtobufDeserializeAndDeserialize</td><td>11.95 us</td><td>0.074 us</td><td>0.066 us</td><td>0.018 us</td><td>11.87 us</td><td>11.90 us</td><td>11.92 us</td><td>11.99 us</td><td>12.07 us</td><td>83,681.4</td><td>1.9836</td><td>-</td><td>-</td><td>3.06 KB</td>
 </tr></tbody></table>
 </body>
 </html>

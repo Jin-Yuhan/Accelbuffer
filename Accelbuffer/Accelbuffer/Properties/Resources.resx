@@ -181,7 +181,7 @@
     <value>不支持多维数组序列化与反序列化</value>
   </data>
   <data name="NotSupportTypeInjection" xml:space="preserve">
-    <value>无法为{0}类型注入代理</value>
+    <value>无法为{0}类型注入代理，因为类型没有无参构造方法</value>
   </data>
   <data name="SByteName" xml:space="preserve">
     <value>Int8</value>
@@ -230,5 +230,8 @@
   </data>
   <data name="WriteValueMethodName" xml:space="preserve">
     <value>WriteValue</value>
+  </data>
+  <data name="NotSerializable" xml:space="preserve">
+    <value>无法为{0}类型注入代理，因为类型没有被标记为[Serializable]</value>
   </data>
 </root>

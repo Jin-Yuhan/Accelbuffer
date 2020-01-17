@@ -8,6 +8,11 @@
         Invalid = 0,
 
         /// <summary>
+        /// C#使用的字符
+        /// </summary>
+        DefaultValue,
+
+        /// <summary>
         /// 文件末尾
         /// </summary>
         EOF,
@@ -61,11 +66,6 @@
         /// 标识符
         /// </summary>
         Identifier,
-
-        /// <summary>
-        /// 十进制32位整数
-        /// </summary>
-        Int32Literal,
 
         /// <summary>
         /// namespace

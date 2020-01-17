@@ -45,12 +45,23 @@ namespace Accelbuffer.Injection
                 [typeof(bool)] = typeof(PrimitiveTypeSerializer),
                 [typeof(char)] = typeof(PrimitiveTypeSerializer),
                 [typeof(string)] = typeof(PrimitiveTypeSerializer),
+                [typeof(Type)] = typeof(TypeSerializer),
+
                 [typeof(List<>)] = typeof(ListSerializer<>),
                 [typeof(IList<>)] = typeof(ListSerializeProxy<,>),
                 [typeof(ICollection<>)] = typeof(CollectionSerializer<,>),
                 [typeof(ISerializableEnumerable<>)] = typeof(SerializableEnumerableSerializer<,>),
                 [typeof(Dictionary<,>)] = typeof(DictionarySerializer<,>),
-                [typeof(IDictionary<,>)] = typeof(DictionarySerializeProxy<,,>)
+                [typeof(IDictionary<,>)] = typeof(DictionarySerializeProxy<,,>),
+
+#if UNITY
+                [typeof(UnityEngine.Vector2)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Vector3)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Vector4)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Vector2Int)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Vector3Int)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Quaternion)] = typeof(UnitySerializer)
+#endif
             };
         }
 
@@ -163,6 +174,11 @@ namespace Accelbuffer.Injection
                 if (!IsInjectable(objectType))
                 {
                     throw new NotSupportedException(string.Format(Resources.NotSupportTypeInjection, objectType));
+                }
+
+                if (!objectType.IsSerializable)
+                {
+                    throw new NotSupportedException(string.Format(Resources.NotSerializable, objectType));
                 }
 
                 return SerializerPipeline.InjectType<T>();

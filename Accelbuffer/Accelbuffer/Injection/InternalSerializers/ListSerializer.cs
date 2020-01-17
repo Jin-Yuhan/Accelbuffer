@@ -7,12 +7,6 @@ namespace Accelbuffer.Injection
         List<T> ITypeSerializer<List<T>>.Deserialize(ref StreamingIterator iterator)
         {
             int count = iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : 0;
-
-            if (count == -1)
-            {
-                return null;
-            }
-
             List<T> result = new List<T>(count);
 
             while (iterator.HasNext())
@@ -25,7 +19,7 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<List<T>>.Serialize(List<T> obj, ref StreamingWriter writer)
         {
-            int count = obj == null ? -1 : obj.Count;
+            int count = obj.Count;
             writer.WriteValue(count, NumberFormat.Variant);
 
             for (int i = 0; i < count; i++)
@@ -39,13 +33,6 @@ namespace Accelbuffer.Injection
     {
         T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
         {
-            int count = iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : 0;
-
-            if (count == -1)
-            {
-                return default;
-            }
-
             T result = new T();
 
             while (iterator.HasNext())
@@ -58,14 +45,6 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<T>.Serialize(T obj, ref StreamingWriter writer)
         {
-            int count = obj == null ? -1 : obj.Count;
-            writer.WriteValue(count, NumberFormat.Variant);
-
-            if (count == -1)
-            {
-                return;
-            }
-
             for (int i = 0; i < obj.Count; i++)
             {
                 writer.WriteValue(obj[i]);
