@@ -1,8 +1,11 @@
 # Accelbuffer - v1.4
 `Accelbuffer` 是一个快速，高效的序列化系统。
 
-## 运行时支持
-`.NET Framework 4.5+`
+## 支持
+* 需要.NET Framework 4.5+
+* 提供unity插件
+* 提供unity生成配置
+* 提供sublime的语法高亮文件
 
 ## 特点
 * 时间消耗低
@@ -99,8 +102,6 @@ internal sealed class StudentSerializer : ITypeSerializer<Student>
 ```
 
 #### 方案三，使用`Accelbuffer`语言
-> 项目提供了`sublime`的语法高亮文件
-
 ```csharp
 using System.Collections.Generic;
 

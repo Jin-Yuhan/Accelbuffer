@@ -100,7 +100,7 @@ namespace accelc
                                 continue;
                             }
 
-                            string outputPath = filePath + ".cs";
+                            string outputPath = Path.ChangeExtension(filePath, "cs");
                             Generator generator = new Generator(declarations, outputPath);
                             generator.Generate();
 

@@ -100,7 +100,7 @@ namespace accelc.Properties {
         ///   查找类似 type #NAME#
         ///{  
         ///	
-        ///	//序列化消息，会在序列化前调用，可以在这个方法设置字段的默认值，内部的代码请使用纯C#编写
+        ///	//序列化消息，会在序列化前调用，内部的代码请使用纯C#编写
         ///	.before
         ///	{
         ///
@@ -282,7 +282,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1001: 无法为字段设置默认值，因为声明字段的类型没有被标记&apos;ref&apos;关键字 的本地化字符串。
+        ///   查找类似 error: A1001: the default value cannot be set for the field because the type of the declared field is not marked with the &apos;ref&apos; keyword 的本地化字符串。
         /// </summary>
         internal static string Error_A1001_InvalidAssignment {
             get {
@@ -291,7 +291,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1002: 无法找到文件：{0} 的本地化字符串。
+        ///   查找类似 error: A1002: file not found:{0} 的本地化字符串。
         /// </summary>
         internal static string Error_A1002_FileNotFound {
             get {
@@ -300,7 +300,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1003: 缺少&apos;}&apos; 的本地化字符串。
+        ///   查找类似 error: A1003: missing&apos;}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1003_ExpectCloseBrace {
             get {
@@ -309,7 +309,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1004: 缺少方法体 的本地化字符串。
+        ///   查找类似 error: A1004: missing method body 的本地化字符串。
         /// </summary>
         internal static string Error_A1004_ExpectCShapCode {
             get {
@@ -318,7 +318,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1005: 缺少&apos;=&apos; 的本地化字符串。
+        ///   查找类似 error: A1005: missing&apos;=&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1005_ExpectEquals {
             get {
@@ -327,7 +327,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1006: 缺少类型标识符 的本地化字符串。
+        ///   查找类似 error: A1006: missing type identifier 的本地化字符串。
         /// </summary>
         internal static string Error_A1006_ExpectFieldType {
             get {
@@ -336,7 +336,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1007: 缺少标识符 的本地化字符串。
+        ///   查找类似 error: A1007: missing identifier 的本地化字符串。
         /// </summary>
         internal static string Error_A1007_ExpectIdentifier {
             get {
@@ -345,7 +345,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1008: 缺少整数常量 的本地化字符串。
+        ///   查找类似 error: A1008: missing integer constant 的本地化字符串。
         /// </summary>
         internal static string Error_A1008_ExpectInt32Literal {
             get {
@@ -354,7 +354,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1009: 缺少&apos;{&apos; 的本地化字符串。
+        ///   查找类似 error: A1009: missing&apos;{&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1009_ExpectOpenBrace {
             get {
@@ -363,7 +363,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1010: 缺少&apos;;&apos; 的本地化字符串。
+        ///   查找类似 error: A1010: missing&apos;;&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1010_ExpectSemicolon {
             get {
@@ -372,7 +372,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1011: 缺少&apos;type&apos;关键字 的本地化字符串。
+        ///   查找类似 error: A1011: missing &apos;type&apos; keyword 的本地化字符串。
         /// </summary>
         internal static string Error_A1011_ExpectTypeKeyword {
             get {
@@ -381,7 +381,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1012: 缺少 &apos;public&apos; 或 &apos;internal&apos; 关键字 的本地化字符串。
+        ///   查找类似 error: A1012: missing &apos;public&apos; or &apos;internal&apos; keyword 的本地化字符串。
         /// </summary>
         internal static string Error_A1012_ExpectAccessKeyword {
             get {
@@ -390,7 +390,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1013: 缺少&apos;--&apos; 的本地化字符串。
+        ///   查找类似 error: A1013: missing&apos;--&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1013_ExpectSubSub {
             get {
@@ -399,7 +399,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1014: 无效的字符&apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1014: invalid character&apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1014_InvalidChar {
             get {
@@ -408,7 +408,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1014: &apos;.ctor&apos;必须在标记了&apos;ref&apos;关键字的类型中使用 的本地化字符串。
+        ///   查找类似 error: A1014: &apos;.ctor&apos; must be used in a type marked with the &apos;ref&apos; keyword 的本地化字符串。
         /// </summary>
         internal static string Error_A1014_InvalidCtor {
             get {
@@ -417,7 +417,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1015: 无效的关键字&apos;fixed&apos;，因为字段类型不是整数类型 的本地化字符串。
+        ///   查找类似 error: A1015: invalid keyword &apos;fixed&apos; because field type is not integer type 的本地化字符串。
         /// </summary>
         internal static string Error_A1015_InvalidFixedKeyword {
             get {
@@ -426,7 +426,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1016: 无效的关键字&apos;final&apos;，因为类型没有标记&apos;ref&apos;关键字 的本地化字符串。
+        ///   查找类似 error: A1016: invalid keyword &apos;final&apos; because the type does not have the &apos;ref&apos; keyword marked 的本地化字符串。
         /// </summary>
         internal static string Error_A1016_InvalidFinal {
             get {
@@ -435,7 +435,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1017: 无效的标识符&apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1017: invalid indentifier&apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1017_InvalidIdentifier {
             get {
@@ -444,7 +444,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1018: 无效的标记&apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1018: invalid token&apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1018_InvalidToken {
             get {
@@ -453,7 +453,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1019: 不能同时定义多个命名空间 的本地化字符串。
+        ///   查找类似 error: A1019: cannot define multiple namespaces at the same time 的本地化字符串。
         /// </summary>
         internal static string Error_A1019_MultiNamespace {
             get {
@@ -462,7 +462,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1020: 可访问修饰符重复 的本地化字符串。
+        ///   查找类似 error: A1020: multiple accessible modifier 的本地化字符串。
         /// </summary>
         internal static string Error_A1020_MultipleAccessKeyword {
             get {
@@ -471,7 +471,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1021: 重复的关键字&apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1021: multiple keyword&apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1021_MultipleKeyword {
             get {
@@ -480,7 +480,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1022: 命名空间的声明必须在类型之前 的本地化字符串。
+        ///   查找类似 error: A1022: namespace must be declared before type 的本地化字符串。
         /// </summary>
         internal static string Error_A1022_UnexpectedNamespace {
             get {
@@ -489,7 +489,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1023: 命名空间的引用必须在类型之前 的本地化字符串。
+        ///   查找类似 error: A1023: reference to namespace must precede type 的本地化字符串。
         /// </summary>
         internal static string Error_A1023_UnexpectedUsing {
             get {
@@ -498,7 +498,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1024: 无效的关键字&apos;checkref&apos;，因为声明字段的类型被标记为&apos;compact&apos; 的本地化字符串。
+        ///   查找类似 error: A1024: invalid keyword &apos;checkref&apos; because the type of declared field is marked &apos;compact&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1024_InvalidCheckRefWhenCompact {
             get {
@@ -507,7 +507,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1025: 无效的关键字&apos;checkref&apos;，因为字段的类型不是引用类型 的本地化字符串。
+        ///   查找类似 error: A1025: invalid keyword &apos;checkref&apos; because the field type is not a reference type 的本地化字符串。
         /// </summary>
         internal static string Error_A1025_InvalidCheckrefKeyword {
             get {
@@ -516,7 +516,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1026: 无效关键字&apos;unicode&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        ///   查找类似 error: A1026: invalid keyword &apos;unicode&apos; because field is not of type &apos;char&apos; or &apos;string&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1026_InvalidEncodingUnicodeKeyword {
             get {
@@ -525,7 +525,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1027: 无效关键字&apos;ascii&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        ///   查找类似 error: A1027: invalid keyword &apos;ascii&apos; because field is not of type &apos;char&apos; or &apos;string&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1027_InvalidEncodingASCIIKeyword {
             get {
@@ -534,7 +534,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1028: 无效关键字&apos;utf8&apos;，因为字段的类型不是&apos;char&apos;或&apos;string&apos;类型 的本地化字符串。
+        ///   查找类似 error: A1028: invalid keyword &apos;utf8&apos; because field is not of type &apos;char&apos; or &apos;string&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1028_InvalidEncodingUTF8Keyword {
             get {
@@ -543,7 +543,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 error: A1029: 无法识别的字符&apos;{0}&apos; 的本地化字符串。
+        ///   查找类似 error: A1029: unknown character&apos;{0}&apos; 的本地化字符串。
         /// </summary>
         internal static string Error_A1029_UnknownChar {
             get {
@@ -579,7 +579,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 文件路径： 的本地化字符串。
+        ///   查找类似 file path: 的本地化字符串。
         /// </summary>
         internal static string FilePath {
             get {
@@ -597,7 +597,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 文件生成成功 的本地化字符串。
+        ///   查找类似 successful 的本地化字符串。
         /// </summary>
         internal static string GenerateSuccessfully {
             get {
@@ -633,7 +633,7 @@ namespace accelc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 行号： 的本地化字符串。
+        ///   查找类似 line: 的本地化字符串。
         /// </summary>
         internal static string LineNumber {
             get {
