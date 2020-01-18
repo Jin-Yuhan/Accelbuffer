@@ -579,6 +579,33 @@ namespace accelc.Properties {
         }
         
         /// <summary>
+        ///   查找类似 error: A1031: repeat setting &apos;. init_memory&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1031_InvalidDotInitMemory {
+            get {
+                return ResourceManager.GetString("Error_A1031_InvalidDotInitMemory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1032: repeat declaration &apos;.before&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1032_InvalidDotBefore {
+            get {
+                return ResourceManager.GetString("Error_A1032_InvalidDotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 error: A1033: repeat declaration &apos;.after&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_A1033_InvalidDotAfter {
+            get {
+                return ResourceManager.GetString("Error_A1033_InvalidDotAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 public {0} {1}; 的本地化字符串。
         /// </summary>
         internal static string Field {

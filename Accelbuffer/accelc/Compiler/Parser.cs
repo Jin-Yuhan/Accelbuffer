@@ -273,7 +273,7 @@ namespace accelc.Compiler
                 {
                     MoveNext();
 
-                    Declaration[] declarations = GetMembers(isRef, isCompact);
+                    Declaration[] declarations = GetMembers(isRef, isCompact, out InitMemoryDeclaration initMemory, out MessageDeclaration before, out MessageDeclaration after);
 
                     while (MoveNext())
                     {
@@ -301,7 +301,10 @@ namespace accelc.Compiler
                             IsCompact = isCompact,
                             Name = name,
                             Doc = doc,
-                            Declarations = declarations
+                            Declarations = declarations,
+                            InitMemory = initMemory,
+                            Before = before,
+                            After = after
                         };
                     }
                     else
@@ -322,10 +325,13 @@ namespace accelc.Compiler
             return null;
         }
 
-        private Declaration[] GetMembers(bool isTypeRef, bool isCompact)
+        private Declaration[] GetMembers(bool isTypeRef, bool isCompact, out InitMemoryDeclaration initMemory, out MessageDeclaration before, out MessageDeclaration after)
         {
             List<Declaration> declarations = new List<Declaration>(5);
-
+            initMemory = null;
+            before = null;
+            after = null;
+          
             while (MoveNext())
             {
                 Token token = Current();
@@ -337,17 +343,29 @@ namespace accelc.Compiler
                     case TokenType.Document:
                         continue;
 
+                    case TokenType.DotInitMemoryKeyword when initMemory != null:
+                        LogError(Resources.Error_A1031_InvalidDotInitMemory, token);
+                        break;
+
                     case TokenType.DotInitMemoryKeyword:
-                        declaration = GetInitMemory();
+                        initMemory = GetInitMemory();
+                        continue;
+
+                    case TokenType.DotBeforeKeyword when before != null:
+                        LogError(Resources.Error_A1032_InvalidDotBefore, token);
                         break;
 
                     case TokenType.DotBeforeKeyword:
-                        declaration = GetBefore();
+                        before = GetBefore();
+                        continue;
+
+                    case TokenType.DotAfterKeyword when after != null:
+                        LogError(Resources.Error_A1033_InvalidDotAfter, token);
                         break;
 
                     case TokenType.DotAfterKeyword:
-                        declaration = GetAfter();
-                        break;
+                        after = GetAfter();
+                        continue;
 
                     case TokenType.CheckrefKeyword when isCompact:
                         LogError(Resources.Error_A1024_InvalidCheckRefWhenCompact, token);
@@ -399,7 +417,7 @@ namespace accelc.Compiler
             return declarations.ToArray();
         }
 
-        private Declaration GetInitMemory()
+        private InitMemoryDeclaration GetInitMemory()
         {
             if (ExpectNextTokenType(1, TokenType.Equals))
             {
@@ -437,13 +455,13 @@ namespace accelc.Compiler
             return null;
         }
 
-        private Declaration GetBefore()
+        private MessageDeclaration GetBefore()
         {
             if (ExpectNextTokenType(1, TokenType.CSharpCode))
             {
                 MoveNext();
                 string code = Current().Raw;
-                return new MessageDeclaration { IsAfter = false, Code = code };
+                return new MessageDeclaration { Code = code };
             }
             else
             {
@@ -453,13 +471,13 @@ namespace accelc.Compiler
             return null;
         }
 
-        private Declaration GetAfter()
+        private MessageDeclaration GetAfter()
         {
             if(ExpectNextTokenType(1, TokenType.CSharpCode))
             {
                 MoveNext();
                 string code = Current().Raw;
-                return new MessageDeclaration { IsAfter = true, Code = code };
+                return new MessageDeclaration { Code = code };
             }
             else
             {

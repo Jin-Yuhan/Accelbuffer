@@ -11,5 +11,8 @@
         public string Doc;
 
         public Declaration[] Declarations;
+        public InitMemoryDeclaration InitMemory;
+        public MessageDeclaration Before;
+        public MessageDeclaration After;
     }
 }

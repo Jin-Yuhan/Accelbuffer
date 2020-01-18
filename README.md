@@ -119,8 +119,9 @@ ref type Student
 > accelc -c C:\Users\Administrator\Desktop\test.accel
 
 * 如果输出以下内容，则编译成功
-> 文件生成成功
-> 文件路径：C:\Users\Administrator\Desktop\test.accel.cs
+> successful
+
+> file path：C:\Users\Administrator\Desktop\test.cs
 
 ### 2.序列化对象
 ```csharp

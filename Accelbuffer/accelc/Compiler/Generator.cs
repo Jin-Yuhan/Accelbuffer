@@ -96,9 +96,9 @@ namespace accelc.Compiler
 
             WriteLine(Resources.Serializable);
 
-            if (declaration.Declarations.FirstOrDefault(de => de is InitMemoryDeclaration) is InitMemoryDeclaration initMemory)
+            if (declaration.InitMemory != null)
             {
-                WriteLine(string.Format(Resources.InitialMemorySize, initMemory.Value));
+                WriteLine(string.Format(Resources.InitialMemorySize, declaration.InitMemory.Value));
             }
 
             if (!declaration.IsRuntime)
@@ -141,13 +141,20 @@ namespace accelc.Compiler
                             WriteField(field, ref index);
                             break;
 
-                        case MessageDeclaration message:
-                            WriteMessage(message);
-                            break;
                         case TypeDeclaration type:
                             GenerateType(type);
                             break;
                     }
+                }
+
+                if (declaration.Before != null)
+                {
+                    WriteMessage(declaration.Before, false);
+                }
+
+                if (declaration.After != null)
+                {
+                    WriteMessage(declaration.After, true);
                 }
 
                 if (declaration.IsRef)
@@ -179,7 +186,10 @@ namespace accelc.Compiler
                 {
                     int index = 1;
 
-                    WriteLine(Resources.BeforeMethod);
+                    if (declaration.Before != null)
+                    {
+                        WriteLine(Resources.BeforeMethod);
+                    }
 
                     foreach (Declaration d in declaration.Declarations)
                     {
@@ -385,7 +395,10 @@ namespace accelc.Compiler
 
                             if (declaration.IsCompact)
                             {
-                                WriteLine(Resources.AfterMethod);
+                                if (declaration.After != null)
+                                {
+                                    WriteLine(Resources.AfterMethod);
+                                }
                                 WriteLine(Resources.ReturnResult);
                             }
                             else
@@ -403,7 +416,10 @@ namespace accelc.Compiler
                         }
                     }
 
-                    WriteLine(Resources.AfterMethod);
+                    if (declaration.After != null)
+                    {
+                        WriteLine(Resources.AfterMethod);
+                    }
                     WriteLine(Resources.ReturnResult);
                 }
             }
@@ -487,11 +503,11 @@ namespace accelc.Compiler
             }
         }
 
-        private void WriteMessage(MessageDeclaration message)
+        private void WriteMessage(MessageDeclaration message, bool isAfter)
         {
             WriteLine();
 
-            if (message.IsAfter)
+            if (isAfter)
             {
                 WriteLine(Resources.AfterAttr);
                 WriteLine(Resources.After);

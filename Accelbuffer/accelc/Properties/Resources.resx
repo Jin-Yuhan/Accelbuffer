@@ -442,4 +442,13 @@
   <data name="Error_A1030_InvalidRuntime" xml:space="preserve">
     <value>error: A1030: invalid keyword 'runtime' because type is marked 'internal'</value>
   </data>
+  <data name="Error_A1031_InvalidDotInitMemory" xml:space="preserve">
+    <value>error: A1031: repeat setting '. init_memory'</value>
+  </data>
+  <data name="Error_A1032_InvalidDotBefore" xml:space="preserve">
+    <value>error: A1032: repeat declaration '.before'</value>
+  </data>
+  <data name="Error_A1033_InvalidDotAfter" xml:space="preserve">
+    <value>error: A1033: repeat declaration '.after'</value>
+  </data>
 </root>
