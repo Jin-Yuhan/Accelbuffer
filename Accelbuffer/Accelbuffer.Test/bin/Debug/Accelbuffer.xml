@@ -179,275 +179,6 @@
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
         </member>
-        <member name="T:Accelbuffer.Memory.InitialMemorySizeAttribute">
-            <summary>
-            指定<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>初始内存分配大小
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.InitialMemorySizeAttribute.InitialSize">
-            <summary>
-            获取初始的内存分配大小，以字节为单位
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.Memory.InitialMemorySizeAttribute.#ctor(System.Int32)">
-            <summary>
-            创建 InitialMemorySizeAttribute 实例
-            </summary>
-            <param name="initialSize">获取初始的内存分配大小，以字节为单位</param>
-        </member>
-        <member name="T:Accelbuffer.Memory.MemoryAllocator">
-            <summary>
-            公开对序列化内存分配的管理与查询接口
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.MemoryAllocator.DefaultInitialSize">
-            <summary>
-            获取/设置默认初始内存分配大小
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.Memory.MemoryAllocator.FreeAllAvailableMemory">
-            <summary>
-            尝试释放所有使用<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>分配的内存
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.MemoryAllocator.InitialSize">
-            <summary>
-            获取/设置初始化内存时应该分配的字节大小
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.MemoryAllocator.AllocatedSize">
-            <summary>
-            获取当前分配的内存大小，以字节为单位
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsWritingMemory">
-            <summary>
-            获取是否正在写入内存
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsCurrentThreadWritingMemory">
-            <summary>
-            获取当前线程是否正在写入内存
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.Memory.MemoryAllocator.GetMemoryPtr(System.Int32,System.Int32)">
-            <summary>
-            这个方法不是线程安全的，如果需要使方法线程安全，
-            请在前后插入<see cref="M:Accelbuffer.Memory.MemoryAllocator.BeginThreadSafeMemoryWriting"/>和<see cref="M:Accelbuffer.Memory.MemoryAllocator.EndThreadSafeMemoryWriting"/>
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.Memory.MemoryAllocator.TryFreeMemory">
-            <summary>
-            尝试释放当前分配的内存
-            </summary>
-            <returns>如果释放成功，返回true，否则，false</returns>
-        </member>
-        <member name="T:Accelbuffer.Properties.Resources">
-            <summary>
-              一个强类型的资源类，用于查找本地化的字符串等。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ResourceManager">
-            <summary>
-              返回此类使用的缓存的 ResourceManager 实例。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.Culture">
-            <summary>
-              重写当前线程的 CurrentUICulture 属性
-              重写当前线程的 CurrentUICulture 属性。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ASCIIStringByteCountError">
-            <summary>
-              查找类似 ASCII字符串的字节数量必须是非负数 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.BoolName">
-            <summary>
-              查找类似 Boolean 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ByteArrayIsNull">
-            <summary>
-              查找类似 字节数组不能为空 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ByteArrayTooShort">
-            <summary>
-              查找类似 字节数组长度过小 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ByteName">
-            <summary>
-              查找类似 UInt8 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.CharName">
-            <summary>
-              查找类似 Char 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ComplexName">
-            <summary>
-              查找类似  的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.DecimalName">
-            <summary>
-              查找类似 Float128 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.DeserializeMethodName">
-            <summary>
-              查找类似 Deserialize 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.DoubleName">
-            <summary>
-              查找类似 Float64 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.FloatName">
-            <summary>
-              查找类似 Float32 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.HasNextName">
-            <summary>
-              查找类似 HasNext 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.IntName">
-            <summary>
-              查找类似 Int32 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.InvalidCastFormat">
-            <summary>
-              查找类似 不存在从{0}到{1}的隐式转换 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.InvalidFieldIndex">
-            <summary>
-              查找类似 字段的索引必须是 (0, 268435456] 范围内的整数 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.InvalidSerializerType">
-            <summary>
-              查找类似 所有的序列化代理必须要实现ITypeSerializer&lt;T&gt;接口 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.InvalidUTF8Char">
-            <summary>
-              查找类似 UTF8字符的第一个字节的格式必须满足&apos;0vvvvvvv&apos;或&apos;110vvvvv&apos;或&apos;1110vvvv&apos; 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.LongName">
-            <summary>
-              查找类似 Int64 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.NextAsName">
-            <summary>
-              查找类似 NextAs 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.NextAsWithoutTagName">
-            <summary>
-              查找类似 NextAs{0}WithoutTag 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.NotSupportHighRankArray">
-            <summary>
-              查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.NotSupportTypeInjection">
-            <summary>
-              查找类似 无法为{0}类型注入代理 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SByteName">
-            <summary>
-              查找类似 Int8 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SerializeMethodName">
-            <summary>
-              查找类似 Serialize 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SerializerAssemblyName">
-            <summary>
-              查找类似 DynamicSerializerAssembly.dll 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SerializerModuleName">
-            <summary>
-              查找类似 DynamicSerializerModule 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeIsNull">
-            <summary>
-              查找类似 序列化代理类型不能为null 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeSuffix">
-            <summary>
-              查找类似 &lt;Serializer&gt; 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ShortName">
-            <summary>
-              查找类似 Int16 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.SkipNextName">
-            <summary>
-              查找类似 SkipNext 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.StreamTooShort">
-            <summary>
-              查找类似 数据流的长度过小 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.StringName">
-            <summary>
-              查找类似 String 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.UIntName">
-            <summary>
-              查找类似 UInt32 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.ULongName">
-            <summary>
-              查找类似 UInt64 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.UnicodeStringByteCountError">
-            <summary>
-              查找类似 Unicode字符串的字节数量必须是非负偶数 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.UShortName">
-            <summary>
-              查找类似 UInt16 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.UTF8StringByteCountError">
-            <summary>
-              查找类似 UTF8字符串的字节数量必须是非负数 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.WriteValueMethodName">
-            <summary>
-              查找类似 WriteValue 的本地化字符串。
-            </summary>
-        </member>
         <member name="T:Accelbuffer.Injection.CheckRefAttribute">
             <summary>
             指示序列化时检查字段引用是否为null，如果是null，则不写入字段，这个特性只对引用类型有效；
@@ -660,6 +391,280 @@
             <param name="objectType">序列化对象类型</param>
             <param name="checkAttribute">指示是否检查类型的<see cref="T:Accelbuffer.SerializeByAttribute"/></param>
             <returns>如果已经存在，返回true，否则，false</returns>
+        </member>
+        <member name="T:Accelbuffer.Memory.InitialMemorySizeAttribute">
+            <summary>
+            指定<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>初始内存分配大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.InitialMemorySizeAttribute.InitialSize">
+            <summary>
+            获取初始的内存分配大小，以字节为单位
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.InitialMemorySizeAttribute.#ctor(System.Int32)">
+            <summary>
+            创建 InitialMemorySizeAttribute 实例
+            </summary>
+            <param name="initialSize">获取初始的内存分配大小，以字节为单位</param>
+        </member>
+        <member name="T:Accelbuffer.Memory.MemoryAllocator">
+            <summary>
+            公开对序列化内存分配的管理与查询接口
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.DefaultInitialSize">
+            <summary>
+            获取/设置默认初始内存分配大小
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.FreeAllAvailableMemory">
+            <summary>
+            尝试释放所有使用<see cref="T:Accelbuffer.Memory.MemoryAllocator"/>分配的内存
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.InitialSize">
+            <summary>
+            获取/设置初始化内存时应该分配的字节大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.AllocatedSize">
+            <summary>
+            获取当前分配的内存大小，以字节为单位
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsWritingMemory">
+            <summary>
+            获取是否正在写入内存
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Memory.MemoryAllocator.IsCurrentThreadWritingMemory">
+            <summary>
+            获取当前线程是否正在写入内存
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.GetMemoryPtr(System.Int32,System.Int32)">
+            <summary>
+            这个方法不是线程安全的，如果需要使方法线程安全，
+            请在前后插入<see cref="M:Accelbuffer.Memory.MemoryAllocator.BeginThreadSafeMemoryWriting"/>和<see cref="M:Accelbuffer.Memory.MemoryAllocator.EndThreadSafeMemoryWriting"/>
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.TryFreeMemory">
+            <summary>
+            尝试释放当前分配的内存
+            </summary>
+            <returns>如果释放成功，返回true，否则，false</returns>
+        </member>
+        <member name="T:Accelbuffer.Properties.Resources">
+            <summary>
+              一个强类型的资源类，用于查找本地化的字符串等。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ResourceManager">
+            <summary>
+              返回此类使用的缓存的 ResourceManager 实例。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Culture">
+            <summary>
+              重写当前线程的 CurrentUICulture 属性
+              重写当前线程的 CurrentUICulture 属性。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ASCIIStringByteCountError">
+            <summary>
+              查找类似 ASCII字符串的字节数量必须是非负数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.BoolName">
+            <summary>
+              查找类似 Boolean 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteArrayIsNull">
+            <summary>
+              查找类似 字节数组不能为空 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteArrayTooShort">
+            <summary>
+              查找类似 字节数组长度过小 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ByteName">
+            <summary>
+              查找类似 UInt8 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.CharName">
+            <summary>
+              查找类似 Char 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ComplexName">
+            <summary>
+              查找类似  的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DecimalName">
+            <summary>
+              查找类似 Float128 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DeserializeMethodName">
+            <summary>
+              查找类似 Deserialize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.DoubleName">
+            <summary>
+              查找类似 Float64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.FloatName">
+            <summary>
+              查找类似 Float32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.HasNextName">
+            <summary>
+              查找类似 HasNext 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.IntName">
+            <summary>
+              查找类似 Int32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidCastFormat">
+            <summary>
+              查找类似 不存在从{0}到{1}的隐式转换 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidFieldIndex">
+            <summary>
+              查找类似 字段的索引必须是 (0, 268435456] 范围内的整数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidSerializerType">
+            <summary>
+              查找类似 所有的序列化代理必须要实现ITypeSerializer&lt;T&gt;接口 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.InvalidUTF8Char">
+            <summary>
+              查找类似 UTF8字符的第一个字节的格式必须满足&apos;0vvvvvvv&apos;或&apos;110vvvvv&apos;或&apos;1110vvvv&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.LongName">
+            <summary>
+              查找类似 Int64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NextAsName">
+            <summary>
+              查找类似 NextAs 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NextAsWithoutTagName">
+            <summary>
+              查找类似 NextAs{0}WithoutTag 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSerializable">
+            <summary>
+              查找类似 无法为{0}类型注入代理，因为类型没有被标记为[Serializable] 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSupportHighRankArray">
+            <summary>
+              查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.NotSupportTypeInjection">
+            <summary>
+              查找类似 无法为{0}类型注入代理，因为类型没有无参构造方法 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SByteName">
+            <summary>
+              查找类似 Int8 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializeMethodName">
+            <summary>
+              查找类似 Serialize 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerAssemblyName">
+            <summary>
+              查找类似 DynamicSerializerAssembly.dll 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerModuleName">
+            <summary>
+              查找类似 DynamicSerializerModule 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeIsNull">
+            <summary>
+              查找类似 序列化代理类型不能为null 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SerializerTypeSuffix">
+            <summary>
+              查找类似 &lt;Serializer&gt; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ShortName">
+            <summary>
+              查找类似 Int16 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.SkipNextName">
+            <summary>
+              查找类似 SkipNext 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.StreamTooShort">
+            <summary>
+              查找类似 数据流的长度过小 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.StringName">
+            <summary>
+              查找类似 String 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UIntName">
+            <summary>
+              查找类似 UInt32 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.ULongName">
+            <summary>
+              查找类似 UInt64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UnicodeStringByteCountError">
+            <summary>
+              查找类似 Unicode字符串的字节数量必须是非负偶数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UShortName">
+            <summary>
+              查找类似 UInt16 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.UTF8StringByteCountError">
+            <summary>
+              查找类似 UTF8字符串的字节数量必须是非负数 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.WriteValueMethodName">
+            <summary>
+              查找类似 WriteValue 的本地化字符串。
+            </summary>
         </member>
         <member name="T:Accelbuffer.Text.Encodings">
             <summary>

@@ -544,11 +544,11 @@ namespace Accelbuffer
         private void WriteBytes(byte* bytes, int length)
         {
             byte* p = (byte*)m_Allocator.GetMemoryPtr(m_ByteCount + length, m_ByteCount).ToPointer();
+            m_ByteCount += length;
 
             while (length-- > 0)
             {
                 *p++ = *bytes++;
-                m_ByteCount++;
             }
         }
 
@@ -568,7 +568,7 @@ namespace Accelbuffer
                 throw new InvalidFieldIndexException(Resources.InvalidFieldIndex);
             }
 
-            byte* p = (byte*)m_Allocator.GetMemoryPtr(m_ByteCount + 4, m_ByteCount).ToPointer();
+            byte* p = (byte*)m_Allocator.GetMemoryPtr(m_ByteCount + 5, m_ByteCount).ToPointer();
             uint tag = (uint)(index << 4 | (int)objType);
 
             do

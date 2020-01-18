@@ -1,16 +1,29 @@
 ﻿#if UNITY
 using UnityEngine;
+using Accelbuffer.Memory;
 
 namespace Accelbuffer.Injection
 {
     internal sealed class UnitySerializer :
-        ITypeSerializer<Vector2>,
-        ITypeSerializer<Vector3>,
-        ITypeSerializer<Vector4>,
-        ITypeSerializer<Vector2Int>,
-        ITypeSerializer<Vector3Int>,
-        ITypeSerializer<Quaternion>
+        IMemoryOptimizedTypeSerializer<Vector2>,
+        IMemoryOptimizedTypeSerializer<Vector3>,
+        IMemoryOptimizedTypeSerializer<Vector4>,
+        IMemoryOptimizedTypeSerializer<Vector2Int>,
+        IMemoryOptimizedTypeSerializer<Vector3Int>,
+        IMemoryOptimizedTypeSerializer<Quaternion>
     {
+        int IMemoryOptimizedTypeSerializer<Vector2>.InitialMemorySize => 8;
+
+        int IMemoryOptimizedTypeSerializer<Vector3>.InitialMemorySize => 12;
+
+        int IMemoryOptimizedTypeSerializer<Vector2Int>.InitialMemorySize => 8;
+
+        int IMemoryOptimizedTypeSerializer<Vector3Int>.InitialMemorySize => 12;
+
+        int IMemoryOptimizedTypeSerializer<Quaternion>.InitialMemorySize => 16;
+
+        int IMemoryOptimizedTypeSerializer<Vector4>.InitialMemorySize => 16;
+
         Vector2 ITypeSerializer<Vector2>.Deserialize(ref StreamingIterator iterator)
         {
             Vector2 result = new Vector2();

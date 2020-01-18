@@ -1,23 +1,50 @@
-﻿using Accelbuffer.Text;
+﻿using Accelbuffer.Memory;
+using Accelbuffer.Text;
 
 namespace Accelbuffer.Injection
 {
     internal sealed class PrimitiveTypeSerializer :
-        ITypeSerializer<sbyte>,
-        ITypeSerializer<byte>,
-        ITypeSerializer<short>,
-        ITypeSerializer<ushort>,
-        ITypeSerializer<int>,
-        ITypeSerializer<uint>,
-        ITypeSerializer<long>,
-        ITypeSerializer<ulong>,
-        ITypeSerializer<float>,
-        ITypeSerializer<double>,
-        ITypeSerializer<decimal>,
-        ITypeSerializer<bool>,
-        ITypeSerializer<char>,
+        IMemoryOptimizedTypeSerializer<sbyte>,
+        IMemoryOptimizedTypeSerializer<byte>,
+        IMemoryOptimizedTypeSerializer<short>,
+        IMemoryOptimizedTypeSerializer<ushort>,
+        IMemoryOptimizedTypeSerializer<int>,
+        IMemoryOptimizedTypeSerializer<uint>,
+        IMemoryOptimizedTypeSerializer<long>,
+        IMemoryOptimizedTypeSerializer<ulong>,
+        IMemoryOptimizedTypeSerializer<float>,
+        IMemoryOptimizedTypeSerializer<double>,
+        IMemoryOptimizedTypeSerializer<decimal>,
+        IMemoryOptimizedTypeSerializer<bool>,
+        IMemoryOptimizedTypeSerializer<char>,
         ITypeSerializer<string>
     {
+        int IMemoryOptimizedTypeSerializer<sbyte>.InitialMemorySize => 1;
+
+        int IMemoryOptimizedTypeSerializer<byte>.InitialMemorySize => 1;
+
+        int IMemoryOptimizedTypeSerializer<short>.InitialMemorySize => 2;
+
+        int IMemoryOptimizedTypeSerializer<int>.InitialMemorySize => 4;
+
+        int IMemoryOptimizedTypeSerializer<uint>.InitialMemorySize => 4;
+
+        int IMemoryOptimizedTypeSerializer<ushort>.InitialMemorySize => 2;
+
+        int IMemoryOptimizedTypeSerializer<long>.InitialMemorySize => 8;
+
+        int IMemoryOptimizedTypeSerializer<ulong>.InitialMemorySize => 8;
+
+        int IMemoryOptimizedTypeSerializer<double>.InitialMemorySize => 8;
+
+        int IMemoryOptimizedTypeSerializer<float>.InitialMemorySize => 4;
+
+        int IMemoryOptimizedTypeSerializer<bool>.InitialMemorySize => 1;
+
+        int IMemoryOptimizedTypeSerializer<decimal>.InitialMemorySize => 16;
+
+        int IMemoryOptimizedTypeSerializer<char>.InitialMemorySize => 3;
+
         sbyte ITypeSerializer<sbyte>.Deserialize(ref StreamingIterator iterator)
         {
             return iterator.HasNext() ? iterator.NextAsInt8WithoutTag(NumberFormat.Variant) : default;

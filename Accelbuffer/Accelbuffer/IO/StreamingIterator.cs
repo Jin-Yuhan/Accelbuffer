@@ -623,17 +623,18 @@ namespace Accelbuffer
         private uint ReadInt32Variant()
         {
             byte byteCount = ReadByte();
+
+            if (m_ReadCount + byteCount > m_Size)
+            {
+                throw new StreamTooShortException(Resources.StreamTooShort);
+            }
+
             uint value = 0u;
             int count = 0;
 
             while (byteCount-- > 0)
             {
-                if (count > 24)
-                {
-                    continue;
-                }
-
-                value |= (uint)(ReadByte() << count);
+                value |= (uint)(m_Source[m_ReadCount++] << count);
                 count += 8;
             }
 
@@ -644,17 +645,18 @@ namespace Accelbuffer
         private ulong ReadInt64Variant()
         {
             byte byteCount = ReadByte();
+
+            if (m_ReadCount + byteCount > m_Size)
+            {
+                throw new StreamTooShortException(Resources.StreamTooShort);
+            }
+
             ulong value = 0u;
             int count = 0;
 
             while (byteCount-- > 0)
             {
-                if (count > 56)
-                {
-                    continue;
-                }
-
-                value |= (uint)(ReadByte() << count);
+                value |= (uint)(m_Source[m_ReadCount++] << count);
                 count += 8;
             }
 

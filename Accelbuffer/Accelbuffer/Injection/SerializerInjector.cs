@@ -19,7 +19,7 @@ namespace Accelbuffer.Injection
             static InternalCache()
             {
                 Serializer = Inject<T>();
-                Allocator = MemoryAllocator.Alloc<T>();
+                Allocator = MemoryAllocator.Alloc<T>(Serializer);
             }
 
             public static void Initialize() { }
@@ -29,7 +29,7 @@ namespace Accelbuffer.Injection
 
         static SerializerInjector()
         {
-            s_TypeMap = new Dictionary<Type, Type>(27)
+            s_TypeMap = new Dictionary<Type, Type>(33)
             {
                 [typeof(sbyte)] = typeof(PrimitiveTypeSerializer),
                 [typeof(byte)] = typeof(PrimitiveTypeSerializer),

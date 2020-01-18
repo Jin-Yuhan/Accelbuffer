@@ -32,13 +32,21 @@ namespace Accelbuffer.Memory
             }
         }
 
-        internal static MemoryAllocator Alloc<T>()
+        internal static MemoryAllocator Alloc<T>(ITypeSerializer<T> serializer)
         {
-            Type objectType = typeof(T);
-            InitialMemorySizeAttribute attr = objectType.GetCustomAttribute<InitialMemorySizeAttribute>(true);
+            int initialSize;
 
-            int initialBufferSize = (attr == null || attr.InitialSize <= 0) ? DefaultInitialSize : attr.InitialSize;
-            s_AllocatorLink = new MemoryAllocator(initialBufferSize, s_AllocatorLink);
+            if (serializer is IMemoryOptimizedTypeSerializer<T> s)
+            {
+                initialSize = s.InitialMemorySize <= 0 ? DefaultInitialSize : s.InitialMemorySize;
+            }
+            else
+            {
+                InitialMemorySizeAttribute attr = typeof(T).GetCustomAttribute<InitialMemorySizeAttribute>(true);
+                initialSize = (attr == null || attr.InitialSize <= 0) ? DefaultInitialSize : attr.InitialSize;
+            }
+
+            s_AllocatorLink = new MemoryAllocator(initialSize, s_AllocatorLink);
             return s_AllocatorLink;
         }
     }

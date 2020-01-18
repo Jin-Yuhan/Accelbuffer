@@ -64,6 +64,7 @@
     <Compile Include="Exceptions\SerializerTypeException.cs" />
     <Compile Include="Injection\InternalSerializers\TypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\UnitySerializer.cs" />
+    <Compile Include="Memory\IMemoryOptimizedTypeSerializer.cs" />
     <Compile Include="Memory\InitialMemorySizeAttribute.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

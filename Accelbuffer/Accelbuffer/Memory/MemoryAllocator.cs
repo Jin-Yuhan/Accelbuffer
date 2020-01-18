@@ -71,7 +71,7 @@ namespace Accelbuffer.Memory
                 }
             }
 
-            return IntPtr.Add(m_MemoryPtr, offset);
+            return m_MemoryPtr + offset;
         }
 
         internal void BeginThreadSafeMemoryWriting()
