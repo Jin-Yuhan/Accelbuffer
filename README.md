@@ -24,6 +24,7 @@
 * `ISerializableEnumerable<T>`
 * `ICollection<T>`
 * `Type`
+* `Enum`
 * `class`, `struct`
 
 > Unity配置下，新增类型

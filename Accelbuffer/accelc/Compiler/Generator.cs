@@ -253,7 +253,7 @@ namespace accelc.Compiler
                                         {
                                             WriteLine(string.Format(Resources.WriteValueStringASCIICompact, field.Name));
                                         }
-                                        else if (field.IsUTF8)
+                                        else
                                         {
                                             WriteLine(string.Format(Resources.WriteValueStringUTF8Compact, field.Name));
                                         }
@@ -269,7 +269,7 @@ namespace accelc.Compiler
                                         {
                                             WriteLine(string.Format(Resources.WriteValueStringASCII, index++, field.Name));
                                         }
-                                        else if (field.IsUTF8)
+                                        else
                                         {
                                             WriteLine(string.Format(Resources.WriteValueStringUTF8, index++, field.Name));
                                         }
@@ -365,7 +365,7 @@ namespace accelc.Compiler
                                                     {
                                                         WriteLine(string.Format(Resources.NextAsCharStringASCIICompact, field.Name, type));
                                                     }
-                                                    else if (field.IsUTF8)
+                                                    else
                                                     {
                                                         WriteLine(string.Format(Resources.NextAsCharStringUTF8Compact, field.Name, type));
                                                     }
