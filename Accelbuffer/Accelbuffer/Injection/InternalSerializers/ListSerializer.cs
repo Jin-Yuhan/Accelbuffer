@@ -29,7 +29,7 @@ namespace Accelbuffer.Injection
         }
     }
 
-    internal sealed class ListSerializeProxy<T, TValue> : ITypeSerializer<T> where T : IList<TValue>, new()
+    internal sealed class ListSerializer<T, TValue> : ITypeSerializer<T> where T : IList<TValue>, new()
     {
         T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
         {

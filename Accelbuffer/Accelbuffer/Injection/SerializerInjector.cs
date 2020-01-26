@@ -48,11 +48,11 @@ namespace Accelbuffer.Injection
                 [typeof(Type)] = typeof(TypeSerializer),
 
                 [typeof(List<>)] = typeof(ListSerializer<>),
-                [typeof(IList<>)] = typeof(ListSerializeProxy<,>),
+                [typeof(IList<>)] = typeof(ListSerializer<,>),
                 [typeof(ICollection<>)] = typeof(CollectionSerializer<,>),
                 [typeof(ISerializableEnumerable<>)] = typeof(SerializableEnumerableSerializer<,>),
                 [typeof(Dictionary<,>)] = typeof(DictionarySerializer<,>),
-                [typeof(IDictionary<,>)] = typeof(DictionarySerializeProxy<,,>),
+                [typeof(IDictionary<,>)] = typeof(DictionarySerializer<,,>),
 
 #if UNITY
                 [typeof(UnityEngine.Vector2)] = typeof(UnitySerializer),

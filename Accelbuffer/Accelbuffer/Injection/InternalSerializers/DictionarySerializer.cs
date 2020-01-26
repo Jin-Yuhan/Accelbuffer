@@ -32,7 +32,7 @@ namespace Accelbuffer.Injection
         }
     }
 
-    internal sealed class DictionarySerializeProxy<T, TKey, TValue> : ITypeSerializer<T> where T : IDictionary<TKey, TValue>, new()
+    internal sealed class DictionarySerializer<T, TKey, TValue> : ITypeSerializer<T> where T : IDictionary<TKey, TValue>, new()
     {
         T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
         {
