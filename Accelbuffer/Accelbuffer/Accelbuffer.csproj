@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -38,6 +38,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>default</LangVersion>
     <CodeAnalysisRuleSet />
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Unity|AnyCPU'">
     <OutputPath>bin\Unity\</OutputPath>
@@ -58,40 +59,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\FieldType.cs" />
+    <Compile Include="Debug\Debug.cs" />
     <Compile Include="Exceptions\InvalidFieldIndexException.cs" />
     <Compile Include="Exceptions\InvalidUTF8CharException.cs" />
     <Compile Include="Exceptions\SerializerTypeException.cs" />
+    <Compile Include="IBuiltinTypeSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\IntPtrSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\NullableSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\OtherTypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\TypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\UnitySerializer.cs" />
-    <Compile Include="Memory\IMemoryOptimizedTypeSerializer.cs" />
-    <Compile Include="Memory\InitialMemorySizeAttribute.cs" />
+    <Compile Include="Injection\InternalSerializers\KeyValuePairSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\VariantSerializer.cs" />
+    <Compile Include="InternalTypeCache.cs" />
+    <Compile Include="Memory\NativeBuffer.cs" />
+    <Compile Include="Memory\NativeMemory.cs" />
+    <Compile Include="Enums\Endian.cs" />
+    <Compile Include="Text\ReversedUnicodeEncoding.cs" />
+    <Compile Include="vint.cs" />
+    <Compile Include="vuint.cs" />
+    <Compile Include="Memory\IMemorySizeForType.cs" />
+    <Compile Include="Memory\MemorySizeAttribute.cs" />
+    <Compile Include="Memory\Allocator\MemoryAllocator.Chunk.cs" />
+    <Compile Include="Memory\Allocator\MemoryAllocator.Static.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Injection\Attributes\CheckRefAttribute.cs" />
-    <Compile Include="Injection\Attributes\CompactLayoutAttribute.cs" />
+    <Compile Include="Injection\Attributes\NeverNullAttribute.cs" />
     <Compile Include="Injection\Attributes\OnAfterDeserializationAttribute.cs" />
-    <Compile Include="Injection\Enums\AccelbufferCallback.cs" />
-    <Compile Include="Injection\Enums\SerializerOption.cs" />
     <Compile Include="Text\ASCIIEncoding.cs" />
     <Compile Include="Text\Encodings.cs" />
-    <Compile Include="Text\ITextEncoding.cs" />
+    <Compile Include="Text\IUnsafeEncoding.cs" />
     <Compile Include="Text\UnicodeEncoding.cs" />
-    <Compile Include="Enums\NumberFormat.cs" />
-    <Compile Include="Injection\Enums\WireType.cs" />
     <Compile Include="Exceptions\StreamTooShortException.cs" />
-    <Compile Include="IO\StreamingIterator.cs" />
+    <Compile Include="IO\AccelReader.cs" />
     <Compile Include="Injection\Attributes\OnBeforeSerializationAttribute.cs" />
-    <Compile Include="Memory\MemoryAllocator.Static.cs" />
-    <Compile Include="Memory\MemoryAllocator.cs" />
-    <Compile Include="Injection\Attributes\FixedAttribute.cs" />
-    <Compile Include="Text\Encoding.cs" />
-    <Compile Include="Injection\Attributes\EncodingAttribute.cs" />
+    <Compile Include="Memory\Allocator\MemoryAllocator.cs" />
+    <Compile Include="Enums\Encoding.cs" />
     <Compile Include="Injection\Attributes\FieldIndexAttribute.cs" />
-    <Compile Include="ISerializableEnumerable.cs" />
     <Compile Include="ITypeSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializeByAttribute.cs" />
@@ -101,8 +108,6 @@
     <Compile Include="Injection\FieldData.cs" />
     <Compile Include="Injection\InternalSerializers\PrimitiveTypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\ListSerializer.cs" />
-    <Compile Include="Injection\InternalSerializers\SerializableEnumerableSerializer.cs" />
-    <Compile Include="Injection\MethodData.cs" />
     <Compile Include="Injection\Pipeline\Progress\CtorDefineProgress.cs" />
     <Compile Include="Injection\Pipeline\Progress\DeserializeMethodDefineProgress.cs" />
     <Compile Include="Injection\Pipeline\SerializerGenerationProgress.cs" />
@@ -111,7 +116,7 @@
     <Compile Include="Injection\SerializerInjector.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Enums\ObjectType.cs" />
-    <Compile Include="IO\StreamingWriter.cs" />
+    <Compile Include="IO\AccelWriter.cs" />
     <Compile Include="Text\UTF8Encoding.cs" />
   </ItemGroup>
   <ItemGroup>

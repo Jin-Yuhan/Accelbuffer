@@ -11,13 +11,13 @@
         /// </summary>
         /// <param name="obj">将被序列化的对象</param>
         /// <param name="writer">数据输出流</param>
-        void Serialize(T obj, ref StreamingWriter writer);
+        void Serialize(T obj, ref AccelWriter writer);
 
         /// <summary>
         /// 方法用于实现对象的反序列化
         /// </summary>
-        /// <param name="iterator">流数据迭代器</param>
+        /// <param name="reader">数据输入流</param>
         /// <returns>反序列化对象</returns>
-        T Deserialize(ref StreamingIterator iterator);
+        T Deserialize(ref AccelReader reader);
     }
 }

@@ -1,0 +1,13 @@
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.deps.json
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.runtimeconfig.json
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.runtimeconfig.dev.json
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.dll
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.pdb
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.dll
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.pdb
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.csprojAssemblyReference.cache
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.Properties.Resources.resources
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Unity\netcoreapp2.1\asc.csproj.GenerateResource.cache

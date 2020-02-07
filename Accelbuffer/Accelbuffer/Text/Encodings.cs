@@ -1,39 +1,28 @@
 ﻿namespace Accelbuffer.Text
 {
     /// <summary>
-    /// 公开对字符串编码的接口
+    /// 提供目前支持的字符串编码
     /// </summary>
     public static class Encodings
     {
         /// <summary>
         /// ASCII编码
         /// </summary>
-        public static ITextEncoding ASCII { get; } = new ASCIIEncoding();
+        public static IUnsafeEncoding ASCII { get; } = new ASCIIEncoding();
 
         /// <summary>
-        /// Unicode编码
+        /// 使用系统字节序的Unicode编码
         /// </summary>
-        public static ITextEncoding Unicode { get; } = new UnicodeEncoding();
+        public static IUnsafeEncoding Unicode { get; } = new UnicodeEncoding();
+
+        /// <summary>
+        /// 与系统字节序相反的Unicode编码
+        /// </summary>
+        public static IUnsafeEncoding ReversedUnicode { get; } = new ReversedUnicodeEncoding();
 
         /// <summary>
         /// UTF8编码
         /// </summary>
-        public static ITextEncoding UTF8 { get; } = new UTF8Encoding();
-
-        /// <summary>
-        /// 获取指定的文本编码对象
-        /// </summary>
-        /// <param name="encoding">编码类型</param>
-        /// <returns>文本编码</returns>
-        public static ITextEncoding GetEncoding(Encoding encoding)
-        {
-            switch (encoding)
-            {
-                case Encoding.ASCII: return ASCII;
-                case Encoding.Unicode: return Unicode;
-                case Encoding.UTF8: return UTF8;
-                default: return null;
-            }
-        }
+        public static IUnsafeEncoding UTF8 { get; } = new UTF8Encoding();
     }
 }

@@ -1,0 +1,40 @@
+{
+  "name": "accelbuffer",
+  "displayName": "Accelbuffer",
+  "description": "A simple language used to define the Accelbuffer serializable type",
+  "version": "1.0.0",
+  "publisher": "jin-yuhan",
+  "engines": {
+    "vscode": "0.10.x"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "accelbuffer",
+        "extensions": [
+          ".accel",
+          ".accelbuffer",
+          ".abs"
+        ],
+        "aliases": [
+          "Accelbuffer",
+          "Accelbuffer Script"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "accelbuffer",
+        "scopeName": "source.accel",
+        "path": "./syntaxes/accelbuffer.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "accelbuffer",
+        "path": "./snippets/accelbuffer.json"
+      }
+    ]
+  }
+}

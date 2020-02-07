@@ -4,56 +4,52 @@ namespace Accelbuffer.Injection
 {
     internal sealed class DictionarySerializer<TKey, TValue> : ITypeSerializer<Dictionary<TKey, TValue>>
     {
-        Dictionary<TKey, TValue> ITypeSerializer<Dictionary<TKey, TValue>>.Deserialize(ref StreamingIterator iterator)
+        Dictionary<TKey, TValue> ITypeSerializer<Dictionary<TKey, TValue>>.Deserialize(ref AccelReader reader)
         {
-            int count = iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : 0;
-            Dictionary<TKey, TValue> result = new Dictionary<TKey, TValue>(count);
+            Dictionary<TKey, TValue> result = new Dictionary<TKey, TValue>();
 
-            while (iterator.HasNext())
+            while (reader.HasNext())
             {
-                TKey key = iterator.NextAsWithoutTag<TKey>();
-                TValue value = iterator.HasNext() ? iterator.NextAsWithoutTag<TValue>() : default;
+                TKey key = reader.ReadGeneric<TKey>();
+                TValue value = reader.HasNext() ? reader.ReadGeneric<TValue>() : default;
                 result.Add(key, value);
             }
 
             return result;
         }
 
-        void ITypeSerializer<Dictionary<TKey, TValue>>.Serialize(Dictionary<TKey, TValue> obj, ref StreamingWriter writer)
+        void ITypeSerializer<Dictionary<TKey, TValue>>.Serialize(Dictionary<TKey, TValue> obj, ref AccelWriter writer)
         {
-            int count = obj.Count;
-            writer.WriteValue(count, NumberFormat.Variant);
-
             foreach (KeyValuePair<TKey, TValue> pair in obj)
             {
-                writer.WriteValue<TKey>(pair.Key);
-                writer.WriteValue<TValue>(pair.Value);
+                writer.WriteValue<TKey>(1, pair.Key);
+                writer.WriteValue<TValue>(1, pair.Value);
             }
         }
     }
 
     internal sealed class DictionarySerializer<T, TKey, TValue> : ITypeSerializer<T> where T : IDictionary<TKey, TValue>, new()
     {
-        T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
+        T ITypeSerializer<T>.Deserialize(ref AccelReader reader)
         {
             T result = new T();
 
-            while (iterator.HasNext())
+            while (reader.HasNext())
             {
-                TKey key = iterator.NextAsWithoutTag<TKey>();
-                TValue value = iterator.HasNext() ? iterator.NextAsWithoutTag<TValue>() : default;
+                TKey key = reader.ReadGeneric<TKey>();
+                TValue value = reader.HasNext() ? reader.ReadGeneric<TValue>() : default;
                 result.Add(key, value);
             }
 
             return result;
         }
 
-        void ITypeSerializer<T>.Serialize(T obj, ref StreamingWriter writer)
+        void ITypeSerializer<T>.Serialize(T obj, ref AccelWriter writer)
         {
             foreach (KeyValuePair<TKey, TValue> pair in obj)
             {
-                writer.WriteValue<TKey>(pair.Key);
-                writer.WriteValue<TValue>(pair.Value);
+                writer.WriteValue<TKey>(1, pair.Key);
+                writer.WriteValue<TValue>(1, pair.Value);
             }
         }
     }

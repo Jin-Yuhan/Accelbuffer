@@ -5,179 +5,120 @@ using Accelbuffer.Memory;
 namespace Accelbuffer.Injection
 {
     internal sealed class UnitySerializer :
-        IMemoryOptimizedTypeSerializer<Vector2>,
-        IMemoryOptimizedTypeSerializer<Vector3>,
-        IMemoryOptimizedTypeSerializer<Vector4>,
-        IMemoryOptimizedTypeSerializer<Vector2Int>,
-        IMemoryOptimizedTypeSerializer<Vector3Int>,
-        IMemoryOptimizedTypeSerializer<Quaternion>
+        IBuiltinTypeSerializer,
+
+        IMemorySizeForType<Color>,
+        IMemorySizeForType<Color32>,
+        IMemorySizeForType<Vector2>,
+        IMemorySizeForType<Vector3>,
+        IMemorySizeForType<Vector4>,
+        IMemorySizeForType<Vector2Int>,
+        IMemorySizeForType<Vector3Int>,
+        IMemorySizeForType<Quaternion>,
+
+        ITypeSerializer<Color>,
+        ITypeSerializer<Color32>,
+        ITypeSerializer<Vector2>,
+        ITypeSerializer<Vector3>,
+        ITypeSerializer<Vector4>,
+        ITypeSerializer<Vector2Int>,
+        ITypeSerializer<Vector3Int>,
+        ITypeSerializer<Quaternion>
     {
-        int IMemoryOptimizedTypeSerializer<Vector2>.InitialMemorySize => 8;
+        int IMemorySizeForType<Vector2>.ApproximateMemorySize => 8;
 
-        int IMemoryOptimizedTypeSerializer<Vector3>.InitialMemorySize => 12;
+        int IMemorySizeForType<Vector3>.ApproximateMemorySize => 12;
 
-        int IMemoryOptimizedTypeSerializer<Vector2Int>.InitialMemorySize => 8;
+        int IMemorySizeForType<Vector2Int>.ApproximateMemorySize => 8;
 
-        int IMemoryOptimizedTypeSerializer<Vector3Int>.InitialMemorySize => 12;
+        int IMemorySizeForType<Vector3Int>.ApproximateMemorySize => 12;
 
-        int IMemoryOptimizedTypeSerializer<Quaternion>.InitialMemorySize => 16;
+        int IMemorySizeForType<Quaternion>.ApproximateMemorySize => 16;
 
-        int IMemoryOptimizedTypeSerializer<Vector4>.InitialMemorySize => 16;
+        int IMemorySizeForType<Vector4>.ApproximateMemorySize => 16;
 
-        Vector2 ITypeSerializer<Vector2>.Deserialize(ref StreamingIterator iterator)
+        int IMemorySizeForType<Color>.ApproximateMemorySize => 16;
+
+        int IMemorySizeForType<Color32>.ApproximateMemorySize => 4;
+
+        Vector2 ITypeSerializer<Vector2>.Deserialize(ref AccelReader reader)
         {
-            Vector2 result = new Vector2();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsFloat32WithoutTag(); break;
-                    case 1: result.y = iterator.NextAsFloat32WithoutTag(); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadVector2();
         }
 
-        Vector3 ITypeSerializer<Vector3>.Deserialize(ref StreamingIterator iterator)
+        Vector3 ITypeSerializer<Vector3>.Deserialize(ref AccelReader reader)
         {
-            Vector3 result = new Vector3();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsFloat32WithoutTag(); break;
-                    case 1: result.y = iterator.NextAsFloat32WithoutTag(); break;
-                    case 2: result.z = iterator.NextAsFloat32WithoutTag(); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadVector3();
         }
 
-        Vector4 ITypeSerializer<Vector4>.Deserialize(ref StreamingIterator iterator)
+        Vector4 ITypeSerializer<Vector4>.Deserialize(ref AccelReader reader)
         {
-            Vector4 result = new Vector4();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsFloat32WithoutTag(); break;
-                    case 1: result.y = iterator.NextAsFloat32WithoutTag(); break;
-                    case 2: result.z = iterator.NextAsFloat32WithoutTag(); break;
-                    case 3: result.w = iterator.NextAsFloat32WithoutTag(); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadVector4();
         }
 
-        Vector2Int ITypeSerializer<Vector2Int>.Deserialize(ref StreamingIterator iterator)
+        Vector2Int ITypeSerializer<Vector2Int>.Deserialize(ref AccelReader reader)
         {
-            Vector2Int result = new Vector2Int();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsInt32WithoutTag(NumberFormat.Variant); break;
-                    case 1: result.y = iterator.NextAsInt32WithoutTag(NumberFormat.Variant); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadVector2Int();
         }
 
-        Vector3Int ITypeSerializer<Vector3Int>.Deserialize(ref StreamingIterator iterator)
+        Vector3Int ITypeSerializer<Vector3Int>.Deserialize(ref AccelReader reader)
         {
-            Vector3Int result = new Vector3Int();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsInt32WithoutTag(NumberFormat.Variant); break;
-                    case 1: result.y = iterator.NextAsInt32WithoutTag(NumberFormat.Variant); break;
-                    case 2: result.z = iterator.NextAsInt32WithoutTag(NumberFormat.Variant); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadVector3Int();
         }
 
-        Quaternion ITypeSerializer<Quaternion>.Deserialize(ref StreamingIterator iterator)
+        Quaternion ITypeSerializer<Quaternion>.Deserialize(ref AccelReader reader)
         {
-            Quaternion result = new Quaternion();
-            int index = 0;
-
-            while (iterator.HasNext())
-            {
-                switch (index++)
-                {
-                    case 0: result.x = iterator.NextAsFloat32WithoutTag(); break;
-                    case 1: result.y = iterator.NextAsFloat32WithoutTag(); break;
-                    case 2: result.z = iterator.NextAsFloat32WithoutTag(); break;
-                    case 3: result.w = iterator.NextAsFloat32WithoutTag(); break;
-                    default: return result;
-                }
-            }
-
-            return result;
+            return reader.ReadQuaternion();
         }
 
-        void ITypeSerializer<Vector2>.Serialize(Vector2 obj, ref StreamingWriter writer)
+        Color ITypeSerializer<Color>.Deserialize(ref AccelReader reader)
         {
-            writer.WriteValue(obj.x);
-            writer.WriteValue(obj.y);
+            return reader.ReadColor();
         }
 
-        void ITypeSerializer<Vector3>.Serialize(Vector3 obj, ref StreamingWriter writer)
+        Color32 ITypeSerializer<Color32>.Deserialize(ref AccelReader reader)
         {
-            writer.WriteValue(obj.x);
-            writer.WriteValue(obj.y);
-            writer.WriteValue(obj.z);
+            return reader.ReadColor32();
         }
 
-        void ITypeSerializer<Vector4>.Serialize(Vector4 obj, ref StreamingWriter writer)
+        void ITypeSerializer<Vector2>.Serialize(Vector2 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj.x);
-            writer.WriteValue(obj.y);
-            writer.WriteValue(obj.z);
-            writer.WriteValue(obj.w);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<Vector2Int>.Serialize(Vector2Int obj, ref StreamingWriter writer)
+        void ITypeSerializer<Vector3>.Serialize(Vector3 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj.x, NumberFormat.Variant);
-            writer.WriteValue(obj.y, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<Vector3Int>.Serialize(Vector3Int obj, ref StreamingWriter writer)
+        void ITypeSerializer<Vector4>.Serialize(Vector4 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj.x, NumberFormat.Variant);
-            writer.WriteValue(obj.y, NumberFormat.Variant);
-            writer.WriteValue(obj.z, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<Quaternion>.Serialize(Quaternion obj, ref StreamingWriter writer)
+        void ITypeSerializer<Vector2Int>.Serialize(Vector2Int obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj.x);
-            writer.WriteValue(obj.y);
-            writer.WriteValue(obj.z);
-            writer.WriteValue(obj.w);
+            writer.WriteValue(writer.m_Index, obj);
+        }
+
+        void ITypeSerializer<Vector3Int>.Serialize(Vector3Int obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(writer.m_Index, obj);
+        }
+
+        void ITypeSerializer<Quaternion>.Serialize(Quaternion obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(writer.m_Index, obj);
+        }
+
+        void ITypeSerializer<Color>.Serialize(Color obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(writer.m_Index, obj);
+        }
+
+        void ITypeSerializer<Color32>.Serialize(Color32 obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(writer.m_Index, obj);
         }
     }
 }

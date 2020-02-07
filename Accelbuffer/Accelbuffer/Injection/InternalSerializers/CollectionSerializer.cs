@@ -4,23 +4,24 @@ namespace Accelbuffer.Injection
 {
     internal sealed class CollectionSerializer<T, TValue> : ITypeSerializer<T> where T : ICollection<TValue>, new()
     {
-        T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
+        T ITypeSerializer<T>.Deserialize(ref AccelReader reader)
         {
             T result = new T();
 
-            while (iterator.HasNext())
+            while (reader.HasNext())
             {
-                result.Add(iterator.NextAsWithoutTag<TValue>());
+                TValue value = reader.ReadGeneric<TValue>();
+                result.Add(value);
             }
 
             return result;
         }
 
-        void ITypeSerializer<T>.Serialize(T obj, ref StreamingWriter writer)
+        void ITypeSerializer<T>.Serialize(T obj, ref AccelWriter writer)
         {
             foreach (TValue o in obj)
             {
-                writer.WriteValue<TValue>(o);
+                writer.WriteValue<TValue>(1, o);
             }
         }
     }

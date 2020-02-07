@@ -8,39 +8,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Accelbuffer;
 using Accelbuffer.Injection;
 using Accelbuffer.Memory;
-using Accelbuffer.Text;
-using System;
-using System.Collections.Generic;
 using ProtoBuf;
+using System.Collections.Generic;
 
 namespace Accelbuffer.Test
 {
-
-	[Serializable]
-    [CompactLayout]
-	[InitialMemorySize(200)]
     [ProtoContract]
+	[MemorySize(256)]
+    [SerializeBy(typeof(TestSerializer))]
 	public struct Test
 	{
         [ProtoMember(1)]
 		[FieldIndex(1)]
-		[Encoding(Encoding.UTF8)]
 		public string StringValue;
         [ProtoMember(2)]
         [FieldIndex(2)]
 		public int Int32Value;
         [ProtoMember(3)]
         [FieldIndex(3)]
-		public List<Test1> ListValue;
+        public List<Test1> ListValue;
 	}
 
-	[Serializable]
-    [CompactLayout]
-    [InitialMemorySize(200)]
     [ProtoContract]
+    [MemorySize(256)]
+    [SerializeBy(typeof(Test1Serializer))]
     public struct Test1
 	{
         [ProtoMember(1)]
@@ -48,6 +41,74 @@ namespace Accelbuffer.Test
 		public float FloatValue;
         [ProtoMember(2)]
         [FieldIndex(2)]
-		public Dictionary<string, int> DictValue;
+        public Dictionary<string, int> DictValue;
 	}
+
+    public class TestSerializer : ITypeSerializer<Test>
+    {
+        Test ITypeSerializer<Test>.Deserialize(ref AccelReader reader)
+        {
+            Test result = new Test();
+
+            while (reader.HasNext(out int index))
+            {
+                switch (index)
+                {
+                    case 1:
+                        result.StringValue = reader.ReadString();
+                        break;
+                    case 2:
+                        result.Int32Value = reader.ReadInt32();
+                        break;
+                    case 3:
+                        result.ListValue = reader.ReadGeneric<List<Test1>>();
+                        break;
+                    default:
+                        reader.SkipNext();
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        void ITypeSerializer<Test>.Serialize(Test obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(1, obj.StringValue);
+            writer.WriteValue(2, obj.Int32Value);
+            writer.WriteValue(3, obj.ListValue);
+        }
+    }
+
+    public class Test1Serializer : ITypeSerializer<Test1>
+    {
+        Test1 ITypeSerializer<Test1>.Deserialize(ref AccelReader reader)
+        {
+            Test1 result = new Test1();
+
+            while (reader.HasNext(out int index))
+            {
+                switch (index)
+                {
+                    case 1:
+                        result.FloatValue = reader.ReadFloat32();
+                        break;
+                    case 2:
+                        result.DictValue = reader.ReadGeneric<Dictionary<string, int>>();
+                        break;
+                    default:
+                        reader.SkipNext();
+                        break;
+                }
+            }
+
+            return result;
+        }
+
+        void ITypeSerializer<Test1>.Serialize(Test1 obj, ref AccelWriter writer)
+        {
+            writer.WriteValue(1, obj.FloatValue);
+            writer.WriteValue(2, obj.DictValue);
+        }
+    }
 }

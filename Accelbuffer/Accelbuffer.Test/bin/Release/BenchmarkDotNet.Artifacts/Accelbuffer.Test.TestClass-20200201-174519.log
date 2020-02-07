@@ -1,0 +1,279 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 2 benchmark(s) in total *****
+// ***** Building 1 exe(s) in Parallel: Start   *****
+BuildScript: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\778638a2-0036-46e2-b2e9-0c4e512a560e.bat
+// ***** Done, took 00:00:03 (3.44 sec)   *****
+// Found 2 benchmarks:
+//   TestClass.AccelbufferSerializeAndDeserialize: DefaultJob
+//   TestClass.ProtobufDeserializeAndDeserialize: DefaultJob
+
+// **************************
+// Benchmark: TestClass.AccelbufferSerializeAndDeserialize: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\778638a2-0036-46e2-b2e9-0c4e512a560e.exe --benchmarkName "Accelbuffer.Test.TestClass.AccelbufferSerializeAndDeserialize" --job "Default" --benchmarkId 0 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 240824.26 ns, 240.8243 us/op
+WorkloadJitting  1: 1 op, 38068215.68 ns, 38.0682 ms/op
+
+WorkloadPilot    1: 2 op, 81097.48 ns, 40.5487 us/op
+WorkloadPilot    2: 3 op, 74750.72 ns, 24.9169 us/op
+WorkloadPilot    3: 4 op, 64525.39 ns, 16.1313 us/op
+WorkloadPilot    4: 5 op, 75808.52 ns, 15.1617 us/op
+WorkloadPilot    5: 6 op, 88854.63 ns, 14.8091 us/op
+WorkloadPilot    6: 7 op, 123761.81 ns, 17.6803 us/op
+WorkloadPilot    7: 8 op, 141744.29 ns, 17.7180 us/op
+WorkloadPilot    8: 9 op, 118120.24 ns, 13.1245 us/op
+WorkloadPilot    9: 10 op, 218610.60 ns, 21.8611 us/op
+WorkloadPilot   10: 11 op, 142096.89 ns, 12.9179 us/op
+WorkloadPilot   11: 12 op, 163605.35 ns, 13.6338 us/op
+WorkloadPilot   12: 13 op, 157611.19 ns, 12.1239 us/op
+WorkloadPilot   13: 14 op, 240471.66 ns, 17.1765 us/op
+WorkloadPilot   14: 15 op, 186171.61 ns, 12.4114 us/op
+WorkloadPilot   15: 16 op, 205917.08 ns, 12.8698 us/op
+WorkloadPilot   16: 32 op, 387152.33 ns, 12.0985 us/op
+WorkloadPilot   17: 64 op, 748565.02 ns, 11.6963 us/op
+WorkloadPilot   18: 128 op, 1560597.62 ns, 12.1922 us/op
+WorkloadPilot   19: 256 op, 3139177.74 ns, 12.2624 us/op
+WorkloadPilot   20: 512 op, 5916942.78 ns, 11.5565 us/op
+WorkloadPilot   21: 1024 op, 11898763.55 ns, 11.6199 us/op
+WorkloadPilot   22: 2048 op, 23033095.18 ns, 11.2466 us/op
+WorkloadPilot   23: 4096 op, 46951915.89 ns, 11.4629 us/op
+WorkloadPilot   24: 8192 op, 92200784.67 ns, 11.2550 us/op
+WorkloadPilot   25: 16384 op, 183862799.99 ns, 11.2221 us/op
+WorkloadPilot   26: 32768 op, 367176957.88 ns, 11.2054 us/op
+WorkloadPilot   27: 65536 op, 806976710.57 ns, 12.3135 us/op
+
+WorkloadWarmup   1: 65536 op, 732114920.07 ns, 11.1712 us/op
+WorkloadWarmup   2: 65536 op, 739975734.22 ns, 11.2911 us/op
+WorkloadWarmup   3: 65536 op, 731915349.74 ns, 11.1681 us/op
+WorkloadWarmup   4: 65536 op, 741386125.21 ns, 11.3127 us/op
+WorkloadWarmup   5: 65536 op, 736617945.89 ns, 11.2399 us/op
+WorkloadWarmup   6: 65536 op, 740166842.20 ns, 11.2940 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 65536 op, 737728628.79 ns, 11.2568 us/op
+WorkloadActual   2: 65536 op, 739647465.72 ns, 11.2861 us/op
+WorkloadActual   3: 65536 op, 738599545.22 ns, 11.2701 us/op
+WorkloadActual   4: 65536 op, 731304650.45 ns, 11.1588 us/op
+WorkloadActual   5: 65536 op, 740511330.20 ns, 11.2993 us/op
+WorkloadActual   6: 65536 op, 732789439.56 ns, 11.1815 us/op
+WorkloadActual   7: 65536 op, 738908420.85 ns, 11.2748 us/op
+WorkloadActual   8: 65536 op, 733658945.60 ns, 11.1947 us/op
+WorkloadActual   9: 65536 op, 739739141.14 ns, 11.2875 us/op
+WorkloadActual  10: 65536 op, 732434726.22 ns, 11.1761 us/op
+WorkloadActual  11: 65536 op, 759061850.23 ns, 11.5824 us/op
+WorkloadActual  12: 65536 op, 734058791.44 ns, 11.2008 us/op
+WorkloadActual  13: 65536 op, 738812866.86 ns, 11.2734 us/op
+WorkloadActual  14: 65536 op, 748093239.54 ns, 11.4150 us/op
+WorkloadActual  15: 65536 op, 732171688.31 ns, 11.1721 us/op
+
+// AfterActualRun
+WorkloadResult   1: 65536 op, 737728628.79 ns, 11.2568 us/op
+WorkloadResult   2: 65536 op, 739647465.72 ns, 11.2861 us/op
+WorkloadResult   3: 65536 op, 738599545.22 ns, 11.2701 us/op
+WorkloadResult   4: 65536 op, 731304650.45 ns, 11.1588 us/op
+WorkloadResult   5: 65536 op, 740511330.20 ns, 11.2993 us/op
+WorkloadResult   6: 65536 op, 732789439.56 ns, 11.1815 us/op
+WorkloadResult   7: 65536 op, 738908420.85 ns, 11.2748 us/op
+WorkloadResult   8: 65536 op, 733658945.60 ns, 11.1947 us/op
+WorkloadResult   9: 65536 op, 739739141.14 ns, 11.2875 us/op
+WorkloadResult  10: 65536 op, 732434726.22 ns, 11.1761 us/op
+WorkloadResult  11: 65536 op, 734058791.44 ns, 11.2008 us/op
+WorkloadResult  12: 65536 op, 738812866.86 ns, 11.2734 us/op
+WorkloadResult  13: 65536 op, 748093239.54 ns, 11.4150 us/op
+WorkloadResult  14: 65536 op, 732171688.31 ns, 11.1721 us/op
+GC:  85 0 0 135010900 65536
+Threading:  0 0 65536
+
+// AfterAll
+// Benchmark Process 6508 has exited with code 0
+
+Mean = 11.2462 us, StdErr = 0.0187 us (0.17%); N = 14, StdDev = 0.0701 us
+Min = 11.1588 us, Q1 = 11.1815 us, Median = 11.2635 us, Q3 = 11.2861 us, Max = 11.4150 us
+IQR = 0.1046 us, LowerFence = 11.0245 us, UpperFence = 11.4431 us
+ConfidenceInterval = [11.1672 us; 11.3253 us] (CI 99.9%), Margin = 0.0790 us (0.70% of Mean)
+Skewness = 0.67, Kurtosis = 2.87, MValue = 2
+
+// **************************
+// Benchmark: TestClass.ProtobufDeserializeAndDeserialize: DefaultJob
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\778638a2-0036-46e2-b2e9-0c4e512a560e.exe --benchmarkName "Accelbuffer.Test.TestClass.ProtobufDeserializeAndDeserialize" --job "Default" --benchmarkId 1 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 241882.05 ns, 241.8821 us/op
+WorkloadJitting  1: 1 op, 98861708.70 ns, 98.8617 ms/op
+
+WorkloadPilot    1: 2 op, 66640.97 ns, 33.3205 us/op
+WorkloadPilot    2: 3 op, 78629.30 ns, 26.2098 us/op
+WorkloadPilot    3: 4 op, 68051.37 ns, 17.0128 us/op
+WorkloadPilot    4: 5 op, 78629.30 ns, 15.7259 us/op
+WorkloadPilot    5: 6 op, 160079.38 ns, 26.6799 us/op
+WorkloadPilot    6: 7 op, 101548.15 ns, 14.5069 us/op
+WorkloadPilot    7: 8 op, 111773.49 ns, 13.9717 us/op
+WorkloadPilot    8: 9 op, 133634.55 ns, 14.8483 us/op
+WorkloadPilot    9: 10 op, 125524.80 ns, 12.5525 us/op
+WorkloadPilot   10: 11 op, 143154.68 ns, 13.0141 us/op
+WorkloadPilot   11: 12 op, 183703.43 ns, 15.3086 us/op
+WorkloadPilot   12: 13 op, 215084.63 ns, 16.5450 us/op
+WorkloadPilot   13: 14 op, 200628.12 ns, 14.3306 us/op
+WorkloadPilot   14: 15 op, 197454.74 ns, 13.1636 us/op
+WorkloadPilot   15: 16 op, 193576.16 ns, 12.0985 us/op
+WorkloadPilot   16: 32 op, 585312.26 ns, 18.2910 us/op
+WorkloadPilot   17: 64 op, 808506.63 ns, 12.6329 us/op
+WorkloadPilot   18: 128 op, 1506297.57 ns, 11.7679 us/op
+WorkloadPilot   19: 256 op, 3069715.98 ns, 11.9911 us/op
+WorkloadPilot   20: 512 op, 6783628.04 ns, 13.2493 us/op
+WorkloadPilot   21: 1024 op, 12231615.82 ns, 11.9449 us/op
+WorkloadPilot   22: 2048 op, 25358124.72 ns, 12.3819 us/op
+WorkloadPilot   23: 4096 op, 48090101.42 ns, 11.7407 us/op
+WorkloadPilot   24: 8192 op, 97052177.06 ns, 11.8472 us/op
+WorkloadPilot   25: 16384 op, 196630011.78 ns, 12.0013 us/op
+WorkloadPilot   26: 32768 op, 393026956.45 ns, 11.9942 us/op
+WorkloadPilot   27: 65536 op, 817235894.59 ns, 12.4700 us/op
+
+WorkloadWarmup   1: 65536 op, 786455521.73 ns, 12.0004 us/op
+WorkloadWarmup   2: 65536 op, 774125178.55 ns, 11.8122 us/op
+WorkloadWarmup   3: 65536 op, 775832104.24 ns, 11.8383 us/op
+WorkloadWarmup   4: 65536 op, 779918712.12 ns, 11.9006 us/op
+WorkloadWarmup   5: 65536 op, 781865051.67 ns, 11.9303 us/op
+WorkloadWarmup   6: 65536 op, 782766996.71 ns, 11.9441 us/op
+WorkloadWarmup   7: 65536 op, 777559480.60 ns, 11.8646 us/op
+WorkloadWarmup   8: 65536 op, 808829611.72 ns, 12.3418 us/op
+WorkloadWarmup   9: 65536 op, 777197362.71 ns, 11.8591 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 65536 op, 783843830.23 ns, 11.9605 us/op
+WorkloadActual   2: 65536 op, 783429880.47 ns, 11.9542 us/op
+WorkloadActual   3: 65536 op, 780372858.01 ns, 11.9075 us/op
+WorkloadActual   4: 65536 op, 781368241.45 ns, 11.9227 us/op
+WorkloadActual   5: 65536 op, 773374145.35 ns, 11.8008 us/op
+WorkloadActual   6: 65536 op, 812330554.75 ns, 12.3952 us/op
+WorkloadActual   7: 65536 op, 781698978.14 ns, 11.9278 us/op
+WorkloadActual   8: 65536 op, 783452094.13 ns, 11.9545 us/op
+WorkloadActual   9: 65536 op, 785899475.09 ns, 11.9919 us/op
+WorkloadActual  10: 65536 op, 773600865.70 ns, 11.8042 us/op
+WorkloadActual  11: 65536 op, 791937711.49 ns, 12.0840 us/op
+WorkloadActual  12: 65536 op, 770165153.26 ns, 11.7518 us/op
+WorkloadActual  13: 65536 op, 808091977.24 ns, 12.3305 us/op
+WorkloadActual  14: 65536 op, 772838901.97 ns, 11.7926 us/op
+WorkloadActual  15: 65536 op, 779567172.16 ns, 11.8953 us/op
+
+// AfterActualRun
+WorkloadResult   1: 65536 op, 783843830.23 ns, 11.9605 us/op
+WorkloadResult   2: 65536 op, 783429880.47 ns, 11.9542 us/op
+WorkloadResult   3: 65536 op, 780372858.01 ns, 11.9075 us/op
+WorkloadResult   4: 65536 op, 781368241.45 ns, 11.9227 us/op
+WorkloadResult   5: 65536 op, 773374145.35 ns, 11.8008 us/op
+WorkloadResult   6: 65536 op, 781698978.14 ns, 11.9278 us/op
+WorkloadResult   7: 65536 op, 783452094.13 ns, 11.9545 us/op
+WorkloadResult   8: 65536 op, 785899475.09 ns, 11.9919 us/op
+WorkloadResult   9: 65536 op, 773600865.70 ns, 11.8042 us/op
+WorkloadResult  10: 65536 op, 791937711.49 ns, 12.0840 us/op
+WorkloadResult  11: 65536 op, 770165153.26 ns, 11.7518 us/op
+WorkloadResult  12: 65536 op, 772838901.97 ns, 11.7926 us/op
+WorkloadResult  13: 65536 op, 779567172.16 ns, 11.8953 us/op
+GC:  130 0 0 205265320 65536
+Threading:  0 0 65536
+
+// AfterAll
+// Benchmark Process 6352 has exited with code 0
+
+Mean = 11.9037 us, StdErr = 0.0260 us (0.22%); N = 13, StdDev = 0.0938 us
+Min = 11.7518 us, Q1 = 11.8025 us, Median = 11.9227 us, Q3 = 11.9575 us, Max = 12.0840 us
+IQR = 0.1550 us, LowerFence = 11.5699 us, UpperFence = 12.1901 us
+ConfidenceInterval = [11.7913 us; 12.0160 us] (CI 99.9%), Margin = 0.1123 us (0.94% of Mean)
+Skewness = 0.01, Kurtosis = 2.02, MValue = 2
+
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.TestClass-report.csv
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.TestClass-report-github.md
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.TestClass-report.html
+
+// * Detailed results *
+TestClass.AccelbufferSerializeAndDeserialize: DefaultJob
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 11.2462 us, StdErr = 0.0187 us (0.17%); N = 14, StdDev = 0.0701 us
+Min = 11.1588 us, Q1 = 11.1815 us, Median = 11.2635 us, Q3 = 11.2861 us, Max = 11.4150 us
+IQR = 0.1046 us, LowerFence = 11.0245 us, UpperFence = 11.4431 us
+ConfidenceInterval = [11.1672 us; 11.3253 us] (CI 99.9%), Margin = 0.0790 us (0.70% of Mean)
+Skewness = 0.67, Kurtosis = 2.87, MValue = 2
+-------------------- Histogram --------------------
+[11.133 us ; 11.440 us) | @@@@@@@@@@@@@@
+---------------------------------------------------
+
+TestClass.ProtobufDeserializeAndDeserialize: DefaultJob
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 11.9037 us, StdErr = 0.0260 us (0.22%); N = 13, StdDev = 0.0938 us
+Min = 11.7518 us, Q1 = 11.8025 us, Median = 11.9227 us, Q3 = 11.9575 us, Max = 12.0840 us
+IQR = 0.1550 us, LowerFence = 11.5699 us, UpperFence = 12.1901 us
+ConfidenceInterval = [11.7913 us; 12.0160 us] (CI 99.9%), Margin = 0.1123 us (0.94% of Mean)
+Skewness = 0.01, Kurtosis = 2.02, MValue = 2
+-------------------- Histogram --------------------
+[11.717 us ; 12.119 us) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+// * Summary *
+
+BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
+Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
+Frequency=2836093 Hz, Resolution=352.5977 ns, Timer=TSC
+  [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
+  DefaultJob : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+
+
+|                             Method |     Mean |    Error |   StdDev |   StdErr |      Min |       Q1 |   Median |       Q3 |      Max |     Op/s |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|----------------------------------- |---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|-------:|------:|------:|----------:|
+| AccelbufferSerializeAndDeserialize | 11.25 us | 0.079 us | 0.070 us | 0.019 us | 11.16 us | 11.18 us | 11.26 us | 11.29 us | 11.41 us | 88,918.7 | 1.2970 |     - |     - |   2.01 KB |
+|  ProtobufDeserializeAndDeserialize | 11.90 us | 0.112 us | 0.094 us | 0.026 us | 11.75 us | 11.80 us | 11.92 us | 11.96 us | 12.08 us | 84,007.7 | 1.9836 |     - |     - |   3.06 KB |
+
+// * Warnings *
+Environment
+  Summary -> Benchmark was executed with attached debugger
+
+// * Hints *
+Outliers
+  TestClass.AccelbufferSerializeAndDeserialize: Default -> 1 outlier  was  removed (11.58 us)
+  TestClass.ProtobufDeserializeAndDeserialize: Default  -> 2 outliers were removed (12.33 us, 12.40 us)
+
+// * Legends *
+  Mean      : Arithmetic mean of all measurements
+  Error     : Half of 99.9% confidence interval
+  StdDev    : Standard deviation of all measurements
+  StdErr    : Standard error of all measurements
+  Min       : Minimum
+  Q1        : Quartile 1 (25th percentile)
+  Median    : Value separating the higher half of all measurements (50th percentile)
+  Q3        : Quartile 3 (75th percentile)
+  Max       : Maximum
+  Op/s      : Operation per second
+  Gen 0     : GC Generation 0 collects per 1000 operations
+  Gen 1     : GC Generation 1 collects per 1000 operations
+  Gen 2     : GC Generation 2 collects per 1000 operations
+  Allocated : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 us      : 1 Microsecond (0.000001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+// ** Remained 0 benchmark(s) to run **
+Run time: 00:00:41 (41.38 sec), executed benchmarks: 2
+
+Global total time: 00:00:44 (44.84 sec), executed benchmarks: 2
+// * Artifacts cleanup *

@@ -16,7 +16,10 @@ namespace Accelbuffer.Injection
         /// <summary>
         /// 初始化 FieldIndexAttribute 实例
         /// </summary>
-        /// <param name="index">字段的序列化索引，必须是 (0, 268435456] 范围内的整数；如果可能，索引应该尽可能全部连续（以1递增或递减）</param>
+        /// <param name="index">
+        /// 字段的序列化索引，必须是 (0, 268435456] 范围内的整数；
+        /// 如果可能，索引应该尽可能全部连续（以1递增或递减）
+        /// </param>
         public FieldIndexAttribute(int index)
         {
             Index = index;

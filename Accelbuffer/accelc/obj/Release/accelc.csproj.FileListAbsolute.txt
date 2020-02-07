@@ -1,9 +1,0 @@
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\bin\Release\accelc.exe.config
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\bin\Release\accelc.exe
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\bin\Release\accelc.pdb
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.Properties.Resources.resources
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.csproj.GenerateResource.cache
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.exe
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.pdb
-C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\accelc\obj\Release\accelc.csprojAssemblyReference.cache

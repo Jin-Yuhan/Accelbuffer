@@ -1,9 +1,12 @@
-﻿using Accelbuffer.Properties;
-using Accelbuffer.Text;
+﻿#if UNITY
+using UnityEngine;
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
+using Resources = Accelbuffer.Properties.Resources;
 
 namespace Accelbuffer.Injection
 {
@@ -12,119 +15,44 @@ namespace Accelbuffer.Injection
         protected static readonly MethodAttributes s_MethodAttributes = MethodAttributes.Private | MethodAttributes.HideBySig | MethodAttributes.Final | MethodAttributes.NewSlot | MethodAttributes.Virtual;
         protected static readonly CallingConventions s_CallingConventions = CallingConventions.Standard;
 
-        protected static readonly Type s_WriterType = typeof(StreamingWriter);
-        protected static readonly Type s_IteratorType = typeof(StreamingIterator);
+        protected static readonly Type s_WriterType = typeof(AccelWriter);
+        protected static readonly Type s_ReaderType = typeof(AccelReader);
 
         /// <summary>
-        /// 用于定义接口的序列化方法的类型 <see cref="ITypeSerializer{T}.Serialize(T, ref StreamingWriter)"/>
+        /// T, AccelWriter&amp;
         /// </summary>
-        protected static readonly Type[] s_SerializeTypes = new Type[] { null, typeof(StreamingWriter).MakeByRefType() };
+        private static readonly Type[] s_SerializeArguments = new Type[] { null, typeof(AccelWriter).MakeByRefType() };
         /// <summary>
-        /// 用于定义接口的反序列化方法的类型 <see cref="ITypeSerializer{T}.Deserialize(ref StreamingIterator)"/>
+        /// AccelReader&amp;
         /// </summary>
-        protected static readonly Type[] s_DeserializeTypes = new Type[] { typeof(StreamingIterator).MakeByRefType() };
-
-
+        private static readonly Type[] s_DeserializeMethodArguments = new Type[] { typeof(AccelReader).MakeByRefType() };
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, int, NumberFormat)"/> etc...
+        /// int, T
         /// </summary>
-        protected static readonly Type[] s_WriteValueIntWithIndexTypes = new Type[] { typeof(int), null, typeof(NumberFormat) };
+        private static readonly Type[] s_WriteValueMethodArguments = new Type[] { typeof(int), null };
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, NumberFormat)"/> etc...
+        /// <see cref="AccelWriter.WriteValue{T}(int, T)"/>
         /// </summary>
-        protected static readonly Type[] s_WriteValueIntTypes = new Type[] { null, typeof(NumberFormat) };
-
+        protected static readonly MethodInfo s_WriteValueGenericMethod;
 
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, float)"/> etc...
+        /// string
         /// </summary>
-        protected static readonly Type[] s_WriteValueFloatWithIndexTypes = new Type[] { typeof(int), null };
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(float)"/> etc...
-        /// </summary>
-        protected static readonly Type[] s_WriteValueFloatTypes = new Type[] { null };
+        protected static readonly Type[] s_RequireFieldExceptionCtorArgument = new Type[] { typeof(string) };
 
 
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, char, Encoding)"/>
+        /// <see cref="AccelReader.HasNext(out int)"/>
         /// </summary>
-        protected static readonly MethodInfo s_WriteValueCharWithIndexMethod
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(int), typeof(char), typeof(Encoding) });
+        protected static readonly MethodInfo s_HasNextMethod = s_ReaderType.GetMethod(Resources.HasNextName, new Type[] { typeof(int).MakeByRefType() });
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(char, Encoding)"/>
+        /// <see cref="AccelReader.SkipNext()"/>
         /// </summary>
-        protected static readonly MethodInfo s_WriteValueCharMethod
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(char), typeof(Encoding) });
-
-
+        protected static readonly MethodInfo s_SkipNextMethod = s_ReaderType.GetMethod(Resources.SkipNextName, Type.EmptyTypes);
         /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, string, Encoding)"/>
+        /// <see cref="AccelReader.ReadGeneric{T}"/>
         /// </summary>
-        protected static readonly MethodInfo s_WriteValueStringWithIndexMethod
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(int), typeof(string), typeof(Encoding) });
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(string, Encoding)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_WriteValueStringMethod
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(string), typeof(Encoding) });
-
-
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(int, bool)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_WriteValueBoolWithIndexMethod 
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(int), typeof(bool) });
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue(bool)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_WriteValueBoolMethod
-            = s_WriterType.GetMethod(Resources.WriteValueMethodName, new Type[] { typeof(bool) });
-
-
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue{T}(int, T)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_WriteValueComplexWithIndexMethod;
-        /// <summary>
-        /// <see cref="StreamingWriter.WriteValue{T}(T)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_WriteValueComplexTypesMethod;
-
-
-        /// <summary>
-        /// <see cref="NumberFormat"/>
-        /// </summary>
-        protected static readonly Type[] s_NumberFormatTypes = new Type[] { typeof(NumberFormat) };//...
-        /// <summary>
-        /// <see cref="Encoding"/>
-        /// </summary>
-        protected static readonly Type[] s_CharEncodingTypes = new Type[] { typeof(Encoding) };//...
-
-
-        /// <summary>
-        /// <see cref="StreamingIterator.HasNext(out int)"/>
-        /// </summary>
-        protected static readonly MethodInfo s_HasNextOutIndexMethod = s_IteratorType.GetMethod(Resources.HasNextName, new Type[] { typeof(int).MakeByRefType() });
-        /// <summary>
-        /// <see cref="StreamingIterator.HasNext()"/>
-        /// </summary>
-        protected static readonly MethodInfo s_HasNextMethod = s_IteratorType.GetMethod(Resources.HasNextName, Type.EmptyTypes);
-
-
-        /// <summary>
-        /// <see cref="StreamingIterator.SkipNext()"/>
-        /// </summary>
-        protected static readonly MethodInfo s_SkipNextMethod = s_IteratorType.GetMethod(Resources.SkipNextName, Type.EmptyTypes);
-
-
-        /// <summary>
-        /// <see cref="StreamingIterator.NextAs{T}"/>
-        /// </summary>
-        protected static readonly MethodInfo s_IteratorNextAsComplexMethod = s_IteratorType.GetMethod(Resources.NextAsName + Resources.ComplexName);
-        /// <summary>
-        /// <see cref="StreamingIterator.NextAsWithoutTag{T}"/>
-        /// </summary>
-        protected static readonly MethodInfo s_IteratorNextAsComplexWithoutTagMethod = s_IteratorType.GetMethod(string.Format(Resources.NextAsWithoutTagName, Resources.ComplexName));
+        protected static readonly MethodInfo s_ReadGenericMethod = s_ReaderType.GetMethod(Resources.ReadName + Resources.GenericName);
 
 
         static SerializerGenerationProgress()
@@ -133,83 +61,204 @@ namespace Accelbuffer.Injection
             {
                 if (method.IsGenericMethodDefinition)
                 {
-                    if (method.GetParameters().Length == 2)
-                    {
-                        s_WriteValueComplexWithIndexMethod = method;
-                    }
-                    else
-                    {
-                        s_WriteValueComplexTypesMethod = method;
-                    }
+                    s_WriteValueGenericMethod = method;
+                    break;
                 }
             }
         }
 
 
-        public abstract void Execute(Type objType, Type interfaceType, TypeBuilder builder, List<FieldData> fields, List<MethodData> methods, SerializerOption option);
+        public abstract void Execute(Type objType, Type interfaceType, TypeBuilder builder, List<FieldData> fields, MethodInfo beforeMethod, MethodInfo afterMethod);
 
-        private static Encoding GetCharEncoding(FieldInfo field)
+
+        protected static Type[] GetSerializeMethodArguments(Type type)
         {
-            EncodingAttribute attribute = field.GetCustomAttribute<EncodingAttribute>(true);
-            return attribute == null ? Encoding.UTF8 : attribute.Encoding;
+            s_SerializeArguments[0] = type;
+            return s_SerializeArguments;
         }
 
-        private static NumberFormat GetNumberFormat(FieldInfo field)
+        protected static Type[] GetDeserializeMethodArguments()
         {
-            FixedAttribute attr = field.GetCustomAttribute<FixedAttribute>(true);
-            return attr == null ? NumberFormat.Variant : NumberFormat.Fixed;
+            return s_DeserializeMethodArguments;
         }
 
-        private static void EmitEncodingIL(ILGenerator il, Encoding encoding)
+        protected static Type[] GetWriteValueMethodArguments(Type type)
         {
-            switch (encoding)
-            {
-                case Encoding.Unicode:
-                    il.Emit(OpCodes.Ldc_I4_0);
-                    break;
-                case Encoding.ASCII:
-                    il.Emit(OpCodes.Ldc_I4_1);
-                    break;
-                default:
-                    il.Emit(OpCodes.Ldc_I4_2);
-                    break;
-            }
+            s_WriteValueMethodArguments[1] = type;
+            return s_WriteValueMethodArguments;
         }
 
-        private static void EmitNumberFormatIL(ILGenerator il, NumberFormat type)
-        {
-            il.Emit(type == NumberFormat.Variant ? OpCodes.Ldc_I4_0 : OpCodes.Ldc_I4_1);
-        }
-
-        protected static void EmitNumberFormat(ILGenerator il, FieldInfo field)
-        {
-            EmitNumberFormatIL(il, GetNumberFormat(field));
-        }
-
-        protected static void EmitEncoding(ILGenerator il, FieldInfo field)
-        {
-            EmitEncodingIL(il, GetCharEncoding(field));
-        }
-
-        internal static WireType GetWireType(Type type, out string name)
+        protected static bool IsBuiltinType(Type type)
         {
             switch (Type.GetTypeCode(type))
             {
-                case TypeCode.SByte:    name = Resources.SByteName;     return WireType.Int;
-                case TypeCode.Byte:     name = Resources.ByteName;      return WireType.Int;
-                case TypeCode.Int16:    name = Resources.ShortName;     return WireType.Int;
-                case TypeCode.UInt16:   name = Resources.UShortName;    return WireType.Int;
-                case TypeCode.Int32:    name = Resources.IntName;       return WireType.Int;
-                case TypeCode.UInt32:   name = Resources.UIntName;      return WireType.Int;
-                case TypeCode.Int64:    name = Resources.LongName;      return WireType.Int;
-                case TypeCode.UInt64:   name = Resources.ULongName;     return WireType.Int;
-                case TypeCode.Single:   name = Resources.FloatName;     return WireType.Float;
-                case TypeCode.Double:   name = Resources.DoubleName;    return WireType.Float;
-                case TypeCode.Decimal:  name = Resources.DecimalName;   return WireType.Float;
-                case TypeCode.Boolean:  name = Resources.BoolName;      return WireType.Boolean;
-                case TypeCode.Char:     name = Resources.CharName;      return WireType.Char;
-                case TypeCode.String:   name = Resources.StringName;    return WireType.String;
-                default:                name = Resources.ComplexName;   return WireType.Complex;
+                case TypeCode.SByte:
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.UInt16:
+                case TypeCode.Int32: 
+                case TypeCode.UInt32:
+                case TypeCode.Int64: 
+                case TypeCode.UInt64: 
+                case TypeCode.Single: 
+                case TypeCode.Double: 
+                case TypeCode.Decimal: 
+                case TypeCode.Boolean: 
+                case TypeCode.Char:
+                case TypeCode.String:
+                    return true;
+                default:
+                    if (type == typeof(vint))
+                        return true;
+                    if (type == typeof(vuint))
+                        return true;
+                    if (type == typeof(IntPtr))
+                        return true;
+                    if (type == typeof(UIntPtr))
+                        return true;
+#if UNITY
+                    if (type == typeof(Vector2))
+                        return true;
+                    if (type == typeof(Vector3))
+                        return true;
+                    if (type == typeof(Vector4))
+                        return true;
+                    if (type == typeof(Vector2Int))
+                        return true;
+                    if (type == typeof(Vector3Int))
+                        return true;
+                    if (type == typeof(Quaternion))
+                        return true;
+                    if (type == typeof(Color))
+                        return true;
+                    if (type == typeof(Color32))
+                        return true;
+#endif
+                    return false;
+            }
+        }
+
+        protected static bool IsBuiltinType(Type type, out string name)
+        {
+            switch (Type.GetTypeCode(type))
+            {
+                case TypeCode.SByte:
+                    name = Resources.SByteName;
+                    return true;
+                case TypeCode.Byte:
+                    name = Resources.ByteName;
+                    return true;
+                case TypeCode.Int16:
+                    name = Resources.ShortName;
+                    return true;
+                case TypeCode.UInt16:
+                    name = Resources.UShortName;
+                    return true;
+                case TypeCode.Int32:
+                    name = Resources.IntName;
+                    return true;
+                case TypeCode.UInt32:
+                    name = Resources.UIntName;
+                    return true;
+                case TypeCode.Int64:
+                    name = Resources.LongName;
+                    return true;
+                case TypeCode.UInt64:
+                    name = Resources.ULongName;
+                    return true;
+                case TypeCode.Single:
+                    name = Resources.FloatName;
+                    return true;
+                case TypeCode.Double:
+                    name = Resources.DoubleName;
+                    return true;
+                case TypeCode.Decimal:
+                    name = Resources.DecimalName;
+                    return true;
+                case TypeCode.Boolean:
+                    name = Resources.BoolName;
+                    return true;
+                case TypeCode.Char:
+                    name = Resources.CharName;
+                    return true;
+                case TypeCode.String:
+                    name = Resources.StringName;
+                    return true;
+                default:
+                    if (type == typeof(vint))
+                    {
+                        name = Resources.VIntName;
+                        return true;
+                    }
+
+                    if (type == typeof(vuint))
+                    {
+                        name = Resources.VUIntName;
+                        return true;
+                    }
+
+                    if (type == typeof(IntPtr))
+                    {
+                        name = Resources.IntPtrName;
+                        return true;
+                    }
+
+                    if (type == typeof(UIntPtr))
+                    {
+                        name = Resources.UIntPtrName;
+                        return true;
+                    }
+#if UNITY
+                    if (type == typeof(Vector2))
+                    {
+                        name = Resources.Vector2Name;
+                        return true;
+                    }
+
+                    if (type == typeof(Vector3))
+                    {
+                        name = Resources.Vector3Name;
+                        return true;
+                    }
+
+                    if (type == typeof(Vector4))
+                    {
+                        name = Resources.Vector4Name;
+                        return true;
+                    }
+
+                    if (type == typeof(Vector2Int))
+                    {
+                        name = Resources.Vector2IntName;
+                        return true;
+                    }
+
+                    if (type == typeof(Vector3Int))
+                    {
+                        name = Resources.Vector3IntName;
+                        return true;
+                    }
+
+                    if (type == typeof(Quaternion))
+                    {
+                        name = Resources.QuaternionName;
+                        return true;
+                    }
+
+                    if (type == typeof(Color))
+                    {
+                        name = Resources.ColorName;
+                        return true;
+                    }
+
+                    if (type == typeof(Color32))
+                    {
+                        name = Resources.Color32Name;
+                        return true;
+                    }
+#endif
+                    name = Resources.GenericName;
+                    return false;
             }
         }
     }

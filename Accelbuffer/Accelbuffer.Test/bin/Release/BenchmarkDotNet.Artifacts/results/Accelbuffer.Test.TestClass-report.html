@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Accelbuffer.Test.TestClass-20200118-162435</title>
+<title>Accelbuffer.Test.TestClass-20200201-222813</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -15,17 +15,19 @@
 <pre><code>
 BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
 Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
-Frequency=2836142 Hz, Resolution=352.5917 ns, Timer=TSC
+Frequency=2836093 Hz, Resolution=352.5977 ns, Timer=TSC
   [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
   DefaultJob : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
 </code></pre>
 <pre><code></code></pre>
 
 <table>
-<thead><tr><th>                      Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>StdErr</th><th>Min</th><th> Q1</th><th>Median</th><th>Q3</th><th>Max</th><th>Op/s</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+<thead><tr><th>          Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>StdErr</th><th>Median</th><th>Min</th><th>Q1</th><th>Q3</th><th>Max</th><th>Op/s</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>AccelbufferSerializeAndDeserialize</td><td>10.11 us</td><td>0.197 us</td><td>0.312 us</td><td>0.054 us</td><td>9.764 us</td><td>9.815 us</td><td>10.04 us</td><td>10.36 us</td><td>10.80 us</td><td>98,887.0</td><td>1.1902</td><td>-</td><td>-</td><td>1.84 KB</td>
-</tr><tr><td>ProtobufDeserializeAndDeserialize</td><td>12.39 us</td><td>0.244 us</td><td>0.387 us</td><td>0.067 us</td><td>11.794 us</td><td>12.045 us</td><td>12.38 us</td><td>12.70 us</td><td>13.18 us</td><td>80,735.2</td><td>1.9836</td><td>-</td><td>-</td><td>3.06 KB</td>
+</thead><tbody><tr><td>AccelbufferSerialize</td><td>5.872 us</td><td>0.0814 us</td><td>0.0680 us</td><td>0.0189 us</td><td>5.860 us</td><td>5.813 us</td><td>5.820 us</td><td>5.895 us</td><td>6.056 us</td><td>170,292.0</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>AccelbufferDeserialize</td><td>5.942 us</td><td>0.1159 us</td><td>0.1423 us</td><td>0.0303 us</td><td>5.903 us</td><td>5.784 us</td><td>5.834 us</td><td>6.010 us</td><td>6.385 us</td><td>168,283.1</td><td>1.3046</td><td>-</td><td>-</td><td>2060 B</td>
+</tr><tr><td>ProtobufSerialize</td><td>3.958 us</td><td>0.0839 us</td><td>0.0862 us</td><td>0.0209 us</td><td>3.943 us</td><td>3.865 us</td><td>3.880 us</td><td>4.002 us</td><td>4.160 us</td><td>252,666.0</td><td>0.3433</td><td>-</td><td>-</td><td>548 B</td>
+</tr><tr><td>ProtobufDeserialize</td><td>8.082 us</td><td>0.3285 us</td><td>0.7142 us</td><td>0.0946 us</td><td>7.796 us</td><td>7.607 us</td><td>7.691 us</td><td>7.971 us</td><td>9.949 us</td><td>123,728.6</td><td>1.6327</td><td>-</td><td>-</td><td>2584 B</td>
 </tr></tbody></table>
 </body>
 </html>

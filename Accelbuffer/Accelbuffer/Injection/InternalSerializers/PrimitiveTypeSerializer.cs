@@ -1,188 +1,203 @@
 ﻿using Accelbuffer.Memory;
-using Accelbuffer.Text;
 
 namespace Accelbuffer.Injection
 {
     internal sealed class PrimitiveTypeSerializer :
-        IMemoryOptimizedTypeSerializer<sbyte>,
-        IMemoryOptimizedTypeSerializer<byte>,
-        IMemoryOptimizedTypeSerializer<short>,
-        IMemoryOptimizedTypeSerializer<ushort>,
-        IMemoryOptimizedTypeSerializer<int>,
-        IMemoryOptimizedTypeSerializer<uint>,
-        IMemoryOptimizedTypeSerializer<long>,
-        IMemoryOptimizedTypeSerializer<ulong>,
-        IMemoryOptimizedTypeSerializer<float>,
-        IMemoryOptimizedTypeSerializer<double>,
-        IMemoryOptimizedTypeSerializer<decimal>,
-        IMemoryOptimizedTypeSerializer<bool>,
-        IMemoryOptimizedTypeSerializer<char>,
+        IBuiltinTypeSerializer,
+
+        IMemorySizeForType<sbyte>,
+        IMemorySizeForType<byte>,
+        IMemorySizeForType<short>,
+        IMemorySizeForType<ushort>,
+        IMemorySizeForType<int>,
+        IMemorySizeForType<uint>,
+        IMemorySizeForType<long>,
+        IMemorySizeForType<ulong>,
+        IMemorySizeForType<float>,
+        IMemorySizeForType<double>,
+        IMemorySizeForType<decimal>,
+        IMemorySizeForType<bool>,
+        IMemorySizeForType<char>,
+
+        ITypeSerializer<sbyte>,
+        ITypeSerializer<byte>,
+        ITypeSerializer<short>,
+        ITypeSerializer<ushort>,
+        ITypeSerializer<int>,
+        ITypeSerializer<uint>,
+        ITypeSerializer<long>,
+        ITypeSerializer<ulong>,
+        ITypeSerializer<float>,
+        ITypeSerializer<double>,
+        ITypeSerializer<decimal>,
+        ITypeSerializer<bool>,
+        ITypeSerializer<char>,
         ITypeSerializer<string>
     {
-        int IMemoryOptimizedTypeSerializer<sbyte>.InitialMemorySize => 1;
+        int IMemorySizeForType<sbyte>.ApproximateMemorySize => 1;
 
-        int IMemoryOptimizedTypeSerializer<byte>.InitialMemorySize => 1;
+        int IMemorySizeForType<byte>.ApproximateMemorySize => 1;
 
-        int IMemoryOptimizedTypeSerializer<short>.InitialMemorySize => 2;
+        int IMemorySizeForType<short>.ApproximateMemorySize => 2;
 
-        int IMemoryOptimizedTypeSerializer<int>.InitialMemorySize => 4;
+        int IMemorySizeForType<ushort>.ApproximateMemorySize => 2;
 
-        int IMemoryOptimizedTypeSerializer<uint>.InitialMemorySize => 4;
+        int IMemorySizeForType<int>.ApproximateMemorySize => 4;
 
-        int IMemoryOptimizedTypeSerializer<ushort>.InitialMemorySize => 2;
+        int IMemorySizeForType<uint>.ApproximateMemorySize => 4;
 
-        int IMemoryOptimizedTypeSerializer<long>.InitialMemorySize => 8;
+        int IMemorySizeForType<long>.ApproximateMemorySize => 8;
 
-        int IMemoryOptimizedTypeSerializer<ulong>.InitialMemorySize => 8;
+        int IMemorySizeForType<ulong>.ApproximateMemorySize => 8;
 
-        int IMemoryOptimizedTypeSerializer<double>.InitialMemorySize => 8;
+        int IMemorySizeForType<float>.ApproximateMemorySize => 4;
 
-        int IMemoryOptimizedTypeSerializer<float>.InitialMemorySize => 4;
+        int IMemorySizeForType<double>.ApproximateMemorySize => 8;
 
-        int IMemoryOptimizedTypeSerializer<bool>.InitialMemorySize => 1;
+        int IMemorySizeForType<decimal>.ApproximateMemorySize => 16;
 
-        int IMemoryOptimizedTypeSerializer<decimal>.InitialMemorySize => 16;
+        int IMemorySizeForType<bool>.ApproximateMemorySize => 1;
 
-        int IMemoryOptimizedTypeSerializer<char>.InitialMemorySize => 3;
+        int IMemorySizeForType<char>.ApproximateMemorySize => 2;
 
-        sbyte ITypeSerializer<sbyte>.Deserialize(ref StreamingIterator iterator)
+        sbyte ITypeSerializer<sbyte>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsInt8WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadInt8();
         }
 
-        byte ITypeSerializer<byte>.Deserialize(ref StreamingIterator iterator)
+        byte ITypeSerializer<byte>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsUInt8WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadUInt8();
         }
 
-        short ITypeSerializer<short>.Deserialize(ref StreamingIterator iterator)
+        short ITypeSerializer<short>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsInt16WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadInt16();
         }
 
-        ushort ITypeSerializer<ushort>.Deserialize(ref StreamingIterator iterator)
+        ushort ITypeSerializer<ushort>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsUInt16WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadUInt16();
         }
 
-        uint ITypeSerializer<uint>.Deserialize(ref StreamingIterator iterator)
+        int ITypeSerializer<int>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsUInt32WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadInt32();
         }
 
-        int ITypeSerializer<int>.Deserialize(ref StreamingIterator iterator)
+        uint ITypeSerializer<uint>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadUInt32();
         }
 
-        ulong ITypeSerializer<ulong>.Deserialize(ref StreamingIterator iterator)
+        long ITypeSerializer<long>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsUInt64WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadInt64();
         }
 
-        double ITypeSerializer<double>.Deserialize(ref StreamingIterator iterator)
+        ulong ITypeSerializer<ulong>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsFloat64WithoutTag(): default;
+            return reader.ReadUInt64();
         }
 
-        long ITypeSerializer<long>.Deserialize(ref StreamingIterator iterator)
+        float ITypeSerializer<float>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsInt64WithoutTag(NumberFormat.Variant) : default;
+            return reader.ReadFloat32();
         }
 
-        float ITypeSerializer<float>.Deserialize(ref StreamingIterator iterator)
+        double ITypeSerializer<double>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsFloat32WithoutTag(): default;
+            return reader.ReadFloat64();
         }
 
-        bool ITypeSerializer<bool>.Deserialize(ref StreamingIterator iterator)
+        decimal ITypeSerializer<decimal>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsBooleanWithoutTag(): default;
+            return reader.ReadFloat128();
         }
 
-        char ITypeSerializer<char>.Deserialize(ref StreamingIterator iterator)
+        bool ITypeSerializer<bool>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsCharWithoutTag(Encoding.UTF8): default;
+            return reader.ReadBoolean();
         }
 
-        string ITypeSerializer<string>.Deserialize(ref StreamingIterator iterator)
+        char ITypeSerializer<char>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsStringWithoutTag(Encoding.UTF8) : default;
+            return reader.ReadChar();
         }
 
-        decimal ITypeSerializer<decimal>.Deserialize(ref StreamingIterator iterator)
+        string ITypeSerializer<string>.Deserialize(ref AccelReader reader)
         {
-            return iterator.HasNext() ? iterator.NextAsFloat128WithoutTag() : default;
+            return reader.ReadString();
         }
 
-        void ITypeSerializer<sbyte>.Serialize(sbyte obj, ref StreamingWriter writer)
+        void ITypeSerializer<sbyte>.Serialize(sbyte obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<byte>.Serialize(byte obj, ref StreamingWriter writer)
+        void ITypeSerializer<byte>.Serialize(byte obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<short>.Serialize(short obj, ref StreamingWriter writer)
+        void ITypeSerializer<short>.Serialize(short obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<ushort>.Serialize(ushort obj, ref StreamingWriter writer)
+        void ITypeSerializer<ushort>.Serialize(ushort obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<uint>.Serialize(uint obj, ref StreamingWriter writer)
+        void ITypeSerializer<int>.Serialize(int obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<int>.Serialize(int obj, ref StreamingWriter writer)
+        void ITypeSerializer<uint>.Serialize(uint obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<ulong>.Serialize(ulong obj, ref StreamingWriter writer)
+        void ITypeSerializer<long>.Serialize(long obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<double>.Serialize(double obj, ref StreamingWriter writer)
+        void ITypeSerializer<ulong>.Serialize(ulong obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<long>.Serialize(long obj, ref StreamingWriter writer)
+        void ITypeSerializer<float>.Serialize(float obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, NumberFormat.Variant);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<float>.Serialize(float obj, ref StreamingWriter writer)
+        void ITypeSerializer<double>.Serialize(double obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<bool>.Serialize(bool obj, ref StreamingWriter writer)
+        void ITypeSerializer<decimal>.Serialize(decimal obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<char>.Serialize(char obj, ref StreamingWriter writer)
+        void ITypeSerializer<bool>.Serialize(bool obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, Encoding.UTF8);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<string>.Serialize(string obj, ref StreamingWriter writer)
+        void ITypeSerializer<char>.Serialize(char obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj, Encoding.UTF8);
+            writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<decimal>.Serialize(decimal obj, ref StreamingWriter writer)
+        void ITypeSerializer<string>.Serialize(string obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj);
+            writer.WriteValue(writer.m_Index, obj);
         }
     }
 }

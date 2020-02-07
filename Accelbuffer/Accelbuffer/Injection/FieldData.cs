@@ -6,13 +6,13 @@ namespace Accelbuffer.Injection
     {
         public readonly FieldInfo Field;
         public readonly int Index;
-        public readonly bool CheckRef;
+        public readonly bool NeverNull;
 
-        public FieldData(FieldInfo field, int index, bool checkRef)
+        public FieldData(FieldInfo field, int index, bool neverNull)
         {
             Field = field;
             Index = index;
-            CheckRef = checkRef;
+            NeverNull = neverNull;
         }
     }
 }

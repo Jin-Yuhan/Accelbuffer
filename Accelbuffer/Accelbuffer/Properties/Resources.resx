@@ -135,8 +135,8 @@
   <data name="CharName" xml:space="preserve">
     <value>Char</value>
   </data>
-  <data name="ComplexName" xml:space="preserve">
-    <value />
+  <data name="GenericName" xml:space="preserve">
+    <value>Generic</value>
   </data>
   <data name="DecimalName" xml:space="preserve">
     <value>Float128</value>
@@ -171,11 +171,8 @@
   <data name="LongName" xml:space="preserve">
     <value>Int64</value>
   </data>
-  <data name="NextAsName" xml:space="preserve">
-    <value>NextAs</value>
-  </data>
-  <data name="NextAsWithoutTagName" xml:space="preserve">
-    <value>NextAs{0}WithoutTag</value>
+  <data name="ReadName" xml:space="preserve">
+    <value>Read</value>
   </data>
   <data name="NotSupportHighRankArray" xml:space="preserve">
     <value>不支持多维数组序列化与反序列化</value>
@@ -190,10 +187,10 @@
     <value>Serialize</value>
   </data>
   <data name="SerializerAssemblyName" xml:space="preserve">
-    <value>DynamicSerializerAssembly.dll</value>
+    <value>RuntimeSerializerAssembly.dll</value>
   </data>
   <data name="SerializerModuleName" xml:space="preserve">
-    <value>DynamicSerializerModule</value>
+    <value>RuntimeSerializerModule</value>
   </data>
   <data name="SerializerTypeIsNull" xml:space="preserve">
     <value>序列化代理类型不能为null</value>
@@ -231,7 +228,46 @@
   <data name="WriteValueMethodName" xml:space="preserve">
     <value>WriteValue</value>
   </data>
-  <data name="NotSerializable" xml:space="preserve">
-    <value>无法为{0}类型注入代理，因为类型没有被标记为[Serializable]</value>
+  <data name="Color32Name" xml:space="preserve">
+    <value>Color32</value>
+  </data>
+  <data name="ColorName" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="IntPtrName" xml:space="preserve">
+    <value>IntPtr</value>
+  </data>
+  <data name="QuaternionName" xml:space="preserve">
+    <value>Quaternion</value>
+  </data>
+  <data name="UIntPtrName" xml:space="preserve">
+    <value>UIntPtr</value>
+  </data>
+  <data name="Vector2IntName" xml:space="preserve">
+    <value>Vector2Int</value>
+  </data>
+  <data name="Vector2Name" xml:space="preserve">
+    <value>Vector2</value>
+  </data>
+  <data name="Vector3IntName" xml:space="preserve">
+    <value>Vector3Int</value>
+  </data>
+  <data name="Vector3Name" xml:space="preserve">
+    <value>Vector3</value>
+  </data>
+  <data name="Vector4Name" xml:space="preserve">
+    <value>Vector4</value>
+  </data>
+  <data name="VIntName" xml:space="preserve">
+    <value>VariantInt</value>
+  </data>
+  <data name="VUIntName" xml:space="preserve">
+    <value>VariantUInt</value>
+  </data>
+  <data name="MissingRequiredFieldMessage" xml:space="preserve">
+    <value>字段{0}被标记为'required'，但是没有被赋值，请保证序列化时写入了这个数据，且不为null</value>
+  </data>
+  <data name="RequiredFieldIsNullMessage" xml:space="preserve">
+    <value>字段{0}的值不能是null，因为这个字段被标记为'required'</value>
   </data>
 </root>

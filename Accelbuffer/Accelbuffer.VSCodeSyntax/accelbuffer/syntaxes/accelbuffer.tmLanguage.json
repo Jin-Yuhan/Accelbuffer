@@ -1,0 +1,172 @@
+{
+  "name": "Accelbuffer",
+  "scopeName": "source.accel",
+  "patterns": [
+    {
+      "include": "#package"
+    },
+    {
+      "include": "#using"
+    },
+    {
+      "include": "#storage-modifier"
+    },
+    {
+      "include": "#struct"
+    },
+    {
+      "include": "#document"
+    },
+    {
+      "include": "#single_line_comment"
+    }
+  ],
+  "repository": {
+    "package": {
+      "match": "\\b(package)\\s+([\\w.]+)\\s*;",
+      "captures": {
+        "1": {
+          "name": "keyword.other.using.package.accel"
+        }
+      }
+    },
+    "using": {
+      "match": "\\b(using)\\s+([\\w.]+)\\s*;",
+      "captures": {
+        "1": {
+          "name": "keyword.other.using..accel"
+        }
+      }
+    },
+    "storage-modifier": {
+      "name": "storage.modifier.accel",
+      "match": "\\b(public|internal|private|protected|ref|final)\\b"
+    },
+    "struct": {
+      "begin": "(\\b)(struct)(\\s+)([A-Za-z_][A-Za-z0-9_]*)(\\s*)((\\{))?",
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.other.struct.accel"
+        },
+        "4": {
+          "name": "entity.name.class.accel"
+        }
+      },
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#about"
+        },
+        {
+          "include": "#field"
+        },
+        {
+          "include": "#storage-modifier"
+        },
+        {
+          "include": "#struct"
+        },
+        {
+          "include": "#document"
+        },
+        {
+          "include": "#single_line_comment"
+        }
+      ]
+    },
+    "about": {
+      "begin": "\\b(about)\\s+([0-9]+)",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.about.accel"
+        },
+        "2": {
+          "name": "constant.numeric.decimal.accel"
+        }
+      },
+      "end": "\\{",
+      "patterns": [
+        {
+          "include": "#single_line_comment"
+        },
+        {
+          "include": "#document"
+        }
+      ]
+    },
+    "field": {
+      "begin": "\\b(var)\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\|\\s*([0-9]+))?\\s*:",
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.var.field.accel"
+        },
+        "2": {
+          "name": "variable.other.name.field.accel"
+        },
+        "3": {
+          "name": "entity.name.function.bar.accel"
+        },
+        "4": {
+          "name": "constant.numeric.decimal.accel"
+        }
+      },
+      "end": ";",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.field.accel"
+        }
+      },
+      "patterns": [
+        {
+          "name": "keyword.base_type.field.accel",
+          "match": "\\b(boolean|uint8|int8|uint16|int16|uint32|int32|uint64|int64|float32|float64|float128|char|string|intptr|uintptr|vint|vuint|vector2|vector3|vector4|vector2int|vector3int|quaternion|color|color32)\\b"
+        },
+        {
+          "name": "keyword.obsolete..accel",
+          "match": "obsolete"
+        },
+        {
+          "name": "storage.type.cs",
+          "match": "\\b[\\w.]+\\b"
+        },
+        {
+          "name": "entity.name.function.notnull.accel",
+          "match": "\\*"
+        }
+      ]
+    },
+    "document": {
+      "patterns": [
+        {
+          "name": "comment.doc.begin.accel",
+          "begin": "--",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.doc.accel"
+            }
+          },
+          "end": "--",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.doc.accel"
+            }
+          }
+        }
+      ]
+    },
+    "single_line_comment": {
+      "patterns": [
+        {
+          "name": "comment.begin.accel",
+          "begin": "//",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.accel"
+            }
+          },
+          "end": "(?=$)"
+        }
+      ]
+    }
+  }
+}

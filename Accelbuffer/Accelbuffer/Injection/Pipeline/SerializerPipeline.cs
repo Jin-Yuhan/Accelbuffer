@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Runtime.CompilerServices;
 
 namespace Accelbuffer.Injection
 {
@@ -24,7 +23,6 @@ namespace Accelbuffer.Injection
         private static readonly BindingFlags s_MessageCallbackBindingFlags;
         private static readonly Type[] s_InterfaceTypeArray;
         private static readonly List<FieldData> s_FieldData;
-        private static readonly List<MethodData> s_MethodData;
 
         private static readonly SerializerGenerationProgress[] s_Progress;
 
@@ -45,7 +43,6 @@ namespace Accelbuffer.Injection
             s_MessageCallbackBindingFlags = BindingFlags.Public | BindingFlags.Instance;
             s_InterfaceTypeArray = new Type[1];
             s_FieldData = new List<FieldData>(10);
-            s_MethodData = new List<MethodData>(2);
 
             s_Progress = new SerializerGenerationProgress[]
             {
@@ -64,14 +61,11 @@ namespace Accelbuffer.Injection
             TypeBuilder builder = CreateBuilder(objType, interfaceType);
 
             GetSerializedFields(objType);
-            GetMessageCallbacks(objType);
-
-            SerializerOption option = objType.GetCustomAttribute<CompactLayoutAttribute>(true) == null 
-                ? SerializerOption.Normal : SerializerOption.CompactLayout;
+            GetMessageCallbacks(objType, out MethodInfo beforeMethod, out MethodInfo afterMethod);
 
             for (int i = 0; i < s_Progress.Length; i++)
             {
-                s_Progress[i].Execute(objType, interfaceType, builder, s_FieldData, s_MethodData, option);
+                s_Progress[i].Execute(objType, interfaceType, builder, s_FieldData, beforeMethod, afterMethod);
             }
 
             return builder.CreateType();
@@ -103,7 +97,7 @@ namespace Accelbuffer.Injection
             {
                 FieldInfo field = allFields[i];
 
-                if (field.GetCustomAttribute<CompilerGeneratedAttribute>() != null || field.IsInitOnly)
+                if (field.IsInitOnly)
                 {
                     continue;
                 }
@@ -112,18 +106,19 @@ namespace Accelbuffer.Injection
 
                 if (attribute != null)
                 {
-                    CheckRefAttribute checkRef = field.GetCustomAttribute<CheckRefAttribute>(true);
-                    s_FieldData.Add(new FieldData(field, attribute.Index, checkRef != null));
+                    NeverNullAttribute neverNull = field.GetCustomAttribute<NeverNullAttribute>(true);
+                    s_FieldData.Add(new FieldData(field, attribute.Index, neverNull != null));
                 }
             }
             
             s_FieldData.Sort(s_Comparer);
         }
 
-        private static void GetMessageCallbacks(Type objType)
+        private static void GetMessageCallbacks(Type objType, out MethodInfo beforeMethod, out MethodInfo afterMethod)
         {
             MethodInfo[] methods = objType.GetMethods(s_MessageCallbackBindingFlags);
-            s_MethodData.Clear();
+            beforeMethod = null;
+            afterMethod = null;
 
             if (methods == null)
             {
@@ -145,16 +140,19 @@ namespace Accelbuffer.Injection
 
                 if (attr1 != null)
                 {
-                    s_MethodData.Add(new MethodData(method, AccelbufferCallback.OnBeforeSerialization, attr1.Priority));
+                    beforeMethod = method;
                 }
 
                 if (attr2 != null)
                 {
-                    s_MethodData.Add(new MethodData(method, AccelbufferCallback.OnAfterDeserialization, attr2.Priority));
+                    afterMethod = method;
+                }
+
+                if (beforeMethod != null && afterMethod != null)
+                {
+                    return;
                 }
             }
-
-            s_MethodData.Sort(s_Comparer);
         }
 
 #if DEBUG
@@ -164,16 +162,11 @@ namespace Accelbuffer.Injection
         }
 #endif
 
-        private sealed class DataComparer : IComparer<FieldData>, IComparer<MethodData>
+        private sealed class DataComparer : IComparer<FieldData>
         {
             public int Compare(FieldData x, FieldData y)
             {
                 return x.Index - y.Index;
-            }
-
-            public int Compare(MethodData x, MethodData y)
-            {
-                return x.Priority - y.Priority;
             }
         }
     }

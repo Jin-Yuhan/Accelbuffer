@@ -1,0 +1,32 @@
+{
+	"package":{
+		"prefix": "package",
+		"description": "package declaration",
+		"body": "package ${1:package_name};"
+	},
+	"using":{
+		"prefix": "using",
+		"description": "using declaration",
+		"body": "using ${1:package_name};"
+	},
+	"class":{
+		"prefix": "class",
+		"description": "class declaration",
+		"body": "ref struct ${1:class_name}\n{\n}"
+	},
+	"struct":{
+		"prefix": "struct",
+		"description": "struct declaration",
+		"body": "struct ${1:struct_name}\n{\n}"
+	},
+	"memory-size":{
+		"prefix": "about",
+		"description": "memory-size declaration",
+		"body": "about ${1:memory_size}"
+	},
+	"field":{
+		"prefix": "var",
+		"description": "field declaration",
+		"body": "var ${1:field_name} : ${2:field_type};"
+	}
+}

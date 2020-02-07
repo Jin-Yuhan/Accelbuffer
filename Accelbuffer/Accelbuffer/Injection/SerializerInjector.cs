@@ -1,5 +1,4 @@
-﻿using Accelbuffer.Memory;
-using Accelbuffer.Properties;
+﻿using Accelbuffer.Properties;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -11,25 +10,11 @@ namespace Accelbuffer.Injection
     /// </summary>
     public static class SerializerInjector
     {
-        internal static class InternalCache<T>
-        {
-            public static readonly ITypeSerializer<T> Serializer;
-            public static readonly MemoryAllocator Allocator;
-
-            static InternalCache()
-            {
-                Serializer = Inject<T>();
-                Allocator = MemoryAllocator.Alloc<T>(Serializer);
-            }
-
-            public static void Initialize() { }
-        }
-
         private static readonly Dictionary<Type, Type> s_TypeMap;
 
         static SerializerInjector()
         {
-            s_TypeMap = new Dictionary<Type, Type>(33)
+            s_TypeMap = new Dictionary<Type, Type>(39)
             {
                 [typeof(sbyte)] = typeof(PrimitiveTypeSerializer),
                 [typeof(byte)] = typeof(PrimitiveTypeSerializer),
@@ -45,12 +30,22 @@ namespace Accelbuffer.Injection
                 [typeof(bool)] = typeof(PrimitiveTypeSerializer),
                 [typeof(char)] = typeof(PrimitiveTypeSerializer),
                 [typeof(string)] = typeof(PrimitiveTypeSerializer),
+                [typeof(vint)] = typeof(VariantSerializer),
+                [typeof(vuint)] = typeof(VariantSerializer),
+                [typeof(IntPtr)] = typeof(IntPtrSerializer),
+                [typeof(UIntPtr)] = typeof(IntPtrSerializer),
+                [typeof(Nullable<>)] = typeof(NullableSerializer<>),
                 [typeof(Type)] = typeof(TypeSerializer),
 
+                [typeof(Guid)] = typeof(OtherTypeSerializer),
+                [typeof(TimeSpan)] = typeof(OtherTypeSerializer),
+                [typeof(DateTime)] = typeof(OtherTypeSerializer),
+                [typeof(DateTimeOffset)] = typeof(OtherTypeSerializer),
+
+                [typeof(KeyValuePair<,>)] = typeof(KeyValuePairSerializer<,>),
                 [typeof(List<>)] = typeof(ListSerializer<>),
                 [typeof(IList<>)] = typeof(ListSerializer<,>),
                 [typeof(ICollection<>)] = typeof(CollectionSerializer<,>),
-                [typeof(ISerializableEnumerable<>)] = typeof(SerializableEnumerableSerializer<,>),
                 [typeof(Dictionary<,>)] = typeof(DictionarySerializer<,>),
                 [typeof(IDictionary<,>)] = typeof(DictionarySerializer<,,>),
 
@@ -60,7 +55,9 @@ namespace Accelbuffer.Injection
                 [typeof(UnityEngine.Vector4)] = typeof(UnitySerializer),
                 [typeof(UnityEngine.Vector2Int)] = typeof(UnitySerializer),
                 [typeof(UnityEngine.Vector3Int)] = typeof(UnitySerializer),
-                [typeof(UnityEngine.Quaternion)] = typeof(UnitySerializer)
+                [typeof(UnityEngine.Quaternion)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Color)] = typeof(UnitySerializer),
+                [typeof(UnityEngine.Color32)] = typeof(UnitySerializer)
 #endif
             };
         }
@@ -176,11 +173,6 @@ namespace Accelbuffer.Injection
                     throw new NotSupportedException(string.Format(Resources.NotSupportTypeInjection, objectType));
                 }
 
-                if (!objectType.IsSerializable)
-                {
-                    throw new NotSupportedException(string.Format(Resources.NotSerializable, objectType));
-                }
-
                 return SerializerPipeline.InjectType<T>();
             }
             else
@@ -212,7 +204,6 @@ namespace Accelbuffer.Injection
 
             if ((interfaceType = objectType.GetInterface(typeof(IList<>).Name)) != null
              || (interfaceType = objectType.GetInterface(typeof(IDictionary<,>).Name)) != null
-             || (interfaceType = objectType.GetInterface(typeof(ISerializableEnumerable<>).Name)) != null
              || (interfaceType = objectType.GetInterface(typeof(ICollection<>).Name)) != null)
             {
                 serializerType = s_TypeMap[interfaceType.GetGenericTypeDefinition()];

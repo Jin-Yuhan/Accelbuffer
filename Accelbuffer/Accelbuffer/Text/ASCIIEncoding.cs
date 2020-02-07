@@ -3,7 +3,7 @@ using System;
 
 namespace Accelbuffer.Text
 {
-    internal sealed class ASCIIEncoding : ITextEncoding
+    internal sealed class ASCIIEncoding : IUnsafeEncoding
     {
         private const char m_ReplacementChar = '?';
         private const char m_MaxChar = '\u0080';
@@ -28,19 +28,6 @@ namespace Accelbuffer.Text
 
                 return (int)(bytes - bytesStart);
             }
-        }
-
-        public unsafe int GetBytes(char c, byte* bytes)
-        {
-            *bytes++ = c >= m_MaxChar ? m_ReplacementCharByte : (byte)c;
-            return 1;
-        }
-
-        public unsafe char GetChar(byte* bytes, out int byteCount)
-        {
-            byteCount = 1;
-            byte b = *bytes++;
-            return b >= m_MaxCharByte ? m_ReplacementChar : (char)b;
         }
 
         public unsafe string GetString(byte* bytes, int byteCount)

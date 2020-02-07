@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>asc</id>
+    <version>1.0.0</version>
+    <authors>asc</authors>
+    <owners>asc</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp2.1">
+        <dependency id="Microsoft.NETCore.App" version="2.1.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.runtimeconfig.json" target="lib\netcoreapp2.1\asc.runtimeconfig.json" />
+    <file src="C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Unity\netcoreapp2.1\asc.dll" target="lib\netcoreapp2.1\asc.dll" />
+  </files>
+</package>

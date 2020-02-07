@@ -3,7 +3,7 @@ using System;
 
 namespace Accelbuffer.Text
 {
-    internal sealed class UTF8Encoding : ITextEncoding
+    internal sealed class UTF8Encoding : IUnsafeEncoding
     {
         public unsafe int GetBytes(string str, byte* bytes)
         {
@@ -40,54 +40,6 @@ namespace Accelbuffer.Text
             }
 
             return byteCount;
-        }
-
-        public unsafe int GetBytes(char c, byte* bytes)
-        {
-            if (c < 0x80)
-            {
-                *bytes++ = (byte)(c & 0xff);
-                return 1;
-            }
-            else if (c < 0x800)
-            {
-                *bytes++ = (byte)(((c >> 6) & 0x1f) | 0xc0);
-                *bytes++ = (byte)((c & 0x3f) | 0x80);
-                return 2;
-            }
-            else if (c < 0x10000)
-            {
-                *bytes++ = (byte)(((c >> 12) & 0x0f) | 0xe0);
-                *bytes++ = (byte)(((c >> 6) & 0x3f) | 0x80);
-                *bytes++ = (byte)((c & 0x3f) | 0x80);
-                return 3;
-            }
-            return -1;
-        }
-
-        public unsafe char GetChar(byte* bytes, out int byteCount)
-        {
-            byte b = *bytes;
-
-            if ((b >> 4) == 0xE)
-            {
-                byteCount = 3;
-                return (char)(((b & 0xF) << 12) | ((bytes[1] & 0x3F) << 6) | (bytes[2] & 0x3F));
-            }
-            else if ((b >> 5) == 0x6)
-            {
-                byteCount = 2;
-                return (char)(((b & 0x1F) << 6) | (bytes[1] & 0x3F));
-            }
-            else if ((b >> 7) == 0)
-            {
-                byteCount = 1;
-                return (char)(b & 0x7F);
-            }
-            else
-            {
-                throw new InvalidUTF8CharException(Resources.InvalidUTF8Char);
-            }
         }
 
         public unsafe string GetString(byte* bytes, int byteCount)

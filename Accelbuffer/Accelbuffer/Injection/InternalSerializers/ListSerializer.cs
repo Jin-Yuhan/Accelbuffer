@@ -4,50 +4,48 @@ namespace Accelbuffer.Injection
 {
     internal sealed class ListSerializer<T> : ITypeSerializer<List<T>>
     {
-        List<T> ITypeSerializer<List<T>>.Deserialize(ref StreamingIterator iterator)
+        List<T> ITypeSerializer<List<T>>.Deserialize(ref AccelReader reader)
         {
-            int count = iterator.HasNext() ? iterator.NextAsInt32WithoutTag(NumberFormat.Variant) : 0;
-            List<T> result = new List<T>(count);
+            List<T> result = new List<T>();
 
-            while (iterator.HasNext())
+            while (reader.HasNext())
             {
-                result.Add(iterator.NextAsWithoutTag<T>());
+                T value = reader.ReadGeneric<T>();
+                result.Add(value);
             }
 
             return result;
         }
 
-        void ITypeSerializer<List<T>>.Serialize(List<T> obj, ref StreamingWriter writer)
+        void ITypeSerializer<List<T>>.Serialize(List<T> obj, ref AccelWriter writer)
         {
-            int count = obj.Count;
-            writer.WriteValue(count, NumberFormat.Variant);
-
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < obj.Count; i++)
             {
-                writer.WriteValue(obj[i]);
+                writer.WriteValue(1, obj[i]);
             }
         }
     }
 
     internal sealed class ListSerializer<T, TValue> : ITypeSerializer<T> where T : IList<TValue>, new()
     {
-        T ITypeSerializer<T>.Deserialize(ref StreamingIterator iterator)
+        T ITypeSerializer<T>.Deserialize(ref AccelReader reader)
         {
             T result = new T();
 
-            while (iterator.HasNext())
+            while (reader.HasNext())
             {
-                result.Add(iterator.NextAsWithoutTag<TValue>());
+                TValue value = reader.ReadGeneric<TValue>();
+                result.Add(value);
             }
 
             return result;
         }
 
-        void ITypeSerializer<T>.Serialize(T obj, ref StreamingWriter writer)
+        void ITypeSerializer<T>.Serialize(T obj, ref AccelWriter writer)
         {
             for (int i = 0; i < obj.Count; i++)
             {
-                writer.WriteValue(obj[i]);
+                writer.WriteValue(1, obj[i]);
             }
         }
     }

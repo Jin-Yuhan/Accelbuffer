@@ -1,24 +1,23 @@
-﻿using Accelbuffer.Text;
-using System;
+﻿using System;
 
 namespace Accelbuffer.Injection
 {
     internal sealed class TypeSerializer : ITypeSerializer<Type>
     {
-        Type ITypeSerializer<Type>.Deserialize(ref StreamingIterator iterator)
+        Type ITypeSerializer<Type>.Deserialize(ref AccelReader reader)
         {
-            if (!iterator.HasNext())
+            if (!reader.HasNext())
             {
                 return null;
             } 
 
-            string value = iterator.NextAsStringWithoutTag(Encoding.UTF8);
+            string value = reader.ReadString();
             return Type.GetType(value, false);
         }
 
-        void ITypeSerializer<Type>.Serialize(Type obj, ref StreamingWriter writer)
+        void ITypeSerializer<Type>.Serialize(Type obj, ref AccelWriter writer)
         {
-            writer.WriteValue(obj.AssemblyQualifiedName, Encoding.UTF8);
+            writer.WriteValue(1, obj.AssemblyQualifiedName);
         }
     }
 }

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Error_AS001_InvalidChar" xml:space="preserve">
+    <value>error: AS001: invalid character: '{0}'</value>
+  </data>
+  <data name="Error_AS002_MissingDocEnd" xml:space="preserve">
+    <value>error: AS002: missing '--'</value>
+  </data>
+  <data name="Error_AS003_MissingIdentifier" xml:space="preserve">
+    <value>error: AS003: missing identifier</value>
+  </data>
+  <data name="Error_AS004_MissingSemicolon" xml:space="preserve">
+    <value>error: AS004: missing ';'</value>
+  </data>
+  <data name="Error_AS005_InvalidIdentifier" xml:space="preserve">
+    <value>error: AS005: invalid identifier: '{0}'</value>
+  </data>
+  <data name="Error_AS006_InvalidPackage" xml:space="preserve">
+    <value>error: AS006: package declaration should be the first non empty statement of the file</value>
+  </data>
+  <data name="Error_AS007_InvalidToken" xml:space="preserve">
+    <value>error: AS007: invalid token: '{0}'</value>
+  </data>
+  <data name="Error_AS008_MultipleKeyword" xml:space="preserve">
+    <value>error: AS008: duplicate keyword: '{0}'</value>
+  </data>
+  <data name="Error_AS009_MultipleAccessKeyword" xml:space="preserve">
+    <value>error: AS009: duplicate access modifier</value>
+  </data>
+  <data name="Error_AS010_InvalidFinalKeyword" xml:space="preserve">
+    <value>error: AS010: only structures marked with the 'ref' keyword can be marked as' final '</value>
+  </data>
+  <data name="Error_AS011_MissingIntLiteral" xml:space="preserve">
+    <value>error: AS011: missing integer value</value>
+  </data>
+  <data name="Error_AS012_MissingOpenBrace" xml:space="preserve">
+    <value>error: AS012: missing '{{'</value>
+  </data>
+  <data name="Error_AS013_InvalidFieldIndex" xml:space="preserve">
+    <value>error: AS013: field index must be in range (0, 268435456]</value>
+  </data>
+  <data name="Error_AS014_MissingColonOrBar" xml:space="preserve">
+    <value>error: AS014: missing ':' or '|'</value>
+  </data>
+  <data name="Error_AS015_MissingSemicolonOrObsoleteKeyword" xml:space="preserve">
+    <value>error: AS015: missing ';' or 'obsolete'</value>
+  </data>
+  <data name="Error_AS016_MissingIdentifierOrAsterisk" xml:space="preserve">
+    <value>error: AS016: missing identifier or '*'</value>
+  </data>
+  <data name="Error_AS017_MissingCloseBrace" xml:space="preserve">
+    <value>error: AS017: missing '}}'</value>
+  </data>
+  <data name="Error_AS018_InvalidPrivateKeyword" xml:space="preserve">
+    <value>error: AS018: keyword 'private' can only be used in nested types</value>
+  </data>
+  <data name="Error_AS019_InvalidProtectedKeyword" xml:space="preserve">
+    <value>error: AS019: keyword 'protected' can only be used in nested types</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>v0.1.6.7</value>
+  </data>
+  <data name="Version_Unity" xml:space="preserve">
+    <value>v0.1.6.7 unity</value>
+  </data>
+  <data name="Warning_AS001_InvalidMemorySize" xml:space="preserve">
+    <value>warning: AS001: the memory size required for the structure must be greater than 0</value>
+  </data>
+  <data name="Warning_AS002_UnnecessaryUsing" xml:space="preserve">
+    <value>warning: AS002: package '{0}' will be referenced automatically, no need to manually reference again</value>
+  </data>
+  <data name="Warning_AS003_RequireContinuousIndex" xml:space="preserve">
+    <value>warning: AS003: the indexes of fields should be as continuous as possible</value>
+  </data>
+</root>

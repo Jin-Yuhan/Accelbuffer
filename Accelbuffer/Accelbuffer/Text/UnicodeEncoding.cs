@@ -1,38 +1,26 @@
-﻿using System;
-using Accelbuffer.Properties;
+﻿using Accelbuffer.Properties;
+using System;
 
 namespace Accelbuffer.Text
 {
-    internal sealed class UnicodeEncoding : ITextEncoding
+    internal sealed class UnicodeEncoding : IUnsafeEncoding
     {
         public unsafe int GetBytes(string str, byte* bytes)
         {
-            int count = str.Length;
-            char* p = (char*)bytes;
+            int size = str.Length;
 
             fixed (char* chars = str)
             {
-                char* source = chars;
+                char* src = chars;
+                char* dst = (char*)bytes;
 
-                while (count-- > 0)
+                while (size-- > 0)
                 {
-                    *p++ = *source++;
+                    *dst++ = *src++;
                 }
             }
 
-            return str.Length << 1;
-        }
-
-        public unsafe int GetBytes(char c, byte* bytes)
-        {
-            *(char*)bytes = c;
-            return 2;
-        }
-
-        public unsafe char GetChar(byte* bytes, out int byteCount)
-        {
-            byteCount = 2;
-            return *(char*)bytes;
+            return size << 1;
         }
 
         public unsafe string GetString(byte* bytes, int byteCount)
@@ -42,8 +30,7 @@ namespace Accelbuffer.Text
                 throw new ArgumentOutOfRangeException(nameof(byteCount), Resources.UnicodeStringByteCountError);
             }
 
-            char* chars = (char*)bytes;
-            return new string(chars, 0, byteCount >> 1);
+            return new string((char*)bytes, 0, byteCount >> 1);
         }
     }
 }

@@ -115,11 +115,20 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 Color32 的本地化字符串。
         /// </summary>
-        internal static string ComplexName {
+        internal static string Color32Name {
             get {
-                return ResourceManager.GetString("ComplexName", resourceCulture);
+                return ResourceManager.GetString("Color32Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Color 的本地化字符串。
+        /// </summary>
+        internal static string ColorName {
+            get {
+                return ResourceManager.GetString("ColorName", resourceCulture);
             }
         }
         
@@ -160,6 +169,15 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 Generic 的本地化字符串。
+        /// </summary>
+        internal static string GenericName {
+            get {
+                return ResourceManager.GetString("GenericName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 HasNext 的本地化字符串。
         /// </summary>
         internal static string HasNextName {
@@ -174,6 +192,15 @@ namespace Accelbuffer.Properties {
         internal static string IntName {
             get {
                 return ResourceManager.GetString("IntName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 IntPtr 的本地化字符串。
+        /// </summary>
+        internal static string IntPtrName {
+            get {
+                return ResourceManager.GetString("IntPtrName", resourceCulture);
             }
         }
         
@@ -223,33 +250,6 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 NextAs 的本地化字符串。
-        /// </summary>
-        internal static string NextAsName {
-            get {
-                return ResourceManager.GetString("NextAsName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 NextAs{0}WithoutTag 的本地化字符串。
-        /// </summary>
-        internal static string NextAsWithoutTagName {
-            get {
-                return ResourceManager.GetString("NextAsWithoutTagName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 无法为{0}类型注入代理，因为类型没有被标记为[Serializable] 的本地化字符串。
-        /// </summary>
-        internal static string NotSerializable {
-            get {
-                return ResourceManager.GetString("NotSerializable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
         /// </summary>
         internal static string NotSupportHighRankArray {
@@ -264,6 +264,24 @@ namespace Accelbuffer.Properties {
         internal static string NotSupportTypeInjection {
             get {
                 return ResourceManager.GetString("NotSupportTypeInjection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Quaternion 的本地化字符串。
+        /// </summary>
+        internal static string QuaternionName {
+            get {
+                return ResourceManager.GetString("QuaternionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Read 的本地化字符串。
+        /// </summary>
+        internal static string ReadName {
+            get {
+                return ResourceManager.GetString("ReadName", resourceCulture);
             }
         }
         
@@ -286,7 +304,7 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 DynamicSerializerAssembly.dll 的本地化字符串。
+        ///   查找类似 RuntimeSerializerAssembly.dll 的本地化字符串。
         /// </summary>
         internal static string SerializerAssemblyName {
             get {
@@ -295,7 +313,7 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 DynamicSerializerModule 的本地化字符串。
+        ///   查找类似 RuntimeSerializerModule 的本地化字符串。
         /// </summary>
         internal static string SerializerModuleName {
             get {
@@ -367,6 +385,15 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 UIntPtr 的本地化字符串。
+        /// </summary>
+        internal static string UIntPtrName {
+            get {
+                return ResourceManager.GetString("UIntPtrName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 UInt64 的本地化字符串。
         /// </summary>
         internal static string ULongName {
@@ -399,6 +426,69 @@ namespace Accelbuffer.Properties {
         internal static string UTF8StringByteCountError {
             get {
                 return ResourceManager.GetString("UTF8StringByteCountError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Vector2Int 的本地化字符串。
+        /// </summary>
+        internal static string Vector2IntName {
+            get {
+                return ResourceManager.GetString("Vector2IntName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Vector2 的本地化字符串。
+        /// </summary>
+        internal static string Vector2Name {
+            get {
+                return ResourceManager.GetString("Vector2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Vector3Int 的本地化字符串。
+        /// </summary>
+        internal static string Vector3IntName {
+            get {
+                return ResourceManager.GetString("Vector3IntName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Vector3 的本地化字符串。
+        /// </summary>
+        internal static string Vector3Name {
+            get {
+                return ResourceManager.GetString("Vector3Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Vector4 的本地化字符串。
+        /// </summary>
+        internal static string Vector4Name {
+            get {
+                return ResourceManager.GetString("Vector4Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 VariantInt 的本地化字符串。
+        /// </summary>
+        internal static string VIntName {
+            get {
+                return ResourceManager.GetString("VIntName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 VariantUInt 的本地化字符串。
+        /// </summary>
+        internal static string VUIntName {
+            get {
+                return ResourceManager.GetString("VUIntName", resourceCulture);
             }
         }
         

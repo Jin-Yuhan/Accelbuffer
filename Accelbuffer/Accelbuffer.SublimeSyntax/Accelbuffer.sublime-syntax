@@ -1,0 +1,130 @@
+%YAML 1.2
+---
+
+name: Accelbuffer
+file_extensions: [accel, accelbuffer, abs]
+scope: source.accel
+
+variables:
+  digit_separators: '(?:(?:_+[0-9]+)*)'
+  decimal_numeral: '(0|[1-9][0-9]*{{digit_separators}})((?i:ul|lu|u|l)?)'
+  
+  unicode_char: '(?:\\u\h{4}|\\U\h{8})'
+
+  base_type: (?:(?:boolean|uint8|int8|uint16|int16|uint32|int32|uint64|int64|float32|float64|float128|char|string|intptr|uintptr|vint|vuint|vector2|vector3|vector4|vector2int|vector3int|quaternion|color|color32)\b)
+  generic_declaration: \s*(<[^(={};<]*>)?\s*
+
+  start_char: '(?:{{unicode_char}}|[_\p{L}])'
+  other_char: '(?:{{unicode_char}}|[_0-9\p{L}])'
+  name_normal: '{{start_char}}{{other_char}}*\b'
+
+  visibility: \b(?:public|private|protected|internal)\b
+  reserved: '(?:{{visibility}}|ref|final)'
+  name: '(?:@{{reserved}}|@{{base_type}}|@var|@?{{name_normal}})'
+  namespaced_name: (?:(?:{{name}}{{generic_declaration}}\s*\.\s*)*{{name}}{{generic_declaration}})
+
+contexts:
+  main:
+    - match: '\b(package)\b'
+      scope: keyword.package.accel
+
+    - match: '\b(using)\b'
+      scope: keyword.using.accel
+
+    - include: document
+    - include: single_line_comment
+    - include: type_declaration
+
+  #类型声明
+  type_declaration:
+    - match: '\b({{reserved}})\b'
+      scope: keyword.type.modifier.accel
+
+    - match: '\b({{visibility}})\b'
+      scope: keyword.type.visibility.accel
+
+    - match: '\b(struct)\s+({{name}})'
+      captures:
+        1: keyword.type.definition.accel
+        2: storage.type.name.accel
+
+      push: type_signature
+
+  #类型签名
+  type_signature:
+    - meta_scope: meta.type.accel
+
+    - match: '\b(about)\b'
+      scope: keyword.about.accel
+
+    - match: '(?=\{)'
+      set: type_body
+
+    - include: int_numeric
+    - include: document
+    - include: single_line_comment
+
+  #类型体
+  type_body:
+    - match: '\{'
+      scope: type.block.begin.accel
+      push:
+        - meta_scope: typeblock.accel
+        - match: '\}'
+          scope: type.block.end.accel
+          pop: true
+
+        - include: type_declaration
+        - include: fields_declaration
+        - include: document
+        - include: single_line_comment
+    - match: '\S*'
+      pop: true 
+        
+  #字段声明
+  fields_declaration:
+    - match: (var)
+      scope: keyword.var.accel
+      push:
+        - match: \b({{name}})\s*((\|)\s*([0-9]+))?\s*(:)
+          captures:
+            4: constant.numeric.integer.decimal.accel
+          set: field_type
+        - match: (;)
+          pop: true
+        
+  field_type:
+    - match: \b(obsolete)\b
+      scope: keyword.obsolete.accel
+    - match: \b({{base_type}})\b
+      scope: keyword.base_type.accel
+    - match: \b({{namespaced_name}})\b
+      scope: storage.type.type_name.accel
+    - match: (;)
+      pop: true
+
+  #整数
+  int_numeric:
+    - match: '{{decimal_numeral}}'
+      captures:
+        1: constant.numeric.integer.decimal.accel
+        2: storage.type.numeric.accel
+
+  #文档
+  document:
+    - match: (--)
+      scope: constant.numeric.doc.begin.accel
+      push: 
+        - meta_scope: constant.numeric.doc.accel
+        - match: (--)
+          scope: constant.numeric.doc.end.accel
+          pop: true
+
+  #单行注释
+  single_line_comment:
+    - match: (//)
+      scope: constant.numeric.begin.accel
+      push: 
+        - meta_scope: constant.numeric.line.accel
+        - match: ($)
+          pop: true
