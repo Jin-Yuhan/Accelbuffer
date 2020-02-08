@@ -50,29 +50,6 @@
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
         </member>
-        <member name="T:Accelbuffer.RequiredFieldException">
-            <summary>
-            标记了<see cref="T:Accelbuffer.Injection.RequiredAttribute"/>的字段没有被赋值的错误
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.RequiredFieldException.#ctor">
-            <summary>
-            初始化 RequiredFieldException
-            </summary>
-        </member>
-        <member name="M:Accelbuffer.RequiredFieldException.#ctor(System.String)">
-            <summary>
-            初始化 RequiredFieldException
-            </summary>
-            <param name="message">描述错误的消息</param>
-        </member>
-        <member name="M:Accelbuffer.RequiredFieldException.#ctor(System.String,System.Exception)">
-            <summary>
-            初始化 RequiredFieldException
-            </summary>
-            <param name="message">描述错误的消息</param>
-            <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
-        </member>
         <member name="T:Accelbuffer.SerializerTypeException">
             <summary>
             序列化代理类型错误
@@ -96,15 +73,10 @@
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
         </member>
-        <member name="T:Accelbuffer.Injection.RequiredAttribute">
-            <summary>
-            指示在反序列化使用的数据中必须包含这个字段的值，且值不能是null
-            </summary>
-        </member>
         <member name="T:Accelbuffer.Injection.NeverNullAttribute">
             <summary>
             指示在序列化时这个字段的值永远不会是null。
-            标记了这个特性的字段在写入时不会进行null检查，这个特性只对引用类型有效
+            标记了这个特性的字段在写入时不会进行null检查
             </summary>
         </member>
         <member name="T:Accelbuffer.Injection.OnAfterDeserializationAttribute">
@@ -112,19 +84,9 @@
             指定一个方法为反序列化后的回调方法
             </summary>
         </member>
-        <member name="P:Accelbuffer.Injection.OnAfterDeserializationAttribute.Priority">
-            <summary>
-            获取/设置调用优先级
-            </summary>
-        </member>
         <member name="T:Accelbuffer.Injection.OnBeforeSerializationAttribute">
             <summary>
             指定一个方法为序列化前的回调方法
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Injection.OnBeforeSerializationAttribute.Priority">
-            <summary>
-            获取/设置调用优先级
             </summary>
         </member>
         <member name="T:Accelbuffer.Injection.FieldIndexAttribute">
@@ -476,12 +438,12 @@
             <returns>解码的字符串</returns>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="byteCount"/>的值错误</exception>
         </member>
-        <member name="T:Accelbuffer.vint">
+        <member name="T:Accelbuffer.VInt">
             <summary>
             表示一个动态长度的有符号整数
             </summary>
         </member>
-        <member name="T:Accelbuffer.vuint">
+        <member name="T:Accelbuffer.VUInt">
             <summary>
             表示一个动态长度的无符号整数
             </summary>
@@ -607,11 +569,6 @@
               查找类似 Int64 的本地化字符串。
             </summary>
         </member>
-        <member name="P:Accelbuffer.Properties.Resources.MissingRequiredFieldMessage">
-            <summary>
-              查找类似 字段{0}被标记为&apos;required&apos;，但是没有被赋值，请保证序列化时写入了这个数据，且不为null 的本地化字符串。
-            </summary>
-        </member>
         <member name="P:Accelbuffer.Properties.Resources.NotSupportHighRankArray">
             <summary>
               查找类似 不支持多维数组序列化与反序列化 的本地化字符串。
@@ -630,11 +587,6 @@
         <member name="P:Accelbuffer.Properties.Resources.ReadName">
             <summary>
               查找类似 Read 的本地化字符串。
-            </summary>
-        </member>
-        <member name="P:Accelbuffer.Properties.Resources.RequiredFieldIsNullMessage">
-            <summary>
-              查找类似 字段{0}的值不能是null，因为这个字段被标记为&apos;required&apos; 的本地化字符串。
             </summary>
         </member>
         <member name="P:Accelbuffer.Properties.Resources.SByteName">
@@ -1190,14 +1142,14 @@
             <param name="index"></param>
             <param name="value"></param>
         </member>
-        <member name="M:Accelbuffer.AccelWriter.WriteValue(System.Int32,Accelbuffer.vint)">
+        <member name="M:Accelbuffer.AccelWriter.WriteValue(System.Int32,Accelbuffer.VInt)">
             <summary>
             
             </summary>
             <param name="index"></param>
             <param name="value"></param>
         </member>
-        <member name="M:Accelbuffer.AccelWriter.WriteValue(System.Int32,Accelbuffer.vuint)">
+        <member name="M:Accelbuffer.AccelWriter.WriteValue(System.Int32,Accelbuffer.VUInt)">
             <summary>
             
             </summary>

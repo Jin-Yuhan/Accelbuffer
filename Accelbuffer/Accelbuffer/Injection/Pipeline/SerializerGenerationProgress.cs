@@ -108,9 +108,9 @@ namespace Accelbuffer.Injection
                 case TypeCode.String:
                     return true;
                 default:
-                    if (type == typeof(vint))
+                    if (type == typeof(VInt))
                         return true;
-                    if (type == typeof(vuint))
+                    if (type == typeof(VUInt))
                         return true;
                     if (type == typeof(IntPtr))
                         return true;
@@ -185,13 +185,13 @@ namespace Accelbuffer.Injection
                     name = Resources.StringName;
                     return true;
                 default:
-                    if (type == typeof(vint))
+                    if (type == typeof(VInt))
                     {
                         name = Resources.VIntName;
                         return true;
                     }
 
-                    if (type == typeof(vuint))
+                    if (type == typeof(VUInt))
                     {
                         name = Resources.VUIntName;
                         return true;

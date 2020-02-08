@@ -94,6 +94,9 @@ Module Module1
         Console.WriteLine(instance.Field16 = 278272728) 'not supported
         Console.WriteLine("Finish")
 
+        Dim nbuffer As NativeBuffer = Serializer.Serialize(Of Accelbuffer.Test.FieldTypeTest)(Nothing)
+        Serializer.Deserialize(Of Accelbuffer.Test.FieldTypeTest)(nbuffer, 0, nbuffer.Length)
+
         MemoryAllocator.Shared.Trim(True)
 
         Console.ReadKey()

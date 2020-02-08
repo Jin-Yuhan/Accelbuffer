@@ -1,0 +1,669 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 8 benchmark(s) in total *****
+// ***** Building 2 exe(s) in Parallel: Start   *****
+// ***** Done, took 00:00:08 (8.09 sec)   *****
+// ***** Failed to build in Parallel, switching to sequential build   *****
+// ***** Done, took 00:00:13 (13.05 sec)   *****
+// Found 8 benchmarks:
+//   TestClass.AccelbufferSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+//   TestClass.AccelbufferDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+//   TestClass.ProtobufSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+//   TestClass.ProtobufDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+//   TestClass.AccelbufferSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+//   TestClass.AccelbufferDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+//   TestClass.ProtobufSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+//   TestClass.ProtobufDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+
+// **************************
+// Benchmark: TestClass.AccelbufferSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\11e6b734-41ca-4e2e-adf4-0acbec334d0f.exe --benchmarkName "Accelbuffer.Test.SpeedTestProgram+TestClass.AccelbufferSerialize" --job "Runtime=.NET 4.7.1" --benchmarkId 0 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 345895.95 ns, 345.8959 us/op
+WorkloadJitting  1: 1 op, 440038.88 ns, 440.0389 us/op
+
+OverheadJitting  2: 16 op, 267972.40 ns, 16.7483 us/op
+WorkloadJitting  2: 16 op, 315220.16 ns, 19.7013 us/op
+
+WorkloadPilot    1: 16 op, 39843.26 ns, 2.4902 us/op
+WorkloadPilot    2: 32 op, 60646.38 ns, 1.8952 us/op
+WorkloadPilot    3: 64 op, 99784.46 ns, 1.5591 us/op
+WorkloadPilot    4: 128 op, 240117.37 ns, 1.8759 us/op
+WorkloadPilot    5: 256 op, 424524.69 ns, 1.6583 us/op
+WorkloadPilot    6: 512 op, 840587.10 ns, 1.6418 us/op
+WorkloadPilot    7: 1024 op, 1556355.48 ns, 1.5199 us/op
+WorkloadPilot    8: 2048 op, 2395532.19 ns, 1.1697 us/op
+WorkloadPilot    9: 4096 op, 5984951.94 ns, 1.4612 us/op
+WorkloadPilot   10: 8192 op, 13566102.62 ns, 1.6560 us/op
+WorkloadPilot   11: 16384 op, 23970130.95 ns, 1.4630 us/op
+WorkloadPilot   12: 32768 op, 41605888.06 ns, 1.2697 us/op
+WorkloadPilot   13: 65536 op, 81115949.89 ns, 1.2377 us/op
+WorkloadPilot   14: 131072 op, 166889330.57 ns, 1.2733 us/op
+WorkloadPilot   15: 262144 op, 275017603.32 ns, 1.0491 us/op
+WorkloadPilot   16: 524288 op, 552353873.07 ns, 1.0535 us/op
+
+OverheadWarmup   1: 524288 op, 1045444.95 ns, 1.9940 ns/op
+OverheadWarmup   2: 524288 op, 1091634.92 ns, 2.0821 ns/op
+OverheadWarmup   3: 524288 op, 1042624.18 ns, 1.9886 ns/op
+OverheadWarmup   4: 524288 op, 1042271.59 ns, 1.9880 ns/op
+OverheadWarmup   5: 524288 op, 1043329.37 ns, 1.9900 ns/op
+OverheadWarmup   6: 524288 op, 1042624.18 ns, 1.9886 ns/op
+
+OverheadActual   1: 524288 op, 1042271.59 ns, 1.9880 ns/op
+OverheadActual   2: 524288 op, 1052496.85 ns, 2.0075 ns/op
+OverheadActual   3: 524288 op, 1042624.18 ns, 1.9886 ns/op
+OverheadActual   4: 524288 op, 1042976.78 ns, 1.9893 ns/op
+OverheadActual   5: 524288 op, 1047207.92 ns, 1.9974 ns/op
+OverheadActual   6: 524288 op, 1046502.73 ns, 1.9960 ns/op
+OverheadActual   7: 524288 op, 1072947.38 ns, 2.0465 ns/op
+OverheadActual   8: 524288 op, 1045797.54 ns, 1.9947 ns/op
+OverheadActual   9: 524288 op, 1031341.13 ns, 1.9671 ns/op
+OverheadActual  10: 524288 op, 1042624.18 ns, 1.9886 ns/op
+OverheadActual  11: 524288 op, 1088814.16 ns, 2.0767 ns/op
+OverheadActual  12: 524288 op, 1046150.14 ns, 1.9954 ns/op
+OverheadActual  13: 524288 op, 1099744.62 ns, 2.0976 ns/op
+OverheadActual  14: 524288 op, 1036277.47 ns, 1.9765 ns/op
+OverheadActual  15: 524288 op, 1073299.97 ns, 2.0472 ns/op
+
+WorkloadWarmup   1: 524288 op, 540045477.74 ns, 1.0301 us/op
+WorkloadWarmup   2: 524288 op, 554167623.08 ns, 1.0570 us/op
+WorkloadWarmup   3: 524288 op, 540524302.10 ns, 1.0310 us/op
+WorkloadWarmup   4: 524288 op, 549003160.31 ns, 1.0471 us/op
+WorkloadWarmup   5: 524288 op, 544101028.41 ns, 1.0378 us/op
+WorkloadWarmup   6: 524288 op, 541136054.88 ns, 1.0321 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 524288 op, 544540714.70 ns, 1.0386 us/op
+WorkloadActual   2: 524288 op, 542062322.62 ns, 1.0339 us/op
+WorkloadActual   3: 524288 op, 545288569.25 ns, 1.0401 us/op
+WorkloadActual   4: 524288 op, 542304908.16 ns, 1.0344 us/op
+WorkloadActual   5: 524288 op, 544114074.44 ns, 1.0378 us/op
+WorkloadActual   6: 524288 op, 544860871.20 ns, 1.0392 us/op
+WorkloadActual   7: 524288 op, 542051392.17 ns, 1.0339 us/op
+WorkloadActual   8: 524288 op, 549711524.19 ns, 1.0485 us/op
+WorkloadActual   9: 524288 op, 541987925.02 ns, 1.0338 us/op
+WorkloadActual  10: 524288 op, 553111600.28 ns, 1.0550 us/op
+WorkloadActual  11: 524288 op, 554628112.49 ns, 1.0579 us/op
+WorkloadActual  12: 524288 op, 541577151.55 ns, 1.0330 us/op
+WorkloadActual  13: 524288 op, 544446924.36 ns, 1.0385 us/op
+WorkloadActual  14: 524288 op, 542395172.55 ns, 1.0345 us/op
+WorkloadActual  15: 524288 op, 543996660.22 ns, 1.0376 us/op
+
+// AfterActualRun
+WorkloadResult   1: 524288 op, 543494564.57 ns, 1.0366 us/op
+WorkloadResult   2: 524288 op, 541016172.49 ns, 1.0319 us/op
+WorkloadResult   3: 524288 op, 544242419.11 ns, 1.0381 us/op
+WorkloadResult   4: 524288 op, 541258758.03 ns, 1.0324 us/op
+WorkloadResult   5: 524288 op, 543067924.30 ns, 1.0358 us/op
+WorkloadResult   6: 524288 op, 543814721.06 ns, 1.0372 us/op
+WorkloadResult   7: 524288 op, 541005242.03 ns, 1.0319 us/op
+WorkloadResult   8: 524288 op, 548665374.05 ns, 1.0465 us/op
+WorkloadResult   9: 524288 op, 540941774.89 ns, 1.0318 us/op
+WorkloadResult  10: 524288 op, 540531001.41 ns, 1.0310 us/op
+WorkloadResult  11: 524288 op, 543400774.23 ns, 1.0365 us/op
+WorkloadResult  12: 524288 op, 541349022.41 ns, 1.0325 us/op
+WorkloadResult  13: 524288 op, 542950510.08 ns, 1.0356 us/op
+GC:  0 0 0 0 524288
+Threading:  0 0 524288
+
+// AfterAll
+// Benchmark Process 6768 has exited with code 0
+
+Mean = 1.0352 us, StdErr = 0.0012 us (0.11%); N = 13, StdDev = 0.0042 us
+Min = 1.0310 us, Q1 = 1.0319 us, Median = 1.0356 us, Q3 = 1.0369 us, Max = 1.0465 us
+IQR = 0.0050 us, LowerFence = 1.0243 us, UpperFence = 1.0445 us
+ConfidenceInterval = [1.0302 us; 1.0402 us] (CI 99.9%), Margin = 0.0050 us (0.48% of Mean)
+Skewness = 1.3, Kurtosis = 4.27, MValue = 2
+
+// **************************
+// Benchmark: TestClass.AccelbufferDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\11e6b734-41ca-4e2e-adf4-0acbec334d0f.exe --benchmarkName "Accelbuffer.Test.SpeedTestProgram+TestClass.AccelbufferDeserialize" --job "Runtime=.NET 4.7.1" --benchmarkId 1 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 242938.13 ns, 242.9381 us/op
+WorkloadJitting  1: 1 op, 5006500.09 ns, 5.0065 ms/op
+
+OverheadJitting  2: 16 op, 172771.68 ns, 10.7982 us/op
+WorkloadJitting  2: 16 op, 215788.30 ns, 13.4868 us/op
+
+WorkloadPilot    1: 16 op, 23271.29 ns, 1.4545 us/op
+WorkloadPilot    2: 32 op, 31380.98 ns, 980.6556 ns/op
+WorkloadPilot    3: 64 op, 62409.36 ns, 975.1463 ns/op
+WorkloadPilot    4: 128 op, 114593.46 ns, 895.2614 ns/op
+WorkloadPilot    5: 256 op, 226366.16 ns, 884.2428 ns/op
+WorkloadPilot    6: 512 op, 492575.58 ns, 962.0617 ns/op
+WorkloadPilot    7: 1024 op, 934377.44 ns, 912.4780 ns/op
+WorkloadPilot    8: 2048 op, 1872986.02 ns, 914.5440 ns/op
+WorkloadPilot    9: 4096 op, 3825305.97 ns, 933.9126 ns/op
+WorkloadPilot   10: 8192 op, 7436234.03 ns, 907.7434 ns/op
+WorkloadPilot   11: 16384 op, 14633055.88 ns, 893.1309 ns/op
+WorkloadPilot   12: 32768 op, 29092987.48 ns, 887.8475 ns/op
+WorkloadPilot   13: 65536 op, 59076630.59 ns, 901.4378 ns/op
+WorkloadPilot   14: 131072 op, 116129716.98 ns, 885.9994 ns/op
+WorkloadPilot   15: 262144 op, 254028312.69 ns, 969.0411 ns/op
+WorkloadPilot   16: 524288 op, 471598628.12 ns, 899.5030 ns/op
+WorkloadPilot   17: 1048576 op, 959916618.27 ns, 915.4478 ns/op
+
+OverheadWarmup   1: 1048576 op, 3336256.35 ns, 3.1817 ns/op
+OverheadWarmup   2: 1048576 op, 2425502.79 ns, 2.3131 ns/op
+OverheadWarmup   3: 1048576 op, 2296100.33 ns, 2.1897 ns/op
+OverheadWarmup   4: 1048576 op, 2315140.48 ns, 2.2079 ns/op
+OverheadWarmup   5: 1048576 op, 2298568.50 ns, 2.1921 ns/op
+OverheadWarmup   6: 1048576 op, 2269303.09 ns, 2.1642 ns/op
+OverheadWarmup   7: 1048576 op, 2587344.02 ns, 2.4675 ns/op
+OverheadWarmup   8: 1048576 op, 3235061.51 ns, 3.0852 ns/op
+OverheadWarmup   9: 1048576 op, 2183622.44 ns, 2.0825 ns/op
+
+OverheadActual   1: 1048576 op, 2145542.16 ns, 2.0461 ns/op
+OverheadActual   2: 1048576 op, 2178686.11 ns, 2.0778 ns/op
+OverheadActual   3: 1048576 op, 2156120.01 ns, 2.0562 ns/op
+OverheadActual   4: 1048576 op, 2149773.30 ns, 2.0502 ns/op
+OverheadActual   5: 1048576 op, 2097236.61 ns, 2.0001 ns/op
+OverheadActual   6: 1048576 op, 2323955.36 ns, 2.2163 ns/op
+OverheadActual   7: 1048576 op, 2316550.86 ns, 2.2092 ns/op
+OverheadActual   8: 1048576 op, 2284464.69 ns, 2.1786 ns/op
+OverheadActual   9: 1048576 op, 2280233.54 ns, 2.1746 ns/op
+OverheadActual  10: 1048576 op, 3299586.44 ns, 3.1467 ns/op
+OverheadActual  11: 1048576 op, 2149068.11 ns, 2.0495 ns/op
+OverheadActual  12: 1048576 op, 2391301.05 ns, 2.2805 ns/op
+OverheadActual  13: 1048576 op, 2164934.90 ns, 2.0646 ns/op
+OverheadActual  14: 1048576 op, 2158940.78 ns, 2.0589 ns/op
+OverheadActual  15: 1048576 op, 2261898.59 ns, 2.1571 ns/op
+
+WorkloadWarmup   1: 1048576 op, 931972386.15 ns, 888.7981 ns/op
+WorkloadWarmup   2: 1048576 op, 949069377.70 ns, 905.1031 ns/op
+WorkloadWarmup   3: 1048576 op, 966799982.93 ns, 922.0123 ns/op
+WorkloadWarmup   4: 1048576 op, 941415592.40 ns, 897.8039 ns/op
+WorkloadWarmup   5: 1048576 op, 936311070.82 ns, 892.9358 ns/op
+WorkloadWarmup   6: 1048576 op, 955408335.28 ns, 911.1484 ns/op
+WorkloadWarmup   7: 1048576 op, 959288293.52 ns, 914.8486 ns/op
+WorkloadWarmup   8: 1048576 op, 933104569.53 ns, 889.8779 ns/op
+
+// BeforeActualRun
+WorkloadActual   1: 1048576 op, 947913217.84 ns, 904.0005 ns/op
+WorkloadActual   2: 1048576 op, 942642623.90 ns, 898.9741 ns/op
+WorkloadActual   3: 1048576 op, 934061865.66 ns, 890.7908 ns/op
+WorkloadActual   4: 1048576 op, 949083834.11 ns, 905.1169 ns/op
+WorkloadActual   5: 1048576 op, 935038554.53 ns, 891.7223 ns/op
+WorkloadActual   6: 1048576 op, 938690736.23 ns, 895.2052 ns/op
+WorkloadActual   7: 1048576 op, 938345898.07 ns, 894.8764 ns/op
+WorkloadActual   8: 1048576 op, 943277295.37 ns, 899.5793 ns/op
+WorkloadActual   9: 1048576 op, 934804431.28 ns, 891.4990 ns/op
+WorkloadActual  10: 1048576 op, 950256565.94 ns, 906.2353 ns/op
+WorkloadActual  11: 1048576 op, 934892580.09 ns, 891.5830 ns/op
+WorkloadActual  12: 1048576 op, 941694495.25 ns, 898.0699 ns/op
+WorkloadActual  13: 1048576 op, 934167291.64 ns, 890.8914 ns/op
+WorkloadActual  14: 1048576 op, 934716987.65 ns, 891.4156 ns/op
+WorkloadActual  15: 1048576 op, 944195100.83 ns, 900.4546 ns/op
+
+// AfterActualRun
+WorkloadResult   1: 1048576 op, 945734531.73 ns, 901.9227 ns/op
+WorkloadResult   2: 1048576 op, 940463937.79 ns, 896.8963 ns/op
+WorkloadResult   3: 1048576 op, 931883179.55 ns, 888.7131 ns/op
+WorkloadResult   4: 1048576 op, 946905148.00 ns, 903.0391 ns/op
+WorkloadResult   5: 1048576 op, 932859868.42 ns, 889.6445 ns/op
+WorkloadResult   6: 1048576 op, 936512050.12 ns, 893.1275 ns/op
+WorkloadResult   7: 1048576 op, 936167211.96 ns, 892.7986 ns/op
+WorkloadResult   8: 1048576 op, 941098609.26 ns, 897.5016 ns/op
+WorkloadResult   9: 1048576 op, 932625745.17 ns, 889.4212 ns/op
+WorkloadResult  10: 1048576 op, 948077879.83 ns, 904.1575 ns/op
+WorkloadResult  11: 1048576 op, 932713893.98 ns, 889.5053 ns/op
+WorkloadResult  12: 1048576 op, 939515809.14 ns, 895.9921 ns/op
+WorkloadResult  13: 1048576 op, 931988605.53 ns, 888.8136 ns/op
+WorkloadResult  14: 1048576 op, 932538301.54 ns, 889.3378 ns/op
+WorkloadResult  15: 1048576 op, 942016414.72 ns, 898.3769 ns/op
+GC:  162 0 0 255860324 1048576
+Threading:  0 0 1048576
+
+// AfterAll
+// Benchmark Process 8740 has exited with code 0
+
+Mean = 894.6165 ns, StdErr = 1.4220 ns (0.16%); N = 15, StdDev = 5.5075 ns
+Min = 888.7131 ns, Q1 = 889.4212 ns, Median = 893.1275 ns, Q3 = 898.3769 ns, Max = 904.1575 ns
+IQR = 8.9556 ns, LowerFence = 875.9878 ns, UpperFence = 911.8103 ns
+ConfidenceInterval = [888.7287 ns; 900.5044 ns] (CI 99.9%), Margin = 5.8878 ns (0.66% of Mean)
+Skewness = 0.4, Kurtosis = 1.57, MValue = 2
+
+// **************************
+// Benchmark: TestClass.ProtobufSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\11e6b734-41ca-4e2e-adf4-0acbec334d0f.exe --benchmarkName "Accelbuffer.Test.SpeedTestProgram+TestClass.ProtobufSerialize" --job "Runtime=.NET 4.7.1" --benchmarkId 2 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 242585.54 ns, 242.5855 us/op
+WorkloadJitting  1: 1 op, 252458.21 ns, 252.4582 us/op
+
+OverheadJitting  2: 16 op, 172066.49 ns, 10.7542 us/op
+WorkloadJitting  2: 16 op, 214730.51 ns, 13.4207 us/op
+
+WorkloadPilot    1: 16 op, 32791.36 ns, 2.0495 us/op
+WorkloadPilot    2: 32 op, 45484.79 ns, 1.4214 us/op
+WorkloadPilot    3: 64 op, 94142.93 ns, 1.4710 us/op
+WorkloadPilot    4: 128 op, 174887.25 ns, 1.3663 us/op
+WorkloadPilot    5: 256 op, 330381.76 ns, 1.2906 us/op
+WorkloadPilot    6: 512 op, 668873.21 ns, 1.3064 us/op
+WorkloadPilot    7: 1024 op, 1287325.29 ns, 1.2572 us/op
+WorkloadPilot    8: 2048 op, 2557726.01 ns, 1.2489 us/op
+WorkloadPilot    9: 4096 op, 5801602.40 ns, 1.4164 us/op
+WorkloadPilot   10: 8192 op, 10963597.01 ns, 1.3383 us/op
+WorkloadPilot   11: 16384 op, 21609153.09 ns, 1.3189 us/op
+WorkloadPilot   12: 32768 op, 42621009.81 ns, 1.3007 us/op
+WorkloadPilot   13: 65536 op, 85232146.96 ns, 1.3005 us/op
+WorkloadPilot   14: 131072 op, 174538532.14 ns, 1.3316 us/op
+WorkloadPilot   15: 262144 op, 364059189.46 ns, 1.3888 us/op
+WorkloadPilot   16: 524288 op, 694827392.28 ns, 1.3253 us/op
+
+OverheadWarmup   1: 524288 op, 1139940.47 ns, 2.1743 ns/op
+OverheadWarmup   2: 524288 op, 1691046.87 ns, 3.2254 ns/op
+OverheadWarmup   3: 524288 op, 1053907.23 ns, 2.0102 ns/op
+OverheadWarmup   4: 524288 op, 1062369.52 ns, 2.0263 ns/op
+OverheadWarmup   5: 524288 op, 1059901.35 ns, 2.0216 ns/op
+
+OverheadActual   1: 524288 op, 1055317.61 ns, 2.0129 ns/op
+OverheadActual   2: 524288 op, 1658608.10 ns, 3.1635 ns/op
+OverheadActual   3: 524288 op, 1053907.23 ns, 2.0102 ns/op
+OverheadActual   4: 524288 op, 1064485.09 ns, 2.0303 ns/op
+OverheadActual   5: 524288 op, 1060606.54 ns, 2.0229 ns/op
+OverheadActual   6: 524288 op, 1068011.04 ns, 2.0371 ns/op
+OverheadActual   7: 524288 op, 1053907.23 ns, 2.0102 ns/op
+OverheadActual   8: 524288 op, 1053554.64 ns, 2.0095 ns/op
+OverheadActual   9: 524288 op, 1053554.64 ns, 2.0095 ns/op
+OverheadActual  10: 524288 op, 1053554.64 ns, 2.0095 ns/op
+OverheadActual  11: 524288 op, 1053907.23 ns, 2.0102 ns/op
+OverheadActual  12: 524288 op, 1064485.09 ns, 2.0303 ns/op
+OverheadActual  13: 524288 op, 1061311.73 ns, 2.0243 ns/op
+OverheadActual  14: 524288 op, 1073299.97 ns, 2.0472 ns/op
+OverheadActual  15: 524288 op, 1053907.23 ns, 2.0102 ns/op
+
+WorkloadWarmup   1: 524288 op, 694071075.45 ns, 1.3238 us/op
+WorkloadWarmup   2: 524288 op, 695704649.29 ns, 1.3270 us/op
+WorkloadWarmup   3: 524288 op, 711046421.63 ns, 1.3562 us/op
+WorkloadWarmup   4: 524288 op, 695022730.05 ns, 1.3257 us/op
+WorkloadWarmup   5: 524288 op, 697841376.56 ns, 1.3310 us/op
+WorkloadWarmup   6: 524288 op, 704923252.35 ns, 1.3445 us/op
+WorkloadWarmup   7: 524288 op, 695288939.47 ns, 1.3262 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 524288 op, 691944573.44 ns, 1.3198 us/op
+WorkloadActual   2: 524288 op, 697928114.99 ns, 1.3312 us/op
+WorkloadActual   3: 524288 op, 695265668.19 ns, 1.3261 us/op
+WorkloadActual   4: 524288 op, 706490185.69 ns, 1.3475 us/op
+WorkloadActual   5: 524288 op, 696903120.57 ns, 1.3292 us/op
+WorkloadActual   6: 524288 op, 715244068.20 ns, 1.3642 us/op
+WorkloadActual   7: 524288 op, 698450661.17 ns, 1.3322 us/op
+WorkloadActual   8: 524288 op, 696676754.42 ns, 1.3288 us/op
+WorkloadActual   9: 524288 op, 695051995.46 ns, 1.3257 us/op
+WorkloadActual  10: 524288 op, 706129480.74 ns, 1.3468 us/op
+WorkloadActual  11: 524288 op, 703391578.54 ns, 1.3416 us/op
+WorkloadActual  12: 524288 op, 693890194.08 ns, 1.3235 us/op
+WorkloadActual  13: 524288 op, 710535158.51 ns, 1.3552 us/op
+WorkloadActual  14: 524288 op, 694474797.02 ns, 1.3246 us/op
+WorkloadActual  15: 524288 op, 719092998.06 ns, 1.3716 us/op
+
+// AfterActualRun
+WorkloadResult   1: 524288 op, 690889255.82 ns, 1.3178 us/op
+WorkloadResult   2: 524288 op, 696872797.38 ns, 1.3292 us/op
+WorkloadResult   3: 524288 op, 694210350.57 ns, 1.3241 us/op
+WorkloadResult   4: 524288 op, 705434868.07 ns, 1.3455 us/op
+WorkloadResult   5: 524288 op, 695847802.96 ns, 1.3272 us/op
+WorkloadResult   6: 524288 op, 714188750.59 ns, 1.3622 us/op
+WorkloadResult   7: 524288 op, 697395343.56 ns, 1.3302 us/op
+WorkloadResult   8: 524288 op, 695621436.80 ns, 1.3268 us/op
+WorkloadResult   9: 524288 op, 693996677.85 ns, 1.3237 us/op
+WorkloadResult  10: 524288 op, 705074163.12 ns, 1.3448 us/op
+WorkloadResult  11: 524288 op, 702336260.93 ns, 1.3396 us/op
+WorkloadResult  12: 524288 op, 692834876.47 ns, 1.3215 us/op
+WorkloadResult  13: 524288 op, 709479840.89 ns, 1.3532 us/op
+WorkloadResult  14: 524288 op, 693419479.41 ns, 1.3226 us/op
+WorkloadResult  15: 524288 op, 718037680.45 ns, 1.3695 us/op
+GC:  167 0 0 264249612 524288
+Threading:  0 0 524288
+
+// AfterAll
+// Benchmark Process 1656 has exited with code 0
+
+Mean = 1.3359 us, StdErr = 0.0041 us (0.31%); N = 15, StdDev = 0.0159 us
+Min = 1.3178 us, Q1 = 1.3237 us, Median = 1.3292 us, Q3 = 1.3455 us, Max = 1.3695 us
+IQR = 0.0218 us, LowerFence = 1.2910 us, UpperFence = 1.3782 us
+ConfidenceInterval = [1.3188 us; 1.3529 us] (CI 99.9%), Margin = 0.0170 us (1.27% of Mean)
+Skewness = 0.77, Kurtosis = 2.19, MValue = 2
+
+// **************************
+// Benchmark: TestClass.ProtobufDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\11e6b734-41ca-4e2e-adf4-0acbec334d0f.exe --benchmarkName "Accelbuffer.Test.SpeedTestProgram+TestClass.ProtobufDeserialize" --job "Runtime=.NET 4.7.1" --benchmarkId 3 in 
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// Runtime=.NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+// GC=Concurrent Workstation
+// Job: DefaultJob
+
+OverheadJitting  1: 1 op, 258099.73 ns, 258.0997 us/op
+WorkloadJitting  1: 1 op, 8509886.59 ns, 8.5099 ms/op
+
+OverheadJitting  2: 16 op, 184759.92 ns, 11.5475 us/op
+WorkloadJitting  2: 16 op, 243995.92 ns, 15.2497 us/op
+
+WorkloadPilot    1: 16 op, 51831.50 ns, 3.2395 us/op
+WorkloadPilot    2: 32 op, 81449.51 ns, 2.5453 us/op
+WorkloadPilot    3: 64 op, 153731.53 ns, 2.4021 us/op
+WorkloadPilot    4: 128 op, 284544.37 ns, 2.2230 us/op
+WorkloadPilot    5: 256 op, 552516.77 ns, 2.1583 us/op
+WorkloadPilot    6: 512 op, 1204818.00 ns, 2.3532 us/op
+WorkloadPilot    7: 1024 op, 2281291.33 ns, 2.2278 us/op
+WorkloadPilot    8: 2048 op, 4672944.98 ns, 2.2817 us/op
+WorkloadPilot    9: 4096 op, 8953451.43 ns, 2.1859 us/op
+WorkloadPilot   10: 8192 op, 22434226.00 ns, 2.7386 us/op
+WorkloadPilot   11: 16384 op, 38063716.08 ns, 2.3232 us/op
+WorkloadPilot   12: 32768 op, 75146159.55 ns, 2.2933 us/op
+WorkloadPilot   13: 65536 op, 157700345.51 ns, 2.4063 us/op
+WorkloadPilot   14: 131072 op, 299235608.74 ns, 2.2830 us/op
+WorkloadPilot   15: 262144 op, 599841050.06 ns, 2.2882 us/op
+
+OverheadWarmup   1: 262144 op, 535944.79 ns, 2.0445 ns/op
+OverheadWarmup   2: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadWarmup   3: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadWarmup   4: 262144 op, 533124.03 ns, 2.0337 ns/op
+OverheadWarmup   5: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadWarmup   6: 262144 op, 542644.10 ns, 2.0700 ns/op
+
+OverheadActual   1: 262144 op, 961174.68 ns, 3.6666 ns/op
+OverheadActual   2: 262144 op, 853633.12 ns, 3.2564 ns/op
+OverheadActual   3: 262144 op, 873025.86 ns, 3.3303 ns/op
+OverheadActual   4: 262144 op, 528187.70 ns, 2.0149 ns/op
+OverheadActual   5: 262144 op, 527129.91 ns, 2.0108 ns/op
+OverheadActual   6: 262144 op, 526072.13 ns, 2.0068 ns/op
+OverheadActual   7: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadActual   8: 262144 op, 818373.60 ns, 3.1218 ns/op
+OverheadActual   9: 262144 op, 533124.03 ns, 2.0337 ns/op
+OverheadActual  10: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadActual  11: 262144 op, 822252.15 ns, 3.1366 ns/op
+OverheadActual  12: 262144 op, 843760.46 ns, 3.2187 ns/op
+OverheadActual  13: 262144 op, 575082.87 ns, 2.1938 ns/op
+OverheadActual  14: 262144 op, 630087.73 ns, 2.4036 ns/op
+OverheadActual  15: 262144 op, 533124.03 ns, 2.0337 ns/op
+OverheadActual  16: 262144 op, 550401.20 ns, 2.0996 ns/op
+OverheadActual  17: 262144 op, 564857.61 ns, 2.1548 ns/op
+OverheadActual  18: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadActual  19: 262144 op, 532771.44 ns, 2.0324 ns/op
+OverheadActual  20: 262144 op, 532771.44 ns, 2.0324 ns/op
+
+WorkloadWarmup   1: 262144 op, 599407357.89 ns, 2.2866 us/op
+WorkloadWarmup   2: 262144 op, 599201089.66 ns, 2.2858 us/op
+WorkloadWarmup   3: 262144 op, 598610845.20 ns, 2.2835 us/op
+WorkloadWarmup   4: 262144 op, 606030507.25 ns, 2.3118 us/op
+WorkloadWarmup   5: 262144 op, 615282606.86 ns, 2.3471 us/op
+WorkloadWarmup   6: 262144 op, 604036933.65 ns, 2.3042 us/op
+WorkloadWarmup   7: 262144 op, 621352181.67 ns, 2.3703 us/op
+WorkloadWarmup   8: 262144 op, 596030553.08 ns, 2.2737 us/op
+
+// BeforeActualRun
+WorkloadActual   1: 262144 op, 598389062.78 ns, 2.2827 us/op
+WorkloadActual   2: 262144 op, 605394777.99 ns, 2.3094 us/op
+WorkloadActual   3: 262144 op, 603471370.85 ns, 2.3021 us/op
+WorkloadActual   4: 262144 op, 613511873.47 ns, 2.3404 us/op
+WorkloadActual   5: 262144 op, 599299463.74 ns, 2.2861 us/op
+WorkloadActual   6: 262144 op, 612929033.50 ns, 2.3381 us/op
+WorkloadActual   7: 262144 op, 629115624.10 ns, 2.3999 us/op
+WorkloadActual   8: 262144 op, 611013030.86 ns, 2.3308 us/op
+WorkloadActual   9: 262144 op, 601000735.87 ns, 2.2926 us/op
+WorkloadActual  10: 262144 op, 612664234.46 ns, 2.3371 us/op
+WorkloadActual  11: 262144 op, 601525397.61 ns, 2.2946 us/op
+WorkloadActual  12: 262144 op, 605472701.55 ns, 2.3097 us/op
+WorkloadActual  13: 262144 op, 600846299.14 ns, 2.2920 us/op
+WorkloadActual  14: 262144 op, 601361440.82 ns, 2.2940 us/op
+WorkloadActual  15: 262144 op, 618407658.65 ns, 2.3590 us/op
+
+// AfterActualRun
+WorkloadResult   1: 262144 op, 597847300.16 ns, 2.2806 us/op
+WorkloadResult   2: 262144 op, 604853015.38 ns, 2.3073 us/op
+WorkloadResult   3: 262144 op, 602929608.23 ns, 2.3000 us/op
+WorkloadResult   4: 262144 op, 612970110.85 ns, 2.3383 us/op
+WorkloadResult   5: 262144 op, 598757701.12 ns, 2.2841 us/op
+WorkloadResult   6: 262144 op, 612387270.89 ns, 2.3361 us/op
+WorkloadResult   7: 262144 op, 628573861.48 ns, 2.3978 us/op
+WorkloadResult   8: 262144 op, 610471268.25 ns, 2.3288 us/op
+WorkloadResult   9: 262144 op, 600458973.25 ns, 2.2906 us/op
+WorkloadResult  10: 262144 op, 612122471.85 ns, 2.3351 us/op
+WorkloadResult  11: 262144 op, 600983635.00 ns, 2.2926 us/op
+WorkloadResult  12: 262144 op, 604930938.93 ns, 2.3076 us/op
+WorkloadResult  13: 262144 op, 600304536.53 ns, 2.2900 us/op
+WorkloadResult  14: 262144 op, 600819678.20 ns, 2.2919 us/op
+WorkloadResult  15: 262144 op, 617865896.03 ns, 2.3570 us/op
+GC:  124 0 0 196091356 262144
+Threading:  0 0 262144
+
+// AfterAll
+// Benchmark Process 6852 has exited with code 0
+
+Mean = 2.3158 us, StdErr = 0.0084 us (0.36%); N = 15, StdDev = 0.0326 us
+Min = 2.2806 us, Q1 = 2.2906 us, Median = 2.3073 us, Q3 = 2.3361 us, Max = 2.3978 us
+IQR = 0.0455 us, LowerFence = 2.2223 us, UpperFence = 2.4043 us
+ConfidenceInterval = [2.2809 us; 2.3507 us] (CI 99.9%), Margin = 0.0349 us (1.51% of Mean)
+Skewness = 0.97, Kurtosis = 3.09, MValue = 2
+
+// Build Error: Standard output: 
+  
+ Standard error: 
+ 已用时间 00:00:01.26
+    4 个错误
+    0 个警告
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+生成失败。
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+版权所有(C) Microsoft Corporation。保留所有权利。
+用于 .NET Core 的 Microsoft (R) 生成引擎版本 16.4.0+e901037fe
+
+// Build Error: Standard output: 
+  
+ Standard error: 
+ 已用时间 00:00:01.26
+    4 个错误
+    0 个警告
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+生成失败。
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+版权所有(C) Microsoft Corporation。保留所有权利。
+用于 .NET Core 的 Microsoft (R) 生成引擎版本 16.4.0+e901037fe
+
+// Build Error: Standard output: 
+  
+ Standard error: 
+ 已用时间 00:00:01.26
+    4 个错误
+    0 个警告
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+生成失败。
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+版权所有(C) Microsoft Corporation。保留所有权利。
+用于 .NET Core 的 Microsoft (R) 生成引擎版本 16.4.0+e901037fe
+
+// Build Error: Standard output: 
+  
+ Standard error: 
+ 已用时间 00:00:01.26
+    4 个错误
+    0 个警告
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+生成失败。
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(2057,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(125,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(1413,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+8922675f-a9b2-4d1b-b252-79fa32d5df20.notcs(769,48): error CS0234: 命名空间“BenchmarkDotNet”中不存在类型或命名空间名“Engines”(是否缺少程序集引用?) [C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Release\8922675f-a9b2-4d1b-b252-79fa32d5df20\BenchmarkDotNet.Autogenerated.csproj]
+版权所有(C) Microsoft Corporation。保留所有权利。
+用于 .NET Core 的 Microsoft (R) 生成引擎版本 16.4.0+e901037fe
+
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.SpeedTestProgram.TestClass-report.csv
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.SpeedTestProgram.TestClass-report-github.md
+  BenchmarkDotNet.Artifacts\results\Accelbuffer.Test.SpeedTestProgram.TestClass-report.html
+
+// * Detailed results *
+TestClass.AccelbufferSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 1.0352 us, StdErr = 0.0012 us (0.11%); N = 13, StdDev = 0.0042 us
+Min = 1.0310 us, Q1 = 1.0319 us, Median = 1.0356 us, Q3 = 1.0369 us, Max = 1.0465 us
+IQR = 0.0050 us, LowerFence = 1.0243 us, UpperFence = 1.0445 us
+ConfidenceInterval = [1.0302 us; 1.0402 us] (CI 99.9%), Margin = 0.0050 us (0.48% of Mean)
+Skewness = 1.3, Kurtosis = 4.27, MValue = 2
+-------------------- Histogram --------------------
+[1.029 us ; 1.048 us) | @@@@@@@@@@@@@
+---------------------------------------------------
+
+TestClass.AccelbufferDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 894.6165 ns, StdErr = 1.4220 ns (0.16%); N = 15, StdDev = 5.5075 ns
+Min = 888.7131 ns, Q1 = 889.4212 ns, Median = 893.1275 ns, Q3 = 898.3769 ns, Max = 904.1575 ns
+IQR = 8.9556 ns, LowerFence = 875.9878 ns, UpperFence = 911.8103 ns
+ConfidenceInterval = [888.7287 ns; 900.5044 ns] (CI 99.9%), Margin = 5.8878 ns (0.66% of Mean)
+Skewness = 0.4, Kurtosis = 1.57, MValue = 2
+-------------------- Histogram --------------------
+[886.759 ns ; 906.112 ns) | @@@@@@@@@@@@@@@
+---------------------------------------------------
+
+TestClass.ProtobufSerialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 1.3359 us, StdErr = 0.0041 us (0.31%); N = 15, StdDev = 0.0159 us
+Min = 1.3178 us, Q1 = 1.3237 us, Median = 1.3292 us, Q3 = 1.3455 us, Max = 1.3695 us
+IQR = 0.0218 us, LowerFence = 1.2910 us, UpperFence = 1.3782 us
+ConfidenceInterval = [1.3188 us; 1.3529 us] (CI 99.9%), Margin = 0.0170 us (1.27% of Mean)
+Skewness = 0.77, Kurtosis = 2.19, MValue = 2
+-------------------- Histogram --------------------
+[1.312 us ; 1.339 us) | @@@@@@@@@
+[1.339 us ; 1.375 us) | @@@@@@
+---------------------------------------------------
+
+TestClass.ProtobufDeserialize: Job-SKBHYL(Runtime=.NET 4.7.1)
+Runtime = .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT; GC = Concurrent Workstation
+Mean = 2.3158 us, StdErr = 0.0084 us (0.36%); N = 15, StdDev = 0.0326 us
+Min = 2.2806 us, Q1 = 2.2906 us, Median = 2.3073 us, Q3 = 2.3361 us, Max = 2.3978 us
+IQR = 0.0455 us, LowerFence = 2.2223 us, UpperFence = 2.4043 us
+ConfidenceInterval = [2.2809 us; 2.3507 us] (CI 99.9%), Margin = 0.0349 us (1.51% of Mean)
+Skewness = 0.97, Kurtosis = 3.09, MValue = 2
+-------------------- Histogram --------------------
+[2.276 us ; 2.357 us) | @@@@@@@@@@@@@
+[2.357 us ; 2.409 us) | @@
+---------------------------------------------------
+
+TestClass.AccelbufferSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+Runtime = ; GC = 
+There are not any results runs
+
+TestClass.AccelbufferDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+Runtime = ; GC = 
+There are not any results runs
+
+TestClass.ProtobufSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+Runtime = ; GC = 
+There are not any results runs
+
+TestClass.ProtobufDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+Runtime = ; GC = 
+There are not any results runs
+
+// * Summary *
+
+BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
+Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
+Frequency=2836113 Hz, Resolution=352.5953 ns, Timer=TSC
+  [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
+  Job-SKBHYL : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+
+
+|                 Method |       Runtime |       Mean |    Error |   StdDev |  StdErr |        Min |         Q1 |     Median |         Q3 |        Max |        Op/s |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|----------------------- |-------------- |-----------:|---------:|---------:|--------:|-----------:|-----------:|-----------:|-----------:|-----------:|------------:|-------:|------:|------:|----------:|
+|   AccelbufferSerialize |    .NET 4.7.1 | 1,035.2 ns |  5.02 ns |  4.19 ns | 1.16 ns | 1,031.0 ns | 1,031.9 ns | 1,035.6 ns | 1,036.9 ns | 1,046.5 ns |   965,985.9 |      - |     - |     - |         - |
+| AccelbufferDeserialize |    .NET 4.7.1 |   894.6 ns |  5.89 ns |  5.51 ns | 1.42 ns |   888.7 ns |   889.4 ns |   893.1 ns |   898.4 ns |   904.2 ns | 1,117,797.4 | 0.1545 |     - |     - |     244 B |
+|      ProtobufSerialize |    .NET 4.7.1 | 1,335.9 ns | 17.02 ns | 15.92 ns | 4.11 ns | 1,317.8 ns | 1,323.7 ns | 1,329.2 ns | 1,345.5 ns | 1,369.5 ns |   748,580.8 | 0.3185 |     - |     - |     504 B |
+|    ProtobufDeserialize |    .NET 4.7.1 | 2,315.8 ns | 34.90 ns | 32.65 ns | 8.43 ns | 2,280.6 ns | 2,290.6 ns | 2,307.3 ns | 2,336.1 ns | 2,397.8 ns |   431,807.7 | 0.4730 |     - |     - |     748 B |
+|   AccelbufferSerialize | .NET Core 2.1 |         NA |       NA |       NA |      NA |         NA |         NA |         NA |         NA |         NA |          NA |      - |     - |     - |         - |
+| AccelbufferDeserialize | .NET Core 2.1 |         NA |       NA |       NA |      NA |         NA |         NA |         NA |         NA |         NA |          NA |      - |     - |     - |         - |
+|      ProtobufSerialize | .NET Core 2.1 |         NA |       NA |       NA |      NA |         NA |         NA |         NA |         NA |         NA |          NA |      - |     - |     - |         - |
+|    ProtobufDeserialize | .NET Core 2.1 |         NA |       NA |       NA |      NA |         NA |         NA |         NA |         NA |         NA |          NA |      - |     - |     - |         - |
+
+Benchmarks with issues:
+  TestClass.AccelbufferSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+  TestClass.AccelbufferDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+  TestClass.ProtobufSerialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+  TestClass.ProtobufDeserialize: Job-VQGKHI(Runtime=.NET Core 2.1)
+
+// * Warnings *
+Environment
+  Summary -> Benchmark was executed with attached debugger
+
+// * Hints *
+Outliers
+  TestClass.AccelbufferSerialize: Runtime=.NET 4.7.1 -> 2 outliers were removed (1.05 us, 1.06 us)
+
+// * Legends *
+  Mean      : Arithmetic mean of all measurements
+  Error     : Half of 99.9% confidence interval
+  StdDev    : Standard deviation of all measurements
+  StdErr    : Standard error of all measurements
+  Min       : Minimum
+  Q1        : Quartile 1 (25th percentile)
+  Median    : Value separating the higher half of all measurements (50th percentile)
+  Q3        : Quartile 3 (75th percentile)
+  Max       : Maximum
+  Op/s      : Operation per second
+  Gen 0     : GC Generation 0 collects per 1000 operations
+  Gen 1     : GC Generation 1 collects per 1000 operations
+  Gen 2     : GC Generation 2 collects per 1000 operations
+  Allocated : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  1 ns      : 1 Nanosecond (0.000000001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+// ** Remained 0 benchmark(s) to run **
+Run time: 00:01:14 (74.63 sec), executed benchmarks: 4
+
+Global total time: 00:01:27 (87.7 sec), executed benchmarks: 4
+// * Artifacts cleanup *

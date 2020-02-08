@@ -11,6 +11,9 @@ namespace asc.Compiler
     {
         private static readonly CodeAttributeDeclaration s_NeverNullAttr = new CodeAttributeDeclaration("NeverNull");
         private static readonly CodeAttributeDeclaration s_ObsoleteAttr = new CodeAttributeDeclaration("Obsolete");
+#if UNITY
+        private static readonly CodeAttributeDeclaration s_SerializeFieldAttr = new CodeAttributeDeclaration("SerializeField");
+#endif
 
         private static readonly CodePropertySetValueReferenceExpression s_PropertyValue = new CodePropertySetValueReferenceExpression();
         private static readonly CodeThisReferenceExpression s_This = new CodeThisReferenceExpression();
@@ -185,6 +188,10 @@ namespace asc.Compiler
                         }
 
                         AddFieldIndexAttribute(field, index);
+
+#if UNITY
+                        field.CustomAttributes.Add(s_SerializeFieldAttr);
+#endif
 
                         CodeMemberProperty property = new CodeMemberProperty()
                         {

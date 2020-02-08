@@ -234,7 +234,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        public void WriteValue(int index, vint value)
+        public void WriteValue(int index, VInt value)
         {
             if (value == default)
             {
@@ -260,7 +260,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
-        public void WriteValue(int index, vuint value)
+        public void WriteValue(int index, VUInt value)
         {
             if (value == default)
             {
@@ -1056,9 +1056,9 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static vint Zig(vint value)
+        private static VInt Zig(VInt value)
         {
-            return new vint(value.m_Value >> 63 ^ value.m_Value << 1);
+            return new VInt(value.m_Value >> 63 ^ value.m_Value << 1);
         }
     }
 }

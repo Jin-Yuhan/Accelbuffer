@@ -4,31 +4,31 @@ namespace Accelbuffer.Injection
 {
     internal sealed class VariantSerializer :
         IBuiltinTypeSerializer,
-        IMemorySizeForType<vint>,
-        IMemorySizeForType<vuint>,
-        ITypeSerializer<vint>,
-        ITypeSerializer<vuint>
+        IMemorySizeForType<VInt>,
+        IMemorySizeForType<VUInt>,
+        ITypeSerializer<VInt>,
+        ITypeSerializer<VUInt>
     {
-        int IMemorySizeForType<vint>.ApproximateMemorySize => 8;
+        int IMemorySizeForType<VInt>.ApproximateMemorySize => 8;
 
-        int IMemorySizeForType<vuint>.ApproximateMemorySize => 8;
+        int IMemorySizeForType<VUInt>.ApproximateMemorySize => 8;
 
-        vint ITypeSerializer<vint>.Deserialize(ref AccelReader reader)
+        VInt ITypeSerializer<VInt>.Deserialize(ref AccelReader reader)
         {
             return reader.ReadVariantInt();
         }
 
-        vuint ITypeSerializer<vuint>.Deserialize(ref AccelReader reader)
+        VUInt ITypeSerializer<VUInt>.Deserialize(ref AccelReader reader)
         {
             return reader.ReadVariantUInt();
         }
 
-        void ITypeSerializer<vint>.Serialize(vint obj, ref AccelWriter writer)
+        void ITypeSerializer<VInt>.Serialize(VInt obj, ref AccelWriter writer)
         {
             writer.WriteValue(writer.m_Index, obj);
         }
 
-        void ITypeSerializer<vuint>.Serialize(vuint obj, ref AccelWriter writer)
+        void ITypeSerializer<VUInt>.Serialize(VUInt obj, ref AccelWriter writer)
         {
             writer.WriteValue(writer.m_Index, obj);
         }

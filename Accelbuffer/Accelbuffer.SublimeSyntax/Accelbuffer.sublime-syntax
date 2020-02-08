@@ -113,18 +113,18 @@ contexts:
   #文档
   document:
     - match: (--)
-      scope: constant.numeric.doc.begin.accel
+      scope: comment.doc.begin.accel
       push: 
-        - meta_scope: constant.numeric.doc.accel
+        - meta_scope: comment.doc.accel
         - match: (--)
-          scope: constant.numeric.doc.end.accel
+          scope: comment.doc.end.accel
           pop: true
 
   #单行注释
   single_line_comment:
     - match: (//)
-      scope: constant.numeric.begin.accel
+      scope: comment.begin.accel
       push: 
-        - meta_scope: constant.numeric.line.accel
+        - meta_scope: comment.line.accel
         - match: ($)
           pop: true

@@ -46,8 +46,15 @@ namespace Accelbuffer.Injection
 
         private void EmitIL(ILGenerator il, Type objType, List<FieldData> fields, MethodInfo afterMethod)
         {
-            EmitFieldsDeserialize(il, objType, fields);
-            EmitMessageCallback(il, objType, afterMethod);
+            if (fields.Count > 0)
+            {
+                EmitFieldsDeserialize(il, objType, fields);
+            }
+
+            if (afterMethod != null)
+            {
+                EmitMessageCallback(il, objType, afterMethod);
+            }
         }
 
         private static void EmitMessageCallback(ILGenerator il, Type objType, MethodInfo method)

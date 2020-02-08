@@ -14,16 +14,16 @@ namespace Accelbuffer
     [Serializable]
     [DebuggerDisplay("{m_Value}")]
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public readonly struct vint : IComparable, IFormattable, IConvertible, IComparable<vint>, IEquatable<vint>, ISerializable
+    public struct VInt : IComparable, IFormattable, IConvertible, IComparable<VInt>, IEquatable<VInt>, ISerializable
     {
 #pragma warning disable CS1591
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public static readonly vint MaxValue = long.MaxValue;
+        public static readonly VInt MaxValue = long.MaxValue;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        public static readonly vint MinValue = long.MinValue;
+        public static readonly VInt MinValue = long.MinValue;
 
 #if UNITY
         [UnityEngine.SerializeField]
@@ -32,7 +32,11 @@ namespace Accelbuffer
         [FieldOffset(0)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+#if UNITY
+        internal long m_Value;
+#else
         internal readonly long m_Value;
+#endif
 
         [FieldOffset(0)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -44,29 +48,29 @@ namespace Accelbuffer
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal readonly uint m_I2;
 
-        public vint(sbyte value) : this() => m_Value = value;
+        public VInt(sbyte value) : this() => m_Value = value;
 
-        public vint(byte value) : this() => m_Value = value;
+        public VInt(byte value) : this() => m_Value = value;
 
-        public vint(short value) : this() => m_Value = value;
+        public VInt(short value) : this() => m_Value = value;
 
-        public vint(ushort value) : this() => m_Value = value;
+        public VInt(ushort value) : this() => m_Value = value;
 
-        public vint(int value) : this() => m_Value = value;
+        public VInt(int value) : this() => m_Value = value;
 
-        public vint(uint value) : this() => m_Value = value;
+        public VInt(uint value) : this() => m_Value = value;
 
-        public vint(long value) : this() => m_Value = value;
+        public VInt(long value) : this() => m_Value = value;
 
-        public vint(ulong value) : this() => m_Value = (long)value;
+        public VInt(ulong value) : this() => m_Value = (long)value;
 
-        public vint(SerializationInfo info, StreamingContext context) : this() => m_Value = info.GetInt64("value");
+        public VInt(SerializationInfo info, StreamingContext context) : this() => m_Value = info.GetInt64("value");
 
-        public int CompareTo(vint other) => m_Value.CompareTo(other.m_Value);
+        public int CompareTo(VInt other) => m_Value.CompareTo(other.m_Value);
 
-        public bool Equals(vint other) => m_Value.Equals(other.m_Value);
+        public bool Equals(VInt other) => m_Value.Equals(other.m_Value);
 
-        public override bool Equals(object obj) => obj is vint v && Equals(v);
+        public override bool Equals(object obj) => obj is VInt v && Equals(v);
 
         public override int GetHashCode() => m_Value.GetHashCode();
 
@@ -80,25 +84,25 @@ namespace Accelbuffer
 
         public int CompareTo(object obj) => m_Value.CompareTo(obj);
 
-        public static vint Parse(string s, NumberStyles style, IFormatProvider provider) => long.Parse(s, style, provider);
+        public static VInt Parse(string s, NumberStyles style, IFormatProvider provider) => long.Parse(s, style, provider);
 
-        public static vint Parse(string s, IFormatProvider provider) => long.Parse(s, provider);
+        public static VInt Parse(string s, IFormatProvider provider) => long.Parse(s, provider);
 
-        public static vint Parse(string s) => long.Parse(s);
+        public static VInt Parse(string s) => long.Parse(s);
 
-        public static vint Parse(string s, NumberStyles style) => long.Parse(s, style);
+        public static VInt Parse(string s, NumberStyles style) => long.Parse(s, style);
 
-        public static bool TryParse(string s, out vint result)
+        public static bool TryParse(string s, out VInt result)
         {
             bool u = long.TryParse(s, out long l);
-            result = new vint(l);
+            result = new VInt(l);
             return u;
         }
 
-        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out vint result)
+        public static bool TryParse(string s, NumberStyles style, IFormatProvider provider, out VInt result)
         {
             bool u = long.TryParse(s, style, provider, out long l);
-            result = new vint(l);
+            result = new VInt(l);
             return u;
         }
 
@@ -138,83 +142,83 @@ namespace Accelbuffer
 
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => info.AddValue("value", m_Value);
 
-        public static vint operator +(vint value) => value;
+        public static VInt operator +(VInt value) => value;
 
-        public static vint operator -(vint value) => new vint(-value.m_Value);
+        public static VInt operator -(VInt value) => new VInt(-value.m_Value);
 
-        public static vint operator ~(vint value) => new vint(~value.m_Value);
+        public static VInt operator ~(VInt value) => new VInt(~value.m_Value);
 
-        public static vint operator ++(vint value) => new vint(value.m_Value + 1);
+        public static VInt operator ++(VInt value) => new VInt(value.m_Value + 1);
 
-        public static vint operator --(vint value) => new vint(value.m_Value - 1);
+        public static VInt operator --(VInt value) => new VInt(value.m_Value - 1);
 
-        public static vint operator +(vint left, vint right) => new vint(left.m_Value + right.m_Value);
+        public static VInt operator +(VInt left, VInt right) => new VInt(left.m_Value + right.m_Value);
 
-        public static vint operator -(vint left, vint right) => new vint(left.m_Value - right.m_Value);
+        public static VInt operator -(VInt left, VInt right) => new VInt(left.m_Value - right.m_Value);
 
-        public static vint operator *(vint left, vint right) => new vint(left.m_Value * right.m_Value);
+        public static VInt operator *(VInt left, VInt right) => new VInt(left.m_Value * right.m_Value);
 
-        public static vint operator /(vint left, vint right) => new vint(left.m_Value / right.m_Value);
+        public static VInt operator /(VInt left, VInt right) => new VInt(left.m_Value / right.m_Value);
 
-        public static vint operator %(vint left, vint right) => new vint(left.m_Value % right.m_Value);
+        public static VInt operator %(VInt left, VInt right) => new VInt(left.m_Value % right.m_Value);
 
-        public static vint operator <<(vint left, int right) => new vint(left.m_Value << right);
+        public static VInt operator <<(VInt left, int right) => new VInt(left.m_Value << right);
 
-        public static vint operator >>(vint left, int right) => new vint(left.m_Value >> right);
+        public static VInt operator >>(VInt left, int right) => new VInt(left.m_Value >> right);
 
-        public static vint operator &(vint left, vint right) => new vint(left.m_Value & right.m_Value);
+        public static VInt operator &(VInt left, VInt right) => new VInt(left.m_Value & right.m_Value);
 
-        public static vint operator |(vint left, vint right) => new vint(left.m_Value | right.m_Value);
+        public static VInt operator |(VInt left, VInt right) => new VInt(left.m_Value | right.m_Value);
 
-        public static vint operator ^(vint left, vint right) => new vint(left.m_Value ^ right.m_Value);
+        public static VInt operator ^(VInt left, VInt right) => new VInt(left.m_Value ^ right.m_Value);
 
-        public static bool operator ==(vint left, vint right) => left.m_Value == right.m_Value;
+        public static bool operator ==(VInt left, VInt right) => left.m_Value == right.m_Value;
 
-        public static bool operator !=(vint left, vint right) => left.m_Value != right.m_Value;
+        public static bool operator !=(VInt left, VInt right) => left.m_Value != right.m_Value;
 
-        public static bool operator >(vint left, vint right) => left.m_Value > right.m_Value;
+        public static bool operator >(VInt left, VInt right) => left.m_Value > right.m_Value;
 
-        public static bool operator <(vint left, vint right) => left.m_Value < right.m_Value;
+        public static bool operator <(VInt left, VInt right) => left.m_Value < right.m_Value;
 
-        public static bool operator >=(vint left, vint right) => left.m_Value >= right.m_Value;
+        public static bool operator >=(VInt left, VInt right) => left.m_Value >= right.m_Value;
 
-        public static bool operator <=(vint left, vint right) => left.m_Value <= right.m_Value;
+        public static bool operator <=(VInt left, VInt right) => left.m_Value <= right.m_Value;
 
-        public static implicit operator vint(sbyte value) => new vint(value);
+        public static implicit operator VInt(sbyte value) => new VInt(value);
 
-        public static implicit operator vint(byte value) => new vint(value);
+        public static implicit operator VInt(byte value) => new VInt(value);
 
-        public static implicit operator vint(short value) => new vint(value);
+        public static implicit operator VInt(short value) => new VInt(value);
 
-        public static implicit operator vint(ushort value) => new vint(value);
+        public static implicit operator VInt(ushort value) => new VInt(value);
 
-        public static implicit operator vint(int value) => new vint(value);
+        public static implicit operator VInt(int value) => new VInt(value);
 
-        public static implicit operator vint(uint value) => new vint(value);
+        public static implicit operator VInt(uint value) => new VInt(value);
 
-        public static implicit operator vint(long value) => new vint(value);
+        public static implicit operator VInt(long value) => new VInt(value);
 
-        public static explicit operator vint(ulong value) => new vint(value);
+        public static explicit operator VInt(ulong value) => new VInt(value);
 
-        public static explicit operator vint(vuint value) => new vint((long)value);
+        public static explicit operator VInt(VUInt value) => new VInt((long)value);
 
-        public static explicit operator sbyte(vint value) => (sbyte)value.m_Value;
+        public static explicit operator sbyte(VInt value) => (sbyte)value.m_Value;
 
-        public static explicit operator byte(vint value) => (byte)value.m_Value;
+        public static explicit operator byte(VInt value) => (byte)value.m_Value;
 
-        public static explicit operator short(vint value) => (short)value.m_Value;
+        public static explicit operator short(VInt value) => (short)value.m_Value;
 
-        public static explicit operator ushort(vint value) => (ushort)value.m_Value;
+        public static explicit operator ushort(VInt value) => (ushort)value.m_Value;
 
-        public static explicit operator int(vint value) => (int)value.m_Value;
+        public static explicit operator int(VInt value) => (int)value.m_Value;
 
-        public static explicit operator uint(vint value) => (uint)value.m_Value;
+        public static explicit operator uint(VInt value) => (uint)value.m_Value;
 
-        public static explicit operator long(vint value) => value.m_Value;
+        public static explicit operator long(VInt value) => value.m_Value;
 
-        public static explicit operator ulong(vint value) => (ulong)value.m_Value;
+        public static explicit operator ulong(VInt value) => (ulong)value.m_Value;
 
-        public static explicit operator vuint(vint value) => new vuint((ulong)value.m_Value);
+        public static explicit operator VUInt(VInt value) => new VUInt((ulong)value.m_Value);
 #pragma warning restore CS1591
     }
 #pragma warning restore IDE1006

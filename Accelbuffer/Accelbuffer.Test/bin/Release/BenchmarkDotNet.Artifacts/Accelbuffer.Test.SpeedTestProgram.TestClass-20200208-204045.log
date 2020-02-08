@@ -1,0 +1,4 @@
+// Validating benchmarks:
+Assembly Accelbuffer.Test which defines benchmarks references non-optimized Accelbuffer
+	If you own this dependency, please, build it in RELEASE.
+	If you don't, you can disable this policy by using 'config.With(ConfigOptions.DisableOptimizationsValidator)'.

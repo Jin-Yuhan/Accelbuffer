@@ -281,7 +281,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
-        public vint ReadVariantInt()
+        public VInt ReadVariantInt()
         {
             ObjectType type = ReadTypeFromCachedTag();
             int len = ReadLengthByType(type);
@@ -316,14 +316,14 @@ namespace Accelbuffer
                 }
             }
 
-            return Zag(new vint(value));
+            return Zag(new VInt(value));
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public vuint ReadVariantUInt()
+        public VUInt ReadVariantUInt()
         {
             ObjectType type = ReadTypeFromCachedTag();
             int len = ReadLengthByType(type);
@@ -358,7 +358,7 @@ namespace Accelbuffer
                 }
             }
 
-            return new vuint(value);
+            return new VUInt(value);
         }
 
         /// <summary>
@@ -973,9 +973,9 @@ namespace Accelbuffer
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static vint Zag(vint value)
+        private static VInt Zag(VInt value)
         {
-            return new vint((long)((ulong)value.m_Value >> 1) ^ -(value.m_Value & 1));
+            return new VInt((long)((ulong)value.m_Value >> 1) ^ -(value.m_Value & 1));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

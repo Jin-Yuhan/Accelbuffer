@@ -76,8 +76,8 @@
     <Compile Include="Memory\NativeMemory.cs" />
     <Compile Include="Enums\Endian.cs" />
     <Compile Include="Text\ReversedUnicodeEncoding.cs" />
-    <Compile Include="vint.cs" />
-    <Compile Include="vuint.cs" />
+    <Compile Include="VInt.cs" />
+    <Compile Include="VUInt.cs" />
     <Compile Include="Memory\IMemorySizeForType.cs" />
     <Compile Include="Memory\MemorySizeAttribute.cs" />
     <Compile Include="Memory\Allocator\MemoryAllocator.Chunk.cs" />

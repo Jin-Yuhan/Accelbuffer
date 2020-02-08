@@ -37,6 +37,8 @@ namespace asc.Compiler
                 new UsingAsDeclaration{TypeName = "System.Decimal", AliasName= "float128"},
                 new UsingAsDeclaration{TypeName = "System.IntPtr", AliasName= "intptr"},
                 new UsingAsDeclaration{TypeName = "System.UIntPtr", AliasName= "uintptr"},
+                new UsingAsDeclaration{TypeName = "Accelbuffer.VInt", AliasName= "vint"},
+                new UsingAsDeclaration{TypeName = "Accelbuffer.VUInt", AliasName= "vuint"},
 
 #if UNITY
                 new UsingAsDeclaration{TypeName = "UnityEngine.Vector2", AliasName= "vector2"},
@@ -86,7 +88,7 @@ namespace asc.Compiler
 
                         if (!field.IsObsolete)
                         {
-                            sb.AppendLine($"\t\t\t\t\t\tresult.{field.Name} = reader.Read{methodName}();");
+                            sb.AppendLine($"\t\t\t\t\t\tresult.m_{field.Name} = reader.Read{methodName}();");
                         }
 
                         sb.AppendLine("\t\t\t\t\t\tbreak;");

@@ -70,7 +70,7 @@ namespace asc.Compiler
 
                         if (!field.IsObsolete)
                         {
-                            sb.AppendLine($"\t\t\t\t\t\t\tresult.{field.Name} = reader.Read{methodName}()");
+                            sb.AppendLine($"\t\t\t\t\t\t\tresult.m_{field.Name} = reader.Read{methodName}()");
                         }
                     }
 

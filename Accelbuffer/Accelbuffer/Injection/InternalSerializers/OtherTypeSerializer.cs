@@ -19,7 +19,7 @@ namespace Accelbuffer.Injection
 
         int IMemorySizeForType<DateTime>.ApproximateMemorySize => 8;
 
-        int IMemorySizeForType<DateTimeOffset>.ApproximateMemorySize => 10;
+        int IMemorySizeForType<DateTimeOffset>.ApproximateMemorySize => 12;
 
         Guid ITypeSerializer<Guid>.Deserialize(ref AccelReader reader)
         {
@@ -56,20 +56,21 @@ namespace Accelbuffer.Injection
         DateTimeOffset ITypeSerializer<DateTimeOffset>.Deserialize(ref AccelReader reader)
         {
             DateTimeOffset result = new DateTimeOffset();
+            ulong* dateTimePtr = (ulong*)&result;
 
             if (!reader.HasNext())
             {
                 return result;
             }
 
-            *(ulong*)&result = reader.ReadUInt64();
+            *dateTimePtr = reader.ReadUInt64();
 
             if (!reader.HasNext())
             {
                 return result;
             }
 
-            ((short*)&result)[4] = reader.ReadInt16();
+            *(int*)(dateTimePtr + 1) = reader.ReadInt32();
 
             return result;
         }
@@ -93,8 +94,9 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<DateTimeOffset>.Serialize(DateTimeOffset obj, ref AccelWriter writer)
         {
-            ulong data = *(ulong*)&obj;
-            short offset = ((short*)&obj)[4];
+            ulong* dateTimePtr = (ulong*)&obj;
+            ulong data = *dateTimePtr;
+            int offset = *(int*)(dateTimePtr + 1);
             writer.WriteValue(1, data);
             writer.WriteValue(2, offset);
         }

@@ -63,4 +63,6 @@ C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\o
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\obj\Debug\Accelbuffer.Test.csproj.CopyComplete
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\obj\Debug\Accelbuffer.Test.exe
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\obj\Debug\Accelbuffer.Test.pdb
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Debug\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Debug\zh-Hans\Microsoft.QualityTools.Testing.Fakes.resources.dll
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\Accelbuffer.Test\bin\Debug\Accelbuffer.xml
