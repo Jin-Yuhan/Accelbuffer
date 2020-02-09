@@ -56,10 +56,7 @@ namespace Accelbuffer.Test
     [SerializeBy(typeof(Example.ExampleSerializer))]
     public partial struct Example
     {
-        [FieldIndex(1)]
         public string Name;
-        
-        [FieldIndex(2)]
         public int Id;
         
         public sealed class ExampleSerializer : ITypeSerializer<Example>
