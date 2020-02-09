@@ -64,7 +64,6 @@ namespace Accelbuffer.Test
         
         public sealed class ExampleSerializer : ITypeSerializer<Example>
         {
-            
             public void Serialize(Example obj, ref AccelWriter writer)
             {
                 if ((obj.m_Name != null))
@@ -83,10 +82,10 @@ namespace Accelbuffer.Test
                     switch (index)
                     {
                         case 1:
-                            result.m_Name = reader.ReadString();
+                            result.Name = reader.ReadString();
                             break;
                         case 2:
-                            result.m_Id = reader.ReadInt32();
+                            result.Id = reader.ReadInt32();
                             break;
                         default:
                             reader.SkipNext();
@@ -127,11 +126,14 @@ public struct Example about 10
 ```csharp
 Example example = new Example { ... };
 NativeBuffer buffer = Serializer.Serialize<Example>(example);
+//...
+buffer.Dispose();
 ```
 
 ### 3.反序列化对象
 ```csharp
 Example example = Serializer.Deserialize<Example>(buffer, 0, buffer.Length);
+buffer.Dispose();
 ```
 
 ### 4.释放序列化缓冲区内存
@@ -167,10 +169,13 @@ public class ...
 ## 使用BenchmarkDotNet的测试结果
 * 结果可能存在误差
 > BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
+
 > Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
+
 > Frequency=2836025 Hz, Resolution=352.6062 ns, Timer=TSC
   [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
   Job-SWSWQT : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
+
 > Runtime=.NET 4.7.2  
 
 |Method|Mean|Error|StdDev|StdErr|Allocated|
