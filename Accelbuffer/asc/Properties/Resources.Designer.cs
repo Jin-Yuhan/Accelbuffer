@@ -232,7 +232,16 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.7 的本地化字符串。
+        ///   查找类似 error: AS020: duplicate field index &apos;{0}&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_AS020_MultipleIndex {
+            get {
+                return ResourceManager.GetString("Error_AS020_MultipleIndex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 v0.1.6.10 的本地化字符串。
         /// </summary>
         internal static string Version {
             get {
@@ -241,7 +250,7 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.7 unity 的本地化字符串。
+        ///   查找类似 v0.1.6.10 unity 的本地化字符串。
         /// </summary>
         internal static string Version_Unity {
             get {

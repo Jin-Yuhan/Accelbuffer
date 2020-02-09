@@ -18,7 +18,7 @@ namespace asc.Compiler
 
         public TextWriter Writer { get; }
 
-        public int ExitCode { get; set; }
+        public bool IsError { get; private set; }
 
         public event Action OnBeforeLogError;
 
@@ -31,7 +31,12 @@ namespace asc.Compiler
         public ErrorWriter(TextWriter writer)
         {
             Writer = writer;
-            ExitCode = 0;
+            IsError = false;
+        }
+
+        public void Reset()
+        {
+            IsError = false;
         }
 
         public void LogError(string msg, Token token)
@@ -41,10 +46,13 @@ namespace asc.Compiler
 
         public void LogError(string msg, string filePath, int line, int column, params object[] args)
         {
-            OnBeforeLogError?.Invoke();
-            Console.WriteLine($"{msg}\nfile: {filePath}\nline: {line}\ncolumn: {column}", args);
-            OnAfterLogError?.Invoke();
-            Environment.Exit(ExitCode);
+            if (!IsError)
+            {
+                IsError = true;
+                OnBeforeLogError?.Invoke();
+                Console.WriteLine($"{msg}\nfile: {filePath}\nline: {line}\ncolumn: {column}", args);
+                OnAfterLogError?.Invoke();
+            }
         }
 
         public void LogWarning(string msg, Token token)

@@ -1,6 +1,7 @@
 ﻿using Accelbuffer.Properties;
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using System.Collections.Generic;
 
 namespace Accelbuffer.Memory
@@ -16,7 +17,11 @@ namespace Accelbuffer.Memory
         /// <summary>
         /// 获取缓冲区的长度
         /// </summary>
-        public int Length { get; }
+        public int Length
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get;
+        }
 
         /// <summary>
         /// 获取缓冲区是否被释放
@@ -34,6 +39,7 @@ namespace Accelbuffer.Memory
         /// <exception cref="IndexOutOfRangeException"><paramref name="index"/>超出范围</exception>
         public byte this[int index]
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 if (Disposed)
@@ -48,6 +54,7 @@ namespace Accelbuffer.Memory
 
                 return m_Ptr[index];
             }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (Disposed)

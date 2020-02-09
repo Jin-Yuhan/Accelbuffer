@@ -174,11 +174,14 @@
   <data name="Error_AS019_InvalidProtectedKeyword" xml:space="preserve">
     <value>error: AS019: keyword 'protected' can only be used in nested types</value>
   </data>
+  <data name="Error_AS020_MultipleIndex" xml:space="preserve">
+    <value>error: AS020: duplicate field index '{0}'</value>
+  </data>
   <data name="Version" xml:space="preserve">
-    <value>v0.1.6.7</value>
+    <value>v0.1.6.10</value>
   </data>
   <data name="Version_Unity" xml:space="preserve">
-    <value>v0.1.6.7 unity</value>
+    <value>v0.1.6.10 unity</value>
   </data>
   <data name="Warning_AS001_InvalidMemorySize" xml:space="preserve">
     <value>warning: AS001: the memory size required for the structure must be greater than 0</value>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace Accelbuffer.Memory
 {
@@ -17,10 +18,12 @@ namespace Accelbuffer.Memory
         /// </summary>
         public int MaxFindChunkCount
         {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
                 return m_MaxFindChunkCount;
             }
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 lock (m_SyncObj)
@@ -33,7 +36,13 @@ namespace Accelbuffer.Memory
         /// <summary>
         /// 获取当前保存的所有内存块的总内存大小，以字节为单位
         /// </summary>
-        public int TotalMemorySizeInChunks { get; private set; }
+        public int TotalMemorySizeInChunks
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            private set;
+        }
 
         private MemoryAllocator()
         {

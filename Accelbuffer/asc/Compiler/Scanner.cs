@@ -229,7 +229,7 @@ namespace asc.Compiler
 
         private bool HasNext()
         {
-            return !m_Reader.EndOfStream;
+            return !(m_Reader.EndOfStream || m_Writer.IsError);
         }
 
         private char? PeekNext()

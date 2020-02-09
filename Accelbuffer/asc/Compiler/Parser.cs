@@ -1,7 +1,7 @@
 ﻿using asc.Compiler.Declarations;
 using asc.Properties;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace asc.Compiler
@@ -208,7 +208,6 @@ namespace asc.Compiler
             bool isProtected = false;
             bool isRef = false;
             bool isFinal = false;
-            bool isContinuous = true;
             int size = 160;
             List<IDeclaration> declarations = new List<IDeclaration>();
 
@@ -358,16 +357,8 @@ namespace asc.Compiler
                         continue;
                     case TokenType.VarKeyword:
                         MoveBack();
-                        int tempIndex = fieldIndex + 1;
-                        declarations.Add(GetFieldDeclaration(ref tempIndex));
-
-                        if (Math.Abs(tempIndex - fieldIndex) != 1 && fieldIndex != 0)
-                        {
-                            m_Writer.LogWarning(Resources.Warning_AS003_RequireContinuousIndex, Current());
-                            isContinuous = false;
-                        }
-
-                        fieldIndex = tempIndex;
+                        fieldIndex++;
+                        declarations.Add(GetFieldDeclaration(ref fieldIndex));
                         break;
                     default:
                         if (m_KeywordManager.IsInCategory(token.Raw, KeywordCategory.StructModifier) || token.Type == TokenType.StructKeyword)
@@ -393,6 +384,13 @@ namespace asc.Compiler
             }
 
             MoveNext();
+
+            bool isContinuous = CheckFieldIndex(declarations);
+
+            if (!isContinuous)
+            {
+                m_Writer.LogWarning(Resources.Warning_AS003_RequireContinuousIndex, Current());
+            }
 
             return new StructDeclaration
             {
@@ -657,6 +655,45 @@ namespace asc.Compiler
             return sb.Length == 0 ? null : sb.ToString();
         }
 
+        private bool CheckFieldIndex(List<IDeclaration> declarations)
+        {
+            List<FieldDeclaration> fields = (from def in declarations
+                                                    let field = def as FieldDeclaration
+                                                    where field != null
+                                                    orderby field.Index ascending
+                                                    select field).ToList();
+
+            if (fields.Count > 1)
+            {
+                bool result = true;
+                int last = fields[0].Index;
+
+                HashSet<int> indexes = new HashSet<int>(fields.Count) { last };
+
+                for (int i = 1; i < fields.Count; i++)
+                {
+                    int index = fields[i].Index;
+
+                    if (!indexes.Add(index))
+                    {
+                        m_Writer.LogError(string.Format(Resources.Error_AS020_MultipleIndex, index), Current());
+                        return result;
+                    }
+
+                    if (index - last != 1)
+                    {
+                        result = false;
+                    }
+
+                    last = index;
+                }
+
+                return result;
+            }
+
+            return true;
+        }
+
         private bool ExpectNextTokenType(TokenType type)
         {
             int i = m_Index + 1;
@@ -665,14 +702,14 @@ namespace asc.Compiler
 
         private bool MoveNext()
         {
-            bool next = m_Index < m_Tokens.Length - 1;
+            bool next = m_Index < m_Tokens.Length - 1 && !m_Writer.IsError;
             m_Index += next ? 1 : 0;
             return next;
         }
 
         private bool MoveBack()
         {
-            bool back = m_Index > -1;
+            bool back = m_Index > -1 && !m_Writer.IsError;
             m_Index -= back ? 1 : 0;
             return back;
         }

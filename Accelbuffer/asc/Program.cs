@@ -117,22 +117,34 @@ namespace asc
                     continue;
                 }
 
+                writer.Reset();
+
                 using Scanner scanner = new Scanner(path, writer, keywordManager);
                 Token[] tokens = scanner.ToTokens();
+
+                if (writer.IsError)
+                {
+                    continue;
+                }
 
                 if (mode == RunMode.ToTokens)
                 {
                     WriteTokens(tokens);
-                    return;
+                    continue;
                 }
 
                 Parser parser = new Parser(tokens, writer, keywordManager, languageManager);
                 IDeclaration[] declarations = parser.ToDeclaration();
 
+                if (writer.IsError)
+                {
+                    continue;
+                }
+
                 if (mode == RunMode.ToDeclarations)
                 {
                     WriteDeclarations(declarations);
-                    return;
+                    continue;
                 }
 
                 string outputPath = languageManager.ChangeExtension(path);

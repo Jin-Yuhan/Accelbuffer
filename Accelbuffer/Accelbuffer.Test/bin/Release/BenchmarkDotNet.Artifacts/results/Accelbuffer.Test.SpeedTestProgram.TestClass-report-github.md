@@ -2,16 +2,16 @@
 
 BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
 Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
-Frequency=2836113 Hz, Resolution=352.5953 ns, Timer=TSC
+Frequency=2836025 Hz, Resolution=352.6062 ns, Timer=TSC
   [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
   Job-SWSWQT : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
 
 Runtime=.NET 4.7.2  
 
 ```
-|                 Method |     Mean |     Error |    StdDev |    StdErr |    Median |       Min |        Q1 |       Q3 |      Max |      Op/s |  Gen 0 | Gen 1 | Gen 2 | Allocated |
-|----------------------- |---------:|----------:|----------:|----------:|----------:|----------:|----------:|---------:|---------:|----------:|-------:|------:|------:|----------:|
-|   AccelbufferSerialize | 1.037 us | 0.0104 us | 0.0087 us | 0.0024 us | 1.0330 us | 1.0296 us | 1.0317 us | 1.045 us | 1.057 us | 964,311.4 |      - |     - |     - |         - |
-| AccelbufferDeserialize | 1.021 us | 0.0440 us | 0.1299 us | 0.0130 us | 0.9530 us | 0.8817 us | 0.8900 us | 1.162 us | 1.176 us | 979,276.8 | 0.1545 |     - |     - |     244 B |
-|      ProtobufSerialize | 1.341 us | 0.0142 us | 0.0126 us | 0.0034 us | 1.3364 us | 1.3241 us | 1.3317 us | 1.349 us | 1.364 us | 745,954.7 | 0.3185 |     - |     - |     504 B |
-|    ProtobufDeserialize | 2.315 us | 0.0442 us | 0.0345 us | 0.0100 us | 2.3001 us | 2.2806 us | 2.2900 us | 2.341 us | 2.395 us | 432,011.2 | 0.4730 |     - |     - |     748 B |
+|                 Method |       Mean |    Error |   StdDev |  StdErr |        Min |         Q1 |     Median |         Q3 |        Max |        Op/s |  Gen 0 | Gen 1 | Gen 2 | Allocated |
+|----------------------- |-----------:|---------:|---------:|--------:|-----------:|-----------:|-----------:|-----------:|-----------:|------------:|-------:|------:|------:|----------:|
+|   AccelbufferSerialize | 1,049.0 ns |  8.39 ns |  7.44 ns | 1.99 ns | 1,040.5 ns | 1,045.3 ns | 1,046.1 ns | 1,050.7 ns | 1,067.0 ns |   953,290.1 |      - |     - |     - |         - |
+| AccelbufferDeserialize |   897.3 ns |  6.39 ns |  5.98 ns | 1.54 ns |   889.2 ns |   893.2 ns |   896.2 ns |   901.3 ns |   912.6 ns | 1,114,412.9 | 0.1545 |     - |     - |     244 B |
+|      ProtobufSerialize | 1,324.1 ns | 11.47 ns | 10.17 ns | 2.72 ns | 1,313.7 ns | 1,317.0 ns | 1,321.0 ns | 1,327.3 ns | 1,348.5 ns |   755,206.3 | 0.3185 |     - |     - |     504 B |
+|    ProtobufDeserialize | 2,550.1 ns | 24.72 ns | 23.12 ns | 5.97 ns | 2,519.8 ns | 2,532.1 ns | 2,542.8 ns | 2,570.8 ns | 2,591.7 ns |   392,146.9 | 0.4730 |     - |     - |     748 B |

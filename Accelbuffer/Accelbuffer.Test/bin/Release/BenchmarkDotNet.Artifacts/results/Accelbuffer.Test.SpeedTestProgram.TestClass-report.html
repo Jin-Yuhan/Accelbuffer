@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Accelbuffer.Test.SpeedTestProgram.TestClass-20200208-205543</title>
+<title>Accelbuffer.Test.SpeedTestProgram.TestClass-20200209-183704</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -15,7 +15,7 @@
 <pre><code>
 BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
 Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
-Frequency=2836113 Hz, Resolution=352.5953 ns, Timer=TSC
+Frequency=2836025 Hz, Resolution=352.6062 ns, Timer=TSC
   [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
   Job-SWSWQT : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
 </code></pre>
@@ -23,12 +23,12 @@ Frequency=2836113 Hz, Resolution=352.5953 ns, Timer=TSC
 </code></pre>
 
 <table>
-<thead><tr><th>          Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>StdErr</th><th>Median</th><th>Min</th><th> Q1</th><th>Q3</th><th>Max</th><th>Op/s</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
+<thead><tr><th>          Method</th><th>Mean</th><th>Error</th><th>StdDev</th><th>StdErr</th><th> Min</th><th>  Q1</th><th>Median</th><th>  Q3</th><th> Max</th><th> Op/s</th><th>Gen 0</th><th>Gen 1</th><th>Gen 2</th><th>Allocated</th>
 </tr>
-</thead><tbody><tr><td>AccelbufferSerialize</td><td>1.037 us</td><td>0.0104 us</td><td>0.0087 us</td><td>0.0024 us</td><td>1.0330 us</td><td>1.0296 us</td><td>1.0317 us</td><td>1.045 us</td><td>1.057 us</td><td>964,311.4</td><td>-</td><td>-</td><td>-</td><td>-</td>
-</tr><tr><td>AccelbufferDeserialize</td><td>1.021 us</td><td>0.0440 us</td><td>0.1299 us</td><td>0.0130 us</td><td>0.9530 us</td><td>0.8817 us</td><td>0.8900 us</td><td>1.162 us</td><td>1.176 us</td><td>979,276.8</td><td>0.1545</td><td>-</td><td>-</td><td>244 B</td>
-</tr><tr><td>ProtobufSerialize</td><td>1.341 us</td><td>0.0142 us</td><td>0.0126 us</td><td>0.0034 us</td><td>1.3364 us</td><td>1.3241 us</td><td>1.3317 us</td><td>1.349 us</td><td>1.364 us</td><td>745,954.7</td><td>0.3185</td><td>-</td><td>-</td><td>504 B</td>
-</tr><tr><td>ProtobufDeserialize</td><td>2.315 us</td><td>0.0442 us</td><td>0.0345 us</td><td>0.0100 us</td><td>2.3001 us</td><td>2.2806 us</td><td>2.2900 us</td><td>2.341 us</td><td>2.395 us</td><td>432,011.2</td><td>0.4730</td><td>-</td><td>-</td><td>748 B</td>
+</thead><tbody><tr><td>AccelbufferSerialize</td><td>1,049.0 ns</td><td>8.39 ns</td><td>7.44 ns</td><td>1.99 ns</td><td>1,040.5 ns</td><td>1,045.3 ns</td><td>1,046.1 ns</td><td>1,050.7 ns</td><td>1,067.0 ns</td><td>953,290.1</td><td>-</td><td>-</td><td>-</td><td>-</td>
+</tr><tr><td>AccelbufferDeserialize</td><td>897.3 ns</td><td>6.39 ns</td><td>5.98 ns</td><td>1.54 ns</td><td>889.2 ns</td><td>893.2 ns</td><td>896.2 ns</td><td>901.3 ns</td><td>912.6 ns</td><td>1,114,412.9</td><td>0.1545</td><td>-</td><td>-</td><td>244 B</td>
+</tr><tr><td>ProtobufSerialize</td><td>1,324.1 ns</td><td>11.47 ns</td><td>10.17 ns</td><td>2.72 ns</td><td>1,313.7 ns</td><td>1,317.0 ns</td><td>1,321.0 ns</td><td>1,327.3 ns</td><td>1,348.5 ns</td><td>755,206.3</td><td>0.3185</td><td>-</td><td>-</td><td>504 B</td>
+</tr><tr><td>ProtobufDeserialize</td><td>2,550.1 ns</td><td>24.72 ns</td><td>23.12 ns</td><td>5.97 ns</td><td>2,519.8 ns</td><td>2,532.1 ns</td><td>2,542.8 ns</td><td>2,570.8 ns</td><td>2,591.7 ns</td><td>392,146.9</td><td>0.4730</td><td>-</td><td>-</td><td>748 B</td>
 </tr></tbody></table>
 </body>
 </html>

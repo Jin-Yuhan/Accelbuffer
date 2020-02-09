@@ -119,39 +119,39 @@ namespace asc.Compiler
                 type.Comments.Add(GetDocument(structDeclaration.Doc));
             }
 
-            if (structDeclaration.IsFinal)
-            {
-                type.TypeAttributes |= TypeAttributes.Sealed;
-            }
-
             switch (structDeclaration.TypeVisibility)
             {
                 case Visibility.Internal when structDeclaration.IsNested:
-                    type.TypeAttributes |= TypeAttributes.NestedAssembly;
+                    type.TypeAttributes = TypeAttributes.NestedAssembly;
                     break;
                 case Visibility.Internal:
-                    type.TypeAttributes |= TypeAttributes.NotPublic;
+                    type.TypeAttributes = TypeAttributes.NotPublic;
                     break;
 
                 case Visibility.Private:
-                    type.TypeAttributes |= TypeAttributes.NestedPrivate;
+                    type.TypeAttributes = TypeAttributes.NestedPrivate;
                     break;
 
                 case Visibility.PrivateProtected:
-                    type.TypeAttributes |= TypeAttributes.NestedFamANDAssem;
+                    type.TypeAttributes = TypeAttributes.NestedFamANDAssem;
                     break;
 
                 case Visibility.Protected:
-                    type.TypeAttributes |= TypeAttributes.NestedFamily;
+                    type.TypeAttributes = TypeAttributes.NestedFamily;
                     break;
 
                 case Visibility.ProtectedInternal:
-                    type.TypeAttributes |= TypeAttributes.NestedFamORAssem;
+                    type.TypeAttributes = TypeAttributes.NestedFamORAssem;
                     break;
 
                 case Visibility.Public:
-                    type.TypeAttributes |= TypeAttributes.Public;
+                    type.TypeAttributes = TypeAttributes.Public;
                     break;
+            }
+
+            if (structDeclaration.IsFinal)
+            {
+                type.TypeAttributes |= TypeAttributes.Sealed;
             }
 
             CodeTypeReference structRef = new CodeTypeReference(structDeclaration.Name);
