@@ -98,10 +98,9 @@ namespace Accelbuffer.Test
 ```
 
 #### 方案三，使用`Accelbuffer Script`
-> Accelbuffer Script语法高度重视类型结构的清晰与直观性，学习起来也很简单轻松。Accelbuffer Script 语法简化了 C#， Visual Basic.NET 的许多复杂操作，并提供强大功能。通常使用Accelbuffer Script可以节省许多时间
+> Accelbuffer Script的语法高度重视类型结构的清晰与直观性，使用起来也很简单轻松。简化了C#，Visual Basic.NET的语法，并提供简便的类型声明方式，例如 外观类型，非空类型，弃用标记，索引声明 等，这些语法为Accelbuffer的可序列化类型量身定制。通常使用Accelbuffer Script可以节省许多时间。
 
-> 如下声明方法与上文代码等价，使用Accelbuffer Script编写
-可以使类型的结构更加清晰，并且让类型的声明与目标语言无关
+> 如下声明方法与上文代码等价，使用Accelbuffer Script编写，可以使类型的结构更加清晰，并且让类型的声明与目标语言无关。
 
 ```csharp
 package Accelbuffer.Test;

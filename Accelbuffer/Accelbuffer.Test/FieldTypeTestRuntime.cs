@@ -131,5 +131,9 @@ namespace Accelbuffer.Test
         [NeverNull()]
         [FieldIndex(28)]
         public DateTimeOffset Field27;
+
+        [NeverNull()]
+        [FieldIndex(29)]
+        public TestEnum Field28;
     }
 }

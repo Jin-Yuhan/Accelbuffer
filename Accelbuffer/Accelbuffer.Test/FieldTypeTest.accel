@@ -25,11 +25,12 @@ struct FieldTypeTest about 256
     var Field18 : vint[];
     var Field19 : Dictionary<string, float32>;
     var Field20 : List<boolean>;
-    var Field21 : KeyValuePair<boolean, boolean>;
+    var Field21 : *KeyValuePair<boolean, boolean>;
     var Field22 : vint?;
     var Field23 : Type;
     var Field24 : *Guid;
     var Field25 : *TimeSpan;
     var Field26 : *DateTime;
     var Field27 : *DateTimeOffset;
+	var Field28 : *(int32)TestEnum;
 }

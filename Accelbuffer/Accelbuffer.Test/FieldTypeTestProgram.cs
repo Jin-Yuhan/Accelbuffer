@@ -46,7 +46,8 @@ namespace Accelbuffer.Test
             Field24 == other.Field24 &&
             Field25 == other.Field25 &&
             Field26 == other.Field26 &&
-            Field27 == other.Field27;
+            Field27 == other.Field27 &&
+            Field28 == other.Field28;
         }
 
         public bool Equals(FieldTypeTestRuntime other)
@@ -79,7 +80,8 @@ namespace Accelbuffer.Test
             Field24 == other.Field24 &&
             Field25 == other.Field25 &&
             Field26 == other.Field26 &&
-            Field27 == other.Field27;
+            Field27 == other.Field27 &&
+            Field28 == other.Field28;
         }
     }
 
@@ -127,7 +129,8 @@ namespace Accelbuffer.Test
             Field24 == other.Field24 &&
             Field25 == other.Field25 &&
             Field26 == other.Field26 &&
-            Field27 == other.Field27;
+            Field27 == other.Field27 &&
+            Field28 == other.Field28;
         }
     }
 
@@ -171,7 +174,8 @@ namespace Accelbuffer.Test
                 Field24 = guid,
                 Field25 = time,
                 Field26 = date,
-                Field27 = offset
+                Field27 = offset,
+                Field28 = TestEnum.Value3
             };
 
             var buffer0 = Serializer.Serialize(test, Encoding.ASCII, Endian.LittleEndian);
@@ -238,7 +242,8 @@ namespace Accelbuffer.Test
                 Field24 = guid,
                 Field25 = time,
                 Field26 = date,
-                Field27 = offset
+                Field27 = offset,
+                Field28 = TestEnum.Value3
             };
 
             var buffer10 = Serializer.Serialize(test1, Encoding.ASCII, Endian.LittleEndian);

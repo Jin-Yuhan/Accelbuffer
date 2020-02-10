@@ -184,6 +184,7 @@ namespace asc
                     case FieldDeclaration fieldDeclaration:
                         Console.WriteLine("FieldDeclaration:");
                         Console.WriteLine($"\ttype: {fieldDeclaration.Type}");
+                        Console.WriteLine($"\treal_type: {fieldDeclaration.RealType}");
                         Console.WriteLine($"\tname: {fieldDeclaration.Name}");
                         Console.WriteLine($"\tindex: {fieldDeclaration.Index}");
                         Console.WriteLine($"\tis_obsolete: {fieldDeclaration.IsObsolete}");

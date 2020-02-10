@@ -32,4 +32,5 @@ struct FieldTypeTest about 256
     var Field25 : *TimeSpan;
     var Field26 : *DateTime;
     var Field27 : *DateTimeOffset;
+	var Field28 : *(int32)TestEnum;
 }

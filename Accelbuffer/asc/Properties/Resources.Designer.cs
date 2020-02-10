@@ -241,7 +241,16 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.10 的本地化字符串。
+        ///   查找类似 error: AS021: missing &apos;)&apos; 的本地化字符串。
+        /// </summary>
+        internal static string Error_AS021_MissingCloseParen {
+            get {
+                return ResourceManager.GetString("Error_AS021_MissingCloseParen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 v0.1.6.13 的本地化字符串。
         /// </summary>
         internal static string Version {
             get {
@@ -250,7 +259,7 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.10 unity 的本地化字符串。
+        ///   查找类似 v0.1.6.13 unity 的本地化字符串。
         /// </summary>
         internal static string Version_Unity {
             get {

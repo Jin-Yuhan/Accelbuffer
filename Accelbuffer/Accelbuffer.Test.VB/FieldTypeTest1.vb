@@ -1,5 +1,5 @@
 ﻿Namespace Accelbuffer.Test
-    Partial Public Structure FieldTypeTest
+    Partial Structure FieldTypeTest
 
         Private Sub OnBeforeSerialization()
             System.Console.WriteLine("OnBeforeSerialization")

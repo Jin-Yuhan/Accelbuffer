@@ -33,6 +33,15 @@
         CloseBracket,
 
         /// <summary>
+        /// '('
+        /// </summary>
+        OpenParen,
+        /// <summary>
+        /// ')'
+        /// </summary>
+        CloseParen,
+
+        /// <summary>
         /// ';'
         /// </summary>
         Semicolon,

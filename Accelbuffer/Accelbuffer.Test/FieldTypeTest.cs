@@ -36,7 +36,7 @@ namespace Accelbuffer.Test
     
     [MemorySize(256)]
     [SerializeBy(typeof(FieldTypeTest.FieldTypeTestSerializer))]
-    public partial struct FieldTypeTest
+    internal partial struct FieldTypeTest
     {
         
         [NeverNull()]
@@ -144,6 +144,10 @@ namespace Accelbuffer.Test
         [NeverNull()]
         [FieldIndex(28)]
         private DateTimeOffset m_Field27;
+        
+        [NeverNull()]
+        [FieldIndex(29)]
+        private TestEnum m_Field28;
         
 partial void OnBeforeSerialization();
 partial void OnAfterDeserialization();
@@ -484,6 +488,18 @@ partial void OnAfterDeserialization();
             }
         }
         
+        public TestEnum Field28
+        {
+            get
+            {
+                return this.m_Field28;
+            }
+            set
+            {
+                this.m_Field28 = value;
+            }
+        }
+        
         public sealed class FieldTypeTestSerializer : object, ITypeSerializer<FieldTypeTest>
         {
             
@@ -536,6 +552,7 @@ partial void OnAfterDeserialization();
                 writer.WriteValue(26, obj.m_Field25);
                 writer.WriteValue(27, obj.m_Field26);
                 writer.WriteValue(28, obj.m_Field27);
+                writer.WriteValue(29, ((int32)(obj.m_Field28)));
             }
             
             public FieldTypeTest Deserialize(ref AccelReader reader)
@@ -547,88 +564,91 @@ partial void OnAfterDeserialization();
 				switch (index)
 				{
 					case 1:
-						result.Field0 = reader.ReadInt8();
+						result.m_Field0 = reader.ReadInt8();
 						break;
 					case 2:
-						result.Field1 = reader.ReadUInt8();
+						result.m_Field1 = reader.ReadUInt8();
 						break;
 					case 3:
-						result.Field2 = reader.ReadInt16();
+						result.m_Field2 = reader.ReadInt16();
 						break;
 					case 4:
-						result.Field3 = reader.ReadUInt16();
+						result.m_Field3 = reader.ReadUInt16();
 						break;
 					case 5:
-						result.Field4 = reader.ReadInt32();
+						result.m_Field4 = reader.ReadInt32();
 						break;
 					case 6:
-						result.Field5 = reader.ReadUInt32();
+						result.m_Field5 = reader.ReadUInt32();
 						break;
 					case 7:
-						result.Field6 = reader.ReadInt64();
+						result.m_Field6 = reader.ReadInt64();
 						break;
 					case 8:
-						result.Field7 = reader.ReadUInt64();
+						result.m_Field7 = reader.ReadUInt64();
 						break;
 					case 9:
-						result.Field8 = reader.ReadBoolean();
+						result.m_Field8 = reader.ReadBoolean();
 						break;
 					case 10:
-						result.Field9 = reader.ReadFloat32();
+						result.m_Field9 = reader.ReadFloat32();
 						break;
 					case 11:
-						result.Field10 = reader.ReadFloat64();
+						result.m_Field10 = reader.ReadFloat64();
 						break;
 					case 12:
-						result.Field11 = reader.ReadFloat128();
+						result.m_Field11 = reader.ReadFloat128();
 						break;
 					case 13:
-						result.Field12 = reader.ReadIntPtr();
+						result.m_Field12 = reader.ReadIntPtr();
 						break;
 					case 14:
-						result.Field13 = reader.ReadUIntPtr();
+						result.m_Field13 = reader.ReadUIntPtr();
 						break;
 					case 15:
-						result.Field14 = reader.ReadVariantInt();
+						result.m_Field14 = reader.ReadVariantInt();
 						break;
 					case 16:
-						result.Field15 = reader.ReadVariantUInt();
+						result.m_Field15 = reader.ReadVariantUInt();
 						break;
 					case 17:
-						result.Field16 = reader.ReadChar();
+						result.m_Field16 = reader.ReadChar();
 						break;
 					case 18:
-						result.Field17 = reader.ReadString();
+						result.m_Field17 = reader.ReadString();
 						break;
 					case 19:
-						result.Field18 = reader.ReadGeneric<vint[]>();
+						result.m_Field18 = reader.ReadGeneric<vint[]>();
 						break;
 					case 20:
-						result.Field19 = reader.ReadGeneric<Dictionary<string,float32>>();
+						result.m_Field19 = reader.ReadGeneric<Dictionary<string,float32>>();
 						break;
 					case 21:
-						result.Field20 = reader.ReadGeneric<List<boolean>>();
+						result.m_Field20 = reader.ReadGeneric<List<boolean>>();
 						break;
 					case 22:
-						result.Field21 = reader.ReadGeneric<KeyValuePair<boolean,boolean>>();
+						result.m_Field21 = reader.ReadGeneric<KeyValuePair<boolean,boolean>>();
 						break;
 					case 23:
-						result.Field22 = reader.ReadGeneric<vint?>();
+						result.m_Field22 = reader.ReadGeneric<vint?>();
 						break;
 					case 24:
-						result.Field23 = reader.ReadGeneric<Type>();
+						result.m_Field23 = reader.ReadGeneric<Type>();
 						break;
 					case 25:
-						result.Field24 = reader.ReadGeneric<Guid>();
+						result.m_Field24 = reader.ReadGeneric<Guid>();
 						break;
 					case 26:
-						result.Field25 = reader.ReadGeneric<TimeSpan>();
+						result.m_Field25 = reader.ReadGeneric<TimeSpan>();
 						break;
 					case 27:
-						result.Field26 = reader.ReadGeneric<DateTime>();
+						result.m_Field26 = reader.ReadGeneric<DateTime>();
 						break;
 					case 28:
-						result.Field27 = reader.ReadGeneric<DateTimeOffset>();
+						result.m_Field27 = reader.ReadGeneric<DateTimeOffset>();
+						break;
+					case 29:
+						result.m_Field28 = (TestEnum)reader.ReadInt32();
 						break;
 					default:
 						reader.SkipNext();

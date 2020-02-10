@@ -23,8 +23,8 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="obj">被序列化的对象</param>
         /// <typeparam name="T">序列化的对象类型</typeparam>
-        /// <param name="encoding"></param>
-        /// <param name="endian"></param>
+        /// <param name="encoding">序列化使用的字符编码</param>
+        /// <param name="endian">序列化使用的字节序</param>
         /// <returns>对象的序列化结果</returns>
         public static NativeBuffer Serialize<T>(T obj, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
@@ -52,8 +52,8 @@ namespace Accelbuffer
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">对象的序列化结果</param>
         /// <typeparam name="T">序列化的对象类型</typeparam>
-        /// <param name="encoding"></param>
-        /// <param name="endian"></param>
+        /// <param name="encoding">序列化使用的字符编码</param>
+        /// <param name="endian">序列化使用的字节序</param>
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
         public static void Serialize<T>(T obj, out byte[] buffer, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
@@ -81,8 +81,8 @@ namespace Accelbuffer
         /// <param name="buffer">用于接受序列化数据的缓冲区</param>
         /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
         /// <typeparam name="T">序列化的对象类型</typeparam>
-        /// <param name="encoding"></param>
-        /// <param name="endian"></param>
+        /// <param name="encoding">序列化使用的字符编码</param>
+        /// <param name="endian">序列化使用的字节序</param>
         /// <returns>序列化数据的大小</returns>
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
         public static int Serialize<T>(T obj, byte[] buffer, int index, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
@@ -116,10 +116,10 @@ namespace Accelbuffer
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
         public static T Deserialize<T>(byte[] bytes, int index, int length)
         {
-            if (length < 2)
-            {
-                return default;
-            }
+            //if (length < 2)
+            //{
+            //    return default;
+            //}
 
             if (bytes == null)
             {
@@ -159,10 +159,10 @@ namespace Accelbuffer
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="buffer"/>长度不足</exception>
         public static T Deserialize<T>(NativeBuffer buffer, int index, int length)
         {
-            if (length < 2)
-            {
-                return default;
-            }
+            //if (length < 2)
+            //{
+            //    return default;
+            //}
 
             if (!buffer)
             {

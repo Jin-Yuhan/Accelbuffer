@@ -177,11 +177,14 @@
   <data name="Error_AS020_MultipleIndex" xml:space="preserve">
     <value>error: AS020: duplicate field index '{0}'</value>
   </data>
+  <data name="Error_AS021_MissingCloseParen" xml:space="preserve">
+    <value>error: AS021: missing ')'</value>
+  </data>
   <data name="Version" xml:space="preserve">
-    <value>v0.1.6.10</value>
+    <value>v0.1.6.13</value>
   </data>
   <data name="Version_Unity" xml:space="preserve">
-    <value>v0.1.6.10 unity</value>
+    <value>v0.1.6.13 unity</value>
   </data>
   <data name="Warning_AS001_InvalidMemorySize" xml:space="preserve">
     <value>warning: AS001: the memory size required for the structure must be greater than 0</value>

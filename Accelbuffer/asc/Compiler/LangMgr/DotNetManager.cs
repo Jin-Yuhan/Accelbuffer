@@ -219,7 +219,7 @@ namespace asc.Compiler
 
                         if (!fieldDeclaration.IsObsolete)
                         {
-                            AddSerializedField(serializeMethod, fieldRef, index, fieldDeclaration.IsNeverNull);
+                            AddSerializedField(serializeMethod, fieldRef, index, fieldDeclaration.RealType, fieldDeclaration.IsNeverNull);
                         }
 
                         break;
@@ -323,9 +323,10 @@ namespace asc.Compiler
             type.Members.Add(serializerType);
         }
 
-        private void AddSerializedField(CodeMemberMethod serializeMethod, CodeFieldReferenceExpression fieldRef, CodePrimitiveExpression index, bool isNeverNull)
+        private void AddSerializedField(CodeMemberMethod serializeMethod, CodeFieldReferenceExpression fieldRef, CodePrimitiveExpression index, string? realType, bool isNeverNull)
         {
-            CodeExpression expr = new CodeMethodInvokeExpression(s_WriterRef, "WriteValue", index, fieldRef);
+            CodeExpression param = string.IsNullOrEmpty(realType) ? fieldRef as CodeExpression : new CodeCastExpression(GetTypeReference(realType), fieldRef);
+            CodeExpression expr = new CodeMethodInvokeExpression(s_WriterRef, "WriteValue", index, param);
 
             if (isNeverNull)
             {

@@ -66,6 +66,12 @@ namespace asc.Compiler
                     case ']':
                         token = CreateToken("]", TokenType.CloseBracket);
                         break;
+                    case '(':
+                        token = CreateToken("(", TokenType.OpenParen);
+                        break;
+                    case ')':
+                        token = CreateToken(")", TokenType.CloseParen);
+                        break;
                     case '|':
                         token = CreateToken("|", TokenType.Bar);
                         break;

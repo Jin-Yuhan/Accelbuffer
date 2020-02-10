@@ -408,7 +408,8 @@ namespace asc.Compiler
 
         private FieldDeclaration GetFieldDeclaration(ref int index)
         {
-            string type;
+            string? realType = null;
+            string? type;
             string name;
             string? doc = null;
             bool isObsolete = false;
@@ -470,15 +471,33 @@ namespace asc.Compiler
                 isNeverNull = true;
             }
 
-            string? typeName = GetNextPackageOrTypeIdentifier(out _);
+            if (ExpectNextTokenType(TokenType.OpenParen))
+            {
+                MoveNext();
+                realType = GetNextPackageOrTypeIdentifier(out _);
 
-            if (typeName == null)
+                if (realType == null)
+                {
+                    m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                    return null!;
+                }
+
+                if (!ExpectNextTokenType(TokenType.CloseParen))
+                {
+                    m_Writer.LogError(Resources.Error_AS021_MissingCloseParen, Current());
+                    return null!;
+                }
+
+                MoveNext();
+            }
+
+            type = GetNextPackageOrTypeIdentifier(out _);
+
+            if (type == null)
             {
                 m_Writer.LogError(Resources.Error_AS016_MissingIdentifierOrAsterisk, Current());
                 return null!;
             }
-
-            type = typeName;
 
             if (ExpectNextTokenType(TokenType.ObsoleteKeyword))
             {
@@ -496,6 +515,7 @@ namespace asc.Compiler
             return new FieldDeclaration
             {
                 Name = name,
+                RealType = realType,
                 Type = type,
                 Index = index,
                 Doc = doc,

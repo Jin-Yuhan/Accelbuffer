@@ -25,379 +25,392 @@ Imports uint8 = System.Byte
 '扩展类型请使用partial关键字在其他文件扩展，否则更改可能会丢失。
 Namespace Accelbuffer.Test
     
-    <MemorySize(256),  _
-     SerializeBy(GetType(FieldTypeTest.FieldTypeTestSerializer))>  _
-    Partial Public Structure FieldTypeTest
-        
-        <NeverNull(),  _
-         FieldIndex(1)>  _
+    <MemorySize(256),
+     SerializeBy(GetType(FieldTypeTest.FieldTypeTestSerializer))>
+    Partial Friend Structure FieldTypeTest
+
+        <NeverNull(),
+         FieldIndex(1)>
         Private m_Field0 As int8
-        
-        <NeverNull(),  _
-         FieldIndex(2)>  _
+
+        <NeverNull(),
+         FieldIndex(2)>
         Private m_Field1 As uint8
-        
-        <NeverNull(),  _
-         FieldIndex(3)>  _
-        Private m_Field2 As int16
-        
-        <NeverNull(),  _
-         FieldIndex(4)>  _
-        Private m_Field3 As uint16
-        
-        <NeverNull(),  _
-         FieldIndex(5)>  _
-        Private m_Field4 As int32
-        
-        <NeverNull(),  _
-         FieldIndex(6)>  _
-        Private m_Field5 As uint32
-        
-        <NeverNull(),  _
-         FieldIndex(7)>  _
-        Private m_Field6 As int64
-        
-        <NeverNull(),  _
-         FieldIndex(8)>  _
-        Private m_Field7 As uint64
-        
-        <NeverNull(),  _
-         FieldIndex(9)>  _
-        Private m_Field8 As [boolean]
-        
-        <NeverNull(),  _
-         FieldIndex(10)>  _
+
+        <NeverNull(),
+         FieldIndex(3)>
+        Private m_Field2 As Int16
+
+        <NeverNull(),
+         FieldIndex(4)>
+        Private m_Field3 As UInt16
+
+        <NeverNull(),
+         FieldIndex(5)>
+        Private m_Field4 As Int32
+
+        <NeverNull(),
+         FieldIndex(6)>
+        Private m_Field5 As UInt32
+
+        <NeverNull(),
+         FieldIndex(7)>
+        Private m_Field6 As Int64
+
+        <NeverNull(),
+         FieldIndex(8)>
+        Private m_Field7 As UInt64
+
+        <NeverNull(),
+         FieldIndex(9)>
+        Private m_Field8 As [Boolean]
+
+        <NeverNull(),
+         FieldIndex(10)>
         Private m_Field9 As float32
-        
-        <NeverNull(),  _
-         FieldIndex(11)>  _
+
+        <NeverNull(),
+         FieldIndex(11)>
         Private m_Field10 As float64
-        
-        <NeverNull(),  _
-         FieldIndex(12)>  _
+
+        <NeverNull(),
+         FieldIndex(12)>
         Private m_Field11 As float128
-        
-        <NeverNull(),  _
-         FieldIndex(13)>  _
-        Private m_Field12 As intptr
-        
-        <NeverNull(),  _
-         FieldIndex(14)>  _
-        Private m_Field13 As uintptr
-        
-        <NeverNull(),  _
-         FieldIndex(15)>  _
-        Private m_Field14 As vint
-        
-        <NeverNull(),  _
-         FieldIndex(16)>  _
-        Private m_Field15 As vuint
-        
-        <NeverNull(),  _
-         FieldIndex(17)>  _
+
+        <NeverNull(),
+         FieldIndex(13)>
+        Private m_Field12 As IntPtr
+
+        <NeverNull(),
+         FieldIndex(14)>
+        Private m_Field13 As UIntPtr
+
+        <NeverNull(),
+         FieldIndex(15)>
+        Private m_Field14 As VInt
+
+        <NeverNull(),
+         FieldIndex(16)>
+        Private m_Field15 As VUInt
+
+        <NeverNull(),
+         FieldIndex(17)>
         Private m_Field16 As Char
-        
-        <FieldIndex(18)>  _
+
+        <FieldIndex(18)>
         Private m_Field17 As String
-        
-        <FieldIndex(19)>  _
-        Private m_Field18 As vint()
-        
-        <FieldIndex(20)>  _
-        Private m_Field19 As Dictionary(Of string,float32)
-        
-        <FieldIndex(21)>  _
-        Private m_Field20 As List(Of boolean)
-        
-        <NeverNull(),  _
-         FieldIndex(22)>  _
-        Private m_Field21 As KeyValuePair(Of boolean,boolean)
-        
-        <FieldIndex(23)>  _
-        Private m_Field22 As vint?
-        
-        <FieldIndex(24)>  _
+
+        <FieldIndex(19)>
+        Private m_Field18 As VInt()
+
+        <FieldIndex(20)>
+        Private m_Field19 As Dictionary(Of String, float32)
+
+        <FieldIndex(21)>
+        Private m_Field20 As List(Of Boolean)
+
+        <NeverNull(),
+         FieldIndex(22)>
+        Private m_Field21 As KeyValuePair(Of Boolean, Boolean)
+
+        <FieldIndex(23)>
+        Private m_Field22 As VInt?
+
+        <FieldIndex(24)>
         Private m_Field23 As Type
-        
-        <NeverNull(),  _
-         FieldIndex(25)>  _
+
+        <NeverNull(),
+         FieldIndex(25)>
         Private m_Field24 As Guid
-        
-        <NeverNull(),  _
-         FieldIndex(26)>  _
+
+        <NeverNull(),
+         FieldIndex(26)>
         Private m_Field25 As TimeSpan
-        
-        <NeverNull(),  _
-         FieldIndex(27)>  _
+
+        <NeverNull(),
+         FieldIndex(27)>
         Private m_Field26 As DateTime
-        
-        <NeverNull(),  _
-         FieldIndex(28)>  _
+
+        <NeverNull(),
+         FieldIndex(28)>
         Private m_Field27 As DateTimeOffset
-        
-Partial Private Sub OnBeforeSerialization()
-End Sub
-Partial Private Sub OnAfterDeserialization()
-End Sub
-        
+
+        <NeverNull(),
+         FieldIndex(29)>
+        Private m_Field28 As TestEnum
+
+        Partial Private Sub OnBeforeSerialization()
+        End Sub
+        Partial Private Sub OnAfterDeserialization()
+        End Sub
+
         Public Property Field0() As int8
             Get
                 Return Me.m_Field0
             End Get
             Set
-                Me.m_Field0 = value
+                Me.m_Field0 = Value
             End Set
         End Property
-        
+
         Public Property Field1() As uint8
             Get
                 Return Me.m_Field1
             End Get
             Set
-                Me.m_Field1 = value
+                Me.m_Field1 = Value
             End Set
         End Property
-        
-        Public Property Field2() As int16
+
+        Public Property Field2() As Int16
             Get
                 Return Me.m_Field2
             End Get
             Set
-                Me.m_Field2 = value
+                Me.m_Field2 = Value
             End Set
         End Property
-        
-        Public Property Field3() As uint16
+
+        Public Property Field3() As UInt16
             Get
                 Return Me.m_Field3
             End Get
             Set
-                Me.m_Field3 = value
+                Me.m_Field3 = Value
             End Set
         End Property
-        
-        Public Property Field4() As int32
+
+        Public Property Field4() As Int32
             Get
                 Return Me.m_Field4
             End Get
             Set
-                Me.m_Field4 = value
+                Me.m_Field4 = Value
             End Set
         End Property
-        
-        Public Property Field5() As uint32
+
+        Public Property Field5() As UInt32
             Get
                 Return Me.m_Field5
             End Get
             Set
-                Me.m_Field5 = value
+                Me.m_Field5 = Value
             End Set
         End Property
-        
-        Public Property Field6() As int64
+
+        Public Property Field6() As Int64
             Get
                 Return Me.m_Field6
             End Get
             Set
-                Me.m_Field6 = value
+                Me.m_Field6 = Value
             End Set
         End Property
-        
-        Public Property Field7() As uint64
+
+        Public Property Field7() As UInt64
             Get
                 Return Me.m_Field7
             End Get
             Set
-                Me.m_Field7 = value
+                Me.m_Field7 = Value
             End Set
         End Property
-        
-        Public Property Field8() As [boolean]
+
+        Public Property Field8() As [Boolean]
             Get
                 Return Me.m_Field8
             End Get
             Set
-                Me.m_Field8 = value
+                Me.m_Field8 = Value
             End Set
         End Property
-        
+
         Public Property Field9() As float32
             Get
                 Return Me.m_Field9
             End Get
             Set
-                Me.m_Field9 = value
+                Me.m_Field9 = Value
             End Set
         End Property
-        
+
         Public Property Field10() As float64
             Get
                 Return Me.m_Field10
             End Get
             Set
-                Me.m_Field10 = value
+                Me.m_Field10 = Value
             End Set
         End Property
-        
+
         Public Property Field11() As float128
             Get
                 Return Me.m_Field11
             End Get
             Set
-                Me.m_Field11 = value
+                Me.m_Field11 = Value
             End Set
         End Property
-        
-        Public Property Field12() As intptr
+
+        Public Property Field12() As IntPtr
             Get
                 Return Me.m_Field12
             End Get
             Set
-                Me.m_Field12 = value
+                Me.m_Field12 = Value
             End Set
         End Property
-        
-        Public Property Field13() As uintptr
+
+        Public Property Field13() As UIntPtr
             Get
                 Return Me.m_Field13
             End Get
             Set
-                Me.m_Field13 = value
+                Me.m_Field13 = Value
             End Set
         End Property
-        
-        Public Property Field14() As vint
+
+        Public Property Field14() As VInt
             Get
                 Return Me.m_Field14
             End Get
             Set
-                Me.m_Field14 = value
+                Me.m_Field14 = Value
             End Set
         End Property
-        
-        Public Property Field15() As vuint
+
+        Public Property Field15() As VUInt
             Get
                 Return Me.m_Field15
             End Get
             Set
-                Me.m_Field15 = value
+                Me.m_Field15 = Value
             End Set
         End Property
-        
+
         Public Property Field16() As Char
             Get
                 Return Me.m_Field16
             End Get
             Set
-                Me.m_Field16 = value
+                Me.m_Field16 = Value
             End Set
         End Property
-        
+
         Public Property Field17() As String
             Get
                 Return Me.m_Field17
             End Get
             Set
-                Me.m_Field17 = value
+                Me.m_Field17 = Value
             End Set
         End Property
-        
-        Public Property Field18() As vint()
+
+        Public Property Field18() As VInt()
             Get
                 Return Me.m_Field18
             End Get
             Set
-                Me.m_Field18 = value
+                Me.m_Field18 = Value
             End Set
         End Property
-        
-        Public Property Field19() As Dictionary(Of string,float32)
+
+        Public Property Field19() As Dictionary(Of String, float32)
             Get
                 Return Me.m_Field19
             End Get
             Set
-                Me.m_Field19 = value
+                Me.m_Field19 = Value
             End Set
         End Property
-        
-        Public Property Field20() As List(Of boolean)
+
+        Public Property Field20() As List(Of Boolean)
             Get
                 Return Me.m_Field20
             End Get
             Set
-                Me.m_Field20 = value
+                Me.m_Field20 = Value
             End Set
         End Property
-        
-        Public Property Field21() As KeyValuePair(Of boolean,boolean)
+
+        Public Property Field21() As KeyValuePair(Of Boolean, Boolean)
             Get
                 Return Me.m_Field21
             End Get
             Set
-                Me.m_Field21 = value
+                Me.m_Field21 = Value
             End Set
         End Property
-        
-        Public Property Field22() As vint?
+
+        Public Property Field22() As VInt?
             Get
                 Return Me.m_Field22
             End Get
             Set
-                Me.m_Field22 = value
+                Me.m_Field22 = Value
             End Set
         End Property
-        
+
         Public Property Field23() As Type
             Get
                 Return Me.m_Field23
             End Get
             Set
-                Me.m_Field23 = value
+                Me.m_Field23 = Value
             End Set
         End Property
-        
+
         Public Property Field24() As Guid
             Get
                 Return Me.m_Field24
             End Get
             Set
-                Me.m_Field24 = value
+                Me.m_Field24 = Value
             End Set
         End Property
-        
+
         Public Property Field25() As TimeSpan
             Get
                 Return Me.m_Field25
             End Get
             Set
-                Me.m_Field25 = value
+                Me.m_Field25 = Value
             End Set
         End Property
-        
+
         Public Property Field26() As DateTime
             Get
                 Return Me.m_Field26
             End Get
             Set
-                Me.m_Field26 = value
+                Me.m_Field26 = Value
             End Set
         End Property
-        
+
         Public Property Field27() As DateTimeOffset
             Get
                 Return Me.m_Field27
             End Get
             Set
-                Me.m_Field27 = value
+                Me.m_Field27 = Value
             End Set
         End Property
-        
+
+        Public Property Field28() As TestEnum
+            Get
+                Return Me.m_Field28
+            End Get
+            Set
+                Me.m_Field28 = Value
+            End Set
+        End Property
+
         Public NotInheritable Class FieldTypeTestSerializer
             Inherits Object
             Implements ITypeSerializer(Of FieldTypeTest)
-            
+
             Public Sub Serialize(ByVal obj As FieldTypeTest, ByRef writer As AccelWriter) Implements ITypeSerializer(Of FieldTypeTest).Serialize
-                obj.OnBeforeSerialization
+                obj.OnBeforeSerialization()
                 writer.WriteValue(1, obj.m_Field0)
                 writer.WriteValue(2, obj.m_Field1)
                 writer.WriteValue(3, obj.m_Field2)
@@ -438,71 +451,74 @@ End Sub
                 writer.WriteValue(26, obj.m_Field25)
                 writer.WriteValue(27, obj.m_Field26)
                 writer.WriteValue(28, obj.m_Field27)
+                writer.WriteValue(29, CType(obj.m_Field28, Int32))
             End Sub
-            
+
             Public Function Deserialize(ByRef reader As AccelReader) As FieldTypeTest Implements ITypeSerializer(Of FieldTypeTest).Deserialize
                 Dim result As FieldTypeTest = New FieldTypeTest()
                 Dim index As Integer
-				Do While reader.HasNext(index)
-					Select Case index
-						Case 1
-							result.m_Field0 = reader.ReadInt8()
-						Case 2
-							result.m_Field1 = reader.ReadUInt8()
-						Case 3
-							result.m_Field2 = reader.ReadInt16()
-						Case 4
-							result.m_Field3 = reader.ReadUInt16()
-						Case 5
-							result.m_Field4 = reader.ReadInt32()
-						Case 6
-							result.m_Field5 = reader.ReadUInt32()
-						Case 7
-							result.m_Field6 = reader.ReadInt64()
-						Case 8
-							result.m_Field7 = reader.ReadUInt64()
-						Case 9
-							result.m_Field8 = reader.ReadBoolean()
-						Case 10
-							result.m_Field9 = reader.ReadFloat32()
-						Case 11
-							result.m_Field10 = reader.ReadFloat64()
-						Case 12
-							result.m_Field11 = reader.ReadFloat128()
-						Case 13
-							result.m_Field12 = reader.ReadIntPtr()
-						Case 14
-							result.m_Field13 = reader.ReadUIntPtr()
-						Case 15
-							result.m_Field14 = reader.ReadVariantInt()
-						Case 16
-							result.m_Field15 = reader.ReadVariantUInt()
-						Case 17
-							result.m_Field16 = reader.ReadChar()
-						Case 18
-							result.m_Field17 = reader.ReadString()
-						Case 19
-							result.m_Field18 = reader.ReadGeneric(Of vint())()
-						Case 20
-							result.m_Field19 = reader.ReadGeneric(Of Dictionary(Of string,float32))()
-						Case 21
-							result.m_Field20 = reader.ReadGeneric(Of List(Of boolean))()
-						Case 22
-							result.m_Field21 = reader.ReadGeneric(Of KeyValuePair(Of boolean,boolean))()
-						Case 23
-							result.m_Field22 = reader.ReadGeneric(Of vint?)()
-						Case 24
-							result.m_Field23 = reader.ReadGeneric(Of Type)()
-						Case 25
-							result.m_Field24 = reader.ReadGeneric(Of Guid)()
-						Case 26
-							result.m_Field25 = reader.ReadGeneric(Of TimeSpan)()
-						Case 27
-							result.m_Field26 = reader.ReadGeneric(Of DateTime)()
-						Case 28
-							result.m_Field27 = reader.ReadGeneric(Of DateTimeOffset)()
-						Case Else
-							reader.SkipNext()
+                Do While reader.HasNext(index)
+                    Select Case index
+                        Case 1
+                            result.m_Field0 = reader.ReadInt8()
+                        Case 2
+                            result.m_Field1 = reader.ReadUInt8()
+                        Case 3
+                            result.m_Field2 = reader.ReadInt16()
+                        Case 4
+                            result.m_Field3 = reader.ReadUInt16()
+                        Case 5
+                            result.m_Field4 = reader.ReadInt32()
+                        Case 6
+                            result.m_Field5 = reader.ReadUInt32()
+                        Case 7
+                            result.m_Field6 = reader.ReadInt64()
+                        Case 8
+                            result.m_Field7 = reader.ReadUInt64()
+                        Case 9
+                            result.m_Field8 = reader.ReadBoolean()
+                        Case 10
+                            result.m_Field9 = reader.ReadFloat32()
+                        Case 11
+                            result.m_Field10 = reader.ReadFloat64()
+                        Case 12
+                            result.m_Field11 = reader.ReadFloat128()
+                        Case 13
+                            result.m_Field12 = reader.ReadIntPtr()
+                        Case 14
+                            result.m_Field13 = reader.ReadUIntPtr()
+                        Case 15
+                            result.m_Field14 = reader.ReadVariantInt()
+                        Case 16
+                            result.m_Field15 = reader.ReadVariantUInt()
+                        Case 17
+                            result.m_Field16 = reader.ReadChar()
+                        Case 18
+                            result.m_Field17 = reader.ReadString()
+                        Case 19
+                            result.m_Field18 = reader.ReadGeneric(Of VInt())()
+                        Case 20
+                            result.m_Field19 = reader.ReadGeneric(Of Dictionary(Of String, float32))()
+                        Case 21
+                            result.m_Field20 = reader.ReadGeneric(Of List(Of Boolean))()
+                        Case 22
+                            result.m_Field21 = reader.ReadGeneric(Of KeyValuePair(Of Boolean, Boolean))()
+                        Case 23
+                            result.m_Field22 = reader.ReadGeneric(Of VInt?)()
+                        Case 24
+                            result.m_Field23 = reader.ReadGeneric(Of Type)()
+                        Case 25
+                            result.m_Field24 = reader.ReadGeneric(Of Guid)()
+                        Case 26
+                            result.m_Field25 = reader.ReadGeneric(Of TimeSpan)()
+                        Case 27
+                            result.m_Field26 = reader.ReadGeneric(Of DateTime)()
+                        Case 28
+                            result.m_Field27 = reader.ReadGeneric(Of DateTimeOffset)()
+                        Case 29
+                            result.m_Field28 = CType(reader.ReadInt32(), TestEnum)
+                        Case Else
+                            reader.SkipNext()
 					End Select
 				Loop
 

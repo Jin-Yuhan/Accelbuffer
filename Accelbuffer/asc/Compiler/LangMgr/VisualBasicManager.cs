@@ -63,14 +63,23 @@ namespace asc.Compiler
                             continue;
                         }
 
-                        string typeName = GetTypeNameInMethod(field.Type);
-                        string methodName = typeName == "Generic" ? $"Generic(Of {ValidateType(field.Type)})" : typeName;
+                        bool isFacadeType = !string.IsNullOrEmpty(field.RealType);
+                        string readType = isFacadeType ? field.RealType! : field.Type;
+                        string typeName = GetTypeNameInMethod(readType);
+                        string methodName = typeName == "Generic" ? $"Generic(Of {ValidateType(readType)})" : typeName;
 
                         sb.AppendLine($"\t\t\t\t\t\tCase {field.Index}");
 
                         if (!field.IsObsolete)
                         {
-                            sb.AppendLine($"\t\t\t\t\t\t\tresult.m_{field.Name} = reader.Read{methodName}()");
+                            if (isFacadeType)
+                            {
+                                sb.AppendLine($"\t\t\t\t\t\t\tresult.m_{field.Name} = CType(reader.Read{methodName}(), {field.Type})");
+                            }
+                            else
+                            {
+                                sb.AppendLine($"\t\t\t\t\t\t\tresult.m_{field.Name} = reader.Read{methodName}()");
+                            }
                         }
                     }
 

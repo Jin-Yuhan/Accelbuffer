@@ -15,11 +15,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyCopyrightAttribute("See https://github.com/Jin-Yuhan/Accelbuffer")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("accelbuffer script compiler")]
-[assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.6.7")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.6.7")]
+[assembly: System.Reflection.AssemblyFileVersionAttribute("0.1.6.13")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.1.6.13")]
 [assembly: System.Reflection.AssemblyProductAttribute("Accelbuffer script compiler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("asc")]
-[assembly: System.Reflection.AssemblyVersionAttribute("0.1.6.7")]
+[assembly: System.Reflection.AssemblyVersionAttribute("0.1.6.13")]
 
 // 由 MSBuild WriteCodeFragment 类生成。
 

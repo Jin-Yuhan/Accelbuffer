@@ -944,8 +944,8 @@
             </summary>
             <param name="obj">被序列化的对象</param>
             <typeparam name="T">序列化的对象类型</typeparam>
-            <param name="encoding"></param>
-            <param name="endian"></param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
             <returns>对象的序列化结果</returns>
         </member>
         <member name="M:Accelbuffer.Serializer.Serialize``1(``0,System.Byte[]@,Accelbuffer.Encoding,Accelbuffer.Endian)">
@@ -955,8 +955,8 @@
             <param name="obj">被序列化的对象</param>
             <param name="buffer">对象的序列化结果</param>
             <typeparam name="T">序列化的对象类型</typeparam>
-            <param name="encoding"></param>
-            <param name="endian"></param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
             <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
         </member>
         <member name="M:Accelbuffer.Serializer.Serialize``1(``0,System.Byte[],System.Int32,Accelbuffer.Encoding,Accelbuffer.Endian)">
@@ -967,8 +967,8 @@
             <param name="buffer">用于接受序列化数据的缓冲区</param>
             <param name="index"><paramref name="buffer"/>开始写入的索引</param>
             <typeparam name="T">序列化的对象类型</typeparam>
-            <param name="encoding"></param>
-            <param name="endian"></param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
             <returns>序列化数据的大小</returns>
             <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
         </member>

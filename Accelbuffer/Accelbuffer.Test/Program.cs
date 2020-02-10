@@ -6,8 +6,8 @@ namespace Accelbuffer.Test
     {
         private static void Main()
         {
-            //FieldTypeTestProgram.ProgramMain();
-            SpeedTestProgram.ProgramMain();
+            FieldTypeTestProgram.ProgramMain();
+            //SpeedTestProgram.ProgramMain();
             Console.ReadKey();
         }
     }
