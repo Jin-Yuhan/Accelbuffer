@@ -16,9 +16,11 @@
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)accelbuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)basic_types.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)string.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)vint.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)string.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)vint.cpp" />
   </ItemGroup>
 </Project>
