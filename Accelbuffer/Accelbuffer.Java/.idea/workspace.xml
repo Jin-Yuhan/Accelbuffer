@@ -13,6 +13,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="Enum" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -33,11 +34,15 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -61,13 +66,17 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="470" y="264" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1440.860@0.0.1440.860" timestamp="1581428574894" />
-    <state x="223" y="7" key="SettingsEditor" timestamp="1581428564019">
+    <state x="223" y="7" key="SettingsEditor" timestamp="1581589012043">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="223" y="7" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1581428564019" />
-    <state x="412" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1581425839491">
+    <state x="223" y="7" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1581589012043" />
+    <state x="412" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1581585336044">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="412" y="256" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1581425839491" />
+    <state x="412" y="256" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1581585336044" />
+    <state x="418" y="322" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581585859910">
+      <screen x="0" y="0" width="1440" height="860" />
+    </state>
+    <state x="418" y="322" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.860@0.0.1440.860" timestamp="1581585859910" />
   </component>
 </project>

@@ -1,5 +1,4 @@
 package accelbuffer.core;
 
-public final class AccelWriter
-{
+public final class AccelWriter {
 }

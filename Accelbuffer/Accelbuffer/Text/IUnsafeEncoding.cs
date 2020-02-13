@@ -5,6 +5,7 @@ namespace Accelbuffer.Text
     /// <summary>
     /// '不安全'的字符串编码转换器
     /// </summary>
+    [CLSCompliant(false)]
     public interface IUnsafeEncoding
     {
         /// <summary>

@@ -87,6 +87,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public sbyte ReadInt8()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -146,6 +147,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public ushort ReadUInt16()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -200,6 +202,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public uint ReadUInt32()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -254,6 +257,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public ulong ReadUInt64()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -323,6 +327,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public VUInt ReadVariantUInt()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -392,6 +397,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public UIntPtr ReadUIntPtr()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -614,6 +620,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Vector2 ReadVector2()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -644,6 +651,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Vector3 ReadVector3()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -677,6 +685,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Vector4 ReadVector4()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -713,6 +722,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Vector2Int ReadVector2Int()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -743,6 +753,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Vector3Int ReadVector3Int()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -776,6 +787,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Quaternion ReadQuaternion()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -812,6 +824,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Color ReadColor()
         {
             ObjectType type = ReadTypeFromCachedTag();
@@ -848,6 +861,7 @@ namespace Accelbuffer
         /// 
         /// </summary>
         /// <returns></returns>
+        [CLSCompliant(false)]
         public Color32 ReadColor32()
         {
             ObjectType type = ReadTypeFromCachedTag();

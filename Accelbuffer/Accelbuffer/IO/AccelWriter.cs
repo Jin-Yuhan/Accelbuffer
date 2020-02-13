@@ -45,6 +45,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, sbyte value)
         {
             if (value == default)
@@ -104,6 +105,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, ushort value)
         {
             if (value == default)
@@ -156,6 +158,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, uint value)
         {
             if (value == default)
@@ -208,6 +211,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, ulong value)
         {
             if (value == default)
@@ -260,6 +264,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, VUInt value)
         {
             if (value == default)
@@ -311,6 +316,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, UIntPtr value)
         {
             if (value == default)
@@ -518,6 +524,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Vector2 value)
         {
             WriteTag(index, ObjectType.Fixed64);
@@ -545,6 +552,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Vector3 value)
         {
             WriteTag(index, ObjectType.Fixed96);
@@ -576,6 +584,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Vector4 value)
         {
             WriteTag(index, ObjectType.Fixed128);
@@ -611,6 +620,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Vector2Int value)
         {
             WriteTag(index, ObjectType.Fixed64);
@@ -638,6 +648,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Vector3Int value)
         {
             WriteTag(index, ObjectType.Fixed96);
@@ -669,6 +680,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Quaternion value)
         {
             WriteTag(index, ObjectType.Fixed128);
@@ -704,6 +716,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="value"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Color value)
         {
             WriteTag(index, ObjectType.Fixed128);
@@ -739,6 +752,7 @@ namespace Accelbuffer
         /// </summary>
         /// <param name="index"></param>
         /// <param name="color"></param>
+        [CLSCompliant(false)]
         public void WriteValue(int index, Color32 color)
         {
             WriteTag(index, ObjectType.Fixed32);

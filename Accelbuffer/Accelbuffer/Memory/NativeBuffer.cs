@@ -170,6 +170,7 @@ namespace Accelbuffer.Memory
         /// 获取对象内部维护的指针
         /// </summary>
         /// <param name="buffer">需要获取指针的对象</param>
+        [CLSCompliant(false)]
         public static unsafe explicit operator byte* (NativeBuffer buffer)
         {
             return buffer.m_Ptr;

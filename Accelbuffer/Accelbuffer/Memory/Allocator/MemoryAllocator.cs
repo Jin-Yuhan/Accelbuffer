@@ -115,7 +115,7 @@ namespace Accelbuffer.Memory
         /// <param name="size">需要分配的字节大小，这个值的大小在分配内存时可能被向上调整</param>
         /// <returns>分配的内存指针，如果为null，则分配失败</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/>是负数</exception>
-        public byte* Allocate(ref int size)
+        internal byte* Allocate(ref int size)
         {
             if (size < 0)
             {
@@ -168,7 +168,7 @@ namespace Accelbuffer.Memory
         /// </summary>
         /// <param name="p">指向内存的指针</param>
         /// <param name="size">内存的字节大小</param>
-        public void Free(void* p, int size)
+        internal void Free(void* p, int size)
         {
             if (p == null || size <= 0)
             {
@@ -203,7 +203,7 @@ namespace Accelbuffer.Memory
         /// <returns>指向新内存的指针，如果为null，则分配失败</returns>
         /// <exception cref="ArgumentNullException"><paramref name="p"/>为null</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="oldSize"/>不是正数，或<paramref name="newSize"/>是负数</exception>
-        public byte* Reallocate(void* p, int oldSize, ref int newSize)
+        internal byte* Reallocate(void* p, int oldSize, ref int newSize)
         {
             if (p == null)
             {

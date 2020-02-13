@@ -48,20 +48,24 @@ namespace Accelbuffer
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal readonly uint m_I2;
 
+        [CLSCompliant(false)]
         public VInt(sbyte value) : this() => m_Value = value;
 
         public VInt(byte value) : this() => m_Value = value;
 
         public VInt(short value) : this() => m_Value = value;
 
+        [CLSCompliant(false)]
         public VInt(ushort value) : this() => m_Value = value;
 
         public VInt(int value) : this() => m_Value = value;
 
+        [CLSCompliant(false)]
         public VInt(uint value) : this() => m_Value = value;
 
         public VInt(long value) : this() => m_Value = value;
 
+        [CLSCompliant(false)]
         public VInt(ulong value) : this() => m_Value = (long)value;
 
         public VInt(SerializationInfo info, StreamingContext context) : this() => m_Value = info.GetInt64("value");
@@ -184,40 +188,50 @@ namespace Accelbuffer
 
         public static bool operator <=(VInt left, VInt right) => left.m_Value <= right.m_Value;
 
+        [CLSCompliant(false)]
         public static implicit operator VInt(sbyte value) => new VInt(value);
 
         public static implicit operator VInt(byte value) => new VInt(value);
 
         public static implicit operator VInt(short value) => new VInt(value);
 
+        [CLSCompliant(false)]
         public static implicit operator VInt(ushort value) => new VInt(value);
 
         public static implicit operator VInt(int value) => new VInt(value);
 
+        [CLSCompliant(false)]
         public static implicit operator VInt(uint value) => new VInt(value);
 
         public static implicit operator VInt(long value) => new VInt(value);
 
+        [CLSCompliant(false)]
         public static explicit operator VInt(ulong value) => new VInt(value);
 
+        [CLSCompliant(false)]
         public static explicit operator VInt(VUInt value) => new VInt((long)value);
 
+        [CLSCompliant(false)]
         public static explicit operator sbyte(VInt value) => (sbyte)value.m_Value;
 
         public static explicit operator byte(VInt value) => (byte)value.m_Value;
 
         public static explicit operator short(VInt value) => (short)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator ushort(VInt value) => (ushort)value.m_Value;
 
         public static explicit operator int(VInt value) => (int)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator uint(VInt value) => (uint)value.m_Value;
 
         public static explicit operator long(VInt value) => value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator ulong(VInt value) => (ulong)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator VUInt(VInt value) => new VUInt((ulong)value.m_Value);
 #pragma warning restore CS1591
     }

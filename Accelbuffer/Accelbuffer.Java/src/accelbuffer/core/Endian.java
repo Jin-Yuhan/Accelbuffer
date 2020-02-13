@@ -3,8 +3,7 @@ package accelbuffer.core;
 /**
  *指示字节序
  */
-public enum Endian
-{
+public enum Endian {
     /**
      *指示使用大端字节序（网络字节序）
      */
@@ -16,13 +15,11 @@ public enum Endian
 
     private int value;
 
-    private Endian(int value)
-    {
+    private Endian(int value) {
         this.value = value;
     }
 
-    public int getValue()
-    {
+    public int getValue() {
         return value;
     }
 }

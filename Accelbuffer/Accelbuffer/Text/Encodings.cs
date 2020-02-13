@@ -1,8 +1,11 @@
-﻿namespace Accelbuffer.Text
+﻿using System;
+
+namespace Accelbuffer.Text
 {
     /// <summary>
     /// 提供目前支持的字符串编码
     /// </summary>
+    [CLSCompliant(false)]
     public static class Encodings
     {
         /// <summary>

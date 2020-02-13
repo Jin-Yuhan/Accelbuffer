@@ -3,8 +3,7 @@ package accelbuffer.core;
 /**
  * 表示一个对象的数据类型（4位）
  */
-enum ObjectType
-{
+enum ObjectType {
     /**
      * 丢失的类型
      */
@@ -72,13 +71,11 @@ enum ObjectType
 
     private int value;
 
-    private ObjectType(int value)
-    {
+    private ObjectType(int value) {
         this.value = value;
     }
 
-    public int getValue()
-    {
+    public int getValue() {
         return value;
     }
 }

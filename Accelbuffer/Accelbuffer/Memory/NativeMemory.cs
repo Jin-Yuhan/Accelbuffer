@@ -29,6 +29,7 @@ namespace Accelbuffer.Memory
         /// 获取内存的指针
         /// </summary>
         /// <returns>指向内存的指针，如果是null，则对象已经被释放</returns>
+        [CLSCompliant(false)]
         public byte* GetPointer()
         {
             return m_Ptr;
@@ -40,6 +41,7 @@ namespace Accelbuffer.Memory
         /// <param name="minSize">获取的内存的最小值，以字节为单位</param>
         /// <returns>指向内存的指针</returns>
         /// <exception cref="ObjectDisposedException">当前内存已经被释放</exception>
+        [CLSCompliant(false)]
         public byte* GetPointer(int minSize)
         {
             if (m_Size == 0)

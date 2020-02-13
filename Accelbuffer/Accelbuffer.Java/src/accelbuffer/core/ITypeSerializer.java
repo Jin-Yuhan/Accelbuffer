@@ -4,8 +4,7 @@ package accelbuffer.core;
  * 实现接口完成指定类型对象的序列化和反序列化
  * @param <T> 序列化的对象的类型
  */
-public interface ITypeSerializer<T>
-{
+public interface ITypeSerializer<T> {
     /**
      * 方法用于实现对象的序列化
      * @param obj 将被序列化的对象

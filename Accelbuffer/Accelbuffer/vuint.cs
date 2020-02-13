@@ -14,6 +14,7 @@ namespace Accelbuffer
     [Serializable]
     [DebuggerDisplay("{m_Value}")]
     [StructLayout(LayoutKind.Explicit, Size = 8)]
+    [CLSCompliant(false)]
     public struct VUInt : IComparable, IFormattable, IConvertible, IComparable<VUInt>, IEquatable<VUInt>, ISerializable
     {
 #pragma warning disable CS1591
@@ -48,20 +49,24 @@ namespace Accelbuffer
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal readonly uint m_I2;
 
+        [CLSCompliant(false)]
         public VUInt(sbyte value) : this() => m_Value = (ulong)value;
 
         public VUInt(byte value) : this() => m_Value = value;
 
         public VUInt(short value) : this() => m_Value = (ulong)value;
 
+        [CLSCompliant(false)]
         public VUInt(ushort value) : this() => m_Value = value;
 
         public VUInt(int value) : this() => m_Value = (ulong)value;
 
+        [CLSCompliant(false)]
         public VUInt(uint value) : this() => m_Value = value;
 
         public VUInt(long value) : this() => m_Value = (ulong)value;
 
+        [CLSCompliant(false)]
         public VUInt(ulong value) : this() => m_Value = value;
 
         public VUInt(SerializationInfo info, StreamingContext context) : this() => m_Value = info.GetUInt64("value");
@@ -182,38 +187,46 @@ namespace Accelbuffer
 
         public static bool operator <=(VUInt left, VUInt right) => left.m_Value <= right.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator VUInt(sbyte value) => new VUInt(value);
 
         public static implicit operator VUInt(byte value) => new VUInt(value);
 
         public static explicit operator VUInt(short value) => new VUInt(value);
 
+        [CLSCompliant(false)]
         public static implicit operator VUInt(ushort value) => new VUInt(value);
 
         public static explicit operator VUInt(int value) => new VUInt(value);
 
+        [CLSCompliant(false)]
         public static implicit operator VUInt(uint value) => new VUInt(value);
 
         public static explicit operator VUInt(long value) => new VUInt(value);
 
+        [CLSCompliant(false)]
         public static implicit operator VUInt(ulong value) => new VUInt(value);
 
         public static explicit operator VUInt(VInt value) => new VUInt((ulong)value);
 
+        [CLSCompliant(false)]
         public static explicit operator sbyte(VUInt value) => (sbyte)value.m_Value;
 
         public static explicit operator byte(VUInt value) => (byte)value.m_Value;
 
         public static explicit operator short(VUInt value) => (short)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator ushort(VUInt value) => (ushort)value.m_Value;
 
         public static explicit operator int(VUInt value) => (int)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator uint(VUInt value) => (uint)value.m_Value;
 
         public static explicit operator long(VUInt value) => (long)value.m_Value;
 
+        [CLSCompliant(false)]
         public static explicit operator ulong(VUInt value) => value.m_Value;
 
         public static explicit operator VInt(VUInt value) => new VInt(value.m_Value);

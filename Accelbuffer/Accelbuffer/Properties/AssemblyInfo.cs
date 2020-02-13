@@ -1,5 +1,6 @@
-﻿using System.Resources;
+﻿using System;
 using System.Reflection;
+using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -23,6 +24,7 @@ using System.Runtime.InteropServices;
 [assembly: CompilationRelaxations(8)]
 
 [assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]
 
 [assembly: Guid("8c53dd8b-aca0-466c-852c-4b2197540c3c")]
 
