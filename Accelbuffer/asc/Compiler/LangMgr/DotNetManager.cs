@@ -26,13 +26,20 @@ namespace asc.Compiler
         private static readonly CodeArgumentReferenceExpression s_WriterRef = new CodeArgumentReferenceExpression("writer");
         private static readonly CodeArgumentReferenceExpression s_ObjRef = new CodeArgumentReferenceExpression("obj");
 
-        private static readonly CodeVariableReferenceExpression s_ReturnRef = new CodeVariableReferenceExpression("result");
-        private static readonly CodeMethodReturnStatement s_ReturnResult = new CodeMethodReturnStatement(s_ReturnRef);
+        private static readonly CodeVariableReferenceExpression s_ResultRef = new CodeVariableReferenceExpression("result");
+        private static readonly CodeMethodReturnStatement s_ReturnResult = new CodeMethodReturnStatement(s_ResultRef);
 
         private static readonly CodePrimitiveExpression s_Null = new CodePrimitiveExpression(null); 
 
         private static readonly CodeMethodInvokeExpression s_OnBeforeSerialization = new CodeMethodInvokeExpression(s_ObjRef, "OnBeforeSerialization"); 
-        private static readonly CodeMethodInvokeExpression s_OnAfterDeserialization = new CodeMethodInvokeExpression(s_ReturnRef, "OnAfterDeserialization"); 
+        private static readonly CodeMethodInvokeExpression s_OnAfterDeserialization = new CodeMethodInvokeExpression(s_ResultRef, "OnAfterDeserialization");
+
+        private static readonly CodeVariableDeclarationStatement s_BytesResult = new CodeVariableDeclarationStatement(typeof(byte[]), "result");
+        private static readonly CodeMethodInvokeExpression s_Serialize = new CodeMethodInvokeExpression(new CodeTypeReferenceExpression("Serializer"), "Serialize", s_This, new CodeDirectionExpression(FieldDirection.Out, s_ResultRef));
+
+        private static readonly CodeTypeReference s_ByteArray = new CodeTypeReference(typeof(byte[]));
+
+        private static readonly CodeParameterDeclarationExpression s_Bytes = new CodeParameterDeclarationExpression(s_ByteArray, "bytes");
 
         protected abstract string LanguageName { get; }
 
@@ -156,6 +163,8 @@ namespace asc.Compiler
 
             CodeTypeReference structRef = new CodeTypeReference(structDeclaration.Name);
 
+            AddShortcutMethod(type, structDeclaration.Name, structRef);
+
             AddSerializerType(type, structRef, serializerName, structDeclaration.Name, out var serializeMethod, out var deserializeMethod);
 
             foreach (var declaration in structDeclaration.Declarations)
@@ -238,6 +247,8 @@ namespace asc.Compiler
         }
 
         protected abstract CodeSnippetStatement GetDeserializeMethodBody(IDeclaration[] declarations);
+
+        protected abstract CodeSnippetStatement GetFromBytesMethodBody(string typeName);
 
         protected virtual string ValidateType(string rawType)
         {
@@ -352,6 +363,30 @@ namespace asc.Compiler
         private CodeCommentStatement GetDocument(string doc)
         {
             return new CodeCommentStatement($"<summary>{Environment.NewLine} {doc}{Environment.NewLine} </summary>", true);
+        }
+
+        private void AddShortcutMethod(CodeTypeDeclaration type, string typeName, CodeTypeReference structRef)
+        {
+            CodeMemberMethod toBytes = new CodeMemberMethod
+            {
+                Name = "ToBytes",
+                ReturnType = s_ByteArray,
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
+            };
+            toBytes.Statements.Add(s_BytesResult);
+            toBytes.Statements.Add(s_Serialize);
+            toBytes.Statements.Add(s_ReturnResult);
+            type.Members.Add(toBytes);
+
+            CodeMemberMethod fromBytes = new CodeMemberMethod
+            {
+                Name = "FromBytes",
+                ReturnType = structRef,
+                Attributes = MemberAttributes.Public | MemberAttributes.Final | MemberAttributes.Static,
+            };
+            fromBytes.Parameters.Add(s_Bytes);
+            fromBytes.Statements.Add(GetFromBytesMethodBody(typeName));
+            type.Members.Add(fromBytes);
         }
 
         private void SetPropertyMethods(CodeMemberProperty property, string fieldName)

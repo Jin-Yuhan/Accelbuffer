@@ -91,5 +91,10 @@ namespace asc.Compiler
             sb.AppendLine("\t\t\t\tLoop");
             return new CodeSnippetStatement(sb.ToString());
         }
+
+        protected override CodeSnippetStatement GetFromBytesMethodBody(string typeName)
+        {
+            return new CodeSnippetStatement($"Return Serializer.Deserialize(Of {typeName})(bytes, 0, bytes.Length)");
+        }
     }
 }

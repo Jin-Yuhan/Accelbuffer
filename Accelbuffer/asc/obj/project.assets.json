@@ -725,7 +725,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "0.1.6.13",
+    "version": "0.1.6.14",
     "restore": {
       "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj",
       "projectName": "asc",

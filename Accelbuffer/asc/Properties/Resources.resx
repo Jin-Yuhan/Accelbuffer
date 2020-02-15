@@ -181,10 +181,10 @@
     <value>error: AS021: missing ')'</value>
   </data>
   <data name="Version" xml:space="preserve">
-    <value>v0.1.6.13</value>
+    <value>v0.1.6.14</value>
   </data>
   <data name="Version_Unity" xml:space="preserve">
-    <value>v0.1.6.13 unity</value>
+    <value>v0.1.6.14 unity</value>
   </data>
   <data name="Warning_AS001_InvalidMemorySize" xml:space="preserve">
     <value>warning: AS001: the memory size required for the structure must be greater than 0</value>

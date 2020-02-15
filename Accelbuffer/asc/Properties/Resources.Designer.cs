@@ -250,7 +250,7 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.13 的本地化字符串。
+        ///   查找类似 v0.1.6.14 的本地化字符串。
         /// </summary>
         internal static string Version {
             get {
@@ -259,7 +259,7 @@ namespace asc.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.13 unity 的本地化字符串。
+        ///   查找类似 v0.1.6.14 unity 的本地化字符串。
         /// </summary>
         internal static string Version_Unity {
             get {

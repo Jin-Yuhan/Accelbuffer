@@ -8,7 +8,7 @@
     <Configurations>Debug;Release;Unity</Configurations>
     <StartupObject></StartupObject>
     <ApplicationIcon />
-    <Version>0.1.6.13</Version>
+    <Version>0.1.6.14</Version>
     <Authors>JinYuhan</Authors>
     <Product>Accelbuffer script compiler</Product>
     <Copyright>See https://github.com/Jin-Yuhan/Accelbuffer</Copyright>

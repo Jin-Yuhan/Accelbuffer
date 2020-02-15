@@ -112,5 +112,10 @@ namespace asc.Compiler
             sb.AppendLine("\t\t\t}");
             return new CodeSnippetStatement(sb.ToString());
         }
+
+        protected override CodeSnippetStatement GetFromBytesMethodBody(string typeName)
+        {
+            return new CodeSnippetStatement($"return Serializer.Deserialize<{typeName}>(bytes, 0, bytes.Length);");
+        }
     }
 }
