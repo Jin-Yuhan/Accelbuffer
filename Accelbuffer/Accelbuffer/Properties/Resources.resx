@@ -264,10 +264,4 @@
   <data name="VUIntName" xml:space="preserve">
     <value>VariantUInt</value>
   </data>
-  <data name="MissingRequiredFieldMessage" xml:space="preserve">
-    <value>字段{0}被标记为'required'，但是没有被赋值，请保证序列化时写入了这个数据，且不为null</value>
-  </data>
-  <data name="RequiredFieldIsNullMessage" xml:space="preserve">
-    <value>字段{0}的值不能是null，因为这个字段被标记为'required'</value>
-  </data>
 </root>
