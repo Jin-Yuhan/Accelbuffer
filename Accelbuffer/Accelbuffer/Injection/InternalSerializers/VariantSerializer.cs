@@ -25,12 +25,12 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<VInt>.Serialize(VInt obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<VUInt>.Serialize(VUInt obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
     }
 }

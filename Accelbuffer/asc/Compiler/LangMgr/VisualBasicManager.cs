@@ -19,7 +19,8 @@ namespace asc.Compiler
                 new UsingDeclaration { PackageName = "Accelbuffer" },
                 new UsingDeclaration { PackageName = "Accelbuffer.Injection" },
                 new UsingDeclaration { PackageName = "Accelbuffer.Memory" },
-                new UsingDeclaration { PackageName = "Accelbuffer.Text" },
+                new UsingDeclaration { PackageName = "Accelbuffer.Unsafe" },
+                new UsingDeclaration { PackageName = "Accelbuffer.Unsafe.Text" },
                 new UsingDeclaration { PackageName = "System" },
 #if UNITY
                 new UsingDeclaration { PackageName = "UnityEngine" },

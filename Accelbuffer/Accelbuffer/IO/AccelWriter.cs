@@ -3,7 +3,7 @@ using UnityEngine;
 #endif
 
 using Accelbuffer.Memory;
-using Accelbuffer.Text;
+using Accelbuffer.Unsafe.Text;
 using System;
 using System.Runtime.CompilerServices;
 using Resources = Accelbuffer.Properties.Resources;
@@ -19,7 +19,12 @@ namespace Accelbuffer
         private readonly Encoding m_Encoding;
         private readonly bool m_IsLittleEndian;
         private int m_ByteCount;
-        internal int m_Index;//builtin-serializer使用，默认是1
+        internal int Index;//builtin-serializer使用，默认是1
+
+        /// <summary>
+        /// 获取当前写入的字节数量
+        /// </summary>
+        public int ByteCount => m_ByteCount;
 
         internal AccelWriter(NativeMemory* memory, Encoding encoding, bool isLittleEndian)
         {
@@ -27,12 +32,7 @@ namespace Accelbuffer
             m_Encoding = encoding;
             m_IsLittleEndian = isLittleEndian;
             m_ByteCount = 0;
-            m_Index = 1;
-        }
-
-        internal void Free()
-        {
-            m_Memory->Dispose();
+            Index = 1;
         }
 
         internal void WriteGlobalConfig(Encoding encoding, Endian endian)
@@ -486,7 +486,7 @@ namespace Accelbuffer
 
             if (serializer is IBuiltinTypeSerializer)
             {
-                m_Index = index;
+                Index = index;
                 serializer.Serialize(value, ref this);
             }
             else
@@ -513,7 +513,7 @@ namespace Accelbuffer
                 }
                 finally
                 {
-                    writer.Free();
+                    mem.Dispose();
                 }
             }
         }
@@ -763,12 +763,6 @@ namespace Accelbuffer
             WriteByte(color.a);
         }
 #endif
-
-
-        internal NativeBuffer ToNativeBufferNoCopy()
-        {
-            return new NativeBuffer(m_Memory->GetPointer(0), m_ByteCount, m_Memory->Size);
-        }
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

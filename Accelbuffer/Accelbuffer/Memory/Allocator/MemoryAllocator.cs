@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Runtime.CompilerServices;
 
 namespace Accelbuffer.Memory
@@ -26,9 +27,9 @@ namespace Accelbuffer.Memory
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
-                lock (m_SyncObj)
+                if (value > 0)
                 {
-                    m_MaxFindChunkCount = value > 1 ? value : m_MaxFindChunkCount;
+                    Interlocked.Exchange(ref m_MaxFindChunkCount, value);
                 }
             }
         }
@@ -136,6 +137,7 @@ namespace Accelbuffer.Memory
             }
 
             int index = GetFreeListIndex(size);
+            int count = 0;
 
             lock (m_SyncObj)
             {
@@ -155,7 +157,7 @@ namespace Accelbuffer.Memory
                         return (byte*)chunk;
                     }
                 }
-                while ((++index < m_FreeList.Length + MaxFindChunkCount) && (index < m_FreeList.Length));
+                while ((++count < MaxFindChunkCount) && (index < m_FreeList.Length));
             }
 
             size = Align(size);

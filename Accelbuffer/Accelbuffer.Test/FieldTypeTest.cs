@@ -13,7 +13,7 @@ namespace Accelbuffer.Test
     using Accelbuffer;
     using Accelbuffer.Injection;
     using Accelbuffer.Memory;
-    using Accelbuffer.Text;
+    using Accelbuffer.Unsafe.Text;
     using System;
     using boolean = System.Boolean;
     using int8 = System.SByte;

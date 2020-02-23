@@ -2,7 +2,7 @@
 using UnityEngine;
 #endif
 
-using Accelbuffer.Text;
+using Accelbuffer.Unsafe.Text;
 using System;
 using System.Runtime.CompilerServices;
 using Resources = Accelbuffer.Properties.Resources;

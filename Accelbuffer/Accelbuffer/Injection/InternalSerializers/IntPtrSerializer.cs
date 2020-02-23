@@ -26,12 +26,12 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<IntPtr>.Serialize(IntPtr obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<UIntPtr>.Serialize(UIntPtr obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
     }
 }

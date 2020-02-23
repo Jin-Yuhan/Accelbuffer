@@ -1,9 +1,9 @@
 ﻿using Accelbuffer.Properties;
 using System;
 
-namespace Accelbuffer.Text
+namespace Accelbuffer.Unsafe.Text
 {
-    internal sealed class ReversedUnicodeEncoding : IUnsafeEncoding
+    internal sealed class UnicodeEncoding : IUnsafeEncoding
     {
         public unsafe int GetBytes(string str, byte* bytes)
         {
@@ -12,12 +12,11 @@ namespace Accelbuffer.Text
             fixed (char* chars = str)
             {
                 char* src = chars;
+                char* dst = (char*)bytes;
 
                 while (size-- > 0)
                 {
-                    byte* charBytes = (byte*)src++;
-                    *bytes++ = charBytes[1];
-                    *bytes++ = charBytes[0];
+                    *dst++ = *src++;
                 }
             }
 
@@ -29,13 +28,6 @@ namespace Accelbuffer.Text
             if ((byteCount < 0) || (byteCount % 2 != 0))
             {
                 throw new ArgumentOutOfRangeException(nameof(byteCount), Resources.UnicodeStringByteCountError);
-            }
-
-            for (int i = 0; i < byteCount; i += 2)
-            {
-                bytes[i] ^= bytes[i + 1];
-                bytes[i + 1] ^= bytes[i];
-                bytes[i] ^= bytes[i + 1];
             }
 
             return new string((char*)bytes, 0, byteCount >> 1);

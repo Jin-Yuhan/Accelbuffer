@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accelbuffer.Text
+namespace Accelbuffer.Unsafe.Text
 {
     /// <summary>
     /// '不安全'的字符串编码转换器
@@ -12,9 +12,9 @@ namespace Accelbuffer.Text
         /// 将指定字符串中的一组字符编码为指定的字节数组
         /// </summary>
         /// <param name="str">字符串</param>
-        /// <param name="bytes">字节数组指针</param>
+        /// <param name="buffer">字节数组指针</param>
         /// <returns>字节数量</returns>
-        unsafe int GetBytes(string str, byte* bytes);
+        unsafe int GetBytes(string str, byte* buffer);
 
         /// <summary>
         /// 将指定字节数组中的所有字节解码为一个字符串

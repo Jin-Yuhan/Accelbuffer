@@ -132,72 +132,72 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<sbyte>.Serialize(sbyte obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<byte>.Serialize(byte obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<short>.Serialize(short obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<ushort>.Serialize(ushort obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<int>.Serialize(int obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<uint>.Serialize(uint obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<long>.Serialize(long obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<ulong>.Serialize(ulong obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<float>.Serialize(float obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<double>.Serialize(double obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<decimal>.Serialize(decimal obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<bool>.Serialize(bool obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<char>.Serialize(char obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<string>.Serialize(string obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
     }
 }

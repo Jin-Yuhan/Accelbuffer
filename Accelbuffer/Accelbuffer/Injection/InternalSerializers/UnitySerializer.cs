@@ -83,42 +83,42 @@ namespace Accelbuffer.Injection
 
         void ITypeSerializer<Vector2>.Serialize(Vector2 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Vector3>.Serialize(Vector3 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Vector4>.Serialize(Vector4 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Vector2Int>.Serialize(Vector2Int obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Vector3Int>.Serialize(Vector3Int obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Quaternion>.Serialize(Quaternion obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Color>.Serialize(Color obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
 
         void ITypeSerializer<Color32>.Serialize(Color32 obj, ref AccelWriter writer)
         {
-            writer.WriteValue(writer.m_Index, obj);
+            writer.WriteValue(writer.Index, obj);
         }
     }
 }

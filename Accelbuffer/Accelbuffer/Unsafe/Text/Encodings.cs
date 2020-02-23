@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accelbuffer.Text
+namespace Accelbuffer.Unsafe.Text
 {
     /// <summary>
     /// 提供目前支持的字符串编码

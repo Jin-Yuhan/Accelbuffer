@@ -1,7 +1,7 @@
 ﻿using Accelbuffer.Properties;
 using System;
 
-namespace Accelbuffer.Text
+namespace Accelbuffer.Unsafe.Text
 {
     internal sealed class UTF8Encoding : IUnsafeEncoding
     {

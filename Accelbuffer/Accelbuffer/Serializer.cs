@@ -1,5 +1,6 @@
 ﻿using Accelbuffer.Memory;
 using Accelbuffer.Properties;
+using Accelbuffer.Unsafe;
 using System;
 
 namespace Accelbuffer
@@ -19,13 +20,13 @@ namespace Accelbuffer
         }
 
         /// <summary>
-        /// 序列化对象，并返回序列化数据（线程安全）
+        /// 序列化对象，并返回序列化数据
         /// </summary>
-        /// <param name="obj">被序列化的对象</param>
         /// <typeparam name="T">序列化的对象类型</typeparam>
+        /// <param name="obj">被序列化的对象</param>
         /// <param name="encoding">序列化使用的字符编码</param>
         /// <param name="endian">序列化使用的字节序</param>
-        /// <returns>对象的序列化结果</returns>
+        /// <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
         public static NativeBuffer Serialize<T>(T obj, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
             int memSize = InternalTypeCache<T>.ApproximateMemorySize;
@@ -37,24 +38,23 @@ namespace Accelbuffer
             try
             {
                 InternalTypeCache<T>.Serializer.Serialize(obj, ref writer);
-                return writer.ToNativeBufferNoCopy();
+                return mem.ToNativeBufferNoCopy(writer.ByteCount);
             }
             catch
             {
-                writer.Free();
+                mem.Dispose();
                 throw;
             }
         }
 
         /// <summary>
-        /// 序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+        /// 序列化对象，并将序列化数据写入指定的缓冲区中
         /// </summary>
+        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">对象的序列化结果</param>
-        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <param name="encoding">序列化使用的字符编码</param>
         /// <param name="endian">序列化使用的字节序</param>
-        /// <exception cref="ArgumentException">字节数组容量不足</exception>
         public static void Serialize<T>(T obj, out byte[] buffer, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
             int memSize = InternalTypeCache<T>.ApproximateMemorySize;
@@ -66,21 +66,21 @@ namespace Accelbuffer
             try
             {
                 InternalTypeCache<T>.Serializer.Serialize(obj, ref writer);
-                buffer = writer.ToNativeBufferNoCopy().ToArray();
+                buffer = mem.ToArray(writer.ByteCount);
             }
             finally
             {
-                writer.Free();
+                mem.Dispose();
             }
         }
 
         /// <summary>
-        /// 序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+        /// 序列化对象，并将序列化数据写入指定的缓冲区中
         /// </summary>
+        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">用于接受序列化数据的缓冲区</param>
         /// <param name="index"><paramref name="buffer"/>开始写入的索引</param>
-        /// <typeparam name="T">序列化的对象类型</typeparam>
         /// <param name="encoding">序列化使用的字符编码</param>
         /// <param name="endian">序列化使用的字节序</param>
         /// <returns>序列化数据的大小</returns>
@@ -96,21 +96,21 @@ namespace Accelbuffer
             try
             {
                 InternalTypeCache<T>.Serializer.Serialize(obj, ref writer);
-                return writer.ToNativeBufferNoCopy().CopyToArray(buffer, index);
+                return mem.CopyToArray(writer.ByteCount, buffer, index);
             }
             finally
             {
-                writer.Free();
+                mem.Dispose();
             }
         }
 
         /// <summary>
         /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
-        /// <param name="bytes">被反序列化的字节数组</param>
+        /// <typeparam name="T">反序列化的对象类型</typeparam>
+        /// <param name="bytes">保存了对象数据的字节数组</param>
         /// <param name="index">开始读取的索引位置</param>
         /// <param name="length">可以读取的字节大小</param>
-        /// <typeparam name="T">反序列化的对象类型</typeparam>
         /// <returns>反序列化的对象实例</returns>
         /// <exception cref="ArgumentNullException"><paramref name="bytes"/>为null</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
@@ -150,10 +150,10 @@ namespace Accelbuffer
         /// <summary>
         /// 反序列化<typeparamref name="T"/>类型对象实例
         /// </summary>
-        /// <param name="buffer">被反序列化的字节缓冲区</param>
+        /// <typeparam name="T">反序列化的对象类型</typeparam>
+        /// <param name="buffer">保存了对象数据的非托管缓冲区</param>
         /// <param name="index">开始读取的索引位置</param>
         /// <param name="length">可以读取的字节大小</param>
-        /// <typeparam name="T">反序列化的对象类型</typeparam>
         /// <returns>反序列化的对象实例</returns>
         /// <exception cref="ArgumentException"><paramref name="buffer"/>已经被释放</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="buffer"/>长度不足</exception>

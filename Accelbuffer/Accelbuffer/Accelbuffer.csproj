@@ -75,7 +75,11 @@
     <Compile Include="Memory\NativeBuffer.cs" />
     <Compile Include="Memory\NativeMemory.cs" />
     <Compile Include="Enums\Endian.cs" />
-    <Compile Include="Text\ReversedUnicodeEncoding.cs" />
+    <Compile Include="ObjectSerializationShortcut.cs" />
+    <Compile Include="Unsafe\NativeMemoryIO.cs" />
+    <Compile Include="Unsafe\Text\ReversedUnicodeEncoding.cs" />
+    <Compile Include="Unsafe\UnmanagedObjectSerializationShortcut.cs" />
+    <Compile Include="Unsafe\UnmanagedTypeSerializer.cs" />
     <Compile Include="VInt.cs" />
     <Compile Include="VUInt.cs" />
     <Compile Include="Memory\IMemorySizeForType.cs" />
@@ -89,10 +93,10 @@
     </Compile>
     <Compile Include="Injection\Attributes\NeverNullAttribute.cs" />
     <Compile Include="Injection\Attributes\OnAfterDeserializationAttribute.cs" />
-    <Compile Include="Text\ASCIIEncoding.cs" />
-    <Compile Include="Text\Encodings.cs" />
-    <Compile Include="Text\IUnsafeEncoding.cs" />
-    <Compile Include="Text\UnicodeEncoding.cs" />
+    <Compile Include="Unsafe\Text\ASCIIEncoding.cs" />
+    <Compile Include="Unsafe\Text\Encodings.cs" />
+    <Compile Include="Unsafe\Text\IUnsafeEncoding.cs" />
+    <Compile Include="Unsafe\Text\UnicodeEncoding.cs" />
     <Compile Include="Exceptions\StreamTooShortException.cs" />
     <Compile Include="IO\AccelReader.cs" />
     <Compile Include="Injection\Attributes\OnBeforeSerializationAttribute.cs" />
@@ -117,7 +121,7 @@
     <Compile Include="Serializer.cs" />
     <Compile Include="Enums\ObjectType.cs" />
     <Compile Include="IO\AccelWriter.cs" />
-    <Compile Include="Text\UTF8Encoding.cs" />
+    <Compile Include="Unsafe\Text\UTF8Encoding.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

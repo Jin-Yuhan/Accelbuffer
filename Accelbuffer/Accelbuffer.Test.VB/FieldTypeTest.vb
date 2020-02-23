@@ -13,7 +13,7 @@ Option Explicit On
 Imports Accelbuffer
 Imports Accelbuffer.Injection
 Imports Accelbuffer.Memory
-Imports Accelbuffer.Text
+Imports Accelbuffer.UnsafeText
 Imports float128 = System.Decimal
 Imports float32 = System.Single
 Imports float64 = System.Double

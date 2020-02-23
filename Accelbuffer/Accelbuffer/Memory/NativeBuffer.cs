@@ -116,6 +116,7 @@ namespace Accelbuffer.Memory
         /// <param name="startIndex">开始写入的索引位置</param>
         /// <returns>写入的数据长度</returns>
         /// <exception cref="ObjectDisposedException">当前对象已经被释放</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="buffer"/>是null</exception>
         /// <exception cref="ArgumentException"><paramref name="buffer"/>长度不足</exception>
         public unsafe int CopyToArray(byte[] buffer, int startIndex)
         {
@@ -124,7 +125,12 @@ namespace Accelbuffer.Memory
                 throw new ObjectDisposedException(nameof(NativeBuffer));
             }
 
-            if (buffer.LongLength - startIndex < Length)
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
+
+            if (buffer.Length - startIndex < Length)
             {
                 throw new ArgumentException(Resources.ByteArrayTooShort);
             }
