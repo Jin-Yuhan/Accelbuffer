@@ -4,6 +4,1076 @@
         <name>Accelbuffer</name>
     </assembly>
     <members>
+        <member name="T:Accelbuffer.Compiling.Declarations.FieldDeclaration">
+            <summary>
+            字段声明
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.RealType">
+            <summary>
+            字段的真实类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.Type">
+            <summary>
+            字段的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.Name">
+            <summary>
+            字段的名称
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.Doc">
+            <summary>
+            字段的文档
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.Index">
+            <summary>
+            字段的索引
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.IsObsolete">
+            <summary>
+            字段是否过时
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.FieldDeclaration.IsNeverNull">
+            <summary>
+            字段是否永远不会为null
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.FieldDeclaration.ToBytes">
+            <summary>
+            序列化对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.FieldDeclaration.FromBytes(System.Byte[])">
+            <summary>
+            反序列化对象
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.FieldDeclaration.FieldDeclarationSerializer">
+            <summary>
+            对象序列化代理（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.FieldDeclaration.FieldDeclarationSerializer.Serialize(Accelbuffer.Compiling.Declarations.FieldDeclaration,Accelbuffer.AccelWriter@)">
+            <summary>
+            序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.FieldDeclaration.FieldDeclarationSerializer.Deserialize(Accelbuffer.AccelReader@)">
+            <summary>
+            反序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.FieldDeclaration.#ctor">
+            <summary>
+            初始化 FieldDeclaration
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.PackageDeclaration">
+            <summary>
+            包声明
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.PackageDeclaration.PackageName">
+            <summary>
+            包名
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.PackageDeclaration.ToBytes">
+            <summary>
+            序列化对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.PackageDeclaration.FromBytes(System.Byte[])">
+            <summary>
+            反序列化对象
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.PackageDeclaration.PackageDeclarationSerializer">
+            <summary>
+            对象序列化代理（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.PackageDeclaration.PackageDeclarationSerializer.Serialize(Accelbuffer.Compiling.Declarations.PackageDeclaration,Accelbuffer.AccelWriter@)">
+            <summary>
+            序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.PackageDeclaration.PackageDeclarationSerializer.Deserialize(Accelbuffer.AccelReader@)">
+            <summary>
+            反序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.StructDeclaration">
+            <summary>
+            结构声明
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.TypeVisibility">
+            <summary>
+            可访问性
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.IsFinal">
+            <summary>
+            是否为密封结构
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.IsRef">
+            <summary>
+            是否为引用结构
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.IsNested">
+            <summary>
+            是否为嵌套结构
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.IsFieldIndexContinuous">
+            <summary>
+            所有字段的索引是否连续
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.Name">
+            <summary>
+            结构的名称
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.Doc">
+            <summary>
+            结构的文档
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.Size">
+            <summary>
+            结构的大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.StructDeclaration.Declarations">
+            <summary>
+            结构内的声明
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.StructDeclaration.ToBytes">
+            <summary>
+            序列化对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.StructDeclaration.FromBytes(System.Byte[])">
+            <summary>
+            反序列化对象
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.StructDeclaration.StructDeclarationSerializer">
+            <summary>
+            对象序列化代理（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.StructDeclaration.StructDeclarationSerializer.Serialize(Accelbuffer.Compiling.Declarations.StructDeclaration,Accelbuffer.AccelWriter@)">
+            <summary>
+            序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.StructDeclaration.StructDeclarationSerializer.Deserialize(Accelbuffer.AccelReader@)">
+            <summary>
+            反序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.StructDeclaration.#ctor">
+            <summary>
+            初始化StructDeclaration
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.UsingAsDeclaration">
+            <summary>
+            类型别名的声明
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.TypeName">
+            <summary>
+            原始类型名
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.AliasName">
+            <summary>
+            类型的别名
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.ToBytes">
+            <summary>
+            序列化对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.FromBytes(System.Byte[])">
+            <summary>
+            反序列化对象
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.UsingAsDeclarationSerializer">
+            <summary>
+            对象序列化代理（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.UsingAsDeclarationSerializer.Serialize(Accelbuffer.Compiling.Declarations.UsingAsDeclaration,Accelbuffer.AccelWriter@)">
+            <summary>
+            序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingAsDeclaration.UsingAsDeclarationSerializer.Deserialize(Accelbuffer.AccelReader@)">
+            <summary>
+            反序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.UsingDeclaration">
+            <summary>
+            包引用声明
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.Declarations.UsingDeclaration.PackageName">
+            <summary>
+            引用的包名
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingDeclaration.ToBytes">
+            <summary>
+            序列化对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingDeclaration.FromBytes(System.Byte[])">
+            <summary>
+            反序列化对象
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.UsingDeclaration.UsingDeclarationSerializer">
+            <summary>
+            对象序列化代理（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingDeclaration.UsingDeclarationSerializer.Serialize(Accelbuffer.Compiling.Declarations.UsingDeclaration,Accelbuffer.AccelWriter@)">
+            <summary>
+            序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Declarations.UsingDeclaration.UsingDeclarationSerializer.Deserialize(Accelbuffer.AccelReader@)">
+            <summary>
+            反序列化方法（自动生成）
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Declarations.IDeclaration">
+            <summary>
+            表示一个声明
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.KeywordCategory">
+            <summary>
+            指示一个关键字的类别
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.KeywordCategory.Other">
+            <summary>
+            其他类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.KeywordCategory.TypeKeyword">
+            <summary>
+            类型关键字
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.KeywordCategory.StructModifier">
+            <summary>
+            结构描述关键字
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.KeywordCategory.UnityTypeKeyword">
+            <summary>
+            unity类型关键字
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.TokenType">
+            <summary>
+            指示一个标记的类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Invalid">
+            <summary>
+            无效值
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Document">
+            <summary>
+            文档
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.OpenBrace">
+            <summary>
+            '{'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.CloseBrace">
+            <summary>
+            '}'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.OpenBracket">
+            <summary>
+            '['
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.CloseBracket">
+            <summary>
+            ']'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.OpenParen">
+            <summary>
+            '('
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.CloseParen">
+            <summary>
+            ')'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Semicolon">
+            <summary>
+            ';'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Bar">
+            <summary>
+            '|'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Asterisk">
+            <summary>
+            '*'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Question">
+            <summary>
+            '?'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Colon">
+            <summary>
+            ':'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Dot">
+            <summary>
+            '.'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Comma">
+            <summary>
+            ','
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.GreaterThan">
+            <summary>
+            '&gt;'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.LessThan">
+            <summary>
+            '&lt;'
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.IntLiteral">
+            <summary>
+            整数值
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Identifier">
+            <summary>
+            标识符
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.PackageKeyword">
+            <summary>
+            package
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UsingKeyword">
+            <summary>
+            using
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.PublicKeyword">
+            <summary>
+            public
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.InternalKeyword">
+            <summary>
+            internal
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.PrivateKeyword">
+            <summary>
+            private
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.ProtectedKeyword">
+            <summary>
+            protected
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.FinalKeyword">
+            <summary>
+            final
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.RefKeyword">
+            <summary>
+            ref
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.StructKeyword">
+            <summary>
+            struct
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.AboutKeyword">
+            <summary>
+            about
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.VarKeyword">
+            <summary>
+            var
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.ObsoleteKeyword">
+            <summary>
+            obsolete
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.BooleanKeyword">
+            <summary>
+            boolean
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Int8Keyword">
+            <summary>
+            int8
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UInt8Keyword">
+            <summary>
+            uint8
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Int16Keyword">
+            <summary>
+            int16
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UInt16Keyword">
+            <summary>
+            uint16
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Int32Keyword">
+            <summary>
+            int32
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UInt32Keyword">
+            <summary>
+            uint32
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Int64Keyword">
+            <summary>
+            int64
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UInt64Keyword">
+            <summary>
+            uint64
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Float32Keyoword">
+            <summary>
+            float32
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Float64Keyword">
+            <summary>
+            float64
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Float128Keyword">
+            <summary>
+            float128
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.CharKeyword">
+            <summary>
+            char
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.StringKeyword">
+            <summary>
+            string
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.IntPtrKeyword">
+            <summary>
+            intptr
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.UIntPtrKeyword">
+            <summary>
+            uintptr
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.VIntKeyword">
+            <summary>
+            vint
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.VUIntKeyword">
+            <summary>
+            vuint
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Vector2Keyword">
+            <summary>
+            vector2
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Vector3Keyword">
+            <summary>
+            vector3
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Vector4Keyword">
+            <summary>
+            vector4
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Vector2IntKeyword">
+            <summary>
+            vector2int
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Vector3IntKeyword">
+            <summary>
+            vector3int
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.QuaternionKeyword">
+            <summary>
+            quaternion
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.ColorKeyword">
+            <summary>
+            color
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.TokenType.Color32Keyword">
+            <summary>
+            color32
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Compiling.ErrorWriter">
+            <summary>
+            表示一个输出错误信息的编写器。 此类为抽象类。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.ErrorWriter.IsError">
+            <summary>
+            获取是否输出过错误
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.#ctor">
+            <summary>
+            初始化 ErrorWriter
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.Reset">
+            <summary>
+            重置该对象
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogError(System.String,Accelbuffer.Compiling.Token)">
+            <summary>
+            输出一个错误
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="token">导致错误的标记</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogError(System.String,System.String,System.Int32,System.Int32,System.Object[])">
+            <summary>
+            输出一个错误
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="filePath">文件所在路径</param>
+            <param name="line">错误所在行号</param>
+            <param name="column">错误所在列号</param>
+            <param name="args">字符串格式化参数</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogWarning(System.String,Accelbuffer.Compiling.Token)">
+            <summary>
+            输出一个警告
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="token">导致警告的标记</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogWarning(System.String,Accelbuffer.Compiling.Token,System.Object[])">
+            <summary>
+            输出一个警告
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="token">导致警告的标记</param>
+            <param name="args">字符串格式化参数</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogErrorMessage(System.String,System.String,System.Int32,System.Int32,System.Object[])">
+            <summary>
+            输出一个错误
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="filePath">文件所在路径</param>
+            <param name="line">错误所在行号</param>
+            <param name="column">错误所在列号</param>
+            <param name="args">字符串格式化参数</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.ErrorWriter.LogWarning(System.String,System.String,System.Int32,System.Int32,System.Object[])">
+            <summary>
+            输出一个警告
+            </summary>
+            <param name="msg">消息字符串</param>
+            <param name="filePath">文件所在路径</param>
+            <param name="line">警告所在行号</param>
+            <param name="column">警告所在列号</param>
+            <param name="args">字符串格式化参数</param>
+        </member>
+        <member name="T:Accelbuffer.Compiling.KeywordManager">
+            <summary>
+            表示一个关键字管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.KeywordManager.Default">
+            <summary>
+            获取默认的关键字管理器
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.KeywordManager.#ctor">
+            <summary>
+            初始化 KeywordManager
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.KeywordManager.RegisterKeyword(System.String,Accelbuffer.Compiling.TokenType,Accelbuffer.Compiling.KeywordCategory)">
+            <summary>
+            注册一个关键字
+            </summary>
+            <param name="raw">关键字的字符串形式</param>
+            <param name="type">关键字所属的标记类型</param>
+            <param name="category">关键字的类别</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.KeywordManager.IsInCategory(System.String,Accelbuffer.Compiling.KeywordCategory)">
+            <summary>
+            获取关键字是否在指定的类别中
+            </summary>
+            <param name="raw">关键字的字符串形式</param>
+            <param name="category">查询的关键字类别</param>
+            <returns>如果关键字在<paramref name="category"/>类别中，返回true，否则false</returns>
+        </member>
+        <member name="M:Accelbuffer.Compiling.KeywordManager.TryMatchKeyword(System.String,Accelbuffer.Compiling.TokenType@,Accelbuffer.Compiling.KeywordCategory@)">
+            <summary>
+            尝试匹配关键字的标记类型
+            </summary>
+            <param name="raw">关键字的字符串形式</param>
+            <param name="type">关键字的标记类型</param>
+            <param name="category">关键字的类别</param>
+            <returns>如果匹配成功，返回true，否则false</returns>
+        </member>
+        <member name="T:Accelbuffer.Compiling.LanguageManager">
+            <summary>
+            表示一个目标语言管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.AccelbufferByteCode">
+            <summary>
+            AccelbufferByteCode管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.VisualBasic">
+            <summary>
+            VisualBasic管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.CSharp">
+            <summary>
+            C#管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.CPP">
+            <summary>
+            C++管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.Java">
+            <summary>
+            Java管理器
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.EnableUnity">
+            <summary>
+            获取/设置是否支持Unity关键字
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Compiling.LanguageManager.Entension">
+            <summary>
+            获取该语言源文件的后缀名
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.LanguageManager.#ctor">
+            <summary>
+            初始化 LanguageManager
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.LanguageManager.ChangeExtension(System.String)">
+            <summary>
+            切换文件路径的后缀名为目标语言源文件的后缀名
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>修改后的文件路径</returns>
+        </member>
+        <member name="M:Accelbuffer.Compiling.LanguageManager.GenerateCode(Accelbuffer.Compiling.Declarations.IDeclaration[],System.String)">
+            <summary>
+            生成目标语言的代码
+            </summary>
+            <param name="declarations">定义列表</param>
+            <param name="filePath">目标文件路径</param>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Parser">
+            <summary>
+            表示一个语法分析器，用于将标记转换为定义列表
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Parser.#ctor(Accelbuffer.Compiling.Token[],System.Boolean,Accelbuffer.Compiling.ErrorWriter,Accelbuffer.Compiling.KeywordManager)">
+            <summary>
+            初始化 Parser
+            </summary>
+            <param name="tokens">由<see cref="T:Accelbuffer.Compiling.Scanner"/>分析得到的标记数组</param>
+            <param name="enableUnity">指示是否启用unity关键字</param>
+            <param name="writer">错误编写器</param>
+            <param name="keywordManager">关键字管理器</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Parser.ToDeclaration">
+            <summary>
+            将所有标记分析为一个声明列表
+            </summary>
+            <returns>分析完成的声明列表，包含了文件中所有的定义信息</returns>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Scanner">
+            <summary>
+            表示一个字符扫描器，用于将文件转化为一系列标记
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Scanner.#ctor(System.String,System.Boolean,Accelbuffer.Compiling.ErrorWriter,Accelbuffer.Compiling.KeywordManager)">
+            <summary>
+            初始化Scanner
+            </summary>
+            <param name="filePath">扫描的文件路径</param>
+            <param name="enableUnity">是否启用unity关键字</param>
+            <param name="writer">错误编写器</param>
+            <param name="manager">关键字管理器</param>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Scanner.ToTokens">
+            <summary>
+            扫描文件并转换为一系列的标记
+            </summary>
+            <returns>从文件中读取的标记</returns>
+        </member>
+        <member name="T:Accelbuffer.Compiling.Token">
+            <summary>
+            表示一个标记
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.Token.Raw">
+            <summary>
+            获取原始字符串
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.Token.Type">
+            <summary>
+            获取标记的类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.Token.Line">
+            <summary>
+            获取标记所在的行号
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.Token.Column">
+            <summary>
+            获取标记所在的列号
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Compiling.Token.FilePath">
+            <summary>
+            获取标记所在的文件路径
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Compiling.Token.#ctor(System.String,Accelbuffer.Compiling.TokenType,System.Int32,System.Int32,System.String)">
+            <summary>
+            创建一个新的标记
+            </summary>
+            <param name="raw">原始字符串</param>
+            <param name="type">标记的类型</param>
+            <param name="line">标记所在的行号</param>
+            <param name="column">标记所在的列号</param>
+            <param name="filePath">标记所在的文件路径</param>
+        </member>
+        <member name="T:Accelbuffer.Reflection.AccelbufferFieldInfo">
+            <summary>
+            表示一个使用AccelbufferScript编写的结构中的一个字段。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.FieldHandle">
+            <summary>
+            获取内部元数据字段的表示形式的句柄
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.Info">
+            <summary>
+            获取字段的元数据类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.Name">
+            <summary>
+            获取字段的名称
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.Document">
+            <summary>
+            获取字段的文档
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.SerialIndex">
+            <summary>
+            获取字段的序列索引
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.IsObsolete">
+            <summary>
+            获取字段是否已经被弃用
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.IsNeverNull">
+            <summary>
+            获取字段的值是否永远不会为null
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.IsFacadeType">
+            <summary>
+            获取字段是否使用外观类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.DeclaringType">
+            <summary>
+            获取声明此字段的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.FieldType">
+            <summary>
+            获取字段的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferFieldInfo.RealFieldType">
+            <summary>
+            获取字段的真实类型，如果字段没有使用外观类型，将返回null
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferFieldInfo.GetValue``1(System.TypedReference)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="objRef"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferFieldInfo.GetValue(System.Object)">
+            <summary>
+            返回给定对象的字段的值
+            </summary>
+            <param name="obj">获取字段值的对象引用</param>
+            <returns>给定对象的字段的值</returns>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferFieldInfo.SetValue``1(System.TypedReference,``0)">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="objRef"></param>
+            <param name="value"></param>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferFieldInfo.SetValue(System.Object,System.Object)">
+            <summary>
+            设置给定对象的字段的值。
+            </summary>
+            <param name="obj">设置字段值的对象引用</param>
+            <param name="value">要分配给字段的值</param>
+        </member>
+        <member name="T:Accelbuffer.Reflection.AccelbufferTypeInfo">
+            <summary>
+            表示一个使用AccelbufferScript编写的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.TypeHandle">
+            <summary>
+            获取内部元数据类型的表示形式的句柄
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.Info">
+            <summary>
+            获取类型的元数据类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.Name">
+            <summary>
+            获取类型的名称
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.Document">
+            <summary>
+            获取类型的文档
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.Visibility">
+            <summary>
+            获取类型的可访问性
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.IsFinal">
+            <summary>
+            获取类型是否是密封类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.IsClass">
+            <summary>
+            获取类型是否是引用类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.IsValueType">
+            <summary>
+            获取类型是否是值类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.IsNested">
+            <summary>
+            获取类型是否是嵌套类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.HasContinuousSerialIndexes">
+            <summary>
+            获取类型中的字段的序列索引是否连续
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.ApproximateMemorySize">
+            <summary>
+            获取类型的实例将会占用的近似字节大小
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.DeclaringType">
+            <summary>
+            获取声明此类型的类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.AccelbufferTypeInfo.Fields">
+            <summary>
+            获取类型声明的所有字段
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferTypeInfo.CreateInstance">
+            <summary>
+            创建类型的一个实例
+            </summary>
+            <returns>该类型的实例对象</returns>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferTypeInfo.GetFields">
+            <summary>
+            获取类型声明的所有字段
+            </summary>
+            <returns>类型声明的所有字段的枚举对象</returns>
+        </member>
+        <member name="M:Accelbuffer.Reflection.AccelbufferTypeInfo.GetField(System.String)">
+            <summary>
+            获取类型中指定名称的字段
+            </summary>
+            <param name="name">需要获取的字段的名称</param>
+            <returns>类型中具有指定名称的字段，如果字段不存在，则返回null</returns>
+        </member>
+        <member name="T:Accelbuffer.Reflection.TypeVisibility">
+            <summary>
+            表示一个类型的可访问性
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.None">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.Public">
+            <summary>
+            public
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.Internal">
+            <summary>
+            internal
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.Private">
+            <summary>
+            private
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.Protected">
+            <summary>
+            protected
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.ProtectedInternal">
+            <summary>
+            protected internal
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.Reflection.TypeVisibility.PrivateProtected">
+            <summary>
+            private protected
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Reflection.IAccelbufferMemberInfo">
+            <summary>
+            表示一个使用AccelbufferScript编写的成员。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.IAccelbufferMemberInfo.Name">
+            <summary>
+            获取成员的名称
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.IAccelbufferMemberInfo.Document">
+            <summary>
+            获取成员的文档
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Reflection.IAccelbufferMemberInfo.DeclaringType">
+            <summary>
+            获取声明此成员的类型
+            </summary>
+        </member>
         <member name="T:Accelbuffer.InvalidFieldIndexException">
             <summary>
             无效的字段索引错误
@@ -72,6 +1142,28 @@
             </summary>
             <param name="message">描述错误的消息</param>
             <param name="inner">导致当前异常的异常；如果未指定内部异常，则是一个 null 引用（在 Visual Basic 中为 Nothing）。</param>
+        </member>
+        <member name="T:Accelbuffer.Injection.FacadeTypeAttribute">
+            <summary>
+            指示一个字段使用外观类型
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Injection.FacadeTypeAttribute.RealType">
+            <summary>
+            字段的真实类型。
+            在序列化时，字段会被强制转换为该类型。
+            在反序列化时，字段会从该类型强制转换为原类型。
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Injection.FacadeTypeAttribute.#ctor(System.Type)">
+            <summary>
+            初始化 FacadeTypeAttribute
+            </summary>
+            <param name="realType">
+            字段的真实类型。
+            在序列化时，字段会被强制转换为该类型。
+            在反序列化时，字段会从该类型强制转换为原类型。
+            </param>
         </member>
         <member name="T:Accelbuffer.Injection.NeverNullAttribute">
             <summary>
@@ -228,6 +1320,7 @@
             <param name="startIndex">开始写入的索引位置</param>
             <returns>写入的数据长度</returns>
             <exception cref="T:System.ObjectDisposedException">当前对象已经被释放</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="buffer"/>是null</exception>
             <exception cref="T:System.ArgumentException"><paramref name="buffer"/>长度不足</exception>
         </member>
         <member name="M:Accelbuffer.Memory.NativeBuffer.GetEnumerator">
@@ -267,7 +1360,7 @@
             <summary>
             获取内存的指针
             </summary>
-            <returns>指向内存的指针，如果是null，则对象已经被释放</returns>
+            <returns>指向内存的指针，如果是null，则对象已经被释放或者内存大小为0</returns>
         </member>
         <member name="M:Accelbuffer.Memory.NativeMemory.GetPointer(System.Int32)">
             <summary>
@@ -275,7 +1368,19 @@
             </summary>
             <param name="minSize">获取的内存的最小值，以字节为单位</param>
             <returns>指向内存的指针</returns>
-            <exception cref="T:System.ObjectDisposedException">当前内存已经被释放</exception>
+            <exception cref="T:System.ObjectDisposedException">当前内存已经被释放或者内存大小为0</exception>
+        </member>
+        <member name="M:Accelbuffer.Memory.NativeMemory.ToNativeBufferNoCopy(System.Int32)">
+            <summary>
+            将当前内存转换为一个非托管缓冲区。
+            这个方法不会开辟新的内存，
+            所以如果要继续使用返回的<see cref="T:Accelbuffer.Memory.NativeBuffer"/>就不应该调用<see cref="M:Accelbuffer.Memory.NativeMemory.Dispose"/>方法，
+            如果需要释放这块内存，只需要调用<see cref="M:Accelbuffer.Memory.NativeBuffer.Dispose"/>和<see cref="M:Accelbuffer.Memory.NativeMemory.Dispose"/>其中一个
+            </summary>
+            <param name="usedSize">暴露给非托管缓冲区使用的字节大小</param>
+            <returns>与当前对象等效的非托管缓冲区</returns>
+            <exception cref="T:System.ObjectDisposedException">当前内存已经被释放或者内存大小为0</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="usedSize"/>是负数或者大于<see cref="P:Accelbuffer.Memory.NativeMemory.Size"/></exception>
         </member>
         <member name="M:Accelbuffer.Memory.NativeMemory.Allocate(System.Int32@)">
             <summary>
@@ -344,11 +1449,11 @@
             释放所有内存
             </summary>
         </member>
-        <member name="M:Accelbuffer.Memory.MemoryAllocator.Trim(System.Boolean)">
+        <member name="M:Accelbuffer.Memory.MemoryAllocator.FreeMemory(System.Boolean)">
             <summary>
-            释放多余的内存
+            释放内存
             </summary>
-            <param name="trimAll">指示是否释放所有的内存</param>
+            <param name="leaveOneChunkEachSize">指示是否为每一种内存大小保留一个chunk</param>
         </member>
         <member name="M:Accelbuffer.Memory.MemoryAllocator.Allocate(System.Int32@)">
             <summary>
@@ -391,45 +1496,264 @@
             指示使用小端字节序
             </summary>
         </member>
-        <member name="T:Accelbuffer.Text.Encodings">
+        <member name="T:Accelbuffer.ObjectSerializationShortcut">
+            <summary>
+            提供更加方便的序列化对象的方法
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.ObjectSerializationShortcut.WriteToBuffer``1(``0,Accelbuffer.Encoding,Accelbuffer.Endian)">
+            <summary>
+            序列化对象，并返回序列化数据
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
+            <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
+        </member>
+        <member name="M:Accelbuffer.ObjectSerializationShortcut.WriteToBytes``1(``0,System.Byte[]@,Accelbuffer.Encoding,Accelbuffer.Endian)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">对象的序列化结果</param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
+        </member>
+        <member name="M:Accelbuffer.ObjectSerializationShortcut.WriteToBytes``1(``0,System.Byte[],System.Int32,Accelbuffer.Encoding,Accelbuffer.Endian)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">用于接受序列化数据的缓冲区</param>
+            <param name="index"><paramref name="buffer"/>开始写入的索引</param>
+            <param name="encoding">序列化使用的字符编码</param>
+            <param name="endian">序列化使用的字节序</param>
+            <returns>序列化数据的大小</returns>
+            <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
+        </member>
+        <member name="T:Accelbuffer.SerializationCallback`1">
+            <summary>
+            序列化/反序列化回调
+            </summary>
+            <typeparam name="T">序列化/反序列化的对象类型</typeparam>
+            <param name="obj">序列化/反序列化的对象</param>
+        </member>
+        <member name="T:Accelbuffer.SerializationCallbackType">
+            <summary>
+            序列化/反序列化回调类型
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.SerializationCallbackType.OnBeforeSerialization">
+            <summary>
+            指示回调在序列化前调用
+            </summary>
+        </member>
+        <member name="F:Accelbuffer.SerializationCallbackType.OnAfterSerialization">
+            <summary>
+            指示回调在反序列化后调用
+            </summary>
+        </member>
+        <member name="T:Accelbuffer.Unsafe.NativeMemoryIO">
+            <summary>
+            提供一系列<see cref="T:Accelbuffer.Memory.NativeMemory"/>的便捷写入/读取方法
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.ReadByte(Accelbuffer.Memory.NativeMemory@,System.Int32)">
+            <summary>
+            从内存中读取一个字节
+            </summary>
+            <param name="memory">保存了数据的一块非托管内存</param>
+            <param name="offset">读取的偏移量</param>
+            <returns>
+            强制转换为<see cref="T:System.Int32"/>类型的字节对象，
+            如果这个值为-1，则说明偏移处已经没有合法的字节可以读取
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.ReadBytes(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Int32)">
+            <summary>
+            从内存中读取指定数量的字节
+            </summary>
+            <param name="memory">保存了数据的一块非托管内存</param>
+            <param name="offset">读取的偏移量</param>
+            <param name="count">读取的字节数量</param>
+            <returns>读取的所有字节</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数，或者<paramref name="count"/>是负数</exception>
+            <exception cref="T:System.OutOfMemoryException"><paramref name="memory"/>中没有足够的大小用于读取</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.ReadBytes(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            从内存中读取指定数量的字节，并写入指定内存中
+            </summary>
+            <param name="memory">保存了数据的一块非托管内存</param>
+            <param name="offset">读取的偏移量</param>
+            <param name="count">读取的字节数量</param>
+            <param name="destination">用于接受读取的字节数组</param>
+            <param name="destinationStartIndex">向<paramref name="destinationStartIndex"/>开始写入的索引</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="destination"/>是null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数，或者<paramref name="count"/>是负数</exception>
+            <exception cref="T:System.IndexOutOfRangeException"><paramref name="destinationStartIndex"/>是负数</exception>
+            <exception cref="T:System.OutOfMemoryException"><paramref name="memory"/>中没有足够的大小用于读取，或者<paramref name="destination"/>中没有足够的大小用于写入</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.ReadBytes(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Int32,System.Byte*)">
+            <summary>
+            从内存中读取指定数量的字节，并写入指定内存中
+            </summary>
+            <param name="memory">保存了数据的一块非托管内存</param>
+            <param name="offset">读取的偏移量</param>
+            <param name="count">读取的字节数量</param>
+            <param name="destination">用于接受读取的字节的内存的指针</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="destination"/>是null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数，或者<paramref name="count"/>是负数</exception>
+            <exception cref="T:System.OutOfMemoryException"><paramref name="memory"/>中没有足够的大小用于读取</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteByte(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte)">
+            <summary>
+            向内存中写入一个字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="data">需要写入的字节</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteByte(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte,System.Byte)">
+            <summary>
+            向内存中写入两个字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="arg0">需要写入的字节</param>
+            <param name="arg1">需要写入的字节</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteByte(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            向内存中写入三个字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="arg0">需要写入的字节</param>
+            <param name="arg1">需要写入的字节</param>
+            <param name="arg2">需要写入的字节</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteByte(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            向内存中写入四个字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="arg0">需要写入的字节</param>
+            <param name="arg1">需要写入的字节</param>
+            <param name="arg2">需要写入的字节</param>
+            <param name="arg3">需要写入的字节</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteByte(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte[])">
+            <summary>
+            向内存中写入数个字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="bytes">需要写入的字节</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteBytes(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            向内存中写入指定数量的字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="bytes">需要写入的字节数组</param>
+            <param name="startIndex">读取<paramref name="bytes"/>的偏移量</param>
+            <param name="count">需要写入的字节数量</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数，或者<paramref name="count"/>是负数</exception>
+            <exception cref="T:System.IndexOutOfRangeException"><paramref name="startIndex"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.WriteBytes(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte*,System.Int32)">
+            <summary>
+            向内存中写入指定数量的字节
+            </summary>
+            <param name="memory">需要写入的非托管内存</param>
+            <param name="offset">写入的偏移量</param>
+            <param name="bytes">需要写入的字节数组的指针</param>
+            <param name="count">需要写入的字节数量</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="offset"/>是负数，或者<paramref name="count"/>是负数</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.CopyToNativeBuffer(Accelbuffer.Memory.NativeMemory@,System.Int32)">
+            <summary>
+            将当前内存转换为一个非托管缓冲区。
+            这个方法会开辟新的内存，
+            如果需要释放<paramref name="memory"/>的内存，可以调用<see cref="M:Accelbuffer.Memory.NativeMemory.Dispose"/>
+            </summary>
+            <param name="memory">需要拷贝的非托管内存</param>
+            <param name="usedSize">暴露给非托管缓冲区使用的字节大小</param>
+            <returns>与当前对象等效的非托管缓冲区</returns>
+            <exception cref="T:System.ObjectDisposedException">当前内存已经被释放或者内存大小为0</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="usedSize"/>是负数或者大于<paramref name="memory"/>的大小</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.ToArray(Accelbuffer.Memory.NativeMemory@,System.Int32)">
+            <summary>
+            将一段非托管内存转换为托管字节数组
+            </summary>
+            <param name="memory">需要转换的非托管内存</param>
+            <param name="size">转换的字节大小</param>
+            <returns>保存了<paramref name="size"/>个来自<paramref name="memory"/>的字节的托管字节数组</returns>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.NativeMemoryIO.CopyToArray(Accelbuffer.Memory.NativeMemory@,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            将一段非托管内存拷贝到指定的托管字节数组
+            </summary>
+            <param name="memory">需要拷贝的非托管内存</param>
+            <param name="size">拷贝的字节数量</param>
+            <param name="buffer">拷贝到的托管字节数组</param>
+            <param name="startIndex">开始写入的索引位置</param>
+            <returns>写入的数据长度</returns>
+        </member>
+        <member name="T:Accelbuffer.Unsafe.Text.Encodings">
             <summary>
             提供目前支持的字符串编码
             </summary>
         </member>
-        <member name="P:Accelbuffer.Text.Encodings.ASCII">
+        <member name="P:Accelbuffer.Unsafe.Text.Encodings.ASCII">
             <summary>
             ASCII编码
             </summary>
         </member>
-        <member name="P:Accelbuffer.Text.Encodings.Unicode">
+        <member name="P:Accelbuffer.Unsafe.Text.Encodings.Unicode">
             <summary>
             使用系统字节序的Unicode编码
             </summary>
         </member>
-        <member name="P:Accelbuffer.Text.Encodings.ReversedUnicode">
+        <member name="P:Accelbuffer.Unsafe.Text.Encodings.ReversedUnicode">
             <summary>
             与系统字节序相反的Unicode编码
             </summary>
         </member>
-        <member name="P:Accelbuffer.Text.Encodings.UTF8">
+        <member name="P:Accelbuffer.Unsafe.Text.Encodings.UTF8">
             <summary>
             UTF8编码
             </summary>
         </member>
-        <member name="T:Accelbuffer.Text.IUnsafeEncoding">
+        <member name="T:Accelbuffer.Unsafe.Text.IUnsafeEncoding">
             <summary>
             '不安全'的字符串编码转换器
             </summary>
         </member>
-        <member name="M:Accelbuffer.Text.IUnsafeEncoding.GetBytes(System.String,System.Byte*)">
+        <member name="M:Accelbuffer.Unsafe.Text.IUnsafeEncoding.GetBytes(System.String,System.Byte*)">
             <summary>
             将指定字符串中的一组字符编码为指定的字节数组
             </summary>
             <param name="str">字符串</param>
-            <param name="bytes">字节数组指针</param>
+            <param name="buffer">字节数组指针</param>
             <returns>字节数量</returns>
         </member>
-        <member name="M:Accelbuffer.Text.IUnsafeEncoding.GetString(System.Byte*,System.Int32)">
+        <member name="M:Accelbuffer.Unsafe.Text.IUnsafeEncoding.GetString(System.Byte*,System.Int32)">
             <summary>
             将指定字节数组中的所有字节解码为一个字符串
             </summary>
@@ -437,6 +1761,100 @@
             <param name="byteCount">字节数量</param>
             <returns>解码的字符串</returns>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="byteCount"/>的值错误</exception>
+        </member>
+        <member name="T:Accelbuffer.Unsafe.UnmanagedObjectSerializationShortcut">
+            <summary>
+            提供更加方便的序列化非托管对象的方法
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedObjectSerializationShortcut.WriteToBufferUnsafe``1(``0)">
+            <summary>
+            序列化对象，并返回序列化数据
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedObjectSerializationShortcut.WriteToBytesUnsafe``1(``0,System.Byte[]@)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">保存了对象序列化数据的缓冲区</param>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedObjectSerializationShortcut.WriteToBytesUnsafe``1(``0,System.Byte[],System.Int32)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">用于接受序列化数据的缓冲区</param>
+            <param name="index">开始读取的索引位置</param>
+            <returns>序列化数据的大小</returns>
+            <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
+        </member>
+        <member name="T:Accelbuffer.Unsafe.UnmanagedTypeSerializer">
+            <summary>
+            提供最快速的序列化非托管对象的接口，
+            但是通过该接口序列化的数据不做任何优化，
+            数据的大小等于对象类型的字节大小，
+            字符的编码统一使用Unicode编码，
+            字节序根据不同操作系统而不同。
+            换句话说这个接口序列化类型时，
+            只是一个memcpy的过程，
+            如果需要更多功能支持，
+            应该使用<see cref="T:Accelbuffer.Serializer"/>进行类型的序列化。
+            </summary>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedTypeSerializer.Serialize``1(``0)">
+            <summary>
+            序列化对象，并返回序列化数据
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedTypeSerializer.Serialize``1(``0,System.Byte[]@)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">保存了对象序列化数据的缓冲区</param>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedTypeSerializer.Serialize``1(``0,System.Byte[],System.Int32)">
+            <summary>
+            序列化对象，并将序列化数据写入指定的缓冲区中
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
+            <param name="buffer">用于接受序列化数据的缓冲区</param>
+            <param name="index">开始读取的索引位置</param>
+            <returns>序列化数据的大小</returns>
+            <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedTypeSerializer.Deserialize``1(System.Byte[],System.Int32)">
+            <summary>
+            反序列化<typeparamref name="T"/>类型对象实例
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="bytes">保存了对象数据的字节数组</param>
+            <param name="index">开始读取的索引位置</param>
+            <returns>反序列化的对象实例</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
+        </member>
+        <member name="M:Accelbuffer.Unsafe.UnmanagedTypeSerializer.Deserialize``1(Accelbuffer.Memory.NativeBuffer,System.Int32)">
+            <summary>
+            反序列化<typeparamref name="T"/>类型对象实例
+            </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="buffer">保存了对象数据的非托管缓冲区</param>
+            <param name="index">开始读取的索引位置</param>
+            <returns>反序列化的对象实例</returns>
+            <exception cref="T:System.ArgumentException"><paramref name="buffer"/>已经被释放</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="buffer"/>长度不足</exception>
         </member>
         <member name="T:Accelbuffer.VInt">
             <summary>
@@ -517,6 +1935,111 @@
         <member name="P:Accelbuffer.Properties.Resources.DoubleName">
             <summary>
               查找类似 Float64 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS001_InvalidChar">
+            <summary>
+              查找类似 error: AS001: invalid character: &apos;{0}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS002_MissingDocEnd">
+            <summary>
+              查找类似 error: AS002: missing &apos;--&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS003_MissingIdentifier">
+            <summary>
+              查找类似 error: AS003: missing identifier 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS004_MissingSemicolon">
+            <summary>
+              查找类似 error: AS004: missing &apos;;&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS005_InvalidIdentifier">
+            <summary>
+              查找类似 error: AS005: invalid identifier: &apos;{0}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS006_InvalidPackage">
+            <summary>
+              查找类似 error: AS006: package declaration should be the first non empty statement of the file 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS007_InvalidToken">
+            <summary>
+              查找类似 error: AS007: invalid token: &apos;{0}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS008_MultipleKeyword">
+            <summary>
+              查找类似 error: AS008: duplicate keyword: &apos;{0}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS009_MultipleAccessKeyword">
+            <summary>
+              查找类似 error: AS009: duplicate access modifier 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS010_InvalidFinalKeyword">
+            <summary>
+              查找类似 error: AS010: only structures marked with the &apos;ref&apos; keyword can be marked as&apos; final &apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS011_MissingIntLiteral">
+            <summary>
+              查找类似 error: AS011: missing integer value 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS012_MissingOpenBrace">
+            <summary>
+              查找类似 error: AS012: missing &apos;{{&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS013_InvalidFieldIndex">
+            <summary>
+              查找类似 error: AS013: field index must be in range (0, 268435456] 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS014_MissingColonOrBar">
+            <summary>
+              查找类似 error: AS014: missing &apos;:&apos; or &apos;|&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS015_MissingSemicolonOrObsoleteKeyword">
+            <summary>
+              查找类似 error: AS015: missing &apos;;&apos; or &apos;obsolete&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS016_MissingIdentifierOrAsterisk">
+            <summary>
+              查找类似 error: AS016: missing identifier or &apos;*&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS017_MissingCloseBrace">
+            <summary>
+              查找类似 error: AS017: missing &apos;}}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS018_InvalidPrivateKeyword">
+            <summary>
+              查找类似 error: AS018: keyword &apos;private&apos; can only be used in nested types 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS019_InvalidProtectedKeyword">
+            <summary>
+              查找类似 error: AS019: keyword &apos;protected&apos; can only be used in nested types 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS020_MultipleIndex">
+            <summary>
+              查找类似 error: AS020: duplicate field index &apos;{0}&apos; 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Error_AS021_MissingCloseParen">
+            <summary>
+              查找类似 error: AS021: missing &apos;)&apos; 的本地化字符串。
             </summary>
         </member>
         <member name="P:Accelbuffer.Properties.Resources.FloatName">
@@ -694,6 +2217,16 @@
               查找类似 Vector4 的本地化字符串。
             </summary>
         </member>
+        <member name="P:Accelbuffer.Properties.Resources.Version">
+            <summary>
+              查找类似 v0.1.6.14 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Version_Unity">
+            <summary>
+              查找类似 v0.1.6.14 unity 的本地化字符串。
+            </summary>
+        </member>
         <member name="P:Accelbuffer.Properties.Resources.VIntName">
             <summary>
               查找类似 VariantInt 的本地化字符串。
@@ -702,6 +2235,21 @@
         <member name="P:Accelbuffer.Properties.Resources.VUIntName">
             <summary>
               查找类似 VariantUInt 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Warning_AS001_InvalidMemorySize">
+            <summary>
+              查找类似 warning: AS001: the memory size required for the structure must be greater than 0 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Warning_AS002_UnnecessaryUsing">
+            <summary>
+              查找类似 warning: AS002: package &apos;{0}&apos; will be referenced automatically, no need to manually reference again 的本地化字符串。
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.Properties.Resources.Warning_AS003_RequireContinuousIndex">
+            <summary>
+              查找类似 warning: AS003: the indexes of fields should be as continuous as possible 的本地化字符串。
             </summary>
         </member>
         <member name="P:Accelbuffer.Properties.Resources.WriteValueMethodName">
@@ -938,35 +2486,66 @@
             </summary>
             <typeparam name="T">需要初始化的类型</typeparam>
         </member>
+        <member name="M:Accelbuffer.Serializer.AddCallback``1(Accelbuffer.SerializationCallbackType,Accelbuffer.SerializationCallback{``0})">
+            <summary>
+            添加一个序列化/反序列化事件的回调
+            </summary>
+            <typeparam name="T">序列化/反序列化对象的类型</typeparam>
+            <param name="type">回调的类型</param>
+            <param name="callback">回调委托</param>
+        </member>
+        <member name="M:Accelbuffer.Serializer.AddCallback``1(Accelbuffer.SerializationCallback{``0},Accelbuffer.SerializationCallback{``0})">
+            <summary>
+            添加序列化和反序列化事件的回调
+            </summary>
+            <typeparam name="T">序列化/反序列化对象的类型</typeparam>
+            <param name="onBeforeSerialization">在序列化前调用的回调</param>
+            <param name="onAfterDeserialization">在反序列化后调用的回调</param>
+        </member>
+        <member name="M:Accelbuffer.Serializer.RemoveCallback``1(Accelbuffer.SerializationCallbackType,Accelbuffer.SerializationCallback{``0})">
+            <summary>
+            移除一个序列化/反序列化事件的回调
+            </summary>
+            <typeparam name="T">序列化/反序列化对象的类型</typeparam>
+            <param name="type">回调的类型</param>
+            <param name="callback">回调委托</param>
+        </member>
+        <member name="M:Accelbuffer.Serializer.RemoveCallback``1(Accelbuffer.SerializationCallback{``0},Accelbuffer.SerializationCallback{``0})">
+            <summary>
+            移除序列化和反序列化事件的回调
+            </summary>
+            <typeparam name="T">序列化/反序列化对象的类型</typeparam>
+            <param name="onBeforeSerialization">在序列化前调用的回调</param>
+            <param name="onAfterDeserialization">在反序列化后调用的回调</param>
+        </member>
         <member name="M:Accelbuffer.Serializer.Serialize``1(``0,Accelbuffer.Encoding,Accelbuffer.Endian)">
             <summary>
-            序列化对象，并返回序列化数据（线程安全）
+            序列化对象，并返回序列化数据
             </summary>
-            <param name="obj">被序列化的对象</param>
             <typeparam name="T">序列化的对象类型</typeparam>
+            <param name="obj">被序列化的对象</param>
             <param name="encoding">序列化使用的字符编码</param>
             <param name="endian">序列化使用的字节序</param>
-            <returns>对象的序列化结果</returns>
+            <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
         </member>
         <member name="M:Accelbuffer.Serializer.Serialize``1(``0,System.Byte[]@,Accelbuffer.Encoding,Accelbuffer.Endian)">
             <summary>
-            序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+            序列化对象，并将序列化数据写入指定的缓冲区中
             </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
             <param name="obj">被序列化的对象</param>
             <param name="buffer">对象的序列化结果</param>
-            <typeparam name="T">序列化的对象类型</typeparam>
             <param name="encoding">序列化使用的字符编码</param>
             <param name="endian">序列化使用的字节序</param>
-            <exception cref="T:System.ArgumentException">字节数组容量不足</exception>
         </member>
         <member name="M:Accelbuffer.Serializer.Serialize``1(``0,System.Byte[],System.Int32,Accelbuffer.Encoding,Accelbuffer.Endian)">
             <summary>
-            序列化对象，并将序列化数据写入指定的缓冲区中（线程安全）
+            序列化对象，并将序列化数据写入指定的缓冲区中
             </summary>
+            <typeparam name="T">序列化的对象类型</typeparam>
             <param name="obj">被序列化的对象</param>
             <param name="buffer">用于接受序列化数据的缓冲区</param>
             <param name="index"><paramref name="buffer"/>开始写入的索引</param>
-            <typeparam name="T">序列化的对象类型</typeparam>
             <param name="encoding">序列化使用的字符编码</param>
             <param name="endian">序列化使用的字节序</param>
             <returns>序列化数据的大小</returns>
@@ -976,10 +2555,10 @@
             <summary>
             反序列化<typeparamref name="T"/>类型对象实例
             </summary>
-            <param name="bytes">被反序列化的字节数组</param>
+            <typeparam name="T">反序列化的对象类型</typeparam>
+            <param name="bytes">保存了对象数据的字节数组</param>
             <param name="index">开始读取的索引位置</param>
             <param name="length">可以读取的字节大小</param>
-            <typeparam name="T">反序列化的对象类型</typeparam>
             <returns>反序列化的对象实例</returns>
             <exception cref="T:System.ArgumentNullException"><paramref name="bytes"/>为null</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="bytes"/>长度不足</exception>
@@ -988,10 +2567,10 @@
             <summary>
             反序列化<typeparamref name="T"/>类型对象实例
             </summary>
-            <param name="buffer">被反序列化的字节缓冲区</param>
+            <typeparam name="T">反序列化的对象类型</typeparam>
+            <param name="buffer">保存了对象数据的非托管缓冲区</param>
             <param name="index">开始读取的索引位置</param>
             <param name="length">可以读取的字节大小</param>
-            <typeparam name="T">反序列化的对象类型</typeparam>
             <returns>反序列化的对象实例</returns>
             <exception cref="T:System.ArgumentException"><paramref name="buffer"/>已经被释放</exception>
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="buffer"/>长度不足</exception>
@@ -1084,6 +2663,11 @@
         <member name="T:Accelbuffer.AccelWriter">
             <summary>
             公开对字节数据的写入接口
+            </summary>
+        </member>
+        <member name="P:Accelbuffer.AccelWriter.ByteCount">
+            <summary>
+            获取当前写入的字节数量
             </summary>
         </member>
         <member name="M:Accelbuffer.AccelWriter.WriteValue(System.Int32,System.SByte)">

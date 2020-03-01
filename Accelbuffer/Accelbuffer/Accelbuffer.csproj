@@ -53,19 +53,60 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="UnityEngine">
       <HintPath>D:\Unity\2019.2.5f1\Editor\Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compiling\Compiler.cs" />
+    <Compile Include="Compiling\TypeNameStruct\TypeName.cs" />
+    <Compile Include="Compiling\TypeNameStruct\TypeNamePart2.cs" />
+    <Compile Include="Injection\IL\RuntimeInjector.cs" />
+    <Compile Include="Compiling\DeclarationArray.cs" />
+    <Compile Include="Compiling\LangMgr\AccelbufferByteCodeManager.cs" />
+    <Compile Include="Compiling\RuntimeCompiler.cs" />
+    <Compile Include="Compiling\DeclarationArraySerializer.cs" />
+    <Compile Include="Injection\IL\Serializers\SerializerInjector.cs" />
+    <Compile Include="Reflection\AccelFieldInfo.cs" />
+    <Compile Include="Reflection\AccelTypeInfo.cs" />
+    <Compile Include="Compiling\Declarations\AccelbufferScripts\FieldDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\AccelbufferScripts\PackageDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\AccelbufferScripts\StructDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\AccelbufferScripts\UsingAsDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\AccelbufferScripts\UsingDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\FieldDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\IDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\PackageDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\StructDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\UsingAsDeclaration.cs" />
+    <Compile Include="Compiling\Declarations\UsingDeclaration.cs" />
+    <Compile Include="Compiling\Enums\KeywordCategory.cs" />
+    <Compile Include="Compiling\Enums\TokenType.cs" />
+    <Compile Include="Reflection\SerializationHelperDelegates.cs" />
+    <Compile Include="Reflection\TypeVisibility.cs" />
+    <Compile Include="Compiling\ErrorWriter.cs" />
+    <Compile Include="Compiling\KeywordManager.cs" />
+    <Compile Include="Compiling\LangMgr\CPPManager.cs" />
+    <Compile Include="Compiling\LangMgr\CSharpManager.cs" />
+    <Compile Include="Compiling\LangMgr\DotNetManager.cs" />
+    <Compile Include="Compiling\LangMgr\JavaManager.cs" />
+    <Compile Include="Compiling\LangMgr\LanguageManager.cs" />
+    <Compile Include="Compiling\LangMgr\VisualBasicManager.cs" />
+    <Compile Include="Compiling\Parser.cs" />
+    <Compile Include="Compiling\Scanner.cs" />
+    <Compile Include="Compiling\Token.cs" />
     <Compile Include="Debug\Debug.cs" />
+    <Compile Include="Debug\IDebuggable.cs" />
     <Compile Include="Exceptions\InvalidFieldIndexException.cs" />
     <Compile Include="Exceptions\InvalidUTF8CharException.cs" />
     <Compile Include="Exceptions\SerializerTypeException.cs" />
     <Compile Include="IBuiltinTypeSerializer.cs" />
+    <Compile Include="Injection\Attributes\FacadeTypeAttribute.cs" />
     <Compile Include="Injection\InternalSerializers\IntPtrSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\NullableSerializer.cs" />
+    <Compile Include="Injection\InternalSerializers\ObjectSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\OtherTypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\TypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\UnitySerializer.cs" />
@@ -76,6 +117,9 @@
     <Compile Include="Memory\NativeMemory.cs" />
     <Compile Include="Enums\Endian.cs" />
     <Compile Include="ObjectSerializationShortcut.cs" />
+    <Compile Include="Reflection\IAccelMemberInfo.cs" />
+    <Compile Include="SerializationCallback.cs" />
+    <Compile Include="SerializationCallbackType.cs" />
     <Compile Include="Unsafe\NativeMemoryIO.cs" />
     <Compile Include="Unsafe\Text\ReversedUnicodeEncoding.cs" />
     <Compile Include="Unsafe\UnmanagedObjectSerializationShortcut.cs" />
@@ -84,7 +128,7 @@
     <Compile Include="VUInt.cs" />
     <Compile Include="Memory\IMemorySizeForType.cs" />
     <Compile Include="Memory\MemorySizeAttribute.cs" />
-    <Compile Include="Memory\Allocator\MemoryAllocator.Chunk.cs" />
+    <Compile Include="Memory\Allocator\MemoryAllocator.Structs.cs" />
     <Compile Include="Memory\Allocator\MemoryAllocator.Static.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -102,22 +146,20 @@
     <Compile Include="Injection\Attributes\OnBeforeSerializationAttribute.cs" />
     <Compile Include="Memory\Allocator\MemoryAllocator.cs" />
     <Compile Include="Enums\Encoding.cs" />
-    <Compile Include="Injection\Attributes\FieldIndexAttribute.cs" />
+    <Compile Include="Injection\Attributes\SerialIndexAttribute.cs" />
     <Compile Include="ITypeSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializeByAttribute.cs" />
     <Compile Include="Injection\InternalSerializers\ArraySerializer.cs" />
     <Compile Include="Injection\InternalSerializers\CollectionSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\DictionarySerializer.cs" />
-    <Compile Include="Injection\FieldData.cs" />
     <Compile Include="Injection\InternalSerializers\PrimitiveTypeSerializer.cs" />
     <Compile Include="Injection\InternalSerializers\ListSerializer.cs" />
-    <Compile Include="Injection\Pipeline\Progress\CtorDefineProgress.cs" />
-    <Compile Include="Injection\Pipeline\Progress\DeserializeMethodDefineProgress.cs" />
-    <Compile Include="Injection\Pipeline\SerializerGenerationProgress.cs" />
-    <Compile Include="Injection\Pipeline\Progress\SerializeMethodDefineProgress.cs" />
-    <Compile Include="Injection\Pipeline\SerializerPipeline.cs" />
-    <Compile Include="Injection\SerializerInjector.cs" />
+    <Compile Include="Injection\IL\Serializers\Progress\CtorDefineProgress.cs" />
+    <Compile Include="Injection\IL\Serializers\Progress\DeserializeMethodDefineProgress.cs" />
+    <Compile Include="Injection\IL\Serializers\Progress\SerializerGenerationProgress.cs" />
+    <Compile Include="Injection\IL\Serializers\Progress\SerializeMethodDefineProgress.cs" />
+    <Compile Include="Injection\SerializerBinder.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Enums\ObjectType.cs" />
     <Compile Include="IO\AccelWriter.cs" />
@@ -128,6 +170,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="Compiling\Declarations\AccelbufferScripts\FieldDeclaration.accel" />
+    <None Include="Compiling\Declarations\AccelbufferScripts\PackageDeclaration.accel" />
+    <None Include="Compiling\Declarations\AccelbufferScripts\StructDeclaration.accel" />
+    <None Include="Compiling\Declarations\AccelbufferScripts\UsingAsDeclaration.accel" />
+    <None Include="Compiling\Declarations\AccelbufferScripts\UsingDeclaration.accel" />
+    <None Include="Compiling\TypeNameStruct\TypeName.accel" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

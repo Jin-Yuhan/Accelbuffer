@@ -1,0 +1,12 @@
+package Accelbuffer.Compiling.Declarations;
+
+--
+包声明
+--
+public ref final struct PackageDeclaration about 120
+{
+    --
+    包名
+    --
+    var PackageName : string;
+}

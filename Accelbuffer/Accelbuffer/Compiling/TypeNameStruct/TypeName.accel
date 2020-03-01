@@ -1,0 +1,36 @@
+package Accelbuffer.Compiling;
+
+--
+类型名称
+--
+public ref struct TypeName about 120
+{
+    --
+    类型名称的原始字符串
+    --
+    var RawString : string;
+    --
+    类型名称的原始字符串没有nullable符号和数组后缀
+    --
+    var RawStringWithoutNullableAndArraySuffix : string;
+    --
+    获取类型是否为泛型
+    --
+    var IsGenericType : *boolean;
+    --
+    获取类型的泛型定义名称
+    --
+    var GenericTypeDefinitionName : TypeName;
+    --
+    获取类型的泛型参数
+    --
+    var GenericParameters : TypeName[];
+    --
+    获取类型是否是可以为空的类型
+    --
+    var IsNullable : *boolean;
+    --
+    获取类型的数组后缀数量
+    --
+    var ArraySuffixCount : *vint;
+}

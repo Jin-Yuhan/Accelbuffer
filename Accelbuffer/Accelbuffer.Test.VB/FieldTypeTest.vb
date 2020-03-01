@@ -13,7 +13,6 @@ Option Explicit On
 Imports Accelbuffer
 Imports Accelbuffer.Injection
 Imports Accelbuffer.Memory
-Imports Accelbuffer.UnsafeText
 Imports float128 = System.Decimal
 Imports float32 = System.Single
 Imports float64 = System.Double
@@ -30,113 +29,113 @@ Namespace Accelbuffer.Test
     Partial Friend Structure FieldTypeTest
 
         <NeverNull(),
-         FieldIndex(1)>
+         SerialIndex(1)>
         Private m_Field0 As int8
 
         <NeverNull(),
-         FieldIndex(2)>
+         SerialIndex(2)>
         Private m_Field1 As uint8
 
         <NeverNull(),
-         FieldIndex(3)>
+         SerialIndex(3)>
         Private m_Field2 As Int16
 
         <NeverNull(),
-         FieldIndex(4)>
+         SerialIndex(4)>
         Private m_Field3 As UInt16
 
         <NeverNull(),
-         FieldIndex(5)>
+         SerialIndex(5)>
         Private m_Field4 As Int32
 
         <NeverNull(),
-         FieldIndex(6)>
+         SerialIndex(6)>
         Private m_Field5 As UInt32
 
         <NeverNull(),
-         FieldIndex(7)>
+         SerialIndex(7)>
         Private m_Field6 As Int64
 
         <NeverNull(),
-         FieldIndex(8)>
+         SerialIndex(8)>
         Private m_Field7 As UInt64
 
         <NeverNull(),
-         FieldIndex(9)>
+         SerialIndex(9)>
         Private m_Field8 As [Boolean]
 
         <NeverNull(),
-         FieldIndex(10)>
+         SerialIndex(10)>
         Private m_Field9 As float32
 
         <NeverNull(),
-         FieldIndex(11)>
+         SerialIndex(11)>
         Private m_Field10 As float64
 
         <NeverNull(),
-         FieldIndex(12)>
+         SerialIndex(12)>
         Private m_Field11 As float128
 
         <NeverNull(),
-         FieldIndex(13)>
+         SerialIndex(13)>
         Private m_Field12 As IntPtr
 
         <NeverNull(),
-         FieldIndex(14)>
+         SerialIndex(14)>
         Private m_Field13 As UIntPtr
 
         <NeverNull(),
-         FieldIndex(15)>
+         SerialIndex(15)>
         Private m_Field14 As VInt
 
         <NeverNull(),
-         FieldIndex(16)>
+         SerialIndex(16)>
         Private m_Field15 As VUInt
 
         <NeverNull(),
-         FieldIndex(17)>
+         SerialIndex(17)>
         Private m_Field16 As Char
 
-        <FieldIndex(18)>
+        <SerialIndex(18)>
         Private m_Field17 As String
 
-        <FieldIndex(19)>
+        <SerialIndex(19)>
         Private m_Field18 As VInt()
 
-        <FieldIndex(20)>
+        <SerialIndex(20)>
         Private m_Field19 As Dictionary(Of String, float32)
 
-        <FieldIndex(21)>
+        <SerialIndex(21)>
         Private m_Field20 As List(Of Boolean)
 
         <NeverNull(),
-         FieldIndex(22)>
+         SerialIndex(22)>
         Private m_Field21 As KeyValuePair(Of Boolean, Boolean)
 
-        <FieldIndex(23)>
+        <SerialIndex(23)>
         Private m_Field22 As VInt?
 
-        <FieldIndex(24)>
+        <SerialIndex(24)>
         Private m_Field23 As Type
 
         <NeverNull(),
-         FieldIndex(25)>
+         SerialIndex(25)>
         Private m_Field24 As Guid
 
         <NeverNull(),
-         FieldIndex(26)>
+         SerialIndex(26)>
         Private m_Field25 As TimeSpan
 
         <NeverNull(),
-         FieldIndex(27)>
+         SerialIndex(27)>
         Private m_Field26 As DateTime
 
         <NeverNull(),
-         FieldIndex(28)>
+         SerialIndex(28)>
         Private m_Field27 As DateTimeOffset
 
         <NeverNull(),
-         FieldIndex(29)>
+         SerialIndex(29)>
         Private m_Field28 As TestEnum
 
         Partial Private Sub OnBeforeSerialization()

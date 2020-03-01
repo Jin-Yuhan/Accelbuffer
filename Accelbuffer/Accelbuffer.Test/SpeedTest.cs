@@ -15,19 +15,19 @@ namespace Accelbuffer.Test
     public partial struct SpeedTest
     {
         [ProtoMember(1)]
-        [FieldIndex(1), NeverNull]
+        [SerialIndex(1), NeverNull]
         public int32 FixedIntValue;
 
         [ProtoMember(2)]
-        [FieldIndex(2)]
+        [SerialIndex(2)]
         public string StrValue;
 
         [ProtoMember(3)]
-        [FieldIndex(3)]
+        [SerialIndex(3)]
         public Nested[] ArrayValue;
 
         [ProtoMember(4)]
-        [FieldIndex(4)]
+        [SerialIndex(4)]
         public Dictionary<string, char> DictValue;
 
         public sealed class SpeedTestSerializer : ITypeSerializer<SpeedTest>
@@ -88,11 +88,11 @@ namespace Accelbuffer.Test
         public partial struct Nested
         { 
             [ProtoMember(1)]
-            [FieldIndex(1), NeverNull]
+            [SerialIndex(1), NeverNull]
             public boolean BooleanValue;
 
             [ProtoMember(2)]
-            [FieldIndex(2), NeverNull]
+            [SerialIndex(2), NeverNull]
             public float32 FloatValue;
 
             public sealed class NestedSerializer : object, ITypeSerializer<Nested>

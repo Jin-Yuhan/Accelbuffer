@@ -1,0 +1,46 @@
+package Accelbuffer.Compiling.Declarations;
+
+using Accelbuffer.Reflection;
+
+--
+结构声明
+--
+public ref final struct StructDeclaration about 560
+{
+    --
+    可访问性
+    --
+    var Visibility : *(int32)TypeVisibility;
+    --
+    是否为密封结构
+    --
+    var IsFinal : *boolean;
+    --
+    是否为引用结构
+    --
+    var IsRef : *boolean;
+    --
+    是否为嵌套结构
+    --
+    var IsNested : *boolean;
+    --
+    所有字段的索引是否连续
+    --
+    var IsFieldIndexContinuous : *boolean;
+    --
+    结构的名称
+    --
+    var Name : string;
+    --
+    结构的文档
+    --
+    var Doc : string;
+    --
+    结构的大小
+    --
+    var Size : *vint;
+    --
+    结构内的声明
+    --
+    var Declarations : *DeclarationArray;
+}

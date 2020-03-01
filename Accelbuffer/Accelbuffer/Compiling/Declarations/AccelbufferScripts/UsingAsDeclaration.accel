@@ -1,0 +1,16 @@
+package Accelbuffer.Compiling.Declarations;
+
+--
+类型别名的声明
+--
+public ref final struct UsingAsDeclaration about 251
+{
+    --
+    原始类型名
+    --
+    var TypeName : TypeName;
+    --
+    类型的别名
+    --
+    var AliasName : string;
+}

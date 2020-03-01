@@ -138,6 +138,9 @@ namespace Accelbuffer.Test
     {
         public static void ProgramMain()
         {
+            Serializer.AddCallback((ref FieldTypeTest obj) => Console.WriteLine("Before"), (ref FieldTypeTest obj) => Console.WriteLine("After"));
+            Serializer.AddCallback((ref FieldTypeTestRuntime obj) => Console.WriteLine("Before_R"), (ref FieldTypeTestRuntime obj) => Console.WriteLine("After_R"));
+
             Console.WriteLine("Gen");
 
             Guid guid = Guid.NewGuid();
@@ -178,28 +181,28 @@ namespace Accelbuffer.Test
                 Field28 = TestEnum.Value3
             };
 
-            var buffer0 = test.ToNativeBuffer(Encoding.ASCII, Endian.LittleEndian);
+            var buffer0 = test.WriteToBuffer(Encoding.ASCII, Endian.LittleEndian);
             var result0 = Serializer.Deserialize<FieldTypeTest>(buffer0, 0, buffer0.Length);
             buffer0.Dispose();
 
 
-            var buffer1 = test.ToNativeBuffer(Encoding.ASCII, Endian.BigEndian);
+            var buffer1 = test.WriteToBuffer(Encoding.ASCII, Endian.BigEndian);
             var result1 = Serializer.Deserialize<FieldTypeTest>(buffer1, 0, buffer1.Length);
             buffer1.Dispose();
 
-            var buffer2 = test.ToNativeBuffer(Encoding.Unicode, Endian.LittleEndian);
+            var buffer2 = test.WriteToBuffer(Encoding.Unicode, Endian.LittleEndian);
             var result2 = Serializer.Deserialize<FieldTypeTest>(buffer2, 0, buffer2.Length);
             buffer2.Dispose();
 
-            var buffer3 = test.ToNativeBuffer(Encoding.Unicode, Endian.BigEndian);
+            var buffer3 = test.WriteToBuffer(Encoding.Unicode, Endian.BigEndian);
             var result3 = Serializer.Deserialize<FieldTypeTest>(buffer3, 0, buffer3.Length);
             buffer3.Dispose();
 
-            var buffer4 = test.ToNativeBuffer(Encoding.UTF8, Endian.LittleEndian);
+            var buffer4 = test.WriteToBuffer(Encoding.UTF8, Endian.LittleEndian);
             var result4 = Serializer.Deserialize<FieldTypeTest>(buffer4, 0, buffer4.Length);
             buffer4.Dispose();
 
-            var buffer5 = test.ToNativeBuffer(Encoding.UTF8, Endian.BigEndian);
+            var buffer5 = test.WriteToBuffer(Encoding.UTF8, Endian.BigEndian);
             var result5 = Serializer.Deserialize<FieldTypeTest>(buffer5, 0, buffer5.Length);
             buffer5.Dispose();
 
@@ -243,7 +246,9 @@ namespace Accelbuffer.Test
                 Field25 = time,
                 Field26 = date,
                 Field27 = offset,
-                Field28 = TestEnum.Value3
+                Field28 = TestEnum.Value3,
+                ClassData = "C# String -> Object",
+                StructData = 123
             };
             
             var buffer10 = Serializer.Serialize(test1, Encoding.ASCII, Endian.LittleEndian);

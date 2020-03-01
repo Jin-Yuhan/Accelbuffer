@@ -1,0 +1,12 @@
+package Accelbuffer.Compiling.Declarations;
+
+--
+包引用声明
+--
+public ref final struct UsingDeclaration about 120
+{
+    --
+    引用的包名
+    --
+    var PackageName : string;
+}

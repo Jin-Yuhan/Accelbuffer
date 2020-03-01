@@ -15,21 +15,15 @@ namespace Accelbuffer.Memory
         public static MemoryAllocator Shared { get; } = new MemoryAllocator();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int Align(int size)
+        private static void Align(ref int size)
         {
-            return (int)((uint)(size + ALIGN - 1) & (~(uint)(ALIGN - 1)));
+            size = (int)((uint)(size + ALIGN - 1) & (~(uint)(ALIGN - 1)));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static int GetFreeListIndex(int size)
         {
-            return ((size + ALIGN - 1) / ALIGN) - 1;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int GetChunkSize(int index)
-        {
-            return (index + 1) * ALIGN;
+            return (size / ALIGN) - 1;
         }
     }
 }

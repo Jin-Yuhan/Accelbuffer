@@ -376,7 +376,7 @@ namespace Accelbuffer
 
             if (type != ObjectType.Fixed64)
             {
-                throw new InvalidCastException(string.Format(Resources.InvalidCastFormat, type, "intptr"));
+                throw new InvalidCastException(string.Format(Resources.InvalidCastFormat, type, "nint"));
             }
 
             long value = 0;
@@ -404,7 +404,7 @@ namespace Accelbuffer
 
             if (type != ObjectType.Fixed64)
             {
-                throw new InvalidCastException(string.Format(Resources.InvalidCastFormat, type, "uintptr"));
+                throw new InvalidCastException(string.Format(Resources.InvalidCastFormat, type, "nuint"));
             }
 
             ulong value = 0;
@@ -608,9 +608,9 @@ namespace Accelbuffer
                     throw new StreamTooShortException(Resources.StreamTooShort);
                 }
 
-                AccelReader iterator = new AccelReader(m_Source + m_ReadCount, len, m_Encoding, m_IsLittleEndian);
+                AccelReader reader = new AccelReader(m_Source + m_ReadCount, len, m_Encoding, m_IsLittleEndian);
                 m_ReadCount += len;
-                return serializer.Deserialize(ref iterator);
+                return serializer.Deserialize(ref reader);
             }
         }
 
@@ -955,6 +955,7 @@ namespace Accelbuffer
         {
             switch (type)
             {
+                case ObjectType.Fixed0: return 0;
                 case ObjectType.Fixed8: return 1;
                 case ObjectType.Fixed16: return 2;
                 case ObjectType.Fixed24: return 3;

@@ -1,4 +1,4 @@
-﻿using Accelbuffer.Injection;
+﻿using Accelbuffer.Injection.IL.Serializers;
 using Accelbuffer.Memory;
 using System.Reflection;
 
@@ -8,6 +8,8 @@ namespace Accelbuffer
     {
         public static readonly ITypeSerializer<T> Serializer;
         public static readonly int ApproximateMemorySize;
+        public static SerializationCallback<T> OnBeforeSerializationCallbacks;
+        public static SerializationCallback<T> OnAfterDeserializationCallbacks;
 
         static InternalTypeCache()
         {

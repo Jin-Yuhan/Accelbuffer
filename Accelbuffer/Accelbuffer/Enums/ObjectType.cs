@@ -8,7 +8,7 @@
         /// <summary>
         /// 丢失的类型
         /// </summary>
-        Missing = 0,
+        Fixed0 = 0,
 
         /// <summary>
         /// 8位固定长度类型

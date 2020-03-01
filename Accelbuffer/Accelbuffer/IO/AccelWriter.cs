@@ -48,11 +48,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, sbyte value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed8);
             WriteByte((byte)value);
         }
@@ -64,11 +59,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, byte value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed8);
             WriteByte(value);
         }
@@ -80,11 +70,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, short value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed16);
 
             byte* bytes = (byte*)&value;
@@ -108,11 +93,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, ushort value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed16);
 
             byte* bytes = (byte*)&value;
@@ -134,11 +114,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, int value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed32);
 
             byte* bytes = (byte*)&value;
@@ -161,11 +136,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, uint value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed32);
 
             byte* bytes = (byte*)&value;
@@ -187,11 +157,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, long value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed64);
 
             byte* bytes = (byte*)&value;
@@ -214,11 +179,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, ulong value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed64);
 
             byte* bytes = (byte*)&value;
@@ -240,11 +200,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, VInt value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             value = Zig(value);
 
             byte* p = (byte*)&value;
@@ -267,11 +222,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, VUInt value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             byte* p = (byte*)&value;
 
             if (BitConverter.IsLittleEndian)
@@ -291,11 +241,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, IntPtr value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed64);
 
             long longValue = value.ToInt64();
@@ -319,11 +264,6 @@ namespace Accelbuffer
         [CLSCompliant(false)]
         public void WriteValue(int index, UIntPtr value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed64);
 
             ulong ulongValue = value.ToUInt64();
@@ -346,11 +286,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, float value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed32);
 
             byte* bytes = (byte*)&value;
@@ -372,11 +307,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, double value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed64);
 
             byte* bytes = (byte*)&value;
@@ -398,11 +328,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, decimal value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed128);
 
             byte* bytes = (byte*)&value;
@@ -424,11 +349,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, bool value)
         {
-            if (!value)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed8);
             WriteByte((byte)(value ? 1 : 0));
         }
@@ -440,11 +360,6 @@ namespace Accelbuffer
         /// <param name="value"></param>
         public void WriteValue(int index, char value)
         {
-            if (value == default)
-            {
-                return;
-            }
-
             WriteTag(index, ObjectType.Fixed16);
 
             byte* bytes = (byte*)&value;
@@ -879,7 +794,7 @@ namespace Accelbuffer
 
             switch (length)
             {
-                case 0: type = ObjectType.LengthPrefixed; break;
+                case 0: type = ObjectType.Fixed0; break;
                 case 1: type = ObjectType.Fixed8; break;
                 case 2: type = ObjectType.Fixed16; break;
                 case 3: type = ObjectType.Fixed24; break;

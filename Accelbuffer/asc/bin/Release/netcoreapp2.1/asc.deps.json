@@ -6,9 +6,10 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "asc/0.1.6.14": {
+      "asc/0.2.1.21": {
         "dependencies": {
-          "System.CodeDom": "4.7.0"
+          "System.CodeDom": "4.7.0",
+          "Accelbuffer": "2.0.5.8"
         },
         "runtime": {
           "asc.dll": {}
@@ -21,11 +22,19 @@
             "fileVersion": "4.700.19.56404"
           }
         }
+      },
+      "Accelbuffer/2.0.5.8": {
+        "runtime": {
+          "Accelbuffer.dll": {
+            "assemblyVersion": "2.0.5.8",
+            "fileVersion": "2.0.17.10"
+          }
+        }
       }
     }
   },
   "libraries": {
-    "asc/0.1.6.14": {
+    "asc/0.2.1.21": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -36,6 +45,11 @@
       "sha512": "sha512-Hs9pw/kmvH3lXaZ1LFKj3pLQsiGfj2xo3sxSzwiLlRL6UcMZUTeCfoJ9Udalvn3yq5dLlPEZzYegrTQ1/LhPOQ==",
       "path": "system.codedom/4.7.0",
       "hashPath": "system.codedom.4.7.0.nupkg.sha512"
+    },
+    "Accelbuffer/2.0.5.8": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

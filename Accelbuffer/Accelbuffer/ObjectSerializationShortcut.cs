@@ -18,7 +18,7 @@ namespace Accelbuffer
         /// <param name="endian">序列化使用的字节序</param>
         /// <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NativeBuffer ToNativeBuffer<T>(this T obj, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
+        public static NativeBuffer WriteToBuffer<T>(this T obj, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
             return Serializer.Serialize<T>(obj, encoding, endian);
         }
@@ -32,7 +32,7 @@ namespace Accelbuffer
         /// <param name="encoding">序列化使用的字符编码</param>
         /// <param name="endian">序列化使用的字节序</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ToBytes<T>(this T obj, out byte[] buffer, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
+        public static void WriteToBytes<T>(this T obj, out byte[] buffer, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
             Serializer.Serialize<T>(obj, out buffer, encoding, endian);
         }
@@ -49,7 +49,7 @@ namespace Accelbuffer
         /// <returns>序列化数据的大小</returns>
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ToBytes<T>(this T obj, byte[] buffer, int index, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
+        public static int WriteToBytes<T>(this T obj, byte[] buffer, int index, Encoding encoding = Encoding.UTF8, Endian endian = Endian.BigEndian)
         {
             return Serializer.Serialize<T>(obj, buffer, index, encoding, endian);
         }

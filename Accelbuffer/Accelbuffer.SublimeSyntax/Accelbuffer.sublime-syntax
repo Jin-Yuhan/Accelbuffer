@@ -11,7 +11,7 @@ variables:
   
   unicode_char: '(?:\\u\h{4}|\\U\h{8})'
 
-  base_type: (?:(?:boolean|uint8|int8|uint16|int16|uint32|int32|uint64|int64|float32|float64|float128|char|string|intptr|uintptr|vint|vuint|vector2|vector3|vector4|vector2int|vector3int|quaternion|color|color32)\b)
+  base_type: (?:(?:boolean|uint8|int8|uint16|int16|uint32|int32|uint64|int64|float32|float64|float128|char|string|nint|nuint|vint|vuint)\b)
   generic_declaration: \s*(<[^(={};<]*>)?\s*
 
   start_char: '(?:{{unicode_char}}|[_\p{L}])'

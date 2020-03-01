@@ -4,7 +4,12 @@
     {
         T[] ITypeSerializer<T[]>.Deserialize(ref AccelReader reader)
         {
-            int len = reader.HasNext() ? reader.ReadInt32() : 0;
+            if (!reader.HasNext(out int index))
+            {
+                return null;
+            }
+
+            int len = (int)reader.ReadVariantUInt();
             T[] result = new T[len];
 
             for (int i = 0; reader.HasNext(); i++)
@@ -17,7 +22,7 @@
 
         void ITypeSerializer<T[]>.Serialize(T[] obj, ref AccelWriter writer)
         {
-            writer.WriteValue(1, obj.Length);
+            writer.WriteValue(1, (VUInt)obj.Length);
 
             for (int i = 0; i < obj.Length; i++)
             {

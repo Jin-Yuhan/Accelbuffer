@@ -46,7 +46,7 @@ namespace Accelbuffer.Test
             {
                 m_Buffer.Dispose();
                 m_Ms.Dispose();
-                MemoryAllocator.Shared.Trim(true);
+                MemoryAllocator.Shared.FreeMemory(true);
             }
 
             [Benchmark]

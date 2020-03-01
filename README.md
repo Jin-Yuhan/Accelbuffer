@@ -1,200 +1,49 @@
-# Accelbuffer - v2.0
+# Accelbuffer - v2.1
 `Accelbuffer` 是一个快速，高效的序列化系统。
 
-## 支持
-* 需要.NET Framework 4.5+
-* 提供unity类型支持和unitypackage（自动编译，模板代码，编辑器拓展，etc）
-* 提供Sublime，VSCode的语法高亮文件
-* 语言支持C#，Visual Basic.NET
+# 更新日志
 
-## 特点
-* 时间消耗低
-* 托管堆内存分配少
-* 完全避免装箱、拆箱
-* 可以自定义序列化流程
-* 没有序列化深度限制
-* 可以控制序列化使用的字节序和字符编码
+## 编译器
+* 取消了对重复引用内置包的警告。
+* Parser的分析结果不再使用Accelbuffer.Compiling.IDeclaration[]，该用Accelbuffer.Compiling.DeclarationArray。
+* 部分自举，核心代码移至Accelbuffer程序集中（Accelbuffer.Compiling命名空间下），并支持在运行时编译代码（不推荐）。
+* 优化了参数选项并暂时移除Java与C++参数，增加编译为AccelbufferByteCode（这个文件保存了所有元数据，在运行时拥有更快的解析速度）的途径。
+* Declarations中描述类型名称的字段类型改用Accelbuffer.Compiling.TypeName，TypeName公开了Parser的分析结果，避免二次分析带来性能消耗。
+* 支持运行时使用RuntimeCompiler编译并注入可序列化类型，并提供反射访问元数据（包括C#端和AccelbufferScript两部分元数据，Accelbuffer.Reflection命名空间下）。
 
-## 支持的序列化类型
-* 基元类型，可空类型，枚举
-* 一维数组，交错数组
-* `List<T>`, `IList<T>`, `ICollection<T>`
-* `Dictionary<TKey, TValue>`, `IDictionary<TKey, TValue>`
-* `KeyValuePair<TKey, TValue>`
-* `Intptr`, `UIntptr`, `VInt`, `VUInt`
-* `Type`, `Guid`, `TimeSpan`, `DateTime`, `DateTimeOffset`
-* `class`, `struct`
+## IL注入器
+* 增加FacadeTypeAttribute提供注入序列化代理对外观类型的支持。
+* 注入器代码重构（移至Accelbuffer.Injection.IL命名空间下，单独分离，并且公开）。
+* SerializerInjector类型隐藏，原本公开的方法移至SerializerBinder（Accelbuffer.Injection命名空间下）。
+* 将FieldIndexAttribute重命名为SerialIndexAttribute，使之与Accelbuffer.Reflection.AccelFieldInfo中提供的字段名称一致。
 
-> Unity配置下，新增类型
-* `Vector2`, `Vector3`, `Vector4`, `Vector2Int`, `Vector3Int`, `Quaternion`, `Color`, `Color32`
+## 序列化&反序列化
+* 提供更多扩展方法，从而更加便捷地序列化，反序列化。
+* 在序列化基元类型时，如果值是默认值，不再忽略其写入操作。
+* 支持使用System.Object作为ITypeSerializer<T>的泛型参数，但性能较差。
+* Accelbuffer.ObjectType枚举的默认值不再使用Missing，而是有意义的Fixed0。
+* Serializer类增加序列化事件回调注册，但无法为动态注入的可序列化类型注入事件。
+* 提供UnsafeTypeSerializer实现Unmanaged类型以直接拷贝的方法快速序列化，但序列化数据无法跨平台。
 
-## 基本用法
-> 以C#代码举例
+## 内存管理器
+* MemoryAllocator内部不再使用托管数组作为FreeList，改用固定大小的缓冲区。
+* 为NativeMemory（可自动变长的非托管内存）提供一些扩展方法，读取与写入数据不需要再操作指针。
+* 隐藏MemoryAllocator的Unsafe方法，推荐使用NativeMemory和NativeBuffer更加安全地操作非托管内存。
 
-### 1.使用特性标记类型
-#### 方案一，在运行时自动生成代理类型
-```csharp
-namespace Accelbuffer.Test
-{
-    [MemorySize(10)]
-    public struct Example
-    {
-        [FieldIndex(1)]
-        public string Name;
-        
-        [FieldIndex(2)]
-        public int Id;
-    }
-}
-```
+## 字符串编码器
+* Encodings全部移至Accelbuffer.Unsafe.Text命名空间下。
 
-#### 方案二，手动实现代理
-```csharp
-namespace Accelbuffer.Test
-{
-    [MemorySize(10)]
-    [SerializeBy(typeof(Example.ExampleSerializer))]
-    public partial struct Example
-    {
-        public string Name;
-        public int Id;
-        
-        public sealed class ExampleSerializer : ITypeSerializer<Example>
-        {
-            public void Serialize(Example obj, ref AccelWriter writer)
-            {
-                if ((obj.m_Name != null))
-                {
-                    writer.WriteValue(1, obj.Name);
-                }
-                writer.WriteValue(2, obj.Id);
-            }
-            
-            public Example Deserialize(ref AccelReader reader)
-            {
-                Example result = new Example();
+## 类型
+* System.Intptr的关键字改为nint（Native Int）。
+* System.UIntptr的关键字改为nint（Native Unsigned Int）。
 
-                while (reader.HasNext(out int index))
-                {
-                    switch (index)
-                    {
-                        case 1:
-                            result.Name = reader.ReadString();
-                            break;
-                        case 2:
-                            result.Id = reader.ReadInt32();
-                            break;
-                        default:
-                            reader.SkipNext();
-                            break;
-                    }
-                }
+## Unity3D
+* 编辑器中提供更多编译选项。
+* 移除所有Unity关键字，但仍然支持这些类型的内联序列化&反序列化。
 
-                return result;
-            }
-        }
-    }
-}
-```
+## 其他
+* 公开部分过去隐藏的类型与方法。
+* MethodInfo，Type类型的字段全部改用RuntimeMethodHandle与RuntimeTypeHandle，避免这类大型对象长期闲置后仍无法被GC的问题。
 
-#### 方案三，使用`Accelbuffer Script`
-> Accelbuffer Script的语法高度重视类型结构的清晰与直观性，使用起来也很简单轻松。简化了C#，Visual Basic.NET的语法，并提供简便的类型声明方式，例如 外观类型，非空类型，弃用标记，索引声明 等，这些语法为Accelbuffer的可序列化类型量身定制。通常使用Accelbuffer Script可以节省许多时间。
-
-> 如下声明方法与上文代码等价，使用Accelbuffer Script编写，可以使类型的结构更加清晰，并且让类型的声明与目标语言无关。
-
-```csharp
-package Accelbuffer.Test;
-
-public struct Example about 10
-{
-    var Name : string;
-    var Id : *int32;
-}
-```
-
-命令行中输入
-> asc -c -cs C:\Users\Administrator\Desktop\Example.accel
-
-如果输出以下内容，则编译成功
-> output：C:\Users\Administrator\Desktop\Example.cs
-
-### 2.序列化对象
-```csharp
-Example example = new Example { ... };
-NativeBuffer buffer = Serializer.Serialize<Example>(example);
-//...
-buffer.Dispose();
-```
-
-### 3.反序列化对象
-```csharp
-Example example = Serializer.Deserialize<Example>(buffer, 0, buffer.Length);
-buffer.Dispose();
-```
-
-### 4.释放序列化缓冲区内存
-可以通过调用下面的方法释放多余的内存或全部内存
-```csharp
-MemoryAllocator.Shared.Trim();
-```
-
-> MemoryAllocator是Accelbuffer实现的一个非托管内存管理器，是一个线程安全的单例类型
-
-### 5.序列化事件回调
-> 这个方法不会造成值类型的装箱，方法必须是公共的实例方法
-
-```csharp
-public class ...
-{
-    [OnBeforeSerialization]
-    public void Before()
-    {
-        //在序列化前调用
-        Console.WriteLine("Before Serialization");
-    }
-
-    [OnAfterDeserialization]
-    public void After()
-    {
-        //在反序列化后调用
-        Console.WriteLine("After Deserialization");
-    }
-}
-```
-
-## 使用BenchmarkDotNet的测试结果
-* 结果可能存在误差
-> BenchmarkDotNet=v0.12.0, OS=Windows 7 SP1 (6.1.7601.0)
-
-> Intel Pentium CPU G4560T 2.90GHz, 1 CPU, 4 logical and 2 physical cores
-
-> Frequency=2836025 Hz, Resolution=352.6062 ns, Timer=TSC
-  [Host]     : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT  [AttachedDebugger]
-  Job-SWSWQT : .NET Framework 4.7.2 (4.7.3324.0), X86 LegacyJIT
-
-> Runtime=.NET 4.7.2  
-
-|Method|Mean|Error|StdDev|StdErr|Allocated|
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|AccelbufferSerialize|1,049.0 ns|8.39 ns|7.44 ns|1.99 ns|-|
-|AccelbufferDeserialize|897.3 ns|6.39 ns|5.98 ns|1.54 ns|244 B|
-|ProtobufSerialize|1,324.1 ns|11.47 ns|10.17 ns|2.72 ns|504 B|
-|ProtobufDeserialize|2,550.1 ns|24.72 ns|23.12 ns|5.97 ns|748 B|
-
-## Accelbuffer Script的保留关键字
-|1|2|3|4|5|6|
-|:-:|:-:|:-:|:-:|:-:|:-:|
-|package|using|struct|about|var|obsolete|
-|public|internal|private|protected|final|ref|
-|boolean|int8|uint8|int16|uint16|int32|
-|uint32|int64|uint64|float32|float64|float128|
-|char|string|intptr|uintptr|vint|vuint|
-
-* Unity下增加关键字
-
-|1|2|3|4|
-|:-:|:-:|:-:|:-:|
-|vector2|vector3|vector4|vector2int|
-|vector3int|quaternion|color|color32|
-
+# Others
 * 作者联系方式 QQ：1024751595

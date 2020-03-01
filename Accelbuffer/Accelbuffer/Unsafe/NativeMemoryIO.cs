@@ -25,7 +25,7 @@ namespace Accelbuffer.Unsafe
                 throw new ArgumentOutOfRangeException(nameof(offset));
             }
 
-            if (memory.Size <= offset || offset < 0)
+            if (memory.Size <= offset)
             {
                 return -1;
             }

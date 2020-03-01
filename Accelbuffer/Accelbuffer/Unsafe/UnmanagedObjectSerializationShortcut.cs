@@ -16,7 +16,7 @@ namespace Accelbuffer.Unsafe
         /// <param name="obj">被序列化的对象</param>
         /// <returns>保存了对象序列化数据的一块非托管缓冲区</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NativeBuffer ToNativeBufferUnsafe<T>(this T obj) where T : unmanaged
+        public static NativeBuffer WriteToBufferUnsafe<T>(this T obj) where T : unmanaged
         {
             return UnmanagedTypeSerializer.Serialize<T>(obj);
         }
@@ -28,7 +28,7 @@ namespace Accelbuffer.Unsafe
         /// <param name="obj">被序列化的对象</param>
         /// <param name="buffer">保存了对象序列化数据的缓冲区</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ToBytesUnsafe<T>(this T obj, out byte[] buffer) where T : unmanaged
+        public static void WriteToBytesUnsafe<T>(this T obj, out byte[] buffer) where T : unmanaged
         {
             UnmanagedTypeSerializer.Serialize<T>(obj, out buffer);
         }
@@ -43,7 +43,7 @@ namespace Accelbuffer.Unsafe
         /// <returns>序列化数据的大小</returns>
         /// <exception cref="ArgumentException">字节数组容量不足</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ToBytesUnsafe<T>(this T obj, byte[] buffer, int index) where T : unmanaged
+        public static int WriteToBytesUnsafe<T>(this T obj, byte[] buffer, int index) where T : unmanaged
         {
             return UnmanagedTypeSerializer.Serialize<T>(obj, buffer, index);
         }

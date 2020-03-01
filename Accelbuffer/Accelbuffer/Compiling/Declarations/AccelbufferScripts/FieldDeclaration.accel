@@ -1,0 +1,36 @@
+package Accelbuffer.Compiling.Declarations;
+
+--
+字段声明
+--
+public ref final struct FieldDeclaration about 450
+{
+    --
+    字段的真实类型
+    --
+    var RealType : TypeName;
+    --
+    字段的类型
+    --
+    var Type : TypeName;
+    --
+    字段的名称
+    --
+    var Name : string;
+    --
+    字段的文档
+    --
+    var Doc : string;
+    --
+    字段的索引
+    --
+    var Index : *vint;
+    --
+    字段是否过时
+    --
+    var IsObsolete : *boolean;
+    --
+    字段是否永远不会为null
+    --
+    var IsNeverNull : *boolean;
+}

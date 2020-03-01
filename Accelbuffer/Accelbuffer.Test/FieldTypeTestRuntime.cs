@@ -27,113 +27,121 @@ namespace Accelbuffer.Test
     {
         
         [NeverNull()]
-        [FieldIndex(1)]
+        [SerialIndex(1)]
         public int8 Field0;
         
         [NeverNull()]
-        [FieldIndex(2)]
+        [SerialIndex(2)]
         public uint8 Field1;
         
         [NeverNull()]
-        [FieldIndex(3)]
+        [SerialIndex(3)]
         public int16 Field2;
         
         [NeverNull()]
-        [FieldIndex(4)]
+        [SerialIndex(4)]
         public uint16 Field3;
         
         [NeverNull()]
-        [FieldIndex(5)]
+        [SerialIndex(5)]
         public int32 Field4;
         
         [NeverNull()]
-        [FieldIndex(6)]
+        [SerialIndex(6)]
         public uint32 Field5;
         
         [NeverNull()]
-        [FieldIndex(7)]
+        [SerialIndex(7)]
         public int64 Field6;
         
         [NeverNull()]
-        [FieldIndex(8)]
+        [SerialIndex(8)]
         public uint64 Field7;
         
         [NeverNull()]
-        [FieldIndex(9)]
+        [SerialIndex(9)]
         public boolean Field8;
         
         [NeverNull()]
-        [FieldIndex(10)]
+        [SerialIndex(10)]
         public float32 Field9;
         
         [NeverNull()]
-        [FieldIndex(11)]
+        [SerialIndex(11)]
         public float64 Field10;
         
         [NeverNull()]
-        [FieldIndex(12)]
+        [SerialIndex(12)]
         public float128 Field11;
         
         [NeverNull()]
-        [FieldIndex(13)]
+        [SerialIndex(13)]
         public intptr Field12;
         
         [NeverNull()]
-        [FieldIndex(14)]
+        [SerialIndex(14)]
         public uintptr Field13;
         
         [NeverNull()]
-        [FieldIndex(15)]
+        [SerialIndex(15)]
         public vint Field14;
         
         [NeverNull()]
-        [FieldIndex(16)]
+        [SerialIndex(16)]
         public vuint Field15;
         
         [NeverNull()]
-        [FieldIndex(17)]
+        [SerialIndex(17)]
         public char Field16;
         
-        [FieldIndex(18)]
+        [SerialIndex(18)]
         public string Field17;
         
-        [FieldIndex(19)]
+        [SerialIndex(19)]
         public vint[] Field18;
         
-        [FieldIndex(20)]
+        [SerialIndex(20)]
         public Dictionary<string,float32> Field19;
         
-        [FieldIndex(21)]
+        [SerialIndex(21)]
         public List<boolean> Field20;
         
         [NeverNull()]
-        [FieldIndex(22)]
+        [SerialIndex(22)]
         public KeyValuePair<boolean,boolean> Field21;
         
-        [FieldIndex(23)]
+        [SerialIndex(23)]
         public vint? Field22;
         
-        [FieldIndex(24)]
+        [SerialIndex(24)]
         public Type Field23;
         
         [NeverNull()]
-        [FieldIndex(25)]
+        [SerialIndex(25)]
         public Guid Field24;
         
         [NeverNull()]
-        [FieldIndex(26)]
+        [SerialIndex(26)]
         public TimeSpan Field25;
         
         [NeverNull()]
-        [FieldIndex(27)]
+        [SerialIndex(27)]
         public DateTime Field26;
         
         [NeverNull()]
-        [FieldIndex(28)]
+        [SerialIndex(28)]
         public DateTimeOffset Field27;
 
         [NeverNull()]
-        [FieldIndex(29)]
+        [SerialIndex(29)]
         public TestEnum Field28;
+
+        [SerialIndex(30)]
+        [FacadeType(typeof(string))]
+        public object ClassData;//extra
+
+        [SerialIndex(31)]
+        [FacadeType(typeof(object))]
+        public int StructData;//extra
     }
 }

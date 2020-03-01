@@ -11,3 +11,7 @@ C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Debug\netc
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Debug\netcoreapp2.1\asc.AssemblyInfo.cs
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Debug\netcoreapp2.1\asc.dll
 C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Debug\netcoreapp2.1\asc.pdb
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Debug\netcoreapp2.1\Accelbuffer.dll
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Debug\netcoreapp2.1\Accelbuffer.pdb
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\bin\Debug\netcoreapp2.1\Accelbuffer.xml
+C:\Users\Administrator\Desktop\GitHub\Accelbuffer\Accelbuffer\asc\obj\Debug\netcoreapp2.1\asc.csproj.CopyComplete

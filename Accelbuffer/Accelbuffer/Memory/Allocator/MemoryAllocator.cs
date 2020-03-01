@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Runtime.CompilerServices;
 
 namespace Accelbuffer.Memory
 {
     /// <summary>
     /// 表示一个非托管内存分配器
     /// </summary>
-    public sealed unsafe partial class MemoryAllocator
+    public sealed unsafe partial class MemoryAllocator : IDebuggable
     {
-        private readonly Chunk*[] m_FreeList;//内存块链表
-        private readonly object m_SyncObj;
+        string IDebuggable.FriendlyName => "memory_allocator";
+
+        private FreeList m_FreeList;//内存块链表
         private int m_MaxFindChunkCount;
+        private readonly object m_SyncObj;
 
         /// <summary>
         /// 获取/设置分配内存时，寻找合适内存块的最大次数
@@ -20,15 +22,13 @@ namespace Accelbuffer.Memory
         public int MaxFindChunkCount
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return m_MaxFindChunkCount;
-            }
+            get => m_MaxFindChunkCount;
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
                 if (value > 0)
                 {
+                    this.Log($"寻找合适内存块的最大次数{m_MaxFindChunkCount}->{value}");
                     Interlocked.Exchange(ref m_MaxFindChunkCount, value);
                 }
             }
@@ -45,12 +45,20 @@ namespace Accelbuffer.Memory
             private set;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private Chunk* GetChunkPtrAt(int index) => (Chunk*)m_FreeList.List[index];
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private void SetChunkPtrAt(int index, Chunk* value) => m_FreeList.List[index] = (long)value;
+
         private MemoryAllocator()
         {
-            m_FreeList = new Chunk*[FREE_LIST_LENGTH];
-            m_SyncObj = new object();
+            m_FreeList = new FreeList(0L);
+
             m_MaxFindChunkCount = DEFAULT_MAX_FIND_CHUNK_COUNT;
             TotalMemorySizeInChunks = 0;
+
+            m_SyncObj = new object();
         }
 
         /// <summary>
@@ -58,9 +66,9 @@ namespace Accelbuffer.Memory
         /// </summary>
         ~MemoryAllocator()
         {
-            for (int i = 0; i < m_FreeList.Length; i++)
+            for (int i = 0; i < FREE_LIST_LENGTH; i++)
             {
-                Chunk* chunk = m_FreeList[i];
+                Chunk* chunk = GetChunkPtrAt(i);
                 
                 while (chunk != null)
                 {
@@ -72,10 +80,10 @@ namespace Accelbuffer.Memory
         }
 
         /// <summary>
-        /// 释放多余的内存
+        /// 释放内存
         /// </summary>
-        /// <param name="trimAll">指示是否释放所有的内存</param>
-        public void Trim(bool trimAll = false)
+        /// <param name="leaveOneChunkEachSize">指示是否为每一种内存大小保留一个chunk</param>
+        public void FreeMemory(bool leaveOneChunkEachSize = true)
         {
 #if DEBUG
             int sizePrevious = TotalMemorySizeInChunks;
@@ -83,14 +91,13 @@ namespace Accelbuffer.Memory
 
             lock (m_SyncObj)
             {
-                for (int i = 0; i < m_FreeList.Length; i++)
+                for (int i = 0, size = ALIGN; i < FREE_LIST_LENGTH; i++, size += ALIGN)
                 {
-                    Chunk* chunk = m_FreeList[i];
-                    int size = GetChunkSize(i);
+                    Chunk* chunk = GetChunkPtrAt(i);
 
                     while (chunk != null)
                     {
-                        if (!trimAll && chunk->NextChunkPtr == null)
+                        if (leaveOneChunkEachSize && chunk->NextChunkPtr == null)
                         {
                             break;//保留一个chunk
                         }
@@ -101,12 +108,12 @@ namespace Accelbuffer.Memory
                         TotalMemorySizeInChunks -= size;
                     }
 
-                    m_FreeList[i] = chunk;
+                    SetChunkPtrAt(i, chunk);
                 }
             }
 
 #if DEBUG
-            Debug.Log($"[memory_allocator] 释放内存 {sizePrevious}字节 -> {TotalMemorySizeInChunks}字节");
+            this.Log($"释放内存 {sizePrevious}字节 -> {TotalMemorySizeInChunks}字节");
 #endif
         }
 
@@ -116,6 +123,7 @@ namespace Accelbuffer.Memory
         /// <param name="size">需要分配的字节大小，这个值的大小在分配内存时可能被向上调整</param>
         /// <returns>分配的内存指针，如果为null，则分配失败</returns>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/>是负数</exception>
+        /// <exception cref="OutOfMemoryException">内存不足</exception>
         internal byte* Allocate(ref int size)
         {
             if (size < 0)
@@ -125,44 +133,50 @@ namespace Accelbuffer.Memory
 
             if (size == 0)
             {
-                Debug.Log("[memory_allocator] 分配内存0字节");
+                this.Log("分配内存0字节，地址NULL");
                 return null;
             }
 
-
             if (size > MAX_CHUNK_SIZE)
             {
-                Debug.Log($"[memory_allocator] 分配大内存{size}字节");
-                return (byte*)Marshal.AllocHGlobal(size).ToPointer();
+                byte* result = (byte*)Marshal.AllocHGlobal(size).ToPointer();
+                this.Log($"分配大内存{size}字节，地址{(long)result}");
+                return result;
             }
 
+            Align(ref size);
             int index = GetFreeListIndex(size);
             int count = 0;
-
+            
             lock (m_SyncObj)
             {
+                int chunkSize = size;
+
                 do
                 {
-                    Chunk* chunk = m_FreeList[index];
-
+                    Chunk* chunk = GetChunkPtrAt(index);
+                    this.Log(index.ToString());
+                    this.Log(chunkSize.ToString());
+                    this.Log(((long)chunk).ToString());
                     if (chunk != null)
                     {
-                        m_FreeList[index] = chunk->NextChunkPtr;
+                        SetChunkPtrAt(index, chunk->NextChunkPtr);
                         chunk->NextChunkPtr = null;
 
-                        size = GetChunkSize(index);
-                        TotalMemorySizeInChunks -= size;
+                        TotalMemorySizeInChunks -= chunkSize;
 
-                        Debug.Log($"[memory_allocator] 返回内存{size}字节，位置[{index}]，地址{(long)chunk}");
+                        this.Log($"返回内存{chunkSize}字节，位置[{index}]，地址{(long)chunk}");
                         return (byte*)chunk;
                     }
+
+                    chunkSize += ALIGN;
                 }
-                while ((++count < MaxFindChunkCount) && (index < m_FreeList.Length));
+                while ((++count < MaxFindChunkCount) && (index < FREE_LIST_LENGTH));
             }
 
-            size = Align(size);
-            Debug.Log($"[memory_allocator] 分配内存{size}字节");
-            return (byte*)Marshal.AllocHGlobal(size).ToPointer();
+            byte* result1 = (byte*)Marshal.AllocHGlobal(size).ToPointer();
+            this.Log($"分配内存{size}字节，地址{(long)result1}");
+            return result1;
         }
 
         /// <summary>
@@ -179,20 +193,23 @@ namespace Accelbuffer.Memory
 
             if (size > MAX_CHUNK_SIZE)
             {
-                Debug.Log($"[memory_allocator] 释放{size}字节");
+                this.Log($"释放{size}字节，地址{(long)p}");
                 Marshal.FreeHGlobal(new IntPtr(p));
                 return;
             }
 
+            this.Assert(size % ALIGN == 0, $"无效的内存大小，因为不是{ALIGN}的整数倍，请使用分配内存时返回的大小");
+
             int index = GetFreeListIndex(size);
+
             lock (m_SyncObj)
             {
                 Chunk* chunk = (Chunk*)p;
-                chunk->NextChunkPtr = m_FreeList[index];
-                m_FreeList[index] = chunk;
+                chunk->NextChunkPtr = GetChunkPtrAt(index);
+                SetChunkPtrAt(index, chunk);
                 TotalMemorySizeInChunks += size;
 
-                Debug.Log($"[memory_allocator] 回收内存{size}字节，位置[{index}]，地址{(long)chunk}");
+                this.Log($"回收内存{size}字节，位置[{index}]，地址{(long)chunk}");
             }
         }
 
@@ -225,7 +242,7 @@ namespace Accelbuffer.Memory
                 byte* dst = ptr;
                 byte* src = (byte*)p;
 
-                Debug.Log($"[memory_allocator] 拷贝内存{count}字节({(long)src})->({(long)dst})");
+                this.Log($"拷贝内存{count}字节({(long)src})->({(long)dst})");
 
                 while (count-- > 0)
                 {

@@ -40,113 +40,113 @@ namespace Accelbuffer.Test
     {
         
         [NeverNull()]
-        [FieldIndex(1)]
+        [SerialIndex(1)]
         private int8 m_Field0;
         
         [NeverNull()]
-        [FieldIndex(2)]
+        [SerialIndex(2)]
         private uint8 m_Field1;
         
         [NeverNull()]
-        [FieldIndex(3)]
+        [SerialIndex(3)]
         private int16 m_Field2;
         
         [NeverNull()]
-        [FieldIndex(4)]
+        [SerialIndex(4)]
         private uint16 m_Field3;
         
         [NeverNull()]
-        [FieldIndex(5)]
+        [SerialIndex(5)]
         private int32 m_Field4;
         
         [NeverNull()]
-        [FieldIndex(6)]
+        [SerialIndex(6)]
         private uint32 m_Field5;
         
         [NeverNull()]
-        [FieldIndex(7)]
+        [SerialIndex(7)]
         private int64 m_Field6;
         
         [NeverNull()]
-        [FieldIndex(8)]
+        [SerialIndex(8)]
         private uint64 m_Field7;
         
         [NeverNull()]
-        [FieldIndex(9)]
+        [SerialIndex(9)]
         private boolean m_Field8;
         
         [NeverNull()]
-        [FieldIndex(10)]
+        [SerialIndex(10)]
         private float32 m_Field9;
         
         [NeverNull()]
-        [FieldIndex(11)]
+        [SerialIndex(11)]
         private float64 m_Field10;
         
         [NeverNull()]
-        [FieldIndex(12)]
+        [SerialIndex(12)]
         private float128 m_Field11;
         
         [NeverNull()]
-        [FieldIndex(13)]
+        [SerialIndex(13)]
         private intptr m_Field12;
         
         [NeverNull()]
-        [FieldIndex(14)]
+        [SerialIndex(14)]
         private uintptr m_Field13;
         
         [NeverNull()]
-        [FieldIndex(15)]
+        [SerialIndex(15)]
         private vint m_Field14;
         
         [NeverNull()]
-        [FieldIndex(16)]
+        [SerialIndex(16)]
         private vuint m_Field15;
         
         [NeverNull()]
-        [FieldIndex(17)]
+        [SerialIndex(17)]
         private char m_Field16;
         
-        [FieldIndex(18)]
+        [SerialIndex(18)]
         private string m_Field17;
         
-        [FieldIndex(19)]
+        [SerialIndex(19)]
         private vint[] m_Field18;
         
-        [FieldIndex(20)]
+        [SerialIndex(20)]
         private Dictionary<string,float32> m_Field19;
         
-        [FieldIndex(21)]
+        [SerialIndex(21)]
         private List<boolean> m_Field20;
         
         [NeverNull()]
-        [FieldIndex(22)]
+        [SerialIndex(22)]
         private KeyValuePair<boolean,boolean> m_Field21;
         
-        [FieldIndex(23)]
+        [SerialIndex(23)]
         private vint? m_Field22;
         
-        [FieldIndex(24)]
+        [SerialIndex(24)]
         private Type m_Field23;
         
         [NeverNull()]
-        [FieldIndex(25)]
+        [SerialIndex(25)]
         private Guid m_Field24;
         
         [NeverNull()]
-        [FieldIndex(26)]
+        [SerialIndex(26)]
         private TimeSpan m_Field25;
         
         [NeverNull()]
-        [FieldIndex(27)]
+        [SerialIndex(27)]
         private DateTime m_Field26;
         
         [NeverNull()]
-        [FieldIndex(28)]
+        [SerialIndex(28)]
         private DateTimeOffset m_Field27;
         
         [NeverNull()]
-        [FieldIndex(29)]
+        [SerialIndex(29)]
         private TestEnum m_Field28;
         
 partial void OnBeforeSerialization();

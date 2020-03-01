@@ -4,58 +4,58 @@ Imports Accelbuffer.Memory
 <MemorySize(160)>
 Partial Public Structure TestClass
 
-    <FieldIndex(1)>
+    <SerialIndex(1)>
     Public Field1 As Boolean
 
-    <FieldIndex(2)>
+    <SerialIndex(2)>
     Public Field2 As Byte
 
-    <FieldIndex(3)>
+    <SerialIndex(3)>
     Public Field3 As SByte
 
-    <FieldIndex(4)>
+    <SerialIndex(4)>
     Public Field4 As UShort
 
-    <FieldIndex(5)>
+    <SerialIndex(5)>
     Public Field5 As Short
 
-    <FieldIndex(6)>
+    <SerialIndex(6)>
     Public Field6 As UInteger
 
-    <FieldIndex(7)>
+    <SerialIndex(7)>
     Public Field7 As Integer
 
-    <FieldIndex(8)>
+    <SerialIndex(8)>
     Public Field8 As ULong
 
-    <FieldIndex(9)>
+    <SerialIndex(9)>
     Public Field9 As Long
 
-    <FieldIndex(10)>
+    <SerialIndex(10)>
     Public Field10 As Single
 
-    <FieldIndex(11)>
+    <SerialIndex(11)>
     Public Field11 As Double
 
-    <FieldIndex(12)>
+    <SerialIndex(12)>
     Public Field12 As Decimal
 
-    <FieldIndex(13)>
+    <SerialIndex(13)>
     Public Field13 As Char
 
-    <FieldIndex(14)>
+    <SerialIndex(14)>
     Public Field14 As String
 
-    <FieldIndex(15)>
+    <SerialIndex(15)>
     Public Field15 As IntPtr
 
-    <FieldIndex(16)>
+    <SerialIndex(16)>
     Public Field16 As UIntPtr
 
-    <FieldIndex(17)>
+    <SerialIndex(17)>
     Public Field17 As vint
 
-    <FieldIndex(18)>
+    <SerialIndex(18)>
     Public Field18 As vuint
 End Structure
 
@@ -97,7 +97,7 @@ Module Module1
         Dim nbuffer As NativeBuffer = Serializer.Serialize(Of Accelbuffer.Test.FieldTypeTest)(Nothing)
         Serializer.Deserialize(Of Accelbuffer.Test.FieldTypeTest)(nbuffer, 0, nbuffer.Length)
 
-        MemoryAllocator.Shared.Trim(True)
+        MemoryAllocator.Shared.FreeMemory(True)
 
         Console.ReadKey()
 
