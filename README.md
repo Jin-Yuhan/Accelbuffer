@@ -5,7 +5,7 @@
 
 ## 编译器
 * 取消了对重复引用内置包的警告。
-* Parser的分析结果不再使用Accelbuffer.Compiling.IDeclaration[]，该用Accelbuffer.Compiling.DeclarationArray。
+* Parser的分析结果不再使用Accelbuffer.Compiling.IDeclaration[]，改用Accelbuffer.Compiling.DeclarationArray。
 * 部分自举，核心代码移至Accelbuffer程序集中（Accelbuffer.Compiling命名空间下），并支持在运行时编译代码（不推荐）。
 * 优化了参数选项并暂时移除Java与C++参数，增加编译为AccelbufferByteCode（这个文件保存了所有元数据，在运行时拥有更快的解析速度）的途径。
 * Declarations中描述类型名称的字段类型改用Accelbuffer.Compiling.TypeName，TypeName公开了Parser的分析结果，避免二次分析带来性能消耗。
@@ -22,7 +22,7 @@
 * 在序列化基元类型时，如果值是默认值，不再忽略其写入操作。
 * 支持使用System.Object作为ITypeSerializer<T>的泛型参数，但性能较差。
 * Accelbuffer.ObjectType枚举的默认值不再使用Missing，而是有意义的Fixed0。
-* Serializer类增加序列化事件回调注册，但无法为动态注入的可序列化类型注入事件。
+* Serializer类增加序列化事件回调注册，但无法为动态注入的可序列化类型注册事件。
 * 提供UnsafeTypeSerializer实现Unmanaged类型以直接拷贝的方法快速序列化，但序列化数据无法跨平台。
 
 ## 内存管理器
@@ -34,8 +34,8 @@
 * Encodings全部移至Accelbuffer.Unsafe.Text命名空间下。
 
 ## 类型
-* System.Intptr的关键字改为nint（Native Int）。
-* System.UIntptr的关键字改为nint（Native Unsigned Int）。
+* System.IntPtr的关键字改为nint（Native Int）。
+* System.UIntPtr的关键字改为nuint（Native Unsigned Int）。
 
 ## Unity3D
 * 编辑器中提供更多编译选项。
