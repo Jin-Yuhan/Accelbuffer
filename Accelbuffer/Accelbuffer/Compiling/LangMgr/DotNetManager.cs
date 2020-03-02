@@ -43,6 +43,8 @@ namespace Accelbuffer.Compiling
 
         private static readonly CodeParameterDeclarationExpression s_Bytes = new CodeParameterDeclarationExpression(s_ByteArray, "bytes");
 
+        private static readonly CodeAttributeDeclaration s_Serializable = new CodeAttributeDeclaration("System.Serializable");
+
         protected abstract string LanguageName { get; }
 
         protected abstract List<IDeclaration> Predefines { get; }
@@ -105,6 +107,7 @@ namespace Accelbuffer.Compiling
 
             AddMemorySizeAttribute(type, (int)structDeclaration.Size);
             AddSerializeByAttribute(type, serializerFullName);
+            AddSerializableAttribute(type);
             AddMessageMethods(type);
             
             if (structDeclaration.Doc != null)
@@ -161,10 +164,10 @@ namespace Accelbuffer.Compiling
                         string fieldName = "m_" + fieldDeclaration.Name;
                         string typeName = ValidateType(fieldDeclaration.Type.RawString);
 
-                        CodeTypeReference fieldType = GetTypeReference(typeName);
+                        CodeTypeReference fieldType = GetTypeReference(typeName, fieldDeclaration.Type);
                         CodeFieldReferenceExpression fieldRef = new CodeFieldReferenceExpression(s_ObjRef, fieldName);
                         CodePrimitiveExpression index = new CodePrimitiveExpression((int)fieldDeclaration.Index);
-                        CodeTypeReferenceExpression realType = fieldDeclaration.RealType == null ? null : new CodeTypeReferenceExpression(GetTypeReference(fieldDeclaration.RealType.RawString));
+                        CodeTypeReferenceExpression realType = fieldDeclaration.RealType == null ? null : new CodeTypeReferenceExpression(GetTypeReference(ValidateType(fieldDeclaration.RealType.RawString), fieldDeclaration.Type));
 
                         CodeMemberField field = new CodeMemberField()
                         {
@@ -345,13 +348,30 @@ namespace Accelbuffer.Compiling
             }  
         }
 
-        private CodeTypeReference GetTypeReference(string type)
+        private CodeTypeReference GetTypeReference(string validatedType, TypeName typeName)
         {
-            switch (type)
+            switch (typeName.RawStringWithoutNullableAndArraySuffix)
             {
-                case "char": return new CodeTypeReference(typeof(char));
-                case "string": return new CodeTypeReference(typeof(string));
-                default: return new CodeTypeReference(type);
+                case "char":
+                    Type charType = typeName.IsNullable ? typeof(char?) : typeof(char);
+
+                    for (int i = 0; i < typeName.ArraySuffixCount; i++)
+                    {
+                        charType = charType.MakeArrayType();
+                    }
+
+                    return new CodeTypeReference(charType);
+                case "string":
+                    Type stringType = typeof(string);
+
+                    for (int i = 0; i < typeName.ArraySuffixCount; i++)
+                    {
+                        stringType = stringType.MakeArrayType();
+                    }
+
+                    return new CodeTypeReference(stringType);
+                default:
+                    return new CodeTypeReference(validatedType);
             }
         }
 
@@ -418,6 +438,12 @@ namespace Accelbuffer.Compiling
             CodeAttributeArgument attrArg = new CodeAttributeArgument(new CodeTypeOfExpression(fullName));
             CodeAttributeDeclaration serializeByAttr = new CodeAttributeDeclaration("SerializeBy", attrArg);
             type.CustomAttributes.Add(serializeByAttr);
+        }
+
+        private void AddSerializableAttribute(CodeTypeDeclaration type)
+        {
+            CodeAttributeDeclaration serializableAttr = s_Serializable;
+            type.CustomAttributes.Add(serializableAttr);
         }
     }
 }

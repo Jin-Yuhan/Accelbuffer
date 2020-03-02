@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<linker> 
+  <assembly fullname="Accelbuffer">
+    <type fullname="Accelbuffer.Injection.ArraySerializer`1" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.CollectionSerializer`2" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.DictionarySerializer`2" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.DictionarySerializer`3" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.IntPtrSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.KeyValuePairSerializer`2" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.ListSerializer`1" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.ListSerializer`2" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.NullableSerializer`1" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.ObjectSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.OtherTypeSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.PrimitiveTypeSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.TypeSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.UnitySerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Injection.VariantSerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Compiling.DeclarationArraySerializer" preserve="all"/>
+    <type fullname="Accelbuffer.Compiling.TypeName+TypeNameSerializer" preserve="all"/>
+  </assembly>
+</linker>

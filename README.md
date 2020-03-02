@@ -5,6 +5,7 @@
 
 ## 编译器
 * 取消了对重复引用内置包的警告。
+* 为生成类型添加了System.SerializableAttribute。
 * Parser的分析结果不再使用Accelbuffer.Compiling.IDeclaration[]，改用Accelbuffer.Compiling.DeclarationArray。
 * 部分自举，核心代码移至Accelbuffer程序集中（Accelbuffer.Compiling命名空间下），并支持在运行时编译代码（不推荐）。
 * 优化了参数选项并暂时移除Java与C++参数，增加编译为AccelbufferByteCode（这个文件保存了所有元数据，在运行时拥有更快的解析速度）的途径。
