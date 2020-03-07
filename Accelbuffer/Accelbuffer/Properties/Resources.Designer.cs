@@ -133,6 +133,15 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
+        ///   查找类似 0.1.6.16 的本地化字符串。
+        /// </summary>
+        internal static string CompilerVersion {
+            get {
+                return ResourceManager.GetString("CompilerVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Float128 的本地化字符串。
         /// </summary>
         internal static string DecimalName {
@@ -156,195 +165,6 @@ namespace Accelbuffer.Properties {
         internal static string DoubleName {
             get {
                 return ResourceManager.GetString("DoubleName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS001: invalid character: &apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS001_InvalidChar {
-            get {
-                return ResourceManager.GetString("Error_AS001_InvalidChar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS002: missing &apos;--&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS002_MissingDocEnd {
-            get {
-                return ResourceManager.GetString("Error_AS002_MissingDocEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS003: missing identifier 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS003_MissingIdentifier {
-            get {
-                return ResourceManager.GetString("Error_AS003_MissingIdentifier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS004: missing &apos;;&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS004_MissingSemicolon {
-            get {
-                return ResourceManager.GetString("Error_AS004_MissingSemicolon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS005: invalid identifier: &apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS005_InvalidIdentifier {
-            get {
-                return ResourceManager.GetString("Error_AS005_InvalidIdentifier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS006: package declaration should be the first non empty statement of the file 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS006_InvalidPackage {
-            get {
-                return ResourceManager.GetString("Error_AS006_InvalidPackage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS007: invalid token: &apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS007_InvalidToken {
-            get {
-                return ResourceManager.GetString("Error_AS007_InvalidToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS008: duplicate keyword: &apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS008_MultipleKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS008_MultipleKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS009: duplicate access modifier 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS009_MultipleAccessKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS009_MultipleAccessKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS010: only structures marked with the &apos;ref&apos; keyword can be marked as&apos; final &apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS010_InvalidFinalKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS010_InvalidFinalKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS011: missing integer value 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS011_MissingIntLiteral {
-            get {
-                return ResourceManager.GetString("Error_AS011_MissingIntLiteral", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS012: missing &apos;{{&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS012_MissingOpenBrace {
-            get {
-                return ResourceManager.GetString("Error_AS012_MissingOpenBrace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS013: field index must be in range (0, 268435456] 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS013_InvalidFieldIndex {
-            get {
-                return ResourceManager.GetString("Error_AS013_InvalidFieldIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS014: missing &apos;:&apos; or &apos;|&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS014_MissingColonOrBar {
-            get {
-                return ResourceManager.GetString("Error_AS014_MissingColonOrBar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS015: missing &apos;;&apos; or &apos;obsolete&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS015_MissingSemicolonOrObsoleteKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS015_MissingSemicolonOrObsoleteKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS016: missing identifier or &apos;*&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS016_MissingIdentifierOrAsterisk {
-            get {
-                return ResourceManager.GetString("Error_AS016_MissingIdentifierOrAsterisk", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS017: missing &apos;}}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS017_MissingCloseBrace {
-            get {
-                return ResourceManager.GetString("Error_AS017_MissingCloseBrace", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS018: keyword &apos;private&apos; can only be used in nested types 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS018_InvalidPrivateKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS018_InvalidPrivateKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS019: keyword &apos;protected&apos; can only be used in nested types 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS019_InvalidProtectedKeyword {
-            get {
-                return ResourceManager.GetString("Error_AS019_InvalidProtectedKeyword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS020: duplicate field index &apos;{0}&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS020_MultipleIndex {
-            get {
-                return ResourceManager.GetString("Error_AS020_MultipleIndex", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 error: AS021: missing &apos;)&apos; 的本地化字符串。
-        /// </summary>
-        internal static string Error_AS021_MissingCloseParen {
-            get {
-                return ResourceManager.GetString("Error_AS021_MissingCloseParen", resourceCulture);
             }
         }
         
@@ -673,24 +493,6 @@ namespace Accelbuffer.Properties {
         }
         
         /// <summary>
-        ///   查找类似 v0.1.6.14 的本地化字符串。
-        /// </summary>
-        internal static string Version {
-            get {
-                return ResourceManager.GetString("Version", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 v0.1.6.14 unity 的本地化字符串。
-        /// </summary>
-        internal static string Version_Unity {
-            get {
-                return ResourceManager.GetString("Version_Unity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 VariantInt 的本地化字符串。
         /// </summary>
         internal static string VIntName {
@@ -705,33 +507,6 @@ namespace Accelbuffer.Properties {
         internal static string VUIntName {
             get {
                 return ResourceManager.GetString("VUIntName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 warning: AS001: the memory size required for the structure must be greater than 0 的本地化字符串。
-        /// </summary>
-        internal static string Warning_AS001_InvalidMemorySize {
-            get {
-                return ResourceManager.GetString("Warning_AS001_InvalidMemorySize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 warning: AS002: package &apos;{0}&apos; will be referenced automatically, no need to manually reference again 的本地化字符串。
-        /// </summary>
-        internal static string Warning_AS002_UnnecessaryUsing {
-            get {
-                return ResourceManager.GetString("Warning_AS002_UnnecessaryUsing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 warning: AS003: the indexes of fields should be as continuous as possible 的本地化字符串。
-        /// </summary>
-        internal static string Warning_AS003_RequireContinuousIndex {
-            get {
-                return ResourceManager.GetString("Warning_AS003_RequireContinuousIndex", resourceCulture);
             }
         }
         

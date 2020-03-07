@@ -39,10 +39,11 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -66,14 +67,14 @@
       <screen x="0" y="0" width="1440" height="860" />
     </state>
     <state x="470" y="264" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1440.860@0.0.1440.860" timestamp="1581428574894" />
-    <state x="223" y="7" key="SettingsEditor" timestamp="1581589012043">
+    <state x="262" y="145" key="SettingsEditor" timestamp="1583510281332">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="223" y="7" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1581589012043" />
-    <state x="412" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1583293719486">
+    <state x="262" y="145" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1583510281332" />
+    <state x="412" y="256" key="com.intellij.ide.util.TipDialog" timestamp="1583509949275">
       <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="412" y="256" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1583293719486" />
+    <state x="412" y="256" key="com.intellij.ide.util.TipDialog/0.0.1440.860@0.0.1440.860" timestamp="1583509949275" />
     <state x="418" y="322" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1581585859910">
       <screen x="0" y="0" width="1440" height="860" />
     </state>

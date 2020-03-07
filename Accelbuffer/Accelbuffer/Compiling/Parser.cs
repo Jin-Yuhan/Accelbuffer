@@ -69,7 +69,7 @@ namespace Accelbuffer.Compiling
                         declarations.Add(GetUsingDeclaration());
                         break;
                     case TokenType.PackageKeyword:
-                        m_Writer.LogError(Resources.Error_AS006_InvalidPackage, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS006_InvalidPackage, token);
                         break;
                     default:
                         MoveBack();
@@ -98,7 +98,7 @@ namespace Accelbuffer.Compiling
                     case TokenType.Semicolon:
                         continue;
                     case TokenType.PackageKeyword:
-                        m_Writer.LogError(Resources.Error_AS006_InvalidPackage, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS006_InvalidPackage, token);
                         break;
                     default:
                         if (m_KeywordManager.IsInCategory(token.Raw, KeywordCategory.StructModifier) || token.Type == TokenType.StructKeyword)
@@ -108,7 +108,7 @@ namespace Accelbuffer.Compiling
                         }
                         else
                         {
-                            m_Writer.LogError(Resources.Error_AS007_InvalidToken, token);
+                            m_Writer.LogError(CompilerMessages.Error_AS007_InvalidToken, token);
                         }
                         break;
                 }
@@ -150,13 +150,13 @@ namespace Accelbuffer.Compiling
 
             if (identifier == null)
             {
-                m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS003_MissingIdentifier, Current());
                 return null;
             }
 
             if (!ExpectNextTokenType(TokenType.Semicolon))
             {
-                m_Writer.LogError(Resources.Error_AS004_MissingSemicolon, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS004_MissingSemicolon, Current());
                 return null;
             }
 
@@ -170,7 +170,7 @@ namespace Accelbuffer.Compiling
 
             if (identifier == null)
             {
-                m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS003_MissingIdentifier, Current());
                 return null;
             }
 
@@ -180,7 +180,7 @@ namespace Accelbuffer.Compiling
                 return new UsingDeclaration { PackageName = identifier };
             }
 
-            m_Writer.LogError(Resources.Error_AS004_MissingSemicolon, Current());
+            m_Writer.LogError(CompilerMessages.Error_AS004_MissingSemicolon, Current());
             return null;
         }
 
@@ -219,61 +219,61 @@ namespace Accelbuffer.Compiling
                 switch (token.Type)
                 {
                     case TokenType.PublicKeyword when isPublic:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.PublicKeyword when isInternal || isPrivate || isProtected:
-                        m_Writer.LogError(Resources.Error_AS009_MultipleAccessKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS009_MultipleAccessKeyword, token);
                         break;
                     case TokenType.PublicKeyword:
                         isPublic = true;
                         break;
 
                     case TokenType.InternalKeyword when isInternal:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.InternalKeyword when isPublic || isPrivate:
-                        m_Writer.LogError(Resources.Error_AS009_MultipleAccessKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS009_MultipleAccessKeyword, token);
                         break;
                     case TokenType.InternalKeyword:
                         isInternal = true;
                         break;
 
                     case TokenType.PrivateKeyword when isPrivate:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.PrivateKeyword when isPublic || isInternal:
-                        m_Writer.LogError(Resources.Error_AS009_MultipleAccessKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS009_MultipleAccessKeyword, token);
                         break;
                     case TokenType.PrivateKeyword when isNested:
                         isPrivate = true;
                         break;
                     case TokenType.PrivateKeyword:
-                        m_Writer.LogError(Resources.Error_AS018_InvalidPrivateKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS018_InvalidPrivateKeyword, token);
                         break;
 
 
                     case TokenType.ProtectedKeyword when isProtected:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.ProtectedKeyword when isPublic:
-                        m_Writer.LogError(Resources.Error_AS009_MultipleAccessKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS009_MultipleAccessKeyword, token);
                         break;
                     case TokenType.ProtectedKeyword when isNested:
                         isProtected = true;
                         break;
                     case TokenType.ProtectedKeyword:
-                        m_Writer.LogError(Resources.Error_AS019_InvalidProtectedKeyword, token);
+                        m_Writer.LogError(CompilerMessages.Error_AS019_InvalidProtectedKeyword, token);
                         break;
 
                     case TokenType.RefKeyword when isRef:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.RefKeyword:
                         isRef = true;
                         break;
 
                     case TokenType.FinalKeyword when isFinal:
-                        m_Writer.LogError(string.Format(Resources.Error_AS008_MultipleKeyword, token.Raw), token);
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS008_MultipleKeyword, token.Raw), token);
                         break;
                     case TokenType.FinalKeyword:
                         isFinal = true;
@@ -292,12 +292,12 @@ namespace Accelbuffer.Compiling
 
             if (isFinal && !isRef)
             {
-                m_Writer.LogError(Resources.Error_AS010_InvalidFinalKeyword, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS010_InvalidFinalKeyword, Current());
             }
 
             if (!ExpectNextTokenType(TokenType.Identifier))
             {
-                m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS003_MissingIdentifier, Current());
             }
 
             MoveNext();
@@ -309,7 +309,7 @@ namespace Accelbuffer.Compiling
 
                 if (!ExpectNextTokenType(TokenType.IntLiteral))
                 {
-                    m_Writer.LogError(Resources.Error_AS011_MissingIntLiteral, Current());
+                    m_Writer.LogError(CompilerMessages.Error_AS011_MissingIntLiteral, Current());
                     return null;
                 }
 
@@ -318,7 +318,7 @@ namespace Accelbuffer.Compiling
 
                 if (size == 0)
                 {
-                    m_Writer.LogWarning(Resources.Warning_AS001_InvalidMemorySize, Current());
+                    m_Writer.LogWarning(CompilerMessages.Warning_AS001_InvalidMemorySize, Current());
                 }
             }
 
@@ -326,7 +326,7 @@ namespace Accelbuffer.Compiling
 
             if (!ExpectNextTokenType(TokenType.OpenBrace))
             {
-                m_Writer.LogError(Resources.Error_AS012_MissingOpenBrace, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS012_MissingOpenBrace, Current());
                 return null;
             }
 
@@ -365,7 +365,7 @@ namespace Accelbuffer.Compiling
 
             if (!ExpectNextTokenType(TokenType.CloseBrace))
             {
-                m_Writer.LogError(Resources.Error_AS017_MissingCloseBrace, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS017_MissingCloseBrace, Current());
                 return null;
             }
 
@@ -375,7 +375,7 @@ namespace Accelbuffer.Compiling
 
             if (!isContinuous)
             {
-                m_Writer.LogWarning(Resources.Warning_AS003_RequireContinuousIndex, Current());
+                m_Writer.LogWarning(CompilerMessages.Warning_AS003_RequireContinuousIndex, Current());
             }
 
             return new StructDeclaration
@@ -416,7 +416,7 @@ namespace Accelbuffer.Compiling
 
             if (!ExpectNextTokenType(TokenType.Identifier))
             {
-                m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS003_MissingIdentifier, Current());
                 return null;
             }
 
@@ -429,7 +429,7 @@ namespace Accelbuffer.Compiling
 
                 if (!ExpectNextTokenType(TokenType.IntLiteral))
                 {
-                    m_Writer.LogError(Resources.Error_AS011_MissingIntLiteral, Current());
+                    m_Writer.LogError(CompilerMessages.Error_AS011_MissingIntLiteral, Current());
                     return null;
                 }
 
@@ -438,14 +438,14 @@ namespace Accelbuffer.Compiling
 
                 if ((index <= 0) || (index > 268435456))
                 {
-                    m_Writer.LogError(Resources.Error_AS013_InvalidFieldIndex, Current());
+                    m_Writer.LogError(CompilerMessages.Error_AS013_InvalidFieldIndex, Current());
                     return null;
                 }
             }
 
             if (!ExpectNextTokenType(TokenType.Colon))
             {
-                m_Writer.LogError(Resources.Error_AS014_MissingColonOrBar, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS014_MissingColonOrBar, Current());
                 return null;
             }
 
@@ -464,13 +464,13 @@ namespace Accelbuffer.Compiling
 
                 if (realType == null)
                 {
-                    m_Writer.LogError(Resources.Error_AS003_MissingIdentifier, Current());
+                    m_Writer.LogError(CompilerMessages.Error_AS003_MissingIdentifier, Current());
                     return null;
                 }
 
                 if (!ExpectNextTokenType(TokenType.CloseParen))
                 {
-                    m_Writer.LogError(Resources.Error_AS021_MissingCloseParen, Current());
+                    m_Writer.LogError(CompilerMessages.Error_AS021_MissingCloseParen, Current());
                     return null;
                 }
 
@@ -481,7 +481,7 @@ namespace Accelbuffer.Compiling
 
             if (type == null)
             {
-                m_Writer.LogError(Resources.Error_AS016_MissingIdentifierOrAsterisk, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS016_MissingIdentifierOrAsterisk, Current());
                 return null;
             }
 
@@ -493,7 +493,7 @@ namespace Accelbuffer.Compiling
 
             if (!ExpectNextTokenType(TokenType.Semicolon))
             {
-                m_Writer.LogError(Resources.Error_AS015_MissingSemicolonOrObsoleteKeyword, Current());
+                m_Writer.LogError(CompilerMessages.Error_AS015_MissingSemicolonOrObsoleteKeyword, Current());
                 return null;
             }
 
@@ -715,7 +715,7 @@ namespace Accelbuffer.Compiling
 
                     if (!indexes.Add(index))
                     {
-                        m_Writer.LogError(string.Format(Resources.Error_AS020_MultipleIndex, index), Current());
+                        m_Writer.LogError(string.Format(CompilerMessages.Error_AS020_MultipleIndex, index), Current());
                         return result;
                     }
 

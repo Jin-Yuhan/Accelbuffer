@@ -258,83 +258,8 @@
   <data name="VUIntName" xml:space="preserve">
     <value>VariantUInt</value>
   </data>
-  <data name="Error_AS001_InvalidChar" xml:space="preserve">
-    <value>error: AS001: invalid character: '{0}'</value>
-  </data>
-  <data name="Error_AS002_MissingDocEnd" xml:space="preserve">
-    <value>error: AS002: missing '--'</value>
-  </data>
-  <data name="Error_AS003_MissingIdentifier" xml:space="preserve">
-    <value>error: AS003: missing identifier</value>
-  </data>
-  <data name="Error_AS004_MissingSemicolon" xml:space="preserve">
-    <value>error: AS004: missing ';'</value>
-  </data>
-  <data name="Error_AS005_InvalidIdentifier" xml:space="preserve">
-    <value>error: AS005: invalid identifier: '{0}'</value>
-  </data>
-  <data name="Error_AS006_InvalidPackage" xml:space="preserve">
-    <value>error: AS006: package declaration should be the first non empty statement of the file</value>
-  </data>
-  <data name="Error_AS007_InvalidToken" xml:space="preserve">
-    <value>error: AS007: invalid token: '{0}'</value>
-  </data>
-  <data name="Error_AS008_MultipleKeyword" xml:space="preserve">
-    <value>error: AS008: duplicate keyword: '{0}'</value>
-  </data>
-  <data name="Error_AS009_MultipleAccessKeyword" xml:space="preserve">
-    <value>error: AS009: duplicate access modifier</value>
-  </data>
-  <data name="Error_AS010_InvalidFinalKeyword" xml:space="preserve">
-    <value>error: AS010: only structures marked with the 'ref' keyword can be marked as' final '</value>
-  </data>
-  <data name="Error_AS011_MissingIntLiteral" xml:space="preserve">
-    <value>error: AS011: missing integer value</value>
-  </data>
-  <data name="Error_AS012_MissingOpenBrace" xml:space="preserve">
-    <value>error: AS012: missing '{{'</value>
-  </data>
-  <data name="Error_AS013_InvalidFieldIndex" xml:space="preserve">
-    <value>error: AS013: field index must be in range (0, 268435456]</value>
-  </data>
-  <data name="Error_AS014_MissingColonOrBar" xml:space="preserve">
-    <value>error: AS014: missing ':' or '|'</value>
-  </data>
-  <data name="Error_AS015_MissingSemicolonOrObsoleteKeyword" xml:space="preserve">
-    <value>error: AS015: missing ';' or 'obsolete'</value>
-  </data>
-  <data name="Error_AS016_MissingIdentifierOrAsterisk" xml:space="preserve">
-    <value>error: AS016: missing identifier or '*'</value>
-  </data>
-  <data name="Error_AS017_MissingCloseBrace" xml:space="preserve">
-    <value>error: AS017: missing '}}'</value>
-  </data>
-  <data name="Error_AS018_InvalidPrivateKeyword" xml:space="preserve">
-    <value>error: AS018: keyword 'private' can only be used in nested types</value>
-  </data>
-  <data name="Error_AS019_InvalidProtectedKeyword" xml:space="preserve">
-    <value>error: AS019: keyword 'protected' can only be used in nested types</value>
-  </data>
-  <data name="Error_AS020_MultipleIndex" xml:space="preserve">
-    <value>error: AS020: duplicate field index '{0}'</value>
-  </data>
-  <data name="Error_AS021_MissingCloseParen" xml:space="preserve">
-    <value>error: AS021: missing ')'</value>
-  </data>
-  <data name="Version" xml:space="preserve">
-    <value>v0.1.6.14</value>
-  </data>
-  <data name="Version_Unity" xml:space="preserve">
-    <value>v0.1.6.14 unity</value>
-  </data>
-  <data name="Warning_AS001_InvalidMemorySize" xml:space="preserve">
-    <value>warning: AS001: the memory size required for the structure must be greater than 0</value>
-  </data>
-  <data name="Warning_AS002_UnnecessaryUsing" xml:space="preserve">
-    <value>warning: AS002: package '{0}' will be referenced automatically, no need to manually reference again</value>
-  </data>
-  <data name="Warning_AS003_RequireContinuousIndex" xml:space="preserve">
-    <value>warning: AS003: the indexes of fields should be as continuous as possible</value>
+  <data name="CompilerVersion" xml:space="preserve">
+    <value>0.1.6.16</value>
   </data>
   <data name="RuntimeAssemblyName" xml:space="preserve">
     <value>RuntimeTypes.dll</value>

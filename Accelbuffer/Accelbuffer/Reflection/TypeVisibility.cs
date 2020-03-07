@@ -35,6 +35,7 @@ namespace Accelbuffer.Reflection
         /// <summary>
         /// private protected
         /// </summary>
+        [Obsolete("使用该可访问性生成的代码并不稳定")]
         PrivateProtected = Private | Protected
     }
 }

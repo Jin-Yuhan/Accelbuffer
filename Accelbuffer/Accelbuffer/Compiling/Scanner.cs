@@ -140,7 +140,7 @@ namespace Accelbuffer.Compiling
                         }
                         else
                         {
-                            LogError(Resources.Error_AS001_InvalidChar, c);
+                            LogError(CompilerMessages.Error_AS001_InvalidChar, c);
                         }
                         break;
                 }
@@ -220,7 +220,7 @@ namespace Accelbuffer.Compiling
 
             if (!end)
             {
-                LogError(Resources.Error_AS002_MissingDocEnd);
+                LogError(CompilerMessages.Error_AS002_MissingDocEnd);
             }
             return CreateToken(m_StrBuilder.ToString().Trim(), TokenType.Document);
         }

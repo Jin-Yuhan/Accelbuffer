@@ -9,7 +9,7 @@
       "asc/0.2.1.21": {
         "dependencies": {
           "System.CodeDom": "4.7.0",
-          "Accelbuffer": "2.0.5.8"
+          "Accelbuffer": "2.1.7.12"
         },
         "runtime": {
           "asc.dll": {}
@@ -23,11 +23,11 @@
           }
         }
       },
-      "Accelbuffer/2.0.5.8": {
+      "Accelbuffer/2.1.7.12": {
         "runtime": {
           "Accelbuffer.dll": {
-            "assemblyVersion": "2.0.5.8",
-            "fileVersion": "2.0.17.10"
+            "assemblyVersion": "2.1.7.12",
+            "fileVersion": "2.15.7.14"
           }
         }
       }
@@ -46,7 +46,7 @@
       "path": "system.codedom/4.7.0",
       "hashPath": "system.codedom.4.7.0.nupkg.sha512"
     },
-    "Accelbuffer/2.0.5.8": {
+    "Accelbuffer/2.1.7.12": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

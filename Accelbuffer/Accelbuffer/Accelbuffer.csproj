@@ -64,11 +64,16 @@
     <Compile Include="Compiling\TypeNameStruct\TypeName.cs" />
     <Compile Include="Compiling\TypeNameStruct\TypeNamePart2.cs" />
     <Compile Include="Injection\IL\RuntimeInjector.cs" />
-    <Compile Include="Compiling\DeclarationArray.cs" />
+    <Compile Include="Compiling\DeclarationArray\DeclarationArray.cs" />
     <Compile Include="Compiling\LangMgr\AccelbufferByteCodeManager.cs" />
     <Compile Include="Compiling\RuntimeCompiler.cs" />
-    <Compile Include="Compiling\DeclarationArraySerializer.cs" />
+    <Compile Include="Compiling\DeclarationArray\DeclarationArraySerializer.cs" />
     <Compile Include="Injection\IL\Serializers\SerializerInjector.cs" />
+    <Compile Include="Properties\CompilerMessages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompilerMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="Reflection\AccelFieldInfo.cs" />
     <Compile Include="Reflection\AccelTypeInfo.cs" />
     <Compile Include="Compiling\Declarations\AccelbufferScripts\FieldDeclaration.cs" />
@@ -166,6 +171,10 @@
     <Compile Include="Unsafe\Text\UTF8Encoding.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\CompilerMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CompilerMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

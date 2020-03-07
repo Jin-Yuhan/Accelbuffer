@@ -1,5 +1,4 @@
 ﻿using Accelbuffer.Compiling;
-using asc.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,7 +23,7 @@ namespace asc
                         ShowHelps();
                         return;
                     case "-v":
-                        Console.WriteLine(Resources.Version);
+                        Console.WriteLine(Compiler.Version);
                         return;
                     default:
                         ShowHelps();
@@ -115,10 +114,11 @@ namespace asc
 
         private static void ShowHelps()
         {
-            Console.WriteLine("Usage:\tasc (<Options...> [File Paths...])...");
-            Console.WriteLine("Options:");
+            Console.WriteLine("Usage:\tasc <Help Options> | <(<Options...> [File Paths...])...>");
+            Console.WriteLine("Help Options:");
             Console.WriteLine("\t-h : Show helps.");
             Console.WriteLine("\t-v : Show compiler version.");
+            Console.WriteLine("Options:");
             Console.WriteLine("\t-b : Compile to Accelbuffer Byte Code files.");
             Console.WriteLine("\t-cs: Compile to C# files.");
             Console.WriteLine("\t-vb: Compile to Visual Basic files.");

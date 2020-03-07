@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Accelbuffer.Properties;
 
 namespace Accelbuffer.Compiling
 {
@@ -10,6 +11,11 @@ namespace Accelbuffer.Compiling
     /// </summary>
     public sealed class Compiler
     {
+        /// <summary>
+        /// 获取编译器版本号
+        /// </summary>
+        public static string Version => Resources.CompilerVersion;
+
         private readonly ErrorWriter m_ErrorWriter;
         private readonly KeywordManager m_KeywordManager;
         private readonly object m_SyncObj;

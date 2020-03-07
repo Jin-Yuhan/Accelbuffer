@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj": {}
+    "E:\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj": {
+    "E:\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj": {
       "version": "0.2.1.21",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj",
+        "projectUniqueName": "E:\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj",
         "projectName": "asc",
-        "projectPath": "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj",
+        "projectPath": "E:\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\asc.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Desktop\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\obj\\",
+        "outputPath": "E:\\GitHub\\Accelbuffer\\Accelbuffer\\asc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
