@@ -19,10 +19,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.CodeDom" Version="4.7.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Accelbuffer">
       <HintPath>..\Accelbuffer\bin\Release\Accelbuffer.dll</HintPath>
     </Reference>

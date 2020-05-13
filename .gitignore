@@ -1,4 +1,9 @@
-
-Accelbuffer/.vs/Accelbuffer/v16/Server/sqlite3/storage.ide-shm
-Accelbuffer/.vs/Accelbuffer/v16/Server/sqlite3/storage.ide-wal
-Accelbuffer/.vs/Accelbuffer/v16/.suo
+.vs
+Accelbuffer.CPP
+Accelbuffer.Java
+Accelbuffer.Test
+Accelbuffer.Test.CPP
+Accelbuffer.Test.VB
+packages
+bin
+obj
