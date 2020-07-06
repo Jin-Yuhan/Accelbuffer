@@ -48,3 +48,7 @@
 
 # Others
 * 作者联系方式 QQ：1024751595
+
+# 修改计划
+1. Parser StringBuilder 缓存
+2. DotNetManager GetTypeNameInMethod方法，unity部分移除
